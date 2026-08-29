@@ -13,6 +13,8 @@
     /* ==========================================================================
        1. DESIGN SYSTEM (STRICT BLACK & WHITE)
        ========================================================================== */
+    /* We include a fallback for Brittany. If you own the Brittany font file (.ttf/.woff), 
+       you can host it in your folder and use @font-face to guarantee it shows up everywhere! */
     @font-face {
       font-family: 'Brittany';
       src: local('Brittany Signature'), local('BrittanySignature');
@@ -50,14 +52,14 @@
        2. SCREEN SWAPPING TRICK (The "New Page" effect)
        ========================================================================== */
     .screen {
-      display: none; 
+      display: none; /* Hides all screens by default */
       min-height: 100vh;
       background-color: var(--white);
       animation: fadeIn 0.8s ease forwards;
     }
     
     .screen.active {
-      display: block; 
+      display: block; /* Shows only the active screen */
     }
 
     @keyframes fadeIn {
@@ -94,6 +96,7 @@
       background-image: url('cover.jpeg');
       background-size: cover;
       background-position: center;
+      opacity: 0.5; /* 50% opacity to highlight the text */
       z-index: 1;
     }
 
@@ -111,11 +114,11 @@
     .cover-btn:hover { background-color: #FFF; color: #000; }
 
     /* ==========================================================================
-       4. MENU / WELCOME SCREEN (ELEGANT LIST)
+       4. MENU / WELCOME SCREEN (ELEGANT DARK LIST)
        ========================================================================== */
     #screen-menu { 
       position: relative;
-      background-color: var(--white); 
+      background-color: var(--black); 
     }
     
     /* Background Image for Welcome Page */
@@ -129,34 +132,35 @@
       z-index: 0;
     }
 
-    /* Soft light overlay so the elegant text is readable */
+    /* Dark overlay so the white elegant text is readable */
     #screen-menu::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(255, 255, 255, 0.80); 
+      background-color: rgba(0, 0, 0, 0.65); 
       z-index: 0;
     }
     
-    .menu-header { margin-bottom: 4rem; text-align: center; }
-    .menu-header h2 { font-size: 2rem; letter-spacing: 2px; }
-    .menu-header p { font-size: 12px; letter-spacing: 4px; color: var(--gray); text-transform: uppercase; margin-top: 0.5rem;}
+    .menu-header { margin-bottom: 4rem; text-align: center; color: var(--white); }
+    .menu-header .script { color: var(--white); }
+    .menu-header h2 { font-size: 2rem; letter-spacing: 2px; color: var(--white); }
+    .menu-header p { font-size: 12px; letter-spacing: 4px; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; margin-top: 0.5rem;}
     
-    .elegant-menu { display: flex; flex-direction: column; max-width: 500px; margin: 0 auto; }
+    .elegant-menu { display: flex; flex-direction: column; max-width: 500px; margin: 0 auto; color: var(--white); }
     
     .elegant-item { 
       display: flex; align-items: center; justify-content: space-between; 
-      padding: 2.5rem 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); 
+      padding: 2.5rem 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
       cursor: pointer; transition: all 0.4s ease; text-align: left;
     }
-    .elegant-item:first-child { border-top: 1px solid rgba(0,0,0,0.1); }
+    .elegant-item:first-child { border-top: 1px solid rgba(255, 255, 255, 0.2); }
     .elegant-item:hover { transform: translateX(10px); }
     
-    .ei-num { font-family: var(--font-serif); font-size: 1.4rem; font-style: italic; color: var(--gray); width: 40px; }
+    .ei-num { font-family: var(--font-serif); font-size: 1.4rem; font-style: italic; color: rgba(255, 255, 255, 0.5); width: 40px; }
     .ei-text { flex-grow: 1; padding: 0 1.5rem; }
-    .ei-title { font-family: var(--font-serif); font-size: 26px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.3rem; }
-    .ei-desc { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); font-family: var(--font-sans); }
-    .ei-arrow { font-size: 18px; color: var(--gray); transition: all 0.3s; }
-    .elegant-item:hover .ei-arrow { color: var(--black); transform: translateX(5px); }
+    .ei-title { font-family: var(--font-serif); font-size: 26px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.3rem; color: var(--white); }
+    .ei-desc { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); font-family: var(--font-sans); }
+    .ei-arrow { font-size: 18px; color: rgba(255, 255, 255, 0.5); transition: all 0.3s; }
+    .elegant-item:hover .ei-arrow { color: var(--white); transform: translateX(5px); }
 
     /* ==========================================================================
        5. OUR STORY SCREEN (Refined, Nostalgic, Editorial)
