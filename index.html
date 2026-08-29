@@ -7,12 +7,19 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Poppins:wght@300;400;500&family=Allura&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Poppins:wght@300;400;500&family=Allura&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================================================
        1. DESIGN SYSTEM (STRICT BLACK & WHITE)
        ========================================================================== */
+    /* We include a fallback for Brittany. If you own the Brittany font file (.ttf/.woff), 
+       you can host it in your folder and use @font-face to guarantee it shows up everywhere! */
+    @font-face {
+      font-family: 'Brittany';
+      src: local('Brittany Signature'), local('BrittanySignature');
+    }
+
     :root {
       --white: #FFFFFF;
       --off-white: #FAFAFA;
@@ -22,7 +29,7 @@
       
       --font-serif: 'Cormorant Garamond', serif;
       --font-sans: 'Poppins', sans-serif;
-      --font-script: 'Allura', cursive;
+      --font-script: 'Brittany', 'Allura', cursive; /* Uses Brittany if available, falls back to elegant Allura */
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,7 +43,7 @@
     }
 
     h1, h2, h3, .serif { font-family: var(--font-serif); font-weight: 400; }
-    .script { font-family: var(--font-script); font-size: 2.5rem; color: var(--black); }
+    .script { font-family: var(--font-script); font-size: 2.5rem; color: var(--black); font-weight: normal; }
     
     a { color: inherit; text-decoration: none; cursor: pointer; transition: all 0.3s ease; }
     button { font-family: var(--font-sans); cursor: pointer; border: none; background: none; }
@@ -48,7 +55,7 @@
       display: none; /* Hides all screens by default */
       min-height: 100vh;
       background-color: var(--white);
-      animation: fadeIn 0.6s ease forwards;
+      animation: fadeIn 0.8s ease forwards;
     }
     
     .screen.active {
@@ -56,7 +63,7 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(15px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -65,16 +72,16 @@
 
     /* Buttons */
     .btn {
-      display: inline-block; padding: 1rem 2.5rem; background-color: var(--black); color: var(--white);
-      font-size: 11px; letter-spacing: 3px; text-transform: uppercase; border: 1px solid var(--black); transition: all 0.3s ease;
+      display: inline-block; padding: 1rem 3rem; background-color: var(--black); color: var(--white);
+      font-size: 11px; letter-spacing: 4px; text-transform: uppercase; border: 1px solid var(--black); transition: all 0.4s ease;
     }
     .btn:hover { background-color: transparent; color: var(--black); }
 
     .back-btn {
-      display: inline-block; margin-top: 4rem; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--gray); border-bottom: 1px solid transparent; padding-bottom: 2px;
+      display: inline-block; margin-top: 4rem; font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gray); border-bottom: 1px solid transparent; padding-bottom: 4px; transition: all 0.3s ease;
     }
-    .back-btn:hover { color: var(--black); border-bottom-color: var(--black); }
+    .back-btn:hover { color: var(--black); border-bottom-color: var(--black); letter-spacing: 4px; }
 
     /* ==========================================================================
        3. COVER SCREEN
@@ -100,42 +107,53 @@
 
     .cover-names { font-family: var(--font-serif); font-size: clamp(52px, 10vw, 100px); line-height: 1; color: #FFF; margin-bottom: 2rem; }
     .cover-date { font-size: clamp(11px, 2vw, 13px); letter-spacing: 4px; color: #FFF; text-transform: uppercase; margin-bottom: 3rem; font-weight: 300; }
-    .cover-script { font-family: var(--font-script); font-size: clamp(2rem, 5vw, 2.5rem); color: #FFF; margin-bottom: 0.5rem; }
-    .cover-invite { font-size: 12px; letter-spacing: 5px; color: #FFF; text-transform: uppercase; margin-bottom: 4rem; font-weight: 300; }
+    .cover-script { font-family: var(--font-script); font-size: clamp(2.5rem, 6vw, 3rem); color: #FFF; margin-bottom: 0.5rem; }
+    .cover-invite { font-size: 12px; letter-spacing: 6px; color: #FFF; text-transform: uppercase; margin-bottom: 4rem; font-weight: 300; }
     
     .cover-btn { background-color: transparent; color: #FFF; border: 1px solid #FFF; }
     .cover-btn:hover { background-color: #FFF; color: #000; }
 
     /* ==========================================================================
-       4. MENU SCREEN
+       4. MENU SCREEN (ELEGANT LIST, NO TILES)
        ========================================================================== */
-    #screen-menu { background-color: var(--off-white); }
+    #screen-menu { background-color: var(--white); }
     
-    .menu-header { margin-bottom: 5rem; text-align: center; }
+    .menu-header { margin-bottom: 4rem; text-align: center; }
     .menu-header h2 { font-size: 2rem; letter-spacing: 2px; }
     .menu-header p { font-size: 12px; letter-spacing: 4px; color: var(--gray); text-transform: uppercase; margin-top: 0.5rem;}
     
-    .chapter-list { display: flex; flex-direction: column; gap: 2rem; max-width: 600px; margin: 0 auto; }
+    .elegant-menu { display: flex; flex-direction: column; max-width: 500px; margin: 0 auto; }
     
-    .chapter-card {
-      display: flex; flex-direction: column; align-items: center; padding: 3rem 2rem;
-      background: var(--white); border: 1px solid var(--border); cursor: pointer; text-align: center;
-      transition: all 0.3s ease;
+    .elegant-item { 
+      display: flex; align-items: center; justify-content: space-between; 
+      padding: 2.5rem 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); 
+      cursor: pointer; transition: all 0.4s ease; text-align: left;
     }
-    .chapter-card:hover { transform: translateY(-3px); border-color: var(--black); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .elegant-item:first-child { border-top: 1px solid rgba(0,0,0,0.1); }
+    .elegant-item:hover { transform: translateX(10px); }
     
-    .chapter-num { font-family: var(--font-serif); font-size: 1.5rem; color: var(--gray); font-style: italic; margin-bottom: 0.5rem; }
-    .chapter-title { font-size: 24px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.5rem; }
-    .chapter-desc { font-size: 13px; color: var(--gray); margin-bottom: 1.5rem; }
-    .chapter-link { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid var(--black); padding-bottom: 2px;}
+    .ei-num { font-family: var(--font-serif); font-size: 1.4rem; font-style: italic; color: var(--gray); width: 40px; }
+    .ei-text { flex-grow: 1; padding: 0 1.5rem; }
+    .ei-title { font-family: var(--font-serif); font-size: 26px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .ei-desc { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); font-family: var(--font-sans); }
+    .ei-arrow { font-size: 18px; color: var(--gray); transition: all 0.3s; }
+    .elegant-item:hover .ei-arrow { color: var(--black); transform: translateX(5px); }
 
     /* ==========================================================================
        5. OUR STORY SCREEN
        ========================================================================== */
-    .story-content { max-width: 600px; margin: 0 auto; text-align: left; font-size: 15px; color: var(--gray); line-height: 2; }
-    .story-content p { margin-bottom: 2rem; }
+    .story-content { 
+      max-width: 650px; 
+      margin: 0 auto; 
+      text-align: center; 
+      font-family: var(--font-serif); /* Changed to elegant serif */
+      font-size: 22px; 
+      color: #444; 
+      line-height: 2.2; 
+    }
+    .story-content p { margin-bottom: 2.5rem; }
     
-    .story-bottom { margin-top: 5rem; border-top: 1px solid var(--border); padding-top: 4rem; }
+    .story-bottom { margin-top: 6rem; border-top: 1px solid var(--border); padding-top: 5rem; }
 
     /* ==========================================================================
        6. THE DAY SCREEN
@@ -155,21 +173,30 @@
        ========================================================================== */
     #screen-details {
       position: relative;
+      background-color: var(--white);
+    }
+    
+    /* Cover image with exactly 70% opacity as the background */
+    #screen-details::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       background-image: url('cover.jpg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
+      opacity: 0.7; /* 70% opacity */
+      z-index: 0;
     }
-    
+
     /* More transparent white overlay to let background peek through elegantly */
-    #screen-details::before {
+    #screen-details::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       background-color: rgba(255, 255, 255, 0.60); 
       z-index: 0;
     }
 
-    .details-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 600px; margin: 0 auto; }
+    .details-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 600px; margin: 0 auto; position: relative; z-index: 2; }
     
     .detail-card { 
       border: 1px solid rgba(0,0,0,0.1); 
@@ -199,6 +226,8 @@
       -webkit-backdrop-filter: blur(15px);
       padding: 4rem 3rem; 
       border: 1px solid rgba(0,0,0,0.1); 
+      position: relative;
+      z-index: 2;
     }
     .detail-content.active { display: block; }
     
@@ -249,74 +278,89 @@
       <div class="cover-script">It started with coffee.</div>
       <div class="cover-invite">You are invited.</div>
       
-      <button class="btn cover-btn" onclick="openScreen('details')">OPEN INVITATION &rarr;</button>
+      <button class="btn cover-btn" onclick="openScreen('story')">OPEN INVITATION &rarr;</button>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-story">
+    <div class="container text-center">
+      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem; text-transform: uppercase;">A Little Story About Us</div>
+      <h2 class="serif" style="font-size: 48px; margin-bottom: 4rem; letter-spacing: 2px; text-transform: uppercase;">Our Story</h2>
+
+      <div class="story-content">
+        <p>It started with coffee.</p>
+        <p>We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that <span class="script" style="font-size: 3rem; text-transform: lowercase; display: inline-block; transform: translateY(8px); margin: 0 5px;">we had known each other</span> much longer than we actually had.</p>
+        <p>Somehow, one coffee became another. Then another. And somewhere between the quiet afternoons, spontaneous plans, and everyday moments...</p>
+        <div class="script" style="font-size: 4rem; margin: 3rem 0;">we became us.</div>
+        <p>What started as a simple coffee date became our favorite story to tell.</p>
+        <p class="serif" style="font-size: 28px; text-align: center; color: var(--black); margin-top: 4rem; margin-bottom: 3rem; font-style: italic;">And now, we're getting married.</p>
+        
+        <button class="btn" onclick="openScreen('menu')">JOIN US &rarr;</button>
+      </div>
+
+      <div class="story-bottom text-center">
+        <h3 class="serif" style="font-size: 36px; margin-bottom: 0;">2015</h3>
+        <div style="font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--black); margin-bottom: 1rem;">Our Year</div>
+        <p style="color: var(--gray); font-style: italic; margin-bottom: 2rem; font-family: var(--font-serif); font-size: 18px;">The year everything changed.</p>
+        <div class="script" style="font-size: 3.5rem;">Elena & Adrian</div>
+      </div>
     </div>
   </div>
 
   <div class="screen" id="screen-menu">
     <div class="container text-center">
       <div class="menu-header">
-        <h2 class="serif">Elena & Adrian</h2>
+        <div class="script" style="font-size: 4rem; margin-bottom: 1rem;">Welcome.</div>
+        <h2 class="serif" style="font-size: 26px; text-transform: uppercase; letter-spacing: 4px;">Elena & Adrian</h2>
         <p>31 · 01 · 2028</p>
-        <div class="script" style="font-size: 3rem; margin-top: 1rem;">Welcome to our story.</div>
       </div>
       
-      <div class="chapter-list">
-        <div class="chapter-card" onclick="openScreen('story')">
-          <span class="chapter-num">01</span>
-          <h3 class="chapter-title">Our Story</h3>
-          <p class="chapter-desc">How it all began.</p>
-          <span class="chapter-link">Explore &rarr;</span>
+      <div class="elegant-menu">
+        <div class="elegant-item" onclick="openScreen('story')">
+          <span class="ei-num">01</span>
+          <div class="ei-text">
+            <div class="ei-title">Our Story</div>
+            <div class="ei-desc">How it all began</div>
+          </div>
+          <span class="ei-arrow">&rarr;</span>
         </div>
-        <div class="chapter-card" onclick="openScreen('day')">
-          <span class="chapter-num">02</span>
-          <h3 class="chapter-title">The Day</h3>
-          <p class="chapter-desc">When & where to find us.</p>
-          <span class="chapter-link">Explore &rarr;</span>
+        
+        <div class="elegant-item" onclick="openScreen('day')">
+          <span class="ei-num">02</span>
+          <div class="ei-text">
+            <div class="ei-title">The Day</div>
+            <div class="ei-desc">When & where to find us</div>
+          </div>
+          <span class="ei-arrow">&rarr;</span>
         </div>
-        <div class="chapter-card" onclick="openScreen('details')">
-          <span class="chapter-num">03</span>
-          <h3 class="chapter-title">Details</h3>
-          <p class="chapter-desc">Everything you need to know.</p>
-          <span class="chapter-link">Explore &rarr;</span>
+        
+        <div class="elegant-item" onclick="openScreen('details')">
+          <span class="ei-num">03</span>
+          <div class="ei-text">
+            <div class="ei-title">Details</div>
+            <div class="ei-desc">Everything you need to know</div>
+          </div>
+          <span class="ei-arrow">&rarr;</span>
         </div>
-        <div class="chapter-card" onclick="openScreen('gallery')">
-          <span class="chapter-num">04</span>
-          <h3 class="chapter-title">Gallery</h3>
-          <p class="chapter-desc">The moments we've kept.</p>
-          <span class="chapter-link">Explore &rarr;</span>
+        
+        <div class="elegant-item" onclick="openScreen('gallery')">
+          <span class="ei-num">04</span>
+          <div class="ei-text">
+            <div class="ei-title">Gallery</div>
+            <div class="ei-desc">The moments we've kept</div>
+          </div>
+          <span class="ei-arrow">&rarr;</span>
         </div>
-        <div class="chapter-card" onclick="openScreen('rsvp')">
-          <span class="chapter-num">05</span>
-          <h3 class="chapter-title">RSVP</h3>
-          <p class="chapter-desc">Save your seat.</p>
-          <span class="chapter-link">Explore &rarr;</span>
+        
+        <div class="elegant-item" onclick="openScreen('rsvp')">
+          <span class="ei-num">05</span>
+          <div class="ei-text">
+            <div class="ei-title">RSVP</div>
+            <div class="ei-desc">Save your seat</div>
+          </div>
+          <span class="ei-arrow">&rarr;</span>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="screen" id="screen-story">
-    <div class="container text-center">
-      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">A LITTLE STORY ABOUT US</div>
-      <h2 class="serif" style="font-size: 42px; margin-bottom: 4rem;">OUR STORY</h2>
-
-      <div class="story-content">
-        <p>It started with coffee.</p>
-        <p>We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.</p>
-        <p>Somehow, one coffee became another. Then another. And somewhere between the quiet afternoons, spontaneous plans, and everyday moments, we became us.</p>
-        <p>What started as a simple coffee date became our favorite story to tell.</p>
-        <p class="serif" style="font-size: 26px; text-align: center; color: var(--black); margin-top: 4rem; margin-bottom: 0;">And now, we're getting married.</p>
-      </div>
-
-      <div class="story-bottom text-center">
-        <h3 class="serif" style="font-size: 36px; margin-bottom: 0;">2015</h3>
-        <div style="font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--black); margin-bottom: 1rem;">Our Year</div>
-        <p style="color: var(--gray); font-style: italic; margin-bottom: 2rem;">The year everything changed.</p>
-        <div class="script" style="font-size: 3rem;">Elena & Adrian</div>
-      </div>
-
-      <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
     </div>
   </div>
 
@@ -324,7 +368,7 @@
     <div class="container">
       <div class="text-center" style="margin-bottom: 5rem;">
         <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 02</div>
-        <h2 class="serif" style="font-size: 42px;">January 31, 2028</h2>
+        <h2 class="serif" style="font-size: 48px; letter-spacing: 2px;">January 31, 2028</h2>
       </div>
 
       <div class="event-block">
@@ -418,7 +462,7 @@
   <div class="screen" id="screen-gallery">
     <div class="container text-center">
       <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 04</div>
-      <h2 class="serif" style="font-size: 42px;">The moments we've kept.</h2>
+      <h2 class="serif" style="font-size: 48px; margin-bottom: 4rem; letter-spacing: 2px;">The moments we've kept.</h2>
 
       <div class="gallery-grid">
         <div class="gal-item"><img src="photo1.jpeg" alt="Gallery"></div>
@@ -434,7 +478,7 @@
   <div class="screen" id="screen-rsvp">
     <div class="container text-center">
       <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 05</div>
-      <h2 class="serif" style="font-size: 42px; margin-bottom: 1rem;">We've saved you a seat.</h2>
+      <h2 class="serif" style="font-size: 48px; margin-bottom: 1rem; letter-spacing: 2px;">We've saved you a seat.</h2>
       <p style="color: var(--gray); font-size: 14px; margin-bottom: 4rem;">Please let us know if you'll be joining us.</p>
 
       <form id="rsvp-form" class="rsvp-form" onsubmit="submitRSVP(event)">
