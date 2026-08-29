@@ -206,7 +206,7 @@
     .story-bottom { margin-top: 6rem; border-top: 1px solid rgba(0,0,0,0.15); padding-top: 5rem; }
 
     /* ==========================================================================
-       6. THE DAY SCREEN
+       6. THE DAY SCREEN (UPDATED: FIT IMAGE WITHOUT ZOOM OR STRETCH)
        ========================================================================== */
     #screen-day {
       position: relative;
@@ -214,18 +214,19 @@
       color: var(--white);
     }
 
-    /* Dynamic Background Layer initialized with theday.jpeg */
+    /* Set background-size to contain and prevent repeating/zooming */
     #day-bg-layer {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       background-image: url('theday.jpeg');
-      background-size: cover;
+      background-size: contain;
+      background-repeat: no-repeat;
       background-position: center;
       background-attachment: fixed;
       transition: background-image 0.8s ease-in-out;
       z-index: 0;
     }
 
-    /* Overlay reduced to 50% opacity */
+    /* 50% opacity overlay */
     #screen-day::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -271,7 +272,6 @@
       text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
 
-    /* Transparent card containers (35% opacity) */
     .day-event-block { 
       text-align: center; 
       border: 1px solid rgba(255, 255, 255, 0.3); 
