@@ -184,29 +184,55 @@
     }
 
     .story-content { 
-      max-width: 500px; 
+      max-width: 520px; 
       margin: 0 auto; 
       text-align: center; 
       font-family: var(--font-serif); 
-      font-size: 20px; 
+      font-size: 19px; 
       color: #111111; 
-      line-height: 2.1; 
+      line-height: 1.9; 
       font-weight: 400; 
       letter-spacing: 0.5px; 
     }
-    .story-content p { margin-bottom: 2.5rem; }
+
+    .story-content p { 
+      margin-bottom: 2rem; 
+    }
     
     .story-highlight-italics {
       font-style: italic;
       color: var(--black);
       font-size: 24px;
       font-weight: 500; 
+      line-height: 1.4;
+      margin-bottom: 2rem !important;
+    }
+
+    .story-script-accent {
+      font-family: var(--font-script);
+      font-size: clamp(3.2rem, 8vw, 4.2rem);
+      margin: 2.5rem 0;
+      color: var(--black);
+      line-height: 1.1;
+    }
+
+    .story-married-text {
+      font-style: italic;
+      color: var(--black);
+      font-size: 24px;
+      font-weight: 500;
+      margin-top: 2.5rem;
+      margin-bottom: 3rem;
     }
     
-    .story-bottom { margin-top: 6rem; border-top: 1px solid rgba(0,0,0,0.15); padding-top: 5rem; }
+    .story-bottom { 
+      margin-top: 4.5rem; 
+      border-top: 1px solid rgba(0,0,0,0.15); 
+      padding-top: 3.5rem; 
+    }
 
     /* ==========================================================================
-       6. THE DAY SCREEN (UPDATED DUAL-LAYER FADE & STYLED TIMELINE HEADING)
+       6. THE DAY SCREEN
        ========================================================================== */
     #screen-day {
       position: relative;
@@ -214,7 +240,6 @@
       color: var(--white);
     }
 
-    /* Dual background layers for cross-fading */
     .day-bg {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       background-size: cover;
@@ -234,7 +259,6 @@
       opacity: 0;
     }
 
-    /* Screen dark overlay */
     #screen-day::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -338,7 +362,6 @@
       text-shadow: none;
     }
 
-    /* Container for "The Day At A Glance" trigger */
     .day-glance-card {
       margin-top: 4rem;
       border: 1px solid rgba(255, 255, 255, 0.35);
@@ -366,7 +389,6 @@
       transition: all 0.3s ease;
     }
 
-    /* Hidden timeline container */
     .day-timeline { 
       display: none;
       max-width: 400px; 
@@ -545,16 +567,16 @@
   <div class="screen" id="screen-story">
     <div class="container text-center">
       <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1.5rem; text-transform: uppercase;">A Little Story About Us</div>
-      <h2 class="serif" style="font-size: 42px; margin-bottom: 5rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 300;">Our Story</h2>
+      <h2 class="serif" style="font-size: 42px; margin-bottom: 3.5rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 300;">Our Story</h2>
 
       <div class="story-content">
-        <p class="story-highlight-italics" style="font-size: 26px; margin-bottom: 3.5rem;">It started with coffee.</p>
+        <p class="story-highlight-italics">It started with coffee.</p>
         
         <p>We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.</p>
         
-        <div class="script" style="font-size: 4.5rem; margin: 4rem 0; color: var(--black);">we became us.</div>
+        <div class="story-script-accent">we became us.</div>
         
-        <p class="story-highlight-italics" style="margin-top: 4rem; margin-bottom: 4rem;">And now, we're getting married.</p>
+        <p class="story-married-text">And now, we're getting married.</p>
         
         <button class="btn" onclick="openScreen('menu')">JOIN US &rarr;</button>
       </div>
@@ -639,7 +661,7 @@
         <div class="day-event-label">Reception</div>
         <h3 class="day-event-title">The Manila Hotel</h3>
         <p class="day-event-desc">6:30 PM<br>Manila, Philippines</p>
-        <button class="view-image-btn" onclick="fadeDayBackground('hotel.jpeg')">See Hotel Image</button>
+        <button class="view-image-btn" onclick="fadeDayBackground('hotel.jpg')">See Hotel Image</button>
       </div>
 
       <div class="day-glance-card text-center" onclick="toggleTimeline()">
@@ -794,7 +816,6 @@
       if(screenId !== 'details') closeDetail();
     }
 
-    /* Cross-fading background logic between two layered elements */
     let activeBgIndex = 1;
     function fadeDayBackground(imageName) {
       const bg1 = document.getElementById('day-bg-1');
@@ -809,7 +830,6 @@
       activeBgIndex = activeBgIndex === 1 ? 2 : 1;
     }
 
-    /* Toggle timeline visibility & fade background to original cover */
     function toggleTimeline() {
       const timeline = document.getElementById('day-timeline');
       const trigger = document.getElementById('day-timeline-title');
@@ -820,7 +840,7 @@
       } else {
         timeline.classList.add('active');
         trigger.innerHTML = "The Day At A Glance &larr;";
-        fadeDayBackground('theday.jpeg');
+        fadeDayBackground('atglance.jpeg');
       }
     }
 
