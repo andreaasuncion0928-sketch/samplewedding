@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elena & Adrian — It Started With Coffee</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN SYSTEM & VARIABLES
+       ========================================================================== */
+    :root {
+      --bg-warm-ivory: #F7F2EA;
+      --text-espresso: #3B2923;
+      --coffee-accent: #765548;
+      --primary-purple: #76519A;
+      --lavender: #C8B6D9;
+      --champagne: #C7A76C;
+      --white: #FFFFFF;
+      --bg-card: rgba(255, 255, 255, 0.6);
+      
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Montserrat', sans-serif;
+      --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg-warm-ivory);
+      color: var(--text-espresso);
+      font-family: var(--font-sans);
+      line-height: 1.8;
+      overflow-x: hidden;
+      transition: background-color 0.8s ease;
+    }
+
+    h1, h2, h3, h4, .serif {
+      font-family: var(--font-serif);
+      font-weight: 400;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: var(--font-sans);
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    /* Scroll animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background-color: var(--text-espresso);
+      color: var(--bg-warm-ivory);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: 1px solid var(--text-espresso);
+      transition: var(--transition-smooth);
+      margin-top: 1rem;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-purple);
+      border-color: var(--primary-purple);
+      color: var(--white);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background-color: transparent;
+      color: var(--text-espresso);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: 1px solid var(--text-espresso);
+      transition: var(--transition-smooth);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--text-espresso);
+      color: var(--bg-warm-ivory);
+    }
+
+    /* Coffee SVG & Steam Animation */
+    .cup-container {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    .steam {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      animation: rise 3s infinite ease-out;
+    }
+
+    .steam:nth-child(2) { animation-delay: 1s; left: 42%; }
+    .steam:nth-child(3) { animation-delay: 2s; left: 58%; }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scaleX(1); opacity: 0; }
+      50% { opacity: 0.6; }
+      100% { transform: translateY(-20px) scaleX(1.5); opacity: 0; }
+    }
+
+    /* ==========================================================================
+       2. MUSIC TOGGLE & STICKY NAV
+       ========================================================================== */
+    .music-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(5px);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid var(--coffee-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: var(--transition-smooth);
+    }
+
+    .music-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(247, 242, 234, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 900;
+      transform: translateY(-100%);
+      transition: transform 0.4s ease;
+      border-bottom: 1px solid rgba(59, 41, 35, 0.05);
+    }
+
+    .nav-bar.visible {
+      transform: translateY(0);
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      color: var(--primary-purple);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 1px;
+      background-color: var(--text-espresso);
+    }
+
+    /* Mobile Nav Overlay */
+    .mobile-menu {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100vh;
+      background-color: var(--bg-warm-ivory);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .mobile-menu.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-menu a {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+    }
+
+    /* ==========================================================================
+       3. INTRO OVERLAY (SCREEN 1)
+       ========================================================================== */
+    #intro-screen {
+      position: fixed;
+      inset: 0;
+      background-color: var(--bg-warm-ivory);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+
+    #intro-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .intro-sub {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--coffee-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .intro-title {
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    /* ==========================================================================
+       4. HERO SECTION (SCREEN 2)
+       ========================================================================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+    }
+
+    .hero-label {
+      font-size: 0.8rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--coffee-accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-names {
+      font-size: 5rem;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-date {
+      font-size: 1.1rem;
+      letter-spacing: 3px;
+      margin-bottom: 2rem;
+      color: var(--primary-purple);
+    }
+
+    .hero-tagline {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.4rem;
+      margin-bottom: 3rem;
+      opacity: 0.8;
+    }
+
+    /* ==========================================================================
+       5. INVITATION SECTION
+       ========================================================================== */
+    .section-padding {
+      padding: 6rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .invitation-card {
+      background: var(--white);
+      padding: 4rem 2rem;
+      text-align: center;
+      border: 1px solid rgba(197, 167, 108, 0.3);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+      position: relative;
+    }
+
+    .invitation-card::before {
+      content: '';
+      position: absolute;
+      inset: 10px;
+      border: 1px solid rgba(197, 167, 108, 0.2);
+      pointer-events: none;
+    }
+
+    .invitation-body {
+      max-width: 600px;
+      margin: 2rem auto;
+      font-size: 1.05rem;
+    }
+
+    .event-details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .event-item h4 {
+      font-size: 1.8rem;
+      color: var(--primary-purple);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ==========================================================================
+       6. OUR STORY (TIMELINE)
+       ========================================================================== */
+    .timeline {
+      position: relative;
+      max-width: 700px;
+      margin: 4rem auto;
+      padding: 2rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: var(--coffee-accent);
+      opacity: 0.3;
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      margin-bottom: 4rem;
+      position: relative;
+      width: 50%;
+      padding: 0 2rem;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+      text-align: left;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--bg-warm-ivory);
+      border: 2px solid var(--coffee-accent);
+      z-index: 2;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-dot { right: -6px; }
+    .timeline-item:nth-child(even) .timeline-dot { left: -6px; }
+
+    .timeline-year {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--primary-purple);
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-title {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       7. ON THE MENU (SCHEDULE)
+       ========================================================================== */
+    .menu-container {
+      background-color: var(--white);
+      padding: 4rem 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+      border-radius: 2px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 1rem 0;
+      border-bottom: 1px dashed rgba(118, 85, 72, 0.2);
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .menu-time {
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      color: var(--coffee-accent);
+      font-weight: 500;
+    }
+
+    .menu-event {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      text-align: right;
+    }
+
+    /* ==========================================================================
+       8. DRESS CODE (PALETTE INTERACTION)
+       ========================================================================== */
+    .palette-container {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+    }
+
+    .swatch {
+      width: 80px;
+      height: 100px;
+      border-radius: 40px 40px 0 0;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 0.8rem;
+      color: var(--white);
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+    }
+
+    .swatch:hover {
+      transform: translateY(-10px);
+    }
+
+    .attire-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .attire-card {
+      background: rgba(255, 255, 255, 0.5);
+      padding: 2rem;
+      border: 1px solid rgba(118, 85, 72, 0.1);
+      text-align: center;
+    }
+
+    /* ==========================================================================
+       9. GALLERY & LIGHTBOX
+       ========================================================================== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      aspect-ratio: 4/5;
+      background-color: #ddd;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      z-index: 3000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 85%;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      color: white;
+      font-size: 2rem;
+    }
+
+    /* ==========================================================================
+       10. FAQ ACCORDION
+       ========================================================================== */
+    .faq-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(59, 41, 35, 0.1);
+      margin-bottom: 1rem;
+    }
+
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      padding: 1.2rem 0;
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      font-size: 0.95rem;
+      color: rgba(59, 41, 35, 0.8);
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+      padding-bottom: 1.2rem;
+    }
+
+    /* ==========================================================================
+       11. RSVP FORM
+       ========================================================================== */
+    .rsvp-form {
+      background: var(--white);
+      padding: 3rem 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      background: var(--bg-warm-ivory);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+    }
+
+    /* ==========================================================================
+       12. COUNTDOWN & FOOTER
+       ========================================================================== */
+    .timer-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .timer-box {
+      text-align: center;
+    }
+
+    .timer-number {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      color: var(--primary-purple);
+      line-height: 1;
+    }
+
+    .timer-label {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    footer {
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      background-color: #EFE8DC;
+    }
+
+    /* ==========================================================================
+       13. RESPONSIVE MEDIA QUERIES
+       ========================================================================== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-names { font-size: 3.2rem; }
+      .event-details-grid { grid-template-columns: 1fr; }
+      .attire-cards { grid-template-columns: 1fr; }
+      
+      .timeline::before { left: 20px; }
+      .timeline-item {
+        width: 100%;
+        padding-left: 50px;
+        padding-right: 0;
+        text-align: left !important;
+      }
+      .timeline-item:nth-child(even) { left: 0; }
+      .timeline-item:nth-child(odd) .timeline-dot,
+      .timeline-item:nth-child(even) .timeline-dot {
+        left: 14px;
+        right: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="bg-music" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=soft-piano-108743.mp3" type="audio/mpeg">
+  </audio>
+
+  <button class="music-toggle" id="music-btn" aria-label="Toggle Music">♫</button>
+
+  <nav class="nav-bar" id="navbar">
+    <div class="nav-logo">E & A</div>
+    <ul class="nav-links">
+      <li><a href="#invitation">Invitation</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#details">The Day</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#dresscode">Dress Code</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#rsvp">RSVP</a></li>
+    </ul>
+    <div class="hamburger" id="menu-btn">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#invitation" class="mobile-link">Invitation</a>
+    <a href="#story" class="mobile-link">Our Story</a>
+    <a href="#details" class="mobile-link">The Day</a>
+    <a href="#menu" class="mobile-link">Menu</a>
+    <a href="#dresscode" class="mobile-link">Dress Code</a>
+    <a href="#gallery" class="mobile-link">Gallery</a>
+    <a href="#rsvp" class="mobile-link">RSVP</a>
+  </div>
+
+  <div id="intro-screen">
+    <div class="cup-container">
+      <div class="steam">~</div>
+      <div class="steam">~</div>
+      <div class="steam">~</div>
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#765548" stroke-width="1.5">
+        <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+        <line x1="6" y1="1" x2="6" y2="4"></line>
+        <line x1="10" y1="1" x2="10" y2="4"></line>
+        <line x1="14" y1="1" x2="14" y2="4"></line>
+      </svg>
+    </div>
+    <p class="intro-sub">A Little Story</p>
+    <h2 class="intro-title">It started with coffee.</h2>
+    <button class="btn-primary" id="enter-btn">Take a Sip ☕</button>
+  </div>
+
+  <header class="hero">
+    <p class="hero-label">The Wedding Of</p>
+    <h1 class="hero-names">Elena<br>& Adrian</h1>
+    <p class="hero-date">JANUARY 31, 2028 · MANILA, PHILIPPINES</p>
+    <p class="hero-tagline">"It started with coffee. It became everything."</p>
+    <a href="#invitation" class="btn-outline">Open Our Invitation ↓</a>
+  </header>
+
+  <section class="section-padding" id="invitation">
+    <div class="invitation-card reveal">
+      <p class="intro-sub">You're Invited</p>
+      <div class="invitation-body">
+        <p>Together with their families,</p>
+        <h2 style="font-size: 2.5rem; margin: 1rem 0; color: var(--primary-purple);">Elena Marie Santos <br>&<br> Adrian Miguel Reyes</h2>
+        <p>joyfully invite you to celebrate as they begin their next chapter together.</p>
+      </div>
+      
+      <div class="event-details-grid">
+        <div class="event-item">
+          <h4>Ceremony</h4>
+          <p><strong>San Sebastian Church</strong></p>
+          <p>4:00 PM</p>
+          <a href="https://maps.google.com" target="_blank" class="btn-outline" style="margin-top: 1rem; font-size: 0.65rem;">View Map</a>
+        </div>
+        <div class="event-item">
+          <h4>Reception</h4>
+          <p><strong>The Manila Hotel</strong></p>
+          <p>6:30 PM</p>
+          <a href="https://maps.google.com" target="_blank" class="btn-outline" style="margin-top: 1rem; font-size: 0.65rem;">View Map</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding" id="story">
+    <div style="text-align: center; margin-bottom: 3rem;" class="reveal">
+      <p class="intro-sub">☕ The First Sip</p>
+      <h2 style="font-size: 2.5rem;">Our Blend</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2019</div>
+        <div class="timeline-title">The First Sip</div>
+        <p>Elena and Adrian met through mutual friends for coffee in Makati. Planned for an hour, they stayed for three.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2020</div>
+        <div class="timeline-title">The Regulars</div>
+        <p>Coffee became their routine. “Want coffee?” became their unofficial way of saying *I want to see you*.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2023</div>
+        <div class="timeline-title">Our Blend</div>
+        <p>Collecting coffee shops and memories across different cities and countries. Same two people.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2026</div>
+        <div class="timeline-title">The Question</div>
+        <p>A weekend in Tagaytay. A sunset. A coffee. A ring. She said yes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding" id="menu">
+    <div style="text-align: center; margin-bottom: 3rem;" class="reveal">
+      <p class="intro-sub">Order of Events</p>
+      <h2 style="font-size: 2.5rem;">Today's Menu</h2>
+    </div>
+
+    <div class="menu-container reveal">
+      <div class="menu-item">
+        <span class="menu-time">3:30 PM</span>
+        <span class="menu-event">Guest Arrival</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-time">4:00 PM</span>
+        <span class="menu-event">The Ceremony</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-time">6:00 PM</span>
+        <span class="menu-event">Coffee & Conversations</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-time">6:30 PM</span>
+        <span class="menu-event">The Reception</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-time">7:00 PM</span>
+        <span class="menu-event">Dinner is Served</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-time">8:30 PM</span>
+        <span class="menu-event">Dance Floor Opens</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding" id="dresscode">
+    <div style="text-align: center;" class="reveal">
+      <p class="intro-sub">☕ Your Usual?</p>
+      <h2 style="font-size: 2.5rem; color: var(--primary-purple);">PURPLE</h2>
+      <p style="max-width: 500px; margin: 1rem auto;">While coffee inspired our story, purple is the color of our celebration. Guests are encouraged to wear shades of purple.</p>
+    </div>
+
+    <div class="palette-container reveal">
+      <div class="swatch" style="background-color: #E6E6FA; color: #333;" onclick="changeBg('#E6E6FA')">Lavender</div>
+      <div class="swatch" style="background-color: #C8B6D9; color: #333;" onclick="changeBg('#C8B6D9')">Lilac</div>
+      <div class="swatch" style="background-color: #915C83;" onclick="changeBg('#915C83')">Mauve</div>
+      <div class="swatch" style="background-color: #76519A;" onclick="changeBg('#76519A')">Amethyst</div>
+      <div class="swatch" style="background-color: #4A2E35;" onclick="changeBg('#4A2E35')">Plum</div>
+    </div>
+
+    <div class="attire-cards reveal">
+      <div class="attire-card">
+        <h3>Ladies</h3>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Formal Long Gowns or Elegant Cocktail Dresses in any palette shade.</p>
+      </div>
+      <div class="attire-card">
+        <h3>Gentlemen</h3>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Formal Suits or Barong Tagalog with dark trousers.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding" id="gallery">
+    <div style="text-align: center; margin-bottom: 3rem;" class="reveal">
+      <p class="intro-sub">Photographic Journal</p>
+      <h2 style="font-size: 2.5rem;">From Our Table</h2>
+    </div>
+
+    <div class="gallery-grid reveal">
+      <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80')">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=500&q=80" alt="Gallery photo 1" />
+      </div>
+      <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80')">
+        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=500&q=80" alt="Gallery photo 2" />
+      </div>
+      <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=800&q=80')">
+        <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=500&q=80" alt="Gallery photo 3" />
+      </div>
+    </div>
+  </section>
+
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="Enlarged view" />
+  </div>
+
+  <section class="section-padding">
+    <div style="text-align: center; margin-bottom: 3rem;" class="reveal">
+      <p class="intro-sub">Information</p>
+      <h2 style="font-size: 2.5rem;">The Fine Print</h2>
+    </div>
+
+    <div class="faq-container reveal">
+      <div class="faq-item">
+        <button class="faq-question">What is the dress code? <span>+</span></button>
+        <div class="faq-answer">
+          <p>We invite guests to wear formal attire in shades of purple (lavender, lilac, mauve, amethyst, or plum).</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Are kids allowed? <span>+</span></button>
+        <div class="faq-answer">
+          <p>Although we love your little ones, this will be an adults-only celebration unless specified on your invitation.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Can I bring a plus one? <span>+</span></button>
+        <div class="faq-answer">
+          <p>Due to seating constraints, we can only accommodate guests formally named on the invitation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding" id="rsvp">
+    <div style="text-align: center; margin-bottom: 2rem;" class="reveal">
+      <p class="intro-sub">Reservation</p>
+      <h2 style="font-size: 2.5rem;">A Table For You</h2>
+      <p>Please respond by December 1, 2027.</p>
+    </div>
+
+    <form class="rsvp-form reveal" id="rsvpForm" onsubmit="handleRSVP(event)">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" required placeholder="Elena Santos" />
+      </div>
+      <div class="form-group">
+        <label>Attendance</label>
+        <select required>
+          <option value="accept">☕ Happily Accepts</option>
+          <option value="decline">🥀 Regretfully Declines</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Dietary Restrictions</label>
+        <input type="text" placeholder="None / Vegetarian / Allergies" />
+      </div>
+      <div class="form-group">
+        <label>Message for the Couple</label>
+        <textarea rows="4"></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="width: 100%;">Confirm Reservation</button>
+    </form>
+  </section>
+
+  <footer>
+    <p class="intro-sub">One More Cup Before The Big Day</p>
+    
+    <div class="timer-container">
+      <div class="timer-box"><div class="timer-number" id="days">00</div><div class="timer-label">Days</div></div>
+      <div class="timer-box"><div class="timer-number" id="hours">00</div><div class="timer-label">Hours</div></div>
+      <div class="timer-box"><div class="timer-number" id="minutes">00</div><div class="timer-label">Mins</div></div>
+      <div class="timer-box"><div class="timer-number" id="seconds">00</div><div class="timer-label">Secs</div></div>
+    </div>
+
+    <div style="margin-top: 4rem;">
+      <h2 style="font-size: 3.5rem; font-style: italic;">Forever.</h2>
+      <p style="letter-spacing: 2px; font-size: 0.8rem; margin-top: 1rem;">ELENA & ADRIAN</p>
+    </div>
+  </footer>
+
+  <script>
+    // 1. Intro Screen Transition
+    document.getElementById('enter-btn').addEventListener('click', () => {
+      document.getElementById('intro-screen').classList.add('hidden');
+    });
+
+    // 2. Sticky Navbar Trigger
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 400) {
+        nav.classList.add('visible');
+      } else {
+        nav.classList.remove('visible');
+      }
+    });
+
+    // 3. Mobile Menu Toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+      });
+    });
+
+    // 4. Scroll Reveal Animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // 5. Dress Code Color Swatch Dynamic Background Accent
+    function changeBg(color) {
+      document.body.style.backgroundColor = color + '15'; // Subtle tint
+    }
+
+    // 6. Lightbox Gallery Logic
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // 7. FAQ Accordion Logic
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        item.classList.toggle('active');
+      });
+    });
+
+    // 8. RSVP Submission Handling
+    function handleRSVP(e) {
+      e.preventDefault();
+      const form = document.getElementById('rsvpForm');
+      form.innerHTML = `
+        <div style="text-align: center; padding: 2rem 0;">
+          <h3 style="font-size: 2rem; color: var(--primary-purple);">Your Table is Reserved ☕</h3>
+          <p style="margin-top: 1rem;">We can't wait to celebrate with you in Manila!</p>
+        </div>
+      `;
+    }
+
+    // 9. Audio Player Toggle
+    const musicBtn = document.getElementById('music-btn');
+    const audio = document.getElementById('bg-music');
+    let isPlaying = false;
+
+    musicBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        audio.pause();
+        musicBtn.textContent = '♫';
+      } else {
+        audio.play();
+        musicBtn.textContent = '❚❚';
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // 10. Live Countdown Timer
+    const weddingDate = new Date("January 31, 2028 16:00:00").getTime();
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      if (distance > 0) {
+        document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+        document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000);
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
