@@ -206,7 +206,7 @@
     .story-bottom { margin-top: 6rem; border-top: 1px solid rgba(0,0,0,0.15); padding-top: 5rem; }
 
     /* ==========================================================================
-       6. THE DAY SCREEN
+       6. THE DAY SCREEN (UPDATED DUAL-LAYER FADE & STYLED TIMELINE HEADING)
        ========================================================================== */
     #screen-day {
       position: relative;
@@ -214,16 +214,27 @@
       color: var(--white);
     }
 
-    #day-bg-layer {
+    /* Dual background layers for cross-fading */
+    .day-bg {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-image: url('theday.jpeg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      transition: background-image 0.8s ease-in-out;
+      transition: opacity 0.8s ease-in-out;
       z-index: 0;
     }
 
+    #day-bg-1 {
+      background-image: url('theday.jpeg');
+      opacity: 1;
+    }
+
+    #day-bg-2 {
+      background-image: url('theday.jpeg');
+      opacity: 0;
+    }
+
+    /* Screen dark overlay */
     #screen-day::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -272,9 +283,9 @@
     .day-event-block { 
       text-align: center; 
       border: 1px solid rgba(255, 255, 255, 0.35); 
-      background: rgba(0, 0, 0, 0.18);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
       padding: 3.5rem 2rem 2.5rem; 
       margin-bottom: 3rem; 
       box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
@@ -313,7 +324,7 @@
       text-transform: uppercase;
       color: var(--white);
       border: 1px solid rgba(255, 255, 255, 0.7);
-      background: rgba(0, 0, 0, 0.25);
+      background: rgba(0, 0, 0, 0.3);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       transition: all 0.3s ease;
@@ -327,24 +338,32 @@
       text-shadow: none;
     }
 
-    /* Clickable Title Styling for "The Day At A Glance" */
-    .day-timeline-trigger {
-      display: inline-block;
+    /* Container for "The Day At A Glance" trigger */
+    .day-glance-card {
+      margin-top: 4rem;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      padding: 1.8rem 2rem;
       cursor: pointer;
-      font-size: 14px; 
+      transition: all 0.4s ease;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    .day-glance-card:hover {
+      background: rgba(0, 0, 0, 0.45);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .day-timeline-trigger {
+      font-family: var(--font-sans);
+      font-size: 13px; 
       letter-spacing: 4px; 
       text-transform: uppercase;
       color: var(--white);
       text-shadow: 0 1px 4px rgba(0,0,0,0.8);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-      padding-bottom: 6px;
       transition: all 0.3s ease;
-    }
-
-    .day-timeline-trigger:hover {
-      color: var(--white);
-      border-bottom-color: var(--white);
-      letter-spacing: 5px;
     }
 
     /* Hidden timeline container */
@@ -355,12 +374,12 @@
       border-left: 1px solid rgba(255, 255, 255, 0.6); 
       padding-left: 2rem; 
       text-align: left; 
-      background: rgba(0, 0, 0, 0.18);
+      background: rgba(0, 0, 0, 0.25);
       padding-top: 1.5rem;
       padding-bottom: 1.5rem;
       border-radius: 4px;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
       border: 1px solid rgba(255, 255, 255, 0.25);
       border-left-width: 2px;
       border-left-color: var(--white);
@@ -598,7 +617,8 @@
   </div>
 
   <div class="screen" id="screen-day">
-    <div id="day-bg-layer"></div>
+    <div id="day-bg-1" class="day-bg"></div>
+    <div id="day-bg-2" class="day-bg"></div>
 
     <div class="container">
       <div class="text-center" style="margin-bottom: 4rem;">
@@ -612,18 +632,18 @@
         <div class="day-event-label">Ceremony</div>
         <h3 class="day-event-title">San Sebastian Church</h3>
         <p class="day-event-desc">4:00 PM<br>Manila, Philippines</p>
-        <button class="view-image-btn" onclick="changeDayBackground('church.jpeg')">See Church Image</button>
+        <button class="view-image-btn" onclick="fadeDayBackground('church.jpeg')">See Church Image</button>
       </div>
 
       <div class="day-event-block">
         <div class="day-event-label">Reception</div>
         <h3 class="day-event-title">The Manila Hotel</h3>
         <p class="day-event-desc">6:30 PM<br>Manila, Philippines</p>
-        <button class="view-image-btn" onclick="changeDayBackground('hotel.jpeg')">See Hotel Image</button>
+        <button class="view-image-btn" onclick="fadeDayBackground('hotel.jpeg')">See Hotel Image</button>
       </div>
 
-      <div class="text-center" style="margin-top: 4rem;">
-        <h3 class="day-timeline-trigger" id="day-timeline-title" onclick="toggleTimeline()">The Day At A Glance &rarr;</h3>
+      <div class="day-glance-card text-center" onclick="toggleTimeline()">
+        <h3 class="day-timeline-trigger" id="day-timeline-title">The Day At A Glance &rarr;</h3>
       </div>
       
       <div class="day-timeline" id="day-timeline">
@@ -774,12 +794,22 @@
       if(screenId !== 'details') closeDetail();
     }
 
-    function changeDayBackground(imageName) {
-      const bgLayer = document.getElementById('day-bg-layer');
-      bgLayer.style.backgroundImage = "url('" + imageName + "')";
+    /* Cross-fading background logic between two layered elements */
+    let activeBgIndex = 1;
+    function fadeDayBackground(imageName) {
+      const bg1 = document.getElementById('day-bg-1');
+      const bg2 = document.getElementById('day-bg-2');
+      const nextBg = activeBgIndex === 1 ? bg2 : bg1;
+      const currentBg = activeBgIndex === 1 ? bg1 : bg2;
+
+      nextBg.style.backgroundImage = "url('" + imageName + "')";
+      nextBg.style.opacity = '1';
+      currentBg.style.opacity = '0';
+
+      activeBgIndex = activeBgIndex === 1 ? 2 : 1;
     }
 
-    /* Reveals timeline and resets background image to theday.jpeg */
+    /* Toggle timeline visibility & fade background to original cover */
     function toggleTimeline() {
       const timeline = document.getElementById('day-timeline');
       const trigger = document.getElementById('day-timeline-title');
@@ -790,7 +820,7 @@
       } else {
         timeline.classList.add('active');
         trigger.innerHTML = "The Day At A Glance &larr;";
-        changeDayBackground('theday.jpeg');
+        fadeDayBackground('theday.jpeg');
       }
     }
 
