@@ -13,8 +13,6 @@
     /* ==========================================================================
        1. DESIGN SYSTEM (STRICT BLACK & WHITE)
        ========================================================================== */
-    /* We include a fallback for Brittany. If you own the Brittany font file (.ttf/.woff), 
-       you can host it in your folder and use @font-face to guarantee it shows up everywhere! */
     @font-face {
       font-family: 'Brittany';
       src: local('Brittany Signature'), local('BrittanySignature');
@@ -52,14 +50,14 @@
        2. SCREEN SWAPPING TRICK (The "New Page" effect)
        ========================================================================== */
     .screen {
-      display: none; /* Hides all screens by default */
+      display: none; 
       min-height: 100vh;
       background-color: var(--white);
       animation: fadeIn 0.8s ease forwards;
     }
     
     .screen.active {
-      display: block; /* Shows only the active screen */
+      display: block; 
     }
 
     @keyframes fadeIn {
@@ -96,7 +94,6 @@
       background-image: url('cover.jpeg');
       background-size: cover;
       background-position: center;
-      /* Opacity removed to show photo in full */
       z-index: 1;
     }
 
@@ -114,9 +111,31 @@
     .cover-btn:hover { background-color: #FFF; color: #000; }
 
     /* ==========================================================================
-       4. MENU SCREEN (ELEGANT LIST)
+       4. MENU / WELCOME SCREEN (ELEGANT LIST)
        ========================================================================== */
-    #screen-menu { background-color: var(--white); }
+    #screen-menu { 
+      position: relative;
+      background-color: var(--white); 
+    }
+    
+    /* Background Image for Welcome Page */
+    #screen-menu::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url('welcome.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      z-index: 0;
+    }
+
+    /* Soft light overlay so the elegant text is readable */
+    #screen-menu::after {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(255, 255, 255, 0.80); 
+      z-index: 0;
+    }
     
     .menu-header { margin-bottom: 4rem; text-align: center; }
     .menu-header h2 { font-size: 2rem; letter-spacing: 2px; }
@@ -147,7 +166,6 @@
       background-color: var(--white);
     }
     
-    /* Background Image for Our Story */
     #screen-story::before {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -158,7 +176,6 @@
       z-index: 0;
     }
 
-    /* Soft light overlay so the elegant text is still easy to read */
     #screen-story::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -167,15 +184,15 @@
     }
 
     .story-content { 
-      max-width: 500px; /* Narrower width creates a beautiful, classic paragraph shape */
+      max-width: 500px; 
       margin: 0 auto; 
       text-align: center; 
       font-family: var(--font-serif); 
-      font-size: 20px; /* Slightly larger for readability */
-      color: #111111; /* Darker black for higher contrast */
+      font-size: 20px; 
+      color: #111111; 
       line-height: 2.1; 
-      font-weight: 400; /* Regular weight instead of light for easier reading */
-      letter-spacing: 0.5px; /* Adds a bit of breathing room */
+      font-weight: 400; 
+      letter-spacing: 0.5px; 
     }
     .story-content p { margin-bottom: 2.5rem; }
     
@@ -183,7 +200,7 @@
       font-style: italic;
       color: var(--black);
       font-size: 24px;
-      font-weight: 500; /* Subtle bolding on the highlights */
+      font-weight: 500; 
     }
     
     .story-bottom { margin-top: 6rem; border-top: 1px solid rgba(0,0,0,0.15); padding-top: 5rem; }
@@ -346,17 +363,8 @@
       </div>
       
       <div class="elegant-menu">
-        <div class="elegant-item" onclick="openScreen('story')">
-          <span class="ei-num">01</span>
-          <div class="ei-text">
-            <div class="ei-title">Our Story</div>
-            <div class="ei-desc">How it all began</div>
-          </div>
-          <span class="ei-arrow">&rarr;</span>
-        </div>
-        
         <div class="elegant-item" onclick="openScreen('day')">
-          <span class="ei-num">02</span>
+          <span class="ei-num">01</span>
           <div class="ei-text">
             <div class="ei-title">The Day</div>
             <div class="ei-desc">When & where to find us</div>
@@ -365,7 +373,7 @@
         </div>
         
         <div class="elegant-item" onclick="openScreen('details')">
-          <span class="ei-num">03</span>
+          <span class="ei-num">02</span>
           <div class="ei-text">
             <div class="ei-title">Details</div>
             <div class="ei-desc">Everything you need to know</div>
@@ -374,7 +382,7 @@
         </div>
         
         <div class="elegant-item" onclick="openScreen('gallery')">
-          <span class="ei-num">04</span>
+          <span class="ei-num">03</span>
           <div class="ei-text">
             <div class="ei-title">Gallery</div>
             <div class="ei-desc">The moments we've kept</div>
@@ -383,7 +391,7 @@
         </div>
         
         <div class="elegant-item" onclick="openScreen('rsvp')">
-          <span class="ei-num">05</span>
+          <span class="ei-num">04</span>
           <div class="ei-text">
             <div class="ei-title">RSVP</div>
             <div class="ei-desc">Save your seat</div>
@@ -397,7 +405,7 @@
   <div class="screen" id="screen-day">
     <div class="container">
       <div class="text-center" style="margin-bottom: 5rem;">
-        <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 02</div>
+        <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 01</div>
         <h2 class="serif" style="font-size: 48px; letter-spacing: 2px;">January 31, 2028</h2>
       </div>
 
@@ -431,7 +439,7 @@
 
   <div class="screen" id="screen-details">
     <div class="container text-center">
-      <div style="font-size: 11px; letter-spacing: 4px; color: var(--black); margin-bottom: 1rem; font-weight: 500;">CHAPTER 03</div>
+      <div style="font-size: 11px; letter-spacing: 4px; color: var(--black); margin-bottom: 1rem; font-weight: 500;">CHAPTER 02</div>
       <h2 class="serif" style="font-size: 48px; margin-bottom: 4rem; letter-spacing: 2px; text-transform: uppercase;">The Details</h2>
 
       <div id="details-menu" class="details-grid">
@@ -491,7 +499,7 @@
 
   <div class="screen" id="screen-gallery">
     <div class="container text-center">
-      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 04</div>
+      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 03</div>
       <h2 class="serif" style="font-size: 48px; margin-bottom: 4rem; letter-spacing: 2px;">The moments we've kept.</h2>
 
       <div class="gallery-grid">
@@ -507,7 +515,7 @@
 
   <div class="screen" id="screen-rsvp">
     <div class="container text-center">
-      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 05</div>
+      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 04</div>
       <h2 class="serif" style="font-size: 48px; margin-bottom: 1rem; letter-spacing: 2px;">We've saved you a seat.</h2>
       <p style="color: var(--gray); font-size: 14px; margin-bottom: 4rem;">Please let us know if you'll be joining us.</p>
 
