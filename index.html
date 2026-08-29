@@ -98,7 +98,6 @@
       justify-content: center; text-align: center; height: 100vh; padding: 2rem;
     }
 
-    .cover-pre { font-size: clamp(10px, 2vw, 12px); letter-spacing: 6px; color: #FFF; margin-bottom: 3rem; text-transform: uppercase; }
     .cover-names { font-family: var(--font-serif); font-size: clamp(52px, 10vw, 100px); line-height: 1; color: #FFF; margin-bottom: 2rem; }
     .cover-date { font-size: clamp(11px, 2vw, 13px); letter-spacing: 4px; color: #FFF; text-transform: uppercase; margin-bottom: 3rem; }
     .cover-script { font-family: var(--font-script); font-size: clamp(2rem, 5vw, 2.5rem); color: #FFF; margin-bottom: 4rem; }
@@ -155,17 +154,18 @@
        ========================================================================== */
     #screen-details {
       position: relative;
+      background-color: var(--white);
+    }
+    
+    /* Cover image with exactly 70% opacity as the background */
+    #screen-details::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       background-image: url('cover.jpg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-    }
-    
-    /* White overlay to ensure text is readable over the cover image */
-    #screen-details::before {
-      content: '';
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(255, 255, 255, 0.90);
+      opacity: 0.7; /* 70% opacity */
       z-index: 0;
     }
 
@@ -219,7 +219,6 @@
   <div class="screen active" id="screen-cover">
     <div class="cover-image"></div>
     <div class="cover-content">
-      <div class="cover-pre">A Love Story In Black & White</div>
       <h1 class="cover-names">Elena <br>& Adrian</h1>
       <div class="cover-date">31 January 2028 · Manila</div>
       <div class="cover-script">It started with coffee.</div>
@@ -286,210 +285,4 @@
 
       <div class="story-bottom text-center">
         <h3 class="serif" style="font-size: 36px; margin-bottom: 0;">2015</h3>
-        <div style="font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--black); margin-bottom: 1rem;">Our Year</div>
-        <p style="color: var(--gray); font-style: italic; margin-bottom: 2rem;">The year everything changed.</p>
-        <div class="script" style="font-size: 3rem;">Elena & Adrian</div>
-      </div>
-
-      <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
-    </div>
-  </div>
-
-  <div class="screen" id="screen-day">
-    <div class="container">
-      <div class="text-center" style="margin-bottom: 5rem;">
-        <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 02</div>
-        <h2 class="serif" style="font-size: 42px;">January 31, 2028</h2>
-      </div>
-
-      <div class="event-block">
-        <div class="event-label">Ceremony</div>
-        <h3 class="event-title">San Sebastian Church</h3>
-        <p style="color: var(--gray); font-size: 14px; letter-spacing: 1px;">4:00 PM<br>Manila, Philippines</p>
-      </div>
-
-      <div class="event-block">
-        <div class="event-label">Reception</div>
-        <h3 class="event-title">The Manila Hotel</h3>
-        <p style="color: var(--gray); font-size: 14px; letter-spacing: 1px;">6:30 PM<br>Manila, Philippines</p>
-      </div>
-
-      <div class="text-center" style="margin-top: 5rem;">
-        <h3 style="font-size: 14px; letter-spacing: 4px; text-transform: uppercase;">The Day At A Glance</h3>
-      </div>
-      
-      <div class="timeline">
-        <div class="tl-item"><div class="tl-time">3:30 PM</div><div class="tl-desc">Guest Arrival</div></div>
-        <div class="tl-item"><div class="tl-time">4:00 PM</div><div class="tl-desc">Ceremony</div></div>
-        <div class="tl-item"><div class="tl-time">6:00 PM</div><div class="tl-desc">Cocktail Hour</div></div>
-        <div class="tl-item"><div class="tl-time">6:30 PM</div><div class="tl-desc">Reception</div></div>
-        <div class="tl-item"><div class="tl-time">8:30 PM</div><div class="tl-desc">Dancing</div></div>
-      </div>
-
-      <div class="text-center"><a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a></div>
-    </div>
-  </div>
-
-  <div class="screen" id="screen-details">
-    <div class="container text-center">
-      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 03</div>
-      <h2 class="serif" style="font-size: 42px; margin-bottom: 4rem;">The Details</h2>
-
-      <div id="details-menu" class="details-grid">
-        <div class="detail-card" onclick="openDetail('dc-dress')">
-          <h3 class="detail-title">Dress Code</h3>
-          <p class="detail-sub">Black & White</p>
-        </div>
-        <div class="detail-card" onclick="openDetail('dc-gifts')">
-          <h3 class="detail-title">Gifts</h3>
-          <p class="detail-sub">Your presence is our greatest gift.</p>
-        </div>
-        <div class="detail-card" onclick="openDetail('dc-faq')">
-          <h3 class="detail-title">FAQ</h3>
-          <p class="detail-sub">A few things you might be wondering.</p>
-        </div>
-        <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
-      </div>
-
-      <div id="dc-dress" class="detail-content">
-        <h3 class="dc-header">Black & White</h3>
-        <p class="text-center" style="margin-bottom: 3rem; color: var(--gray); font-style: italic;">Keep it classic. Keep it timeless.</p>
-        <div style="margin-bottom: 2rem;">
-          <h4 style="letter-spacing: 2px; margin-bottom: 0.5rem;">LADIES</h4>
-          <p style="color: var(--gray); font-size: 14px;">Black, white, ivory, or monochrome formalwear.</p>
-        </div>
-        <div style="margin-bottom: 3rem;">
-          <h4 style="letter-spacing: 2px; margin-bottom: 0.5rem;">GENTLEMEN</h4>
-          <p style="color: var(--gray); font-size: 14px;">Black suit, tuxedo, white shirt, or classic monochrome formalwear.</p>
-        </div>
-        <div class="text-center"><a class="back-btn" onclick="closeDetail()">&larr; Back to Details</a></div>
-      </div>
-
-      <div id="dc-gifts" class="detail-content">
-        <h3 class="dc-header">Gifts</h3>
-        <p class="text-center" style="margin-top: 2rem; color: var(--gray);">We are immensely grateful for your love and support. Your presence at our wedding is the greatest gift of all.<br><br>If you wish to bless us with a gift, a monetary contribution to help us start our new chapter together would be deeply appreciated.</p>
-        <div class="text-center"><a class="back-btn" onclick="closeDetail()">&larr; Back to Details</a></div>
-      </div>
-
-      <div id="dc-faq" class="detail-content">
-        <h3 class="dc-header">FAQ</h3>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">What should I wear? <span>+</span></button>
-          <div class="faq-a">Black and white formalwear. Please refer to the Dress Code section for details.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">What time should I arrive? <span>+</span></button>
-          <div class="faq-a">Please arrive at least 30 minutes before the ceremony.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Can I bring a plus-one? <span>+</span></button>
-          <div class="faq-a">Please follow the number of seats indicated on your formal invitation envelope.</div>
-        </div>
-        <div class="text-center"><a class="back-btn" onclick="closeDetail()">&larr; Back to Details</a></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="screen" id="screen-gallery">
-    <div class="container text-center">
-      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 04</div>
-      <h2 class="serif" style="font-size: 42px;">The moments we've kept.</h2>
-
-      <div class="gallery-grid">
-        <div class="gal-item"><img src="photo1.jpeg" alt="Gallery"></div>
-        <div class="gal-item"><img src="photo2.jpeg" alt="Gallery"></div>
-        <div class="gal-item"><img src="photo3.jpeg" alt="Gallery"></div>
-        <div class="gal-item"><img src="photo4.jpeg" alt="Gallery"></div>
-        <div class="gal-item"><img src="photo5.jpeg" alt="Gallery"></div>
-      </div>
-      <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
-    </div>
-  </div>
-
-  <div class="screen" id="screen-rsvp">
-    <div class="container text-center">
-      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 05</div>
-      <h2 class="serif" style="font-size: 42px; margin-bottom: 1rem;">We've saved you a seat.</h2>
-      <p style="color: var(--gray); font-size: 14px; margin-bottom: 4rem;">Please let us know if you'll be joining us.</p>
-
-      <form id="rsvp-form" class="rsvp-form" onsubmit="submitRSVP(event)">
-        <div class="form-group">
-          <label>Your Name</label>
-          <input type="text" required placeholder="Elena & Adrian">
-        </div>
-        <div class="form-group">
-          <label>Will you join us?</label>
-          <select required>
-            <option value="yes">Happily, yes</option>
-            <option value="no">Regretfully, no</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Number of Guests</label>
-          <select required>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
-        </div>
-        <button type="submit" class="btn" style="width: 100%;">Confirm RSVP &rarr;</button>
-      </form>
-
-      <div id="rsvp-success" class="rsvp-success">
-        <h2 class="serif" style="font-size: 32px; margin-bottom: 1rem;">You're on the list.</h2>
-        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can't wait to celebrate with you.</div>
-      </div>
-
-      <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
-    </div>
-  </div>
-
-  <script>
-    /* This function does the magic! It hides everything, then only shows 
-      the screen you requested. No scrolling, just an instant swap.
-    */
-    function openScreen(screenId) {
-      // Step 1: Hide all screens
-      document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
-      });
-      
-      // Step 2: Show the target screen
-      document.getElementById('screen-' + screenId).classList.add('active');
-      
-      // Step 3: Jump to the very top of the new screen instantly
-      window.scrollTo(0, 0); 
-      
-      // Reset the details sub-menu if leaving the details section
-      if(screenId !== 'details') closeDetail();
-    }
-
-    /* Details Sub-Menu Logic */
-    function openDetail(id) {
-      document.getElementById('details-menu').style.display = 'none';
-      document.getElementById(id).classList.add('active');
-      window.scrollTo(0, 0);
-    }
-    
-    function closeDetail() {
-      document.querySelectorAll('.detail-content').forEach(el => el.classList.remove('active'));
-      document.getElementById('details-menu').style.display = 'grid';
-    }
-
-    /* FAQ Logic */
-    function toggleFaq(btn) {
-      const parent = btn.parentElement;
-      const isOpen = parent.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-      if (!isOpen) parent.classList.add('open');
-    }
-
-    /* RSVP Form Submit */
-    function submitRSVP(e) {
-      e.preventDefault();
-      document.getElementById('rsvp-form').style.display = 'none';
-      document.getElementById('rsvp-success').style.display = 'block';
-    }
-  </script>
-</body>
-</html>
+        <div style="font-size: 11px; letter
