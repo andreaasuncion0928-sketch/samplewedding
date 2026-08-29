@@ -1,171 +1,495 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elena & Adrian - Our Story</title>
-    <style>
-        /* General Styles */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            color: #333;
-            background-color: #fafafa;
-            text-align: center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elena & Adrian — A Love Story</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Poppins:wght@300;400;500&family=Allura&display=swap" rel="stylesheet">
 
-        h1, h2, h3 {
-            font-family: 'Georgia', serif;
-            font-weight: normal;
-        }
+  <style>
+    /* ==========================================================================
+       1. DESIGN SYSTEM (STRICT BLACK & WHITE)
+       ========================================================================== */
+    :root {
+      --white: #FFFFFF;
+      --off-white: #FAFAFA;
+      --black: #111111;
+      --gray: #666666;
+      --border: rgba(0, 0, 0, 0.15);
+      
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Poppins', sans-serif;
+      --font-script: 'Allura', cursive;
+    }
 
-        /* Details & Cover Section */
-        .cover-section {
-            position: relative;
-            background-image: url('cover.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            padding: 120px 20px;
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            z-index: 1;
-        }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* 70% Opacity Effect on Cover Photo */
-        .cover-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(255, 255, 255, 0.3); /* 30% white overlay means the photo is essentially at 70% opacity */
-            z-index: -1;
-        }
+    body {
+      background-color: var(--white);
+      color: var(--black);
+      font-family: var(--font-sans);
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
 
-        .cover-content {
-            background: rgba(255, 255, 255, 0.85);
-            padding: 40px;
-            border-radius: 4px;
-            max-width: 600px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
+    h1, h2, h3, .serif { font-family: var(--font-serif); font-weight: 400; }
+    .script { font-family: var(--font-script); font-size: 2.5rem; color: var(--black); }
+    
+    a { color: inherit; text-decoration: none; cursor: pointer; transition: all 0.3s ease; }
+    button { font-family: var(--font-sans); cursor: pointer; border: none; background: none; }
 
-        /* Story Section */
-        .story-section {
-            max-width: 800px;
-            margin: 60px auto;
-            padding: 0 20px;
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
+    /* ==========================================================================
+       2. SCREEN SWAPPING TRICK (The "New Page" effect)
+       ========================================================================== */
+    .screen {
+      display: none; /* Hides all screens by default */
+      min-height: 100vh;
+      background-color: var(--white);
+      animation: fadeIn 0.6s ease forwards;
+    }
+    
+    .screen.active {
+      display: block; /* Shows only the active screen */
+    }
 
-        .story-section h1 {
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .story-section h3 {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 40px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
+    .container { max-width: 800px; margin: 0 auto; padding: 6rem 2rem 4rem; position: relative; z-index: 1;}
+    .text-center { text-align: center; }
 
-        .story-text {
-            text-align: left;
-            margin: 0 auto;
-            max-width: 650px;
-        }
+    /* Buttons */
+    .btn {
+      display: inline-block; padding: 1rem 2.5rem; background-color: var(--black); color: var(--white);
+      font-size: 11px; letter-spacing: 3px; text-transform: uppercase; border: 1px solid var(--black); transition: all 0.3s ease;
+    }
+    .btn:hover { background-color: transparent; color: var(--black); }
 
-        .story-text p {
-            margin-bottom: 20px;
-        }
+    .back-btn {
+      display: inline-block; margin-top: 4rem; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gray); border-bottom: 1px solid transparent; padding-bottom: 2px;
+    }
+    .back-btn:hover { color: var(--black); border-bottom-color: var(--black); }
 
-        .getting-married {
-            font-family: 'Georgia', serif;
-            font-size: 1.5rem;
-            font-style: italic;
-            margin-top: 40px;
-            text-align: center;
-        }
+    /* ==========================================================================
+       3. COVER SCREEN
+       ========================================================================== */
+    #screen-cover {
+      background-color: var(--black);
+      position: relative;
+    }
 
-        /* Bottom Section */
-        .bottom-section {
-            background-color: #efefef;
-            padding: 60px 20px;
-            margin-top: 60px;
-        }
+    .cover-image {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url('cover.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.7; /* 70% opacity */
+      z-index: 1;
+    }
 
-        .bottom-section h2 {
-            font-size: 2.5rem;
-            margin: 0;
-            color: #222;
-        }
+    .cover-content {
+      position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; 
+      justify-content: center; text-align: center; height: 100vh; padding: 2rem;
+    }
 
-        .bottom-section h3 {
-            font-size: 1.5rem;
-            margin: 10px 0 20px 0;
-            color: #555;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+    .cover-pre { font-size: clamp(10px, 2vw, 12px); letter-spacing: 6px; color: #FFF; margin-bottom: 3rem; text-transform: uppercase; }
+    .cover-names { font-family: var(--font-serif); font-size: clamp(52px, 10vw, 100px); line-height: 1; color: #FFF; margin-bottom: 2rem; }
+    .cover-date { font-size: clamp(11px, 2vw, 13px); letter-spacing: 4px; color: #FFF; text-transform: uppercase; margin-bottom: 3rem; }
+    .cover-script { font-family: var(--font-script); font-size: clamp(2rem, 5vw, 2.5rem); color: #FFF; margin-bottom: 4rem; }
+    
+    .cover-btn { background-color: transparent; color: #FFF; border: 1px solid #FFF; }
+    .cover-btn:hover { background-color: #FFF; color: #000; }
 
-        .bottom-section p {
-            font-size: 1.2rem;
-            font-style: italic;
-            color: #666;
-            margin-bottom: 30px;
-        }
+    /* ==========================================================================
+       4. MENU SCREEN
+       ========================================================================== */
+    #screen-menu { background-color: var(--off-white); }
+    
+    .menu-header { margin-bottom: 5rem; text-align: center; }
+    .menu-header h2 { font-size: 2rem; letter-spacing: 2px; }
+    .menu-header p { font-size: 12px; letter-spacing: 4px; color: var(--gray); text-transform: uppercase; margin-top: 0.5rem;}
+    
+    .chapter-list { display: flex; flex-direction: column; gap: 2rem; max-width: 600px; margin: 0 auto; }
+    
+    .chapter-card {
+      display: flex; flex-direction: column; align-items: center; padding: 3rem 2rem;
+      background: var(--white); border: 1px solid var(--border); cursor: pointer; text-align: center;
+      transition: all 0.3s ease;
+    }
+    .chapter-card:hover { transform: translateY(-3px); border-color: var(--black); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    
+    .chapter-num { font-family: var(--font-serif); font-size: 1.5rem; color: var(--gray); font-style: italic; margin-bottom: 0.5rem; }
+    .chapter-title { font-size: 24px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .chapter-desc { font-size: 13px; color: var(--gray); margin-bottom: 1.5rem; }
+    .chapter-link { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid var(--black); padding-bottom: 2px;}
 
-        .names {
-            font-family: 'Georgia', serif;
-            font-size: 2rem;
-            color: #333;
-            letter-spacing: 1px;
-        }
+    /* ==========================================================================
+       5. OUR STORY SCREEN
+       ========================================================================== */
+    .story-content { max-width: 600px; margin: 0 auto; text-align: left; font-size: 15px; color: var(--gray); line-height: 2; }
+    .story-content p { margin-bottom: 2rem; }
+    
+    .story-bottom { margin-top: 5rem; border-top: 1px solid var(--border); padding-top: 4rem; }
 
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            .story-section h1 { font-size: 2rem; }
-            .cover-section { min-height: 40vh; padding: 80px 20px; }
-            .cover-content { padding: 25px; }
-        }
-    </style>
+    /* ==========================================================================
+       6. THE DAY SCREEN
+       ========================================================================== */
+    .event-block { text-align: center; border: 1px solid var(--border); padding: 4rem 2rem; margin-bottom: 3rem; }
+    .event-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gray); margin-bottom: 1rem; }
+    .event-title { font-family: var(--font-serif); font-size: 36px; margin-bottom: 0.5rem; }
+    
+    .timeline { max-width: 400px; margin: 5rem auto 0; border-left: 1px solid var(--black); padding-left: 2rem; text-align: left; }
+    .tl-item { position: relative; padding: 1.5rem 0; }
+    .tl-item::before { content: ''; position: absolute; left: -2.3rem; top: 2rem; width: 8px; height: 8px; background: var(--white); border: 1px solid var(--black); border-radius: 50%; }
+    .tl-time { font-size: 11px; letter-spacing: 2px; color: var(--gray); margin-bottom: 0.2rem; }
+    .tl-desc { font-family: var(--font-serif); font-size: 22px; }
+
+    /* ==========================================================================
+       7. DETAILS SCREEN
+       ========================================================================== */
+    #screen-details {
+      position: relative;
+      background-image: url('cover.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    
+    /* White overlay to ensure text is readable over the cover image */
+    #screen-details::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(255, 255, 255, 0.90);
+      z-index: 0;
+    }
+
+    .details-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 600px; margin: 0 auto; }
+    .detail-card { border: 1px solid var(--border); padding: 2.5rem; text-align: center; cursor: pointer; transition: all 0.3s ease; background: var(--white); }
+    .detail-card:hover { border-color: var(--black); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .detail-title { font-size: 18px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .detail-sub { font-size: 13px; color: var(--gray); }
+
+    .detail-content { display: none; text-align: left; max-width: 600px; margin: 0 auto; animation: fadeIn 0.4s forwards; background: var(--white); padding: 3rem; border: 1px solid var(--border); }
+    .detail-content.active { display: block; }
+    .dc-header { font-family: var(--font-serif); font-size: 32px; margin-bottom: 1rem; text-align: center; border-bottom: 1px solid var(--border); padding-bottom: 1rem;}
+    
+    .faq-q { width: 100%; text-align: left; padding: 1.5rem 0; font-family: var(--font-serif); font-size: 22px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-size: 14px; color: var(--gray); }
+    .faq-item.open .faq-a { max-height: 200px; padding: 1rem 0; }
+
+    /* ==========================================================================
+       8. GALLERY SCREEN
+       ========================================================================== */
+    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .gal-item { overflow: hidden; border: 1px solid var(--border); }
+    .gal-item:nth-child(1) { grid-column: span 2; }
+    .gal-item:nth-child(4) { grid-column: span 2; margin: 0 10%; }
+    
+    .gal-item img {
+      width: 100%; height: 100%; display: block; object-fit: cover;
+      filter: grayscale(100%); /* Ensures photos fit the B&W theme */
+    }
+
+    /* ==========================================================================
+       9. RSVP SCREEN
+       ========================================================================== */
+    .rsvp-form { border: 1px solid var(--border); padding: 4rem 3rem; max-width: 500px; margin: 0 auto; text-align: left; }
+    .form-group { margin-bottom: 2rem; }
+    .form-group label { display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem; color: var(--gray); }
+    .form-group input, .form-group select { width: 100%; padding: 1rem; border: 1px solid var(--border); background: transparent; font-family: var(--font-sans); color: var(--black); }
+    
+    .rsvp-success { display: none; text-align: center; padding: 5rem 0; }
+    
+    @media (max-width: 768px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gal-item:nth-child(1), .gal-item:nth-child(4) { grid-column: span 1; margin: 0; }
+      .rsvp-form { padding: 2rem 1.5rem; }
+      .detail-content { padding: 2rem 1.5rem; }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="cover-section">
-        <div class="cover-content">
-            <h1>OUR STORY</h1>
-            <h3>A Little Story About Us</h3>
+  <div class="screen active" id="screen-cover">
+    <div class="cover-image"></div>
+    <div class="cover-content">
+      <div class="cover-pre">A Love Story In Black & White</div>
+      <h1 class="cover-names">Elena <br>& Adrian</h1>
+      <div class="cover-date">31 January 2028 · Manila</div>
+      <div class="cover-script">It started with coffee.</div>
+      
+      <button class="btn cover-btn" onclick="openScreen('menu')">OPEN INVITATION &rarr;</button>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-menu">
+    <div class="container text-center">
+      <div class="menu-header">
+        <h2 class="serif">Elena & Adrian</h2>
+        <p>31 · 01 · 2028</p>
+        <div class="script" style="font-size: 3rem; margin-top: 1rem;">Welcome to our story.</div>
+      </div>
+      
+      <div class="chapter-list">
+        <div class="chapter-card" onclick="openScreen('story')">
+          <span class="chapter-num">01</span>
+          <h3 class="chapter-title">Our Story</h3>
+          <p class="chapter-desc">How it all began.</p>
+          <span class="chapter-link">Explore &rarr;</span>
         </div>
-    </div>
-
-    <div class="story-section">
-        <div class="story-text">
-            <p>It started with coffee.</p>
-            <p>We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.</p>
-            <p>Somehow, one coffee became another. Then another. And somewhere between the quiet afternoons, spontaneous plans, and everyday moments, we became us.</p>
-            <p>What started as a simple coffee date became our favorite story to tell.</p>
-            <p class="getting-married">And now, we're getting married.</p>
+        <div class="chapter-card" onclick="openScreen('day')">
+          <span class="chapter-num">02</span>
+          <h3 class="chapter-title">The Day</h3>
+          <p class="chapter-desc">When & where to find us.</p>
+          <span class="chapter-link">Explore &rarr;</span>
         </div>
+        <div class="chapter-card" onclick="openScreen('details')">
+          <span class="chapter-num">03</span>
+          <h3 class="chapter-title">Details</h3>
+          <p class="chapter-desc">Everything you need to know.</p>
+          <span class="chapter-link">Explore &rarr;</span>
+        </div>
+        <div class="chapter-card" onclick="openScreen('gallery')">
+          <span class="chapter-num">04</span>
+          <h3 class="chapter-title">Gallery</h3>
+          <p class="chapter-desc">The moments we've kept.</p>
+          <span class="chapter-link">Explore &rarr;</span>
+        </div>
+        <div class="chapter-card" onclick="openScreen('rsvp')">
+          <span class="chapter-num">05</span>
+          <h3 class="chapter-title">RSVP</h3>
+          <p class="chapter-desc">Save your seat.</p>
+          <span class="chapter-link">Explore &rarr;</span>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="bottom-section">
-        <h2>2024</h2>
-        <h3>Our Year</h3>
-        <p>The year everything changed.</p>
-        <div class="names">Elena & Adrian</div>
+  <div class="screen" id="screen-story">
+    <div class="container text-center">
+      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">A LITTLE STORY ABOUT US</div>
+      <h2 class="serif" style="font-size: 42px; margin-bottom: 4rem;">OUR STORY</h2>
+
+      <div class="story-content">
+        <p>It started with coffee.</p>
+        <p>We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.</p>
+        <p>Somehow, one coffee became another. Then another. And somewhere between the quiet afternoons, spontaneous plans, and everyday moments, we became us.</p>
+        <p>What started as a simple coffee date became our favorite story to tell.</p>
+        <p class="serif" style="font-size: 26px; text-align: center; color: var(--black); margin-top: 4rem; margin-bottom: 0;">And now, we're getting married.</p>
+      </div>
+
+      <div class="story-bottom text-center">
+        <h3 class="serif" style="font-size: 36px; margin-bottom: 0;">2015</h3>
+        <div style="font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--black); margin-bottom: 1rem;">Our Year</div>
+        <p style="color: var(--gray); font-style: italic; margin-bottom: 2rem;">The year everything changed.</p>
+        <div class="script" style="font-size: 3rem;">Elena & Adrian</div>
+      </div>
+
+      <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
     </div>
+  </div>
 
+  <div class="screen" id="screen-day">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 5rem;">
+        <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 02</div>
+        <h2 class="serif" style="font-size: 42px;">January 31, 2028</h2>
+      </div>
+
+      <div class="event-block">
+        <div class="event-label">Ceremony</div>
+        <h3 class="event-title">San Sebastian Church</h3>
+        <p style="color: var(--gray); font-size: 14px; letter-spacing: 1px;">4:00 PM<br>Manila, Philippines</p>
+      </div>
+
+      <div class="event-block">
+        <div class="event-label">Reception</div>
+        <h3 class="event-title">The Manila Hotel</h3>
+        <p style="color: var(--gray); font-size: 14px; letter-spacing: 1px;">6:30 PM<br>Manila, Philippines</p>
+      </div>
+
+      <div class="text-center" style="margin-top: 5rem;">
+        <h3 style="font-size: 14px; letter-spacing: 4px; text-transform: uppercase;">The Day At A Glance</h3>
+      </div>
+      
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-time">3:30 PM</div><div class="tl-desc">Guest Arrival</div></div>
+        <div class="tl-item"><div class="tl-time">4:00 PM</div><div class="tl-desc">Ceremony</div></div>
+        <div class="tl-item"><div class="tl-time">6:00 PM</div><div class="tl-desc">Cocktail Hour</div></div>
+        <div class="tl-item"><div class="tl-time">6:30 PM</div><div class="tl-desc">Reception</div></div>
+        <div class="tl-item"><div class="tl-time">8:30 PM</div><div class="tl-desc">Dancing</div></div>
+      </div>
+
+      <div class="text-center"><a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a></div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-details">
+    <div class="container text-center">
+      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 03</div>
+      <h2 class="serif" style="font-size: 42px; margin-bottom: 4rem;">The Details</h2>
+
+      <div id="details-menu" class="details-grid">
+        <div class="detail-card" onclick="openDetail('dc-dress')">
+          <h3 class="detail-title">Dress Code</h3>
+          <p class="detail-sub">Black & White</p>
+        </div>
+        <div class="detail-card" onclick="openDetail('dc-gifts')">
+          <h3 class="detail-title">Gifts</h3>
+          <p class="detail-sub">Your presence is our greatest gift.</p>
+        </div>
+        <div class="detail-card" onclick="openDetail('dc-faq')">
+          <h3 class="detail-title">FAQ</h3>
+          <p class="detail-sub">A few things you might be wondering.</p>
+        </div>
+        <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
+      </div>
+
+      <div id="dc-dress" class="detail-content">
+        <h3 class="dc-header">Black & White</h3>
+        <p class="text-center" style="margin-bottom: 3rem; color: var(--gray); font-style: italic;">Keep it classic. Keep it timeless.</p>
+        <div style="margin-bottom: 2rem;">
+          <h4 style="letter-spacing: 2px; margin-bottom: 0.5rem;">LADIES</h4>
+          <p style="color: var(--gray); font-size: 14px;">Black, white, ivory, or monochrome formalwear.</p>
+        </div>
+        <div style="margin-bottom: 3rem;">
+          <h4 style="letter-spacing: 2px; margin-bottom: 0.5rem;">GENTLEMEN</h4>
+          <p style="color: var(--gray); font-size: 14px;">Black suit, tuxedo, white shirt, or classic monochrome formalwear.</p>
+        </div>
+        <div class="text-center"><a class="back-btn" onclick="closeDetail()">&larr; Back to Details</a></div>
+      </div>
+
+      <div id="dc-gifts" class="detail-content">
+        <h3 class="dc-header">Gifts</h3>
+        <p class="text-center" style="margin-top: 2rem; color: var(--gray);">We are immensely grateful for your love and support. Your presence at our wedding is the greatest gift of all.<br><br>If you wish to bless us with a gift, a monetary contribution to help us start our new chapter together would be deeply appreciated.</p>
+        <div class="text-center"><a class="back-btn" onclick="closeDetail()">&larr; Back to Details</a></div>
+      </div>
+
+      <div id="dc-faq" class="detail-content">
+        <h3 class="dc-header">FAQ</h3>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">What should I wear? <span>+</span></button>
+          <div class="faq-a">Black and white formalwear. Please refer to the Dress Code section for details.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">What time should I arrive? <span>+</span></button>
+          <div class="faq-a">Please arrive at least 30 minutes before the ceremony.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Can I bring a plus-one? <span>+</span></button>
+          <div class="faq-a">Please follow the number of seats indicated on your formal invitation envelope.</div>
+        </div>
+        <div class="text-center"><a class="back-btn" onclick="closeDetail()">&larr; Back to Details</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-gallery">
+    <div class="container text-center">
+      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 04</div>
+      <h2 class="serif" style="font-size: 42px;">The moments we've kept.</h2>
+
+      <div class="gallery-grid">
+        <div class="gal-item"><img src="photo1.jpeg" alt="Gallery"></div>
+        <div class="gal-item"><img src="photo2.jpeg" alt="Gallery"></div>
+        <div class="gal-item"><img src="photo3.jpeg" alt="Gallery"></div>
+        <div class="gal-item"><img src="photo4.jpeg" alt="Gallery"></div>
+        <div class="gal-item"><img src="photo5.jpeg" alt="Gallery"></div>
+      </div>
+      <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-rsvp">
+    <div class="container text-center">
+      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 05</div>
+      <h2 class="serif" style="font-size: 42px; margin-bottom: 1rem;">We've saved you a seat.</h2>
+      <p style="color: var(--gray); font-size: 14px; margin-bottom: 4rem;">Please let us know if you'll be joining us.</p>
+
+      <form id="rsvp-form" class="rsvp-form" onsubmit="submitRSVP(event)">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" required placeholder="Elena & Adrian">
+        </div>
+        <div class="form-group">
+          <label>Will you join us?</label>
+          <select required>
+            <option value="yes">Happily, yes</option>
+            <option value="no">Regretfully, no</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Number of Guests</label>
+          <select required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <button type="submit" class="btn" style="width: 100%;">Confirm RSVP &rarr;</button>
+      </form>
+
+      <div id="rsvp-success" class="rsvp-success">
+        <h2 class="serif" style="font-size: 32px; margin-bottom: 1rem;">You're on the list.</h2>
+        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can't wait to celebrate with you.</div>
+      </div>
+
+      <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
+    </div>
+  </div>
+
+  <script>
+    /* This function does the magic! It hides everything, then only shows 
+      the screen you requested. No scrolling, just an instant swap.
+    */
+    function openScreen(screenId) {
+      // Step 1: Hide all screens
+      document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+      });
+      
+      // Step 2: Show the target screen
+      document.getElementById('screen-' + screenId).classList.add('active');
+      
+      // Step 3: Jump to the very top of the new screen instantly
+      window.scrollTo(0, 0); 
+      
+      // Reset the details sub-menu if leaving the details section
+      if(screenId !== 'details') closeDetail();
+    }
+
+    /* Details Sub-Menu Logic */
+    function openDetail(id) {
+      document.getElementById('details-menu').style.display = 'none';
+      document.getElementById(id).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+    
+    function closeDetail() {
+      document.querySelectorAll('.detail-content').forEach(el => el.classList.remove('active'));
+      document.getElementById('details-menu').style.display = 'grid';
+    }
+
+    /* FAQ Logic */
+    function toggleFaq(btn) {
+      const parent = btn.parentElement;
+      const isOpen = parent.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) parent.classList.add('open');
+    }
+
+    /* RSVP Form Submit */
+    function submitRSVP(e) {
+      e.preventDefault();
+      document.getElementById('rsvp-form').style.display = 'none';
+      document.getElementById('rsvp-success').style.display = 'block';
+    }
+  </script>
 </body>
 </html>
