@@ -5,23 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Elena & Adrian — A Love Story</title>
   
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================================================
-       1. DESIGN SYSTEM & VARIABLES
+       1. DESIGN SYSTEM & VARIABLES (BLACK & WHITE THEME)
        ========================================================================== */
     :root {
-      --warm-ivory: #F6F0E7;
-      --espresso: #3A2B27;
-      --coffee-brown: #72564B;
-      --dusty-purple: #88709D;
-      --soft-lavender: #C7B6D2;
-      --antique-gold: #B89B67;
-      --deep-plum: #49364F;
+      --bg-light: #FAFAFA;
+      --bg-white: #FFFFFF;
+      --text-main: #111111;
+      --text-muted: #666666;
+      --accent-black: #000000;
+      --border-light: rgba(0, 0, 0, 0.1);
       
       --font-serif: 'Cormorant Garamond', serif;
       --font-sans: 'Poppins', sans-serif;
@@ -30,32 +28,32 @@
       --transition-slow: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
       --transition-med: all 0.4s ease;
       
-      --bg-tint: var(--warm-ivory); /* Used for dynamic dress code background */
+      --bg-tint: var(--bg-light);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background-color: var(--bg-tint);
-      color: var(--espresso);
+      color: var(--text-main);
       font-family: var(--font-sans);
       line-height: 1.8;
       overflow-x: hidden;
       transition: background-color 0.8s ease;
     }
 
-    /* Subtle Paper Texture Overlay */
+    /* Subtle Grain Overlay for Elegance */
     body::before {
       content: "";
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
-      background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.04"/%3E%3C/svg%3E');
+      background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.03"/%3E%3C/svg%3E');
       pointer-events: none;
       z-index: 9999;
     }
 
     h1, h2, h3, .serif { font-family: var(--font-serif); font-weight: 400; }
-    .script { font-family: var(--font-script); font-size: 2.5rem; color: var(--dusty-purple); }
+    .script { font-family: var(--font-script); font-size: 2.5rem; color: var(--accent-black); }
     
     a { color: inherit; text-decoration: none; cursor: pointer; }
     button { font-family: var(--font-sans); cursor: pointer; border: none; background: none; }
@@ -63,7 +61,6 @@
     /* ==========================================================================
        2. NAVIGATION & LAYOUT
        ========================================================================== */
-    /* Only one view is active at a time */
     .view {
       display: none;
       opacity: 0;
@@ -82,13 +79,13 @@
       position: fixed;
       top: 0; left: 0; width: 100%;
       padding: 1.5rem 2rem;
-      background: rgba(246, 240, 231, 0.95);
+      background: rgba(250, 250, 250, 0.95);
       backdrop-filter: blur(10px);
       display: flex;
       justify-content: center;
       gap: 2rem;
       z-index: 1000;
-      border-bottom: 1px solid rgba(114, 86, 75, 0.1);
+      border-bottom: 1px solid var(--border-light);
       transform: translateY(-100%);
       transition: transform 0.5s ease;
     }
@@ -96,13 +93,13 @@
     .top-nav.visible { transform: translateY(0); }
     
     .top-nav a {
-      font-size: 12px;
-      letter-spacing: 2px;
+      font-size: 11px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
-      color: var(--coffee-brown);
+      color: var(--text-muted);
       transition: var(--transition-med);
     }
-    .top-nav a:hover, .top-nav a.current { color: var(--deep-plum); }
+    .top-nav a:hover, .top-nav a.current { color: var(--accent-black); }
 
     .container { max-width: 900px; margin: 0 auto; padding: 6rem 2rem 2rem; }
     
@@ -112,29 +109,29 @@
     .btn {
       display: inline-block;
       padding: 1rem 2.5rem;
-      background-color: var(--deep-plum);
-      color: var(--warm-ivory);
-      font-size: 13px;
-      letter-spacing: 2px;
+      background-color: var(--accent-black);
+      color: var(--bg-white);
+      font-size: 12px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
-      border: 1px solid var(--deep-plum);
+      border: 1px solid var(--accent-black);
       transition: var(--transition-med);
       margin-top: 2rem;
     }
-    .btn:hover { background-color: transparent; color: var(--deep-plum); }
+    .btn:hover { background-color: transparent; color: var(--accent-black); }
     
     .btn-outline {
       background-color: transparent;
-      color: var(--espresso);
-      border: 1px solid var(--coffee-brown);
+      color: var(--text-main);
+      border: 1px solid var(--text-main);
     }
-    .btn-outline:hover { background-color: var(--coffee-brown); color: var(--warm-ivory); }
+    .btn-outline:hover { background-color: var(--text-main); color: var(--bg-white); }
 
     /* ==========================================================================
        3. VIEWS & SECTIONS
        ========================================================================== */
        
-    /* Cover View */
+    /* Cover View - Photo Background with Dark Overlay for Text Readability */
     #view-cover {
       display: flex;
       flex-direction: column;
@@ -142,22 +139,26 @@
       justify-content: center;
       text-align: center;
       height: 100vh;
+      overflow: hidden;
       padding: 2rem;
-      background: radial-gradient(circle at center, rgba(199, 182, 210, 0.15) 0%, transparent 60%);
+      
+      /* Grabs cover.jpg and applies a dark gradient over it */
+      background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url('cover.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
     
-    .pre-title { font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--coffee-brown); margin-bottom: 1rem; }
-    .names { font-size: clamp(48px, 8vw, 96px); line-height: 1; color: var(--espresso); margin-bottom: 1rem; }
-    .date-loc { font-size: 14px; letter-spacing: 3px; color: var(--dusty-purple); text-transform: uppercase; }
+    /* Cover Text - Overriding to White/Light Gray for contrast */
+    .cover-pre-title { font-size: 12px; letter-spacing: 6px; color: #CCCCCC; margin-bottom: 0.2rem; }
+    .cover-coffee { font-family: var(--font-serif); font-size: 42px; letter-spacing: 4px; color: #FFFFFF; margin-bottom: 3.5rem; }
+    .cover-names { font-size: clamp(52px, 8vw, 96px); line-height: 1; color: #FFFFFF; margin-bottom: 1.5rem; }
+    .cover-date-loc { font-size: 13px; letter-spacing: 3px; color: #CCCCCC; text-transform: uppercase; margin-bottom: 2rem; }
+    .cover-script { font-family: var(--font-script); font-size: 2.2rem; color: #FFFFFF; margin-bottom: 4rem; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
     
-    .easter-egg-btn {
-      margin-top: 4rem;
-      font-size: 1.5rem;
-      opacity: 0.6;
-      transition: opacity 0.3s;
-    }
-    .easter-egg-btn:hover { opacity: 1; }
-    #easter-egg-msg { font-size: 12px; font-style: italic; opacity: 0; transition: opacity 0.5s; margin-top: 10px; color: var(--coffee-brown);}
+    /* Unique Cover Button Styling */
+    #view-cover .btn-outline { border-color: #FFFFFF; color: #FFFFFF; }
+    #view-cover .btn-outline:hover { background-color: #FFFFFF; color: #000000; }
 
     /* Menu (Album) View */
     .album-grid {
@@ -168,8 +169,8 @@
     }
     
     .album-card {
-      background: rgba(255, 255, 255, 0.4);
-      border: 1px solid rgba(184, 155, 103, 0.3);
+      background: var(--bg-white);
+      border: 1px solid var(--border-light);
       padding: 3rem 2rem;
       text-align: center;
       cursor: pointer;
@@ -178,38 +179,69 @@
     }
     
     .album-card::before {
-      content: ''; position: absolute; inset: 8px; border: 1px solid rgba(114, 86, 75, 0.1); transition: var(--transition-med);
+      content: ''; position: absolute; inset: 8px; border: 1px solid var(--border-light); transition: var(--transition-med);
     }
     
-    .album-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.7); box-shadow: 0 10px 30px rgba(58, 43, 39, 0.05); }
-    .album-card:hover::before { border-color: var(--dusty-purple); }
+    .album-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); }
+    .album-card:hover::before { border-color: var(--accent-black); }
     
-    .album-card h2 { font-size: 28px; color: var(--deep-plum); margin-bottom: 1rem; }
-    .album-card p { font-size: 13px; font-style: italic; color: var(--coffee-brown); }
+    .album-card h2 { font-size: 28px; color: var(--accent-black); margin-bottom: 1rem; }
+    .album-card p { font-size: 13px; font-style: italic; color: var(--text-muted); }
 
     /* Our Story View */
-    .story-chapter { margin-bottom: 5rem; text-align: center; max-width: 600px; margin-left: auto; margin-right: auto; padding-bottom: 3rem; border-bottom: 1px solid rgba(184, 155, 103, 0.3); }
+    .story-chapter { margin-bottom: 5rem; text-align: center; max-width: 600px; margin-left: auto; margin-right: auto; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); }
     .story-chapter:last-child { border-bottom: none; }
-    .story-year { font-size: 40px; color: var(--dusty-purple); margin-bottom: 0.5rem; }
-    .story-title { font-size: 24px; color: var(--espresso); margin-bottom: 1.5rem; font-family: var(--font-serif); }
+    .story-year { font-size: 40px; color: var(--accent-black); margin-bottom: 0.5rem; }
+    .story-title { font-size: 24px; color: var(--text-main); margin-bottom: 1.5rem; font-family: var(--font-serif); font-weight: 600; }
 
-    /* The Day & Timeline */
-    .event-block { background: #fff; padding: 3rem 2rem; border: 1px solid rgba(114, 86, 75, 0.15); margin-bottom: 3rem; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
-    .event-title { font-size: 32px; color: var(--deep-plum); margin-bottom: 0.5rem; }
+    /* The Day & Subtle Timeline */
+    .event-block { background: var(--bg-white); padding: 3rem 2rem; border: 1px solid var(--border-light); margin-bottom: 3rem; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+    .event-title { font-size: 32px; color: var(--accent-black); margin-bottom: 0.5rem; }
+    .event-pre-title { font-size: 12px; letter-spacing: 6px; color: var(--text-muted); margin-bottom: 1rem; text-transform: uppercase; }
     
-    .timeline { max-width: 500px; margin: 4rem auto; position: relative; }
-    .timeline-item { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; border-bottom: 1px solid rgba(114, 86, 75, 0.1); }
-    .timeline-time { font-weight: 500; color: var(--coffee-brown); font-size: 14px; }
-    .timeline-desc { font-family: var(--font-serif); font-size: 20px; }
+    .timeline { 
+      max-width: 320px; 
+      margin: 3rem auto; 
+      border-left: 1px solid var(--border-light); 
+      padding-left: 2rem; 
+      text-align: left; 
+    }
+    .timeline-item { 
+      padding: 1rem 0; 
+      position: relative; 
+    }
+    .timeline-item::before { 
+      content: ''; 
+      position: absolute; 
+      left: -2.25rem; 
+      top: 1.5rem; 
+      width: 7px; 
+      height: 7px; 
+      border-radius: 50%; 
+      background: var(--accent-black); 
+    }
+    .timeline-time { 
+      display: block; 
+      font-weight: 500; 
+      color: var(--text-muted); 
+      font-size: 11px; 
+      letter-spacing: 1.5px; 
+      margin-bottom: 0.2rem; 
+    }
+    .timeline-desc { 
+      font-family: var(--font-serif); 
+      font-size: 18px; 
+      color: var(--text-main); 
+    }
 
     /* Details (Dress Code & FAQ) */
     .swatch-container { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 2rem 0; }
-    .swatch { width: 60px; height: 80px; border-radius: 30px 30px 0 0; cursor: pointer; transition: transform 0.3s; border: 1px solid rgba(0,0,0,0.1); }
+    .swatch { width: 60px; height: 80px; border-radius: 30px 30px 0 0; cursor: pointer; transition: transform 0.3s; border: 1px solid var(--border-light); }
     .swatch:hover { transform: translateY(-10px); }
     
-    .faq-item { border-bottom: 1px solid rgba(114, 86, 75, 0.2); margin-bottom: 1rem; }
-    .faq-q { width: 100%; text-align: left; padding: 1.5rem 0; font-family: var(--font-serif); font-size: 22px; color: var(--espresso); display: flex; justify-content: space-between; }
-    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; color: var(--coffee-brown); font-size: 15px; }
+    .faq-item { border-bottom: 1px solid var(--border-light); margin-bottom: 1rem; }
+    .faq-q { width: 100%; text-align: left; padding: 1.5rem 0; font-family: var(--font-serif); font-size: 22px; color: var(--text-main); display: flex; justify-content: space-between; }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; color: var(--text-muted); font-size: 14px; }
     .faq-item.open .faq-a { max-height: 200px; padding-bottom: 1.5rem; }
 
     /* Gallery - Pile Up Scroll Effect */
@@ -219,19 +251,19 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-bottom: 20vh; /* Space to scroll past */
+      padding-bottom: 20vh;
     }
     
     .pile-item {
       position: sticky;
-      top: 15vh; /* Where it stops on screen */
+      top: 15vh;
       width: 100%;
       max-width: 600px;
-      margin-bottom: 80vh; /* Scroll distance between photos */
-      background: white;
+      margin-bottom: 80vh;
+      background: var(--bg-white);
       padding: 15px 15px 40px 15px;
-      box-shadow: 0 10px 40px rgba(58, 43, 39, 0.15);
-      border: 1px solid rgba(184, 155, 103, 0.2);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-light);
       transition: transform 0.3s;
     }
     
@@ -241,17 +273,18 @@
       display: block;
       object-fit: cover;
       aspect-ratio: 4/5;
+      background-color: #EEE; 
+      filter: grayscale(100%); /* Adds an elegant B&W filter to all gallery photos automatically */
     }
     
     .pile-caption {
       text-align: center;
       font-family: var(--font-script);
       font-size: 28px;
-      color: var(--espresso);
+      color: var(--text-main);
       margin-top: 15px;
     }
     
-    /* Elegant rotation for the stacked photos */
     .pile-item:nth-child(1) { transform: rotate(-2deg); z-index: 1; }
     .pile-item:nth-child(2) { transform: rotate(1deg); z-index: 2; top: 16vh; }
     .pile-item:nth-child(3) { transform: rotate(-1deg); z-index: 3; top: 17vh; }
@@ -259,35 +292,34 @@
     .pile-item:nth-child(5) { transform: rotate(0deg); z-index: 5; top: 19vh; margin-bottom: 10vh; }
 
     /* RSVP Form & Receipt */
-    .rsvp-card { background: white; padding: 4rem 3rem; max-width: 500px; margin: 0 auto; box-shadow: 0 5px 25px rgba(0,0,0,0.05); border: 1px solid var(--warm-ivory); }
+    .rsvp-card { background: var(--bg-white); padding: 4rem 3rem; max-width: 500px; margin: 0 auto; box-shadow: 0 5px 25px rgba(0,0,0,0.05); border: 1px solid var(--border-light); }
     .input-group { margin-bottom: 1.5rem; text-align: left; }
-    .input-group label { display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; color: var(--coffee-brown); }
-    .input-group input, .input-group select { width: 100%; padding: 1rem; border: 1px solid rgba(114, 86, 75, 0.2); background: transparent; font-family: var(--font-sans); color: var(--espresso); }
+    .input-group label { display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; color: var(--text-muted); }
+    .input-group input, .input-group select { width: 100%; padding: 1rem; border: 1px solid var(--border-light); background: transparent; font-family: var(--font-sans); color: var(--text-main); }
     
-    /* Receipt Styles */
     .receipt {
       display: none;
-      background: #FDFBF7;
+      background: var(--bg-white);
       padding: 3rem 2rem;
-      border: 1px dashed var(--coffee-brown);
+      border: 1px dashed var(--text-muted);
       text-align: center;
       font-family: 'Courier New', Courier, monospace;
-      color: var(--espresso);
+      color: var(--text-main);
       box-shadow: 0 10px 20px rgba(0,0,0,0.05);
     }
-    .receipt-header { font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem; border-bottom: 1px dashed var(--coffee-brown); padding-bottom: 1rem; }
+    .receipt-header { font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem; border-bottom: 1px dashed var(--text-muted); padding-bottom: 1rem; }
     .receipt-body { font-size: 0.9rem; line-height: 2; margin-bottom: 2rem; }
 
     /* Countdown View */
     .countdown-grid { display: flex; justify-content: center; gap: 2rem; margin: 4rem 0; flex-wrap: wrap; }
     .cd-box { text-align: center; min-width: 100px; }
-    .cd-num { font-size: 64px; font-family: var(--font-serif); color: var(--deep-plum); line-height: 1; }
-    .cd-label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--coffee-brown); }
+    .cd-num { font-size: 64px; font-family: var(--font-serif); color: var(--accent-black); line-height: 1; }
+    .cd-label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); }
     
     .final-message { margin-top: 8rem; text-align: center; }
 
     @media (max-width: 768px) {
-      .top-nav { display: none; /* Simplify mobile by relying on the main menu */ }
+      .top-nav { display: none; }
       .pile-item { margin-bottom: 100vh; }
       .container { padding-top: 3rem; }
     }
@@ -295,7 +327,6 @@
 </head>
 <body>
 
-  <!-- Sticky Navigation (Desktop) -->
   <nav class="top-nav" id="topNav">
     <a onclick="navigateTo('menu')">Menu</a>
     <a onclick="navigateTo('story')">Our Story</a>
@@ -305,29 +336,20 @@
     <a onclick="navigateTo('rsvp')">RSVP</a>
   </nav>
 
-  <!-- ======================================================================
-       COVER VIEW
-       ====================================================================== -->
   <main class="view active" id="view-cover">
-    <div class="pre-title">The Wedding Of</div>
-    <h1 class="names">Elena <br>& Adrian</h1>
-    <div class="date-loc">January 31, 2028 · Manila, Philippines</div>
-    <div class="script" style="margin: 2rem 0;">It started with coffee.</div>
+    <div class="cover-pre-title">IT STARTED WITH</div>
+    <div class="cover-coffee">COFFEE.</div>
+    <h1 class="cover-names">Elena <br>& Adrian</h1>
+    <div class="cover-date-loc">31 January 2028 · Manila</div>
+    <div class="cover-script">And now, forever.</div>
     
-    <button class="btn" onclick="navigateTo('menu')">Open Invitation</button>
-
-    <!-- Coffee Easter Egg -->
-    <button class="easter-egg-btn" onclick="triggerEasterEgg()">☕</button>
-    <div id="easter-egg-msg"></div>
+    <button class="btn btn-outline" onclick="navigateTo('menu')" style="margin-top: 0;">OPEN INVITATION &rarr;</button>
   </main>
 
-  <!-- ======================================================================
-       MENU / ALBUM VIEW
-       ====================================================================== -->
   <main class="view" id="view-menu">
     <div class="container text-center">
-      <h2 class="serif" style="font-size: 44px; margin-bottom: 1rem;">Chapters</h2>
-      <p class="script" style="font-size: 2rem; color: var(--coffee-brown);">Select a page to turn</p>
+      <h2 class="serif" style="font-size: 44px; margin-bottom: 1rem; color: var(--accent-black);">Chapters</h2>
+      <p class="script" style="font-size: 2rem; color: var(--text-muted);">Select a page to turn</p>
       
       <div class="album-grid">
         <div class="album-card" onclick="navigateTo('story')">
@@ -362,13 +384,10 @@
     </div>
   </main>
 
-  <!-- ======================================================================
-       OUR STORY VIEW
-       ====================================================================== -->
   <main class="view" id="view-story">
     <div class="container">
       <div class="text-center" style="margin-bottom: 4rem;">
-        <h2 style="font-size: 48px; color: var(--deep-plum);">Our Story</h2>
+        <h2 style="font-size: 48px; color: var(--accent-black);">Our Story</h2>
         <p class="script">One cup at a time.</p>
       </div>
 
@@ -402,78 +421,87 @@
     </div>
   </main>
 
-  <!-- ======================================================================
-       THE DAY VIEW
-       ====================================================================== -->
   <main class="view" id="view-day">
     <div class="container text-center">
-      <h2 style="font-size: 48px; color: var(--deep-plum);">The Day</h2>
+      <h2 style="font-size: 48px; color: var(--accent-black);">The Day</h2>
       <p class="script" style="margin-bottom: 4rem;">A day worth remembering.</p>
 
       <div class="event-block">
-        <div class="pre-title">Ceremony</div>
+        <div class="event-pre-title">Ceremony</div>
         <h3 class="event-title">San Sebastian Church</h3>
-        <p style="color: var(--coffee-brown); margin-bottom: 1rem;">4:00 PM<br>January 31, 2028<br>Manila, Philippines</p>
-        <p>Join us as we exchange our vows surrounded by family and friends.</p>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">4:00 PM<br>31 January 2028<br>Manila</p>
+        <p style="font-size: 14px;">Join us as we exchange our vows surrounded by family and friends.</p>
       </div>
 
       <div class="event-block">
-        <div class="pre-title">Reception</div>
+        <div class="event-pre-title">Reception</div>
         <h3 class="event-title">The Manila Hotel</h3>
-        <p style="color: var(--coffee-brown); margin-bottom: 1rem;">6:30 PM<br>Manila, Philippines</p>
-        <p>Dinner, stories, dancing, and a celebration to remember.</p>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">6:30 PM<br>Manila</p>
+        <p style="font-size: 14px;">Dinner, stories, dancing, and a celebration to remember.</p>
       </div>
 
-      <h2 class="serif" style="font-size: 36px; margin: 4rem 0 2rem;">Order of Events</h2>
+      <h2 class="serif" style="font-size: 28px; margin: 4rem 0 1rem; color: var(--accent-black);">Itinerary</h2>
       
-      <div class="timeline text-left">
-        <div class="timeline-item"><span class="timeline-time">3:30 PM</span><span class="timeline-desc">Guest Arrival</span></div>
-        <div class="timeline-item"><span class="timeline-time">4:00 PM</span><span class="timeline-desc">Ceremony</span></div>
-        <div class="timeline-item"><span class="timeline-time">5:15 PM</span><span class="timeline-desc">Photo Session</span></div>
-        <div class="timeline-item"><span class="timeline-time">6:00 PM</span><span class="timeline-desc">Cocktail Hour</span></div>
-        <div class="timeline-item"><span class="timeline-time">7:00 PM</span><span class="timeline-desc">Dinner</span></div>
-        <div class="timeline-item"><span class="timeline-time">8:30 PM</span><span class="timeline-desc">Dancing</span></div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-time">3:30 PM</span>
+          <span class="timeline-desc">Guest Arrival</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-time">4:00 PM</span>
+          <span class="timeline-desc">Ceremony</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-time">5:15 PM</span>
+          <span class="timeline-desc">Photo Session</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-time">6:00 PM</span>
+          <span class="timeline-desc">Cocktail Hour</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-time">7:00 PM</span>
+          <span class="timeline-desc">Dinner</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-time">8:30 PM</span>
+          <span class="timeline-desc">Dancing</span>
+        </div>
       </div>
 
-      <button class="btn btn-outline" onclick="navigateTo('menu')">← Back to Chapters</button>
+      <button class="btn btn-outline" style="margin-top: 3rem;" onclick="navigateTo('menu')">← Back to Chapters</button>
     </div>
   </main>
 
-  <!-- ======================================================================
-       DETAILS VIEW
-       ====================================================================== -->
   <main class="view" id="view-details">
     <div class="container text-center">
-      <h2 style="font-size: 48px; color: var(--deep-plum);">The Little Details</h2>
+      <h2 style="font-size: 48px; color: var(--accent-black);">The Little Details</h2>
       <p class="script" style="margin-bottom: 4rem;">Everything you need to know.</p>
 
-      <!-- Dress Code Interaction -->
-      <div style="margin-bottom: 5rem; background: #fff; padding: 3rem 2rem; border: 1px solid rgba(114, 86, 75, 0.1);">
-        <h3 class="serif" style="font-size: 32px; color: var(--dusty-purple);">Wear a Little Purple</h3>
-        <p style="margin-top: 1rem;">Purple is the color of our celebration. Click a shade below.</p>
+      <div style="margin-bottom: 5rem; background: var(--bg-white); padding: 3rem 2rem; border: 1px solid var(--border-light);">
+        <h3 class="serif" style="font-size: 32px; color: var(--accent-black);">Monochrome Affair</h3>
+        <p style="margin-top: 1rem; color: var(--text-muted);">We invite you to dress in elegant monochromatic tones.</p>
         
         <div class="swatch-container">
-          <div class="swatch" style="background-color: #C7B6D2;" onclick="changeBg('#f5f2f7')"></div>
-          <div class="swatch" style="background-color: #B59BBA;" onclick="changeBg('#f1ebf3')"></div>
-          <div class="swatch" style="background-color: #9D7BA1;" onclick="changeBg('#ece4ef')"></div>
-          <div class="swatch" style="background-color: #88709D;" onclick="changeBg('#e7dfe9')"></div>
-          <div class="swatch" style="background-color: #49364F;" onclick="changeBg('#dcd4df')"></div>
+          <div class="swatch" style="background-color: #000000;" onclick="changeBg('#EEEEEE')"></div>
+          <div class="swatch" style="background-color: #333333;" onclick="changeBg('#F2F2F2')"></div>
+          <div class="swatch" style="background-color: #777777;" onclick="changeBg('#F5F5F5')"></div>
+          <div class="swatch" style="background-color: #BBBBBB;" onclick="changeBg('#F8F8F8')"></div>
+          <div class="swatch" style="background-color: #FFFFFF;" onclick="changeBg('#FAFAFA')"></div>
         </div>
 
         <div style="display: flex; gap: 2rem; justify-content: center; margin-top: 2rem; text-align: left; max-width: 600px; margin-inline: auto;">
           <div style="flex: 1;">
             <strong style="font-family: var(--font-serif); font-size: 20px;">Ladies</strong>
-            <p style="font-size: 14px; margin-top: 0.5rem;">Elegant dresses and evening wear.</p>
+            <p style="font-size: 14px; margin-top: 0.5rem;">Elegant long gowns or evening dresses in black, white, or silver.</p>
           </div>
           <div style="flex: 1;">
             <strong style="font-family: var(--font-serif); font-size: 20px;">Gentlemen</strong>
-            <p style="font-size: 14px; margin-top: 0.5rem;">Suits, barongs, or formalwear with purple accents.</p>
+            <p style="font-size: 14px; margin-top: 0.5rem;">Classic black tuxedos, dark suits, or formal barongs with dark trousers.</p>
           </div>
         </div>
-        <p style="font-size: 12px; font-style: italic; margin-top: 2rem; color: var(--coffee-brown);">No need to match perfectly. Choose the shade that feels like you.</p>
       </div>
 
-      <!-- FAQ Accordion -->
       <h3 class="serif" style="font-size: 32px; margin-bottom: 2rem;">FAQ</h3>
       <div style="max-width: 600px; margin: 0 auto; text-align: left; margin-bottom: 4rem;">
         <div class="faq-item">
@@ -494,55 +522,40 @@
     </div>
   </main>
 
-  <!-- ======================================================================
-       GALLERY VIEW (Pile Up Scroll)
-       ====================================================================== -->
   <main class="view" id="view-gallery">
     <div class="container">
       <div class="gallery-intro">
-        <h2 style="font-size: 48px; color: var(--deep-plum);">From Our Table</h2>
+        <h2 style="font-size: 48px; color: var(--accent-black);">From Our Table</h2>
         <p class="script">The moments we never want to forget.</p>
-        <p style="font-size: 14px; margin-top: 1rem; color: var(--coffee-brown);">Scroll down to reveal our story</p>
+        <p style="font-size: 14px; margin-top: 1rem; color: var(--text-muted);">Scroll down to reveal our story</p>
         <p style="font-size: 20px; margin-top: 20px;">↓</p>
       </div>
     </div>
 
-    <!-- 
-      HOW TO ADD YOUR PICTURES:
-      1. Save your photos in the same folder as this index.html file.
-      2. Name them photo1.jpg, photo2.jpg, etc.
-      3. Replace the link inside src="..." below with your filename.
-      Example: <img src="photo1.jpg" alt="The Beginning">
-    -->
     <div class="pile-container">
       
       <div class="pile-item">
-        <!-- Replace src with your local image: src="photo1.jpg" -->
-        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80" alt="The Beginning">
+        <img src="photo1.jpg" alt="The Beginning">
         <div class="pile-caption">The Beginning</div>
       </div>
 
       <div class="pile-item">
-        <!-- Replace src with your local image: src="photo2.jpg" -->
-        <img src="https://images.unsplash.com/photo-1495474472200-408a50616923?auto=format&fit=crop&w=800&q=80" alt="The Dates">
+        <img src="photo2.jpg" alt="The Coffee Dates">
         <div class="pile-caption">The Coffee Dates</div>
       </div>
 
       <div class="pile-item">
-        <!-- Replace src with your local image: src="photo3.jpg" -->
-        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80" alt="The Adventures">
+        <img src="photo3.jpg" alt="The Adventures">
         <div class="pile-caption">The Adventures</div>
       </div>
 
       <div class="pile-item">
-        <!-- Replace src with your local image: src="photo4.jpg" -->
-        <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=800&q=80" alt="The Little Things">
+        <img src="photo4.jpg" alt="The Little Things">
         <div class="pile-caption">The Little Things</div>
       </div>
 
       <div class="pile-item">
-        <!-- Replace src with your local image: src="photo5.jpg" -->
-        <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=800&q=80" alt="Forever">
+        <img src="photo5.jpg" alt="Forever">
         <div class="pile-caption">Forever</div>
       </div>
 
@@ -553,12 +566,9 @@
     </div>
   </main>
 
-  <!-- ======================================================================
-       RSVP VIEW
-       ====================================================================== -->
   <main class="view" id="view-rsvp">
     <div class="container text-center">
-      <h2 style="font-size: 48px; color: var(--deep-plum);">A Table For You</h2>
+      <h2 style="font-size: 48px; color: var(--accent-black);">A Table For You</h2>
       <p class="script" style="margin-bottom: 3rem;">We've saved you a seat.</p>
 
       <form id="rsvp-form" class="rsvp-card" onsubmit="submitRSVP(event)">
@@ -597,15 +607,14 @@
         <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Reserve My Seat</button>
       </form>
 
-      <!-- Vintage Receipt Confirmation (Hidden by default) -->
       <div id="rsvp-receipt" class="receipt">
         <div class="receipt-header">RESERVATION CONFIRMED</div>
         <div class="receipt-body">
           ELENA & ADRIAN<br>
-          January 31, 2028<br>
+          31 January 2028<br>
           <span id="receipt-table-info">1 TABLE · 1 GUEST</span> · 1 BIG DAY
         </div>
-        <p style="font-size: 0.8rem; font-style: italic;">We can't wait to celebrate with you.<br>☕ 💜</p>
+        <p style="font-size: 0.8rem; font-style: italic;">We can't wait to celebrate with you.</p>
       </div>
 
       <div style="margin-top: 4rem;">
@@ -614,12 +623,9 @@
     </div>
   </main>
 
-  <!-- ======================================================================
-       COUNTDOWN VIEW
-       ====================================================================== -->
   <main class="view" id="view-countdown">
     <div class="container text-center">
-      <h2 style="font-size: 48px; color: var(--deep-plum);">Until We Say I Do</h2>
+      <h2 style="font-size: 48px; color: var(--accent-black);">Until We Say I Do</h2>
       
       <div class="countdown-grid">
         <div class="cd-box"><div class="cd-num" id="cd-days">00</div><div class="cd-label">Days</div></div>
@@ -629,33 +635,23 @@
       </div>
 
       <div class="final-message">
-        <h3 class="serif" style="font-size: 32px; color: var(--espresso);">One more cup?</h3>
+        <h3 class="serif" style="font-size: 32px; color: var(--accent-black);">One more cup?</h3>
         <p class="script" style="margin: 1rem 0 2rem;">It started with coffee. And now... Forever.</p>
-        <p class="pre-title" style="font-size: 10px;">Elena & Adrian<br>January 31, 2028</p>
+        <p class="event-pre-title" style="font-size: 10px;">Elena & Adrian<br>31 January 2028</p>
       </div>
 
       <button class="btn btn-outline" style="margin-top: 4rem;" onclick="navigateTo('menu')">← Back to Chapters</button>
     </div>
   </main>
 
-  <!-- ======================================================================
-       JAVASCRIPT LOGIC
-       ====================================================================== -->
   <script>
-    // Navigation Logic
     function navigateTo(viewId) {
-      // Hide all views
       document.querySelectorAll('.view').forEach(view => {
         view.classList.remove('active');
       });
-      
-      // Show targeted view
       document.getElementById('view-' + viewId).classList.add('active');
-      
-      // Scroll to top
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      // Handle Nav Bar visibility
       const nav = document.getElementById('topNav');
       if(viewId === 'cover' || viewId === 'menu') {
         nav.classList.remove('visible');
@@ -664,33 +660,19 @@
       }
     }
 
-    // Cover Easter Egg
-    function triggerEasterEgg() {
-      const msg = document.getElementById('easter-egg-msg');
-      msg.innerHTML = "One more cup? <br><br> <span style='font-family: var(--font-script); font-size: 1.5rem; color: var(--dusty-purple);'>Always.</span>";
-      msg.style.opacity = 1;
-      setTimeout(() => { msg.style.opacity = 0; }, 4000);
-    }
-
-    // Dress Code Dynamic Background Tint
     function changeBg(colorHex) {
       document.documentElement.style.setProperty('--bg-tint', colorHex);
     }
 
-    // FAQ Accordion
     function toggleFaq(btn) {
       const parent = btn.parentElement;
       const isOpen = parent.classList.contains('open');
-      
-      // Close all others
       document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('open'));
-      
       if (!isOpen) {
         parent.classList.add('open');
       }
     }
 
-    // RSVP Form Logic
     function submitRSVP(e) {
       e.preventDefault();
       const guests = document.getElementById('guest-count').value;
@@ -698,15 +680,11 @@
       const receipt = document.getElementById('rsvp-receipt');
       const infoText = document.getElementById('receipt-table-info');
       
-      // Update receipt text
       infoText.innerText = `1 TABLE · ${guests} GUEST${guests > 1 ? 'S' : ''}`;
-      
-      // Transition
       form.style.display = 'none';
       receipt.style.display = 'block';
     }
 
-    // Countdown Logic
     const weddingDate = new Date("January 31, 2028 16:00:00").getTime();
 
     setInterval(() => {
