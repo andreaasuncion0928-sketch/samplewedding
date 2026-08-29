@@ -93,10 +93,10 @@
 
     .cover-image {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-image: url('cover.jpg');
+      background-image: url('cover.jpeg');
       background-size: cover;
       background-position: center;
-      opacity: 0.7; /* 70% opacity */
+      /* Opacity removed to show photo in full */
       z-index: 1;
     }
 
@@ -142,6 +142,30 @@
     /* ==========================================================================
        5. OUR STORY SCREEN (Refined, Nostalgic, Editorial)
        ========================================================================== */
+    #screen-story {
+      position: relative;
+      background-color: var(--white);
+    }
+    
+    /* Background Image for Our Story */
+    #screen-story::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url('ourstory.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      z-index: 0;
+    }
+
+    /* Soft light overlay so the elegant text is still easy to read */
+    #screen-story::after {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(255, 255, 255, 0.75); 
+      z-index: 0;
+    }
+
     .story-content { 
       max-width: 500px; /* Narrower width creates a beautiful, classic paragraph shape */
       margin: 0 auto; 
@@ -160,7 +184,7 @@
       font-size: 22px;
     }
     
-    .story-bottom { margin-top: 6rem; border-top: 1px solid var(--border); padding-top: 5rem; }
+    .story-bottom { margin-top: 6rem; border-top: 1px solid rgba(0,0,0,0.15); padding-top: 5rem; }
 
     /* ==========================================================================
        6. THE DAY SCREEN
@@ -186,7 +210,7 @@
     #screen-details::before {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-image: url('cover.jpg');
+      background-image: url('cover.jpeg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
