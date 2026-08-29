@@ -206,7 +206,7 @@
     .story-bottom { margin-top: 6rem; border-top: 1px solid rgba(0,0,0,0.15); padding-top: 5rem; }
 
     /* ==========================================================================
-       6. THE DAY SCREEN (UPDATED: FIT IMAGE WITHOUT ZOOM OR STRETCH)
+       6. THE DAY SCREEN (UPDATED FULL COVER & HIGH TRANSPARENCY)
        ========================================================================== */
     #screen-day {
       position: relative;
@@ -214,33 +214,32 @@
       color: var(--white);
     }
 
-    /* Set background-size to contain and prevent repeating/zooming */
+    /* Cover fills full screen without stretching or distorting */
     #day-bg-layer {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       background-image: url('theday.jpeg');
-      background-size: contain;
-      background-repeat: no-repeat;
+      background-size: cover;
       background-position: center;
       background-attachment: fixed;
       transition: background-image 0.8s ease-in-out;
       z-index: 0;
     }
 
-    /* 50% opacity overlay */
+    /* Overall screen overlay */
     #screen-day::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.50);
+      background-color: rgba(0, 0, 0, 0.40);
       z-index: 0;
     }
 
     .day-chapter {
       font-size: 11px;
       letter-spacing: 4px;
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.9);
       margin-bottom: 1rem;
       text-transform: uppercase;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
     }
 
     .day-title {
@@ -251,7 +250,7 @@
       text-transform: uppercase;
       color: var(--white);
       margin-bottom: 0.2rem;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      text-shadow: 0 2px 6px rgba(0,0,0,0.8);
     }
 
     .day-subtitle {
@@ -261,7 +260,7 @@
       letter-spacing: 2px;
       color: rgba(255, 255, 255, 0.95);
       margin-bottom: 0.8rem;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
     }
 
     .day-tagline {
@@ -269,26 +268,28 @@
       font-size: clamp(2rem, 4.5vw, 3rem);
       color: var(--white);
       margin-bottom: 1rem;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      text-shadow: 0 2px 6px rgba(0,0,0,0.8);
     }
 
+    /* Extra transparent background (18% opacity) for event blocks */
     .day-event-block { 
       text-align: center; 
-      border: 1px solid rgba(255, 255, 255, 0.3); 
-      background: rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.35); 
+      background: rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       padding: 3.5rem 2rem 2.5rem; 
       margin-bottom: 3rem; 
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
     }
     
     .day-event-label { 
       font-size: 11px; 
       letter-spacing: 4px; 
       text-transform: uppercase; 
-      color: rgba(255, 255, 255, 0.8); 
+      color: rgba(255, 255, 255, 0.85); 
       margin-bottom: 1rem; 
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
     }
     
     .day-event-title { 
@@ -296,13 +297,15 @@
       font-size: 36px; 
       margin-bottom: 0.5rem; 
       color: var(--white);
+      text-shadow: 0 2px 5px rgba(0,0,0,0.7);
     }
     
     .day-event-desc {
-      color: rgba(255, 255, 255, 0.9); 
+      color: rgba(255, 255, 255, 0.95); 
       font-size: 14px; 
       letter-spacing: 1px;
       margin-bottom: 1.5rem;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
     }
 
     .view-image-btn {
@@ -312,15 +315,19 @@
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--white);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       transition: all 0.3s ease;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
     }
 
     .view-image-btn:hover {
       background: var(--white);
       color: var(--black);
       border-color: var(--white);
+      text-shadow: none;
     }
 
     .day-timeline-heading {
@@ -328,25 +335,33 @@
       letter-spacing: 4px; 
       text-transform: uppercase;
       color: var(--white);
-      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+      margin-bottom: 1.5rem;
     }
 
+    /* Extra transparent background for timeline section */
     .day-timeline { 
+      display: none;
       max-width: 400px; 
-      margin: 3rem auto 0; 
+      margin: 2rem auto 0; 
       border-left: 1px solid rgba(255, 255, 255, 0.6); 
       padding-left: 2rem; 
       text-align: left; 
-      background: rgba(0, 0, 0, 0.35);
+      background: rgba(0, 0, 0, 0.18);
       padding-top: 1.5rem;
       padding-bottom: 1.5rem;
       border-radius: 4px;
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       border-left-width: 2px;
       border-left-color: var(--white);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    .day-timeline.active {
+      display: block;
     }
     
     .day-tl-item { position: relative; padding: 1.2rem 0; }
@@ -365,19 +380,21 @@
     .day-tl-time { 
       font-size: 11px; 
       letter-spacing: 2px; 
-      color: rgba(255, 255, 255, 0.8); 
+      color: rgba(255, 255, 255, 0.85); 
       margin-bottom: 0.2rem; 
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
     }
     
     .day-tl-desc { 
       font-family: var(--font-serif); 
       font-size: 22px; 
       color: var(--white);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.7);
     }
 
     #screen-day .back-btn {
-      color: rgba(255, 255, 255, 0.8);
-      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
     }
     #screen-day .back-btn:hover {
       color: var(--white);
@@ -597,15 +614,12 @@
         <button class="view-image-btn" onclick="changeDayBackground('hotel.jpeg')">See Hotel Image</button>
       </div>
 
-      <div class="text-center" style="margin-top: 4rem; margin-bottom: 1.5rem;">
-        <button class="view-image-btn" style="border-style: dashed; opacity: 0.9;" onclick="changeDayBackground('theday.jpeg')">&#x21BB; Reset Photo</button>
-      </div>
-
-      <div class="text-center" style="margin-top: 3rem;">
+      <div class="text-center" style="margin-top: 4rem;">
         <h3 class="day-timeline-heading">The Day At A Glance</h3>
+        <button class="view-image-btn" id="toggle-timeline-btn" onclick="toggleTimeline()">View The Schedule &rarr;</button>
       </div>
       
-      <div class="day-timeline">
+      <div class="day-timeline" id="day-timeline">
         <div class="day-tl-item"><div class="day-tl-time">3:30 PM</div><div class="day-tl-desc">Guest Arrival</div></div>
         <div class="day-tl-item"><div class="day-tl-time">4:00 PM</div><div class="day-tl-desc">Ceremony</div></div>
         <div class="day-tl-item"><div class="day-tl-time">6:00 PM</div><div class="day-tl-desc">Cocktail Hour</div></div>
@@ -756,6 +770,20 @@
     function changeDayBackground(imageName) {
       const bgLayer = document.getElementById('day-bg-layer');
       bgLayer.style.backgroundImage = "url('" + imageName + "')";
+    }
+
+    function toggleTimeline() {
+      const timeline = document.getElementById('day-timeline');
+      const btn = document.getElementById('toggle-timeline-btn');
+      
+      if (timeline.classList.contains('active')) {
+        timeline.classList.remove('active');
+        btn.innerHTML = "View The Schedule &rarr;";
+      } else {
+        timeline.classList.add('active');
+        btn.innerHTML = "Hide The Schedule &larr;";
+        changeDayBackground('theday.jpeg');
+      }
     }
 
     function openDetail(id) {
