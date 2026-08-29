@@ -99,8 +99,9 @@
     }
 
     .cover-names { font-family: var(--font-serif); font-size: clamp(52px, 10vw, 100px); line-height: 1; color: #FFF; margin-bottom: 2rem; }
-    .cover-date { font-size: clamp(11px, 2vw, 13px); letter-spacing: 4px; color: #FFF; text-transform: uppercase; margin-bottom: 3rem; }
-    .cover-script { font-family: var(--font-script); font-size: clamp(2rem, 5vw, 2.5rem); color: #FFF; margin-bottom: 4rem; }
+    .cover-date { font-size: clamp(11px, 2vw, 13px); letter-spacing: 4px; color: #FFF; text-transform: uppercase; margin-bottom: 3rem; font-weight: 300; }
+    .cover-script { font-family: var(--font-script); font-size: clamp(2rem, 5vw, 2.5rem); color: #FFF; margin-bottom: 0.5rem; }
+    .cover-invite { font-size: 12px; letter-spacing: 5px; color: #FFF; text-transform: uppercase; margin-bottom: 4rem; font-weight: 300; }
     
     .cover-btn { background-color: transparent; color: #FFF; border: 1px solid #FFF; }
     .cover-btn:hover { background-color: #FFF; color: #000; }
@@ -150,38 +151,62 @@
     .tl-desc { font-family: var(--font-serif); font-size: 22px; }
 
     /* ==========================================================================
-       7. DETAILS SCREEN
+       7. DETAILS SCREEN (Modern & Elegant Design)
        ========================================================================== */
     #screen-details {
       position: relative;
-      background-color: var(--white);
-    }
-    
-    /* Cover image with exactly 70% opacity as the background */
-    #screen-details::before {
-      content: '';
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       background-image: url('cover.jpg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      opacity: 0.7; /* 70% opacity */
+    }
+    
+    /* More transparent white overlay to let background peek through elegantly */
+    #screen-details::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(255, 255, 255, 0.60); 
       z-index: 0;
     }
 
     .details-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 600px; margin: 0 auto; }
-    .detail-card { border: 1px solid var(--border); padding: 2.5rem; text-align: center; cursor: pointer; transition: all 0.3s ease; background: var(--white); }
-    .detail-card:hover { border-color: var(--black); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-    .detail-title { font-size: 18px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.5rem; }
-    .detail-sub { font-size: 13px; color: var(--gray); }
-
-    .detail-content { display: none; text-align: left; max-width: 600px; margin: 0 auto; animation: fadeIn 0.4s forwards; background: var(--white); padding: 3rem; border: 1px solid var(--border); }
-    .detail-content.active { display: block; }
-    .dc-header { font-family: var(--font-serif); font-size: 32px; margin-bottom: 1rem; text-align: center; border-bottom: 1px solid var(--border); padding-bottom: 1rem;}
     
-    .faq-q { width: 100%; text-align: left; padding: 1.5rem 0; font-family: var(--font-serif); font-size: 22px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); }
-    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-size: 14px; color: var(--gray); }
-    .faq-item.open .faq-a { max-height: 200px; padding: 1rem 0; }
+    .detail-card { 
+      border: 1px solid rgba(0,0,0,0.1); 
+      padding: 3.5rem 2.5rem; 
+      text-align: center; 
+      cursor: pointer; 
+      transition: all 0.4s ease; 
+      /* Elegant frosted glass effect */
+      background: rgba(255, 255, 255, 0.75); 
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .detail-card:hover { border-color: var(--black); box-shadow: 0 10px 30px rgba(0,0,0,0.08); background: rgba(255, 255, 255, 0.95); }
+    
+    /* Upgraded elegant typography for Details */
+    .detail-title { font-family: var(--font-serif); font-size: 32px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .detail-sub { font-size: 11px; letter-spacing: 3px; color: var(--gray); text-transform: uppercase; font-weight: 300; }
+
+    .detail-content { 
+      display: none; 
+      text-align: left; 
+      max-width: 600px; 
+      margin: 0 auto; 
+      animation: fadeIn 0.4s forwards; 
+      background: rgba(255, 255, 255, 0.85); 
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      padding: 4rem 3rem; 
+      border: 1px solid rgba(0,0,0,0.1); 
+    }
+    .detail-content.active { display: block; }
+    
+    .dc-header { font-family: var(--font-serif); font-size: 38px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 1.5rem;}
+    
+    .faq-q { width: 100%; text-align: left; padding: 1.5rem 0; font-family: var(--font-serif); font-size: 26px; font-weight: 400; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.1); letter-spacing: 1px; color: var(--black); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-size: 14px; font-weight: 300; color: var(--gray); line-height: 1.8; }
+    .faq-item.open .faq-a { max-height: 200px; padding: 1.5rem 0; }
 
     /* ==========================================================================
        8. GALLERY SCREEN
@@ -222,6 +247,7 @@
       <h1 class="cover-names">Elena <br>& Adrian</h1>
       <div class="cover-date">31 January 2028 · Manila</div>
       <div class="cover-script">It started with coffee.</div>
+      <div class="cover-invite">You are invited.</div>
       
       <button class="btn cover-btn" onclick="openScreen('details')">OPEN INVITATION &rarr;</button>
     </div>
@@ -331,8 +357,8 @@
 
   <div class="screen" id="screen-details">
     <div class="container text-center">
-      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 03</div>
-      <h2 class="serif" style="font-size: 42px; margin-bottom: 4rem;">The Details</h2>
+      <div style="font-size: 11px; letter-spacing: 4px; color: var(--black); margin-bottom: 1rem; font-weight: 500;">CHAPTER 03</div>
+      <h2 class="serif" style="font-size: 48px; margin-bottom: 4rem; letter-spacing: 2px; text-transform: uppercase;">The Details</h2>
 
       <div id="details-menu" class="details-grid">
         <div class="detail-card" onclick="openDetail('dc-dress')">
@@ -347,26 +373,26 @@
           <h3 class="detail-title">FAQ</h3>
           <p class="detail-sub">A few things you might be wondering.</p>
         </div>
-        <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
+        <a class="back-btn" style="color: var(--black);" onclick="openScreen('menu')">&larr; Back to Chapters</a>
       </div>
 
       <div id="dc-dress" class="detail-content">
         <h3 class="dc-header">Black & White</h3>
-        <p class="text-center" style="margin-bottom: 3rem; color: var(--gray); font-style: italic;">Keep it classic. Keep it timeless.</p>
-        <div style="margin-bottom: 2rem;">
-          <h4 style="letter-spacing: 2px; margin-bottom: 0.5rem;">LADIES</h4>
-          <p style="color: var(--gray); font-size: 14px;">Black, white, ivory, or monochrome formalwear.</p>
+        <p class="text-center" style="margin-bottom: 3rem; color: var(--gray); font-style: italic; font-size: 16px;">Keep it classic. Keep it timeless.</p>
+        <div style="margin-bottom: 2.5rem;">
+          <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px;">LADIES</h4>
+          <p style="color: var(--gray); font-size: 14px; font-weight: 300;">Black, white, ivory, or monochrome formalwear.</p>
         </div>
         <div style="margin-bottom: 3rem;">
-          <h4 style="letter-spacing: 2px; margin-bottom: 0.5rem;">GENTLEMEN</h4>
-          <p style="color: var(--gray); font-size: 14px;">Black suit, tuxedo, white shirt, or classic monochrome formalwear.</p>
+          <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px;">GENTLEMEN</h4>
+          <p style="color: var(--gray); font-size: 14px; font-weight: 300;">Black suit, tuxedo, white shirt, or classic monochrome formalwear.</p>
         </div>
         <div class="text-center"><a class="back-btn" onclick="closeDetail()">&larr; Back to Details</a></div>
       </div>
 
       <div id="dc-gifts" class="detail-content">
         <h3 class="dc-header">Gifts</h3>
-        <p class="text-center" style="margin-top: 2rem; color: var(--gray);">We are immensely grateful for your love and support. Your presence at our wedding is the greatest gift of all.<br><br>If you wish to bless us with a gift, a monetary contribution to help us start our new chapter together would be deeply appreciated.</p>
+        <p class="text-center" style="margin-top: 2rem; color: var(--gray); font-weight: 300; font-size: 15px; line-height: 2;">We are immensely grateful for your love and support. Your presence at our wedding is the greatest gift of all.<br><br>If you wish to bless us with a gift, a monetary contribution to help us start our new chapter together would be deeply appreciated.</p>
         <div class="text-center"><a class="back-btn" onclick="closeDetail()">&larr; Back to Details</a></div>
       </div>
 
