@@ -19,7 +19,7 @@
       --text-main: #111111;
       --text-muted: #666666;
       --accent-black: #000000;
-      --border-light: rgba(0, 0, 0, 0.1);
+      --border-light: rgba(0, 0, 0, 0.15);
       
       --font-serif: 'Cormorant Garamond', serif;
       --font-sans: 'Poppins', sans-serif;
@@ -65,9 +65,13 @@
       display: none;
       opacity: 0;
       animation: fadeIn 0.8s forwards;
+    }
+    
+    .content-view {
       min-height: 100vh;
       padding-bottom: 5rem;
     }
+
     .view.active { display: block; }
 
     @keyframes fadeIn {
@@ -102,7 +106,6 @@
     .top-nav a:hover, .top-nav a.current { color: var(--accent-black); }
 
     .container { max-width: 900px; margin: 0 auto; padding: 6rem 2rem 2rem; }
-    
     .text-center { text-align: center; }
 
     /* Buttons */
@@ -131,70 +134,88 @@
        3. VIEWS & SECTIONS
        ========================================================================== */
        
-    /* Cover View - Photo Background with Dark Overlay for Text Readability */
+    /* Cover View - Locked strictly to 100vh with heavy top/bottom gradients */
     #view-cover {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      height: 100vh;
-      overflow: hidden;
-      padding: 2rem;
+      height: 100vh; /* Locks it to the screen */
+      height: 100dvh; /* Better mobile support */
+      overflow: hidden; /* Absolutely no scrolling */
+      margin: 0;
+      padding: 0 2rem; /* Removed bottom padding that caused the scroll issue */
       
-      /* Grabs cover.jpg and applies a dark gradient over it */
-      background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url('cover.jpg');
+      /* Dark gradient at top (0%) and bottom (100%), clearer in the middle */
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0.3) 60%, rgba(0, 0, 0, 0.8) 100%), url('cover.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
     }
     
-    /* Cover Text - Overriding to White/Light Gray for contrast */
-    .cover-pre-title { font-size: 12px; letter-spacing: 6px; color: #CCCCCC; margin-bottom: 0.2rem; }
-    .cover-coffee { font-family: var(--font-serif); font-size: 42px; letter-spacing: 4px; color: #FFFFFF; margin-bottom: 3.5rem; }
+    /* Cover Text - Perfectly aligned and purely white for maximum contrast */
+    .cover-pre-title { font-size: 12px; letter-spacing: 6px; color: #FFFFFF; margin-bottom: 0.2rem; opacity: 0.9; }
+    .cover-coffee { font-family: var(--font-serif); font-size: 38px; letter-spacing: 4px; color: #FFFFFF; margin-bottom: 3.5rem; }
     .cover-names { font-size: clamp(52px, 8vw, 96px); line-height: 1; color: #FFFFFF; margin-bottom: 1.5rem; }
-    .cover-date-loc { font-size: 13px; letter-spacing: 3px; color: #CCCCCC; text-transform: uppercase; margin-bottom: 2rem; }
-    .cover-script { font-family: var(--font-script); font-size: 2.2rem; color: #FFFFFF; margin-bottom: 4rem; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+    .cover-date-loc { font-size: 13px; letter-spacing: 3px; color: #FFFFFF; text-transform: uppercase; margin-bottom: 2.5rem; opacity: 0.9; }
+    .cover-script { font-family: var(--font-script); font-size: 2.5rem; color: #FFFFFF; margin-bottom: 3rem; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
     
-    /* Unique Cover Button Styling */
-    #view-cover .btn-outline { border-color: #FFFFFF; color: #FFFFFF; }
+    /* Cover Button */
+    #view-cover .btn-outline { border-color: #FFFFFF; color: #FFFFFF; margin-top: 0; }
     #view-cover .btn-outline:hover { background-color: #FFFFFF; color: #000000; }
 
-    /* Menu (Album) View */
-    .album-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
+    /* ==========================================================================
+       MENU (THE OUTLINE)
+       ========================================================================== */
+    .outline-menu {
+      max-width: 500px;
+      margin: 3rem auto;
+      border-top: 1px solid var(--accent-black);
+      text-align: left;
     }
-    
-    .album-card {
-      background: var(--bg-white);
-      border: 1px solid var(--border-light);
-      padding: 3rem 2rem;
-      text-align: center;
-      cursor: pointer;
-      transition: var(--transition-slow);
-      position: relative;
-    }
-    
-    .album-card::before {
-      content: ''; position: absolute; inset: 8px; border: 1px solid var(--border-light); transition: var(--transition-med);
-    }
-    
-    .album-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); }
-    .album-card:hover::before { border-color: var(--accent-black); }
-    
-    .album-card h2 { font-size: 28px; color: var(--accent-black); margin-bottom: 1rem; }
-    .album-card p { font-size: 13px; font-style: italic; color: var(--text-muted); }
 
-    /* Our Story View */
+    .outline-item {
+      display: flex;
+      align-items: center;
+      padding: 1.8rem 1rem;
+      border-bottom: 1px solid var(--border-light);
+      cursor: pointer;
+      transition: var(--transition-med);
+      background: transparent;
+    }
+
+    .outline-item:hover {
+      background: rgba(0, 0, 0, 0.03);
+      padding-left: 2rem; /* Elegant slide effect on hover */
+    }
+
+    .outline-num {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      color: var(--text-muted);
+      width: 60px;
+      font-style: italic;
+    }
+
+    .outline-text {
+      font-size: 1rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent-black);
+    }
+
+    /* ==========================================================================
+       OUR STORY VIEW
+       ========================================================================== */
     .story-chapter { margin-bottom: 5rem; text-align: center; max-width: 600px; margin-left: auto; margin-right: auto; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); }
     .story-chapter:last-child { border-bottom: none; }
     .story-year { font-size: 40px; color: var(--accent-black); margin-bottom: 0.5rem; }
     .story-title { font-size: 24px; color: var(--text-main); margin-bottom: 1.5rem; font-family: var(--font-serif); font-weight: 600; }
 
-    /* The Day & Subtle Timeline */
+    /* ==========================================================================
+       THE DAY VIEW
+       ========================================================================== */
     .event-block { background: var(--bg-white); padding: 3rem 2rem; border: 1px solid var(--border-light); margin-bottom: 3rem; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
     .event-title { font-size: 32px; color: var(--accent-black); margin-bottom: 0.5rem; }
     .event-pre-title { font-size: 12px; letter-spacing: 6px; color: var(--text-muted); margin-bottom: 1rem; text-transform: uppercase; }
@@ -206,35 +227,16 @@
       padding-left: 2rem; 
       text-align: left; 
     }
-    .timeline-item { 
-      padding: 1rem 0; 
-      position: relative; 
-    }
+    .timeline-item { padding: 1rem 0; position: relative; }
     .timeline-item::before { 
-      content: ''; 
-      position: absolute; 
-      left: -2.25rem; 
-      top: 1.5rem; 
-      width: 7px; 
-      height: 7px; 
-      border-radius: 50%; 
-      background: var(--accent-black); 
+      content: ''; position: absolute; left: -2.25rem; top: 1.5rem; width: 7px; height: 7px; border-radius: 50%; background: var(--accent-black); 
     }
-    .timeline-time { 
-      display: block; 
-      font-weight: 500; 
-      color: var(--text-muted); 
-      font-size: 11px; 
-      letter-spacing: 1.5px; 
-      margin-bottom: 0.2rem; 
-    }
-    .timeline-desc { 
-      font-family: var(--font-serif); 
-      font-size: 18px; 
-      color: var(--text-main); 
-    }
+    .timeline-time { display: block; font-weight: 500; color: var(--text-muted); font-size: 11px; letter-spacing: 1.5px; margin-bottom: 0.2rem; }
+    .timeline-desc { font-family: var(--font-serif); font-size: 18px; color: var(--text-main); }
 
-    /* Details (Dress Code & FAQ) */
+    /* ==========================================================================
+       DETAILS (DRESS CODE & FAQ)
+       ========================================================================== */
     .swatch-container { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 2rem 0; }
     .swatch { width: 60px; height: 80px; border-radius: 30px 30px 0 0; cursor: pointer; transition: transform 0.3s; border: 1px solid var(--border-light); }
     .swatch:hover { transform: translateY(-10px); }
@@ -244,46 +246,26 @@
     .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; color: var(--text-muted); font-size: 14px; }
     .faq-item.open .faq-a { max-height: 200px; padding-bottom: 1.5rem; }
 
-    /* Gallery - Pile Up Scroll Effect */
+    /* ==========================================================================
+       GALLERY
+       ========================================================================== */
     .gallery-intro { text-align: center; margin-bottom: 5rem; }
     
-    .pile-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-bottom: 20vh;
-    }
+    .pile-container { display: flex; flex-direction: column; align-items: center; padding-bottom: 20vh; }
     
     .pile-item {
-      position: sticky;
-      top: 15vh;
-      width: 100%;
-      max-width: 600px;
-      margin-bottom: 80vh;
-      background: var(--bg-white);
-      padding: 15px 15px 40px 15px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-      border: 1px solid var(--border-light);
-      transition: transform 0.3s;
+      position: sticky; top: 15vh; width: 100%; max-width: 600px; margin-bottom: 80vh;
+      background: var(--bg-white); padding: 15px 15px 40px 15px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-light); transition: transform 0.3s;
     }
     
     .pile-item img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-      aspect-ratio: 4/5;
+      width: 100%; height: auto; display: block; object-fit: cover; aspect-ratio: 4/5;
       background-color: #EEE; 
-      filter: grayscale(100%); /* Adds an elegant B&W filter to all gallery photos automatically */
+      filter: grayscale(100%); /* Elegant B&W filter */
     }
     
-    .pile-caption {
-      text-align: center;
-      font-family: var(--font-script);
-      font-size: 28px;
-      color: var(--text-main);
-      margin-top: 15px;
-    }
+    .pile-caption { text-align: center; font-family: var(--font-script); font-size: 28px; color: var(--text-main); margin-top: 15px; }
     
     .pile-item:nth-child(1) { transform: rotate(-2deg); z-index: 1; }
     .pile-item:nth-child(2) { transform: rotate(1deg); z-index: 2; top: 16vh; }
@@ -291,44 +273,42 @@
     .pile-item:nth-child(4) { transform: rotate(2deg); z-index: 4; top: 18vh; }
     .pile-item:nth-child(5) { transform: rotate(0deg); z-index: 5; top: 19vh; margin-bottom: 10vh; }
 
-    /* RSVP Form & Receipt */
+    /* ==========================================================================
+       RSVP
+       ========================================================================== */
     .rsvp-card { background: var(--bg-white); padding: 4rem 3rem; max-width: 500px; margin: 0 auto; box-shadow: 0 5px 25px rgba(0,0,0,0.05); border: 1px solid var(--border-light); }
     .input-group { margin-bottom: 1.5rem; text-align: left; }
     .input-group label { display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; color: var(--text-muted); }
     .input-group input, .input-group select { width: 100%; padding: 1rem; border: 1px solid var(--border-light); background: transparent; font-family: var(--font-sans); color: var(--text-main); }
     
     .receipt {
-      display: none;
-      background: var(--bg-white);
-      padding: 3rem 2rem;
-      border: 1px dashed var(--text-muted);
-      text-align: center;
-      font-family: 'Courier New', Courier, monospace;
-      color: var(--text-main);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      display: none; background: var(--bg-white); padding: 3rem 2rem; border: 1px dashed var(--text-muted); text-align: center;
+      font-family: 'Courier New', Courier, monospace; color: var(--text-main); box-shadow: 0 10px 20px rgba(0,0,0,0.05);
     }
     .receipt-header { font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem; border-bottom: 1px dashed var(--text-muted); padding-bottom: 1rem; }
     .receipt-body { font-size: 0.9rem; line-height: 2; margin-bottom: 2rem; }
 
-    /* Countdown View */
+    /* ==========================================================================
+       COUNTDOWN
+       ========================================================================== */
     .countdown-grid { display: flex; justify-content: center; gap: 2rem; margin: 4rem 0; flex-wrap: wrap; }
     .cd-box { text-align: center; min-width: 100px; }
     .cd-num { font-size: 64px; font-family: var(--font-serif); color: var(--accent-black); line-height: 1; }
     .cd-label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); }
-    
     .final-message { margin-top: 8rem; text-align: center; }
 
     @media (max-width: 768px) {
       .top-nav { display: none; }
       .pile-item { margin-bottom: 100vh; }
       .container { padding-top: 3rem; }
+      .outline-text { font-size: 0.85rem; letter-spacing: 2px; }
     }
   </style>
 </head>
 <body>
 
   <nav class="top-nav" id="topNav">
-    <a onclick="navigateTo('menu')">Menu</a>
+    <a onclick="navigateTo('menu')">Outline</a>
     <a onclick="navigateTo('story')">Our Story</a>
     <a onclick="navigateTo('day')">The Day</a>
     <a onclick="navigateTo('details')">Details</a>
@@ -343,38 +323,38 @@
     <div class="cover-date-loc">31 January 2028 · Manila</div>
     <div class="cover-script">And now, forever.</div>
     
-    <button class="btn btn-outline" onclick="navigateTo('menu')" style="margin-top: 0;">OPEN INVITATION &rarr;</button>
+    <button class="btn btn-outline" onclick="navigateTo('menu')">OPEN INVITATION &rarr;</button>
   </main>
 
-  <main class="view" id="view-menu">
+  <main class="view content-view" id="view-menu">
     <div class="container text-center">
-      <h2 class="serif" style="font-size: 44px; margin-bottom: 1rem; color: var(--accent-black);">Chapters</h2>
-      <p class="script" style="font-size: 2rem; color: var(--text-muted);">Select a page to turn</p>
+      <h2 class="serif" style="font-size: 44px; margin-bottom: 1rem; color: var(--accent-black);">The Outline</h2>
+      <p class="script" style="font-size: 2rem; color: var(--text-muted);">Select a chapter to begin</p>
       
-      <div class="album-grid">
-        <div class="album-card" onclick="navigateTo('story')">
-          <h2>Our Story</h2>
-          <p>How it began.</p>
+      <div class="outline-menu">
+        <div class="outline-item" onclick="navigateTo('story')">
+          <span class="outline-num">I.</span>
+          <span class="outline-text">Our Story</span>
         </div>
-        <div class="album-card" onclick="navigateTo('day')">
-          <h2>The Day</h2>
-          <p>Where & when.</p>
+        <div class="outline-item" onclick="navigateTo('day')">
+          <span class="outline-num">II.</span>
+          <span class="outline-text">The Day & Itinerary</span>
         </div>
-        <div class="album-card" onclick="navigateTo('details')">
-          <h2>Details</h2>
-          <p>Everything you need to know.</p>
+        <div class="outline-item" onclick="navigateTo('details')">
+          <span class="outline-num">III.</span>
+          <span class="outline-text">The Details</span>
         </div>
-        <div class="album-card" onclick="navigateTo('gallery')">
-          <h2>Gallery</h2>
-          <p>Moments we've kept.</p>
+        <div class="outline-item" onclick="navigateTo('gallery')">
+          <span class="outline-num">IV.</span>
+          <span class="outline-text">From Our Table</span>
         </div>
-        <div class="album-card" onclick="navigateTo('rsvp')">
-          <h2>RSVP</h2>
-          <p>Save your seat.</p>
+        <div class="outline-item" onclick="navigateTo('rsvp')">
+          <span class="outline-num">V.</span>
+          <span class="outline-text">RSVP</span>
         </div>
-        <div class="album-card" onclick="navigateTo('countdown')">
-          <h2>Countdown</h2>
-          <p>Until forever.</p>
+        <div class="outline-item" onclick="navigateTo('countdown')">
+          <span class="outline-num">VI.</span>
+          <span class="outline-text">Countdown</span>
         </div>
       </div>
       
@@ -384,7 +364,7 @@
     </div>
   </main>
 
-  <main class="view" id="view-story">
+  <main class="view content-view" id="view-story">
     <div class="container">
       <div class="text-center" style="margin-bottom: 4rem;">
         <h2 style="font-size: 48px; color: var(--accent-black);">Our Story</h2>
@@ -416,12 +396,12 @@
       </div>
 
       <div class="text-center">
-        <button class="btn btn-outline" onclick="navigateTo('menu')">← Back to Chapters</button>
+        <button class="btn btn-outline" onclick="navigateTo('menu')">← Back to Outline</button>
       </div>
     </div>
   </main>
 
-  <main class="view" id="view-day">
+  <main class="view content-view" id="view-day">
     <div class="container text-center">
       <h2 style="font-size: 48px; color: var(--accent-black);">The Day</h2>
       <p class="script" style="margin-bottom: 4rem;">A day worth remembering.</p>
@@ -443,37 +423,19 @@
       <h2 class="serif" style="font-size: 28px; margin: 4rem 0 1rem; color: var(--accent-black);">Itinerary</h2>
       
       <div class="timeline">
-        <div class="timeline-item">
-          <span class="timeline-time">3:30 PM</span>
-          <span class="timeline-desc">Guest Arrival</span>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-time">4:00 PM</span>
-          <span class="timeline-desc">Ceremony</span>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-time">5:15 PM</span>
-          <span class="timeline-desc">Photo Session</span>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-time">6:00 PM</span>
-          <span class="timeline-desc">Cocktail Hour</span>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-time">7:00 PM</span>
-          <span class="timeline-desc">Dinner</span>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-time">8:30 PM</span>
-          <span class="timeline-desc">Dancing</span>
-        </div>
+        <div class="timeline-item"><span class="timeline-time">3:30 PM</span><span class="timeline-desc">Guest Arrival</span></div>
+        <div class="timeline-item"><span class="timeline-time">4:00 PM</span><span class="timeline-desc">Ceremony</span></div>
+        <div class="timeline-item"><span class="timeline-time">5:15 PM</span><span class="timeline-desc">Photo Session</span></div>
+        <div class="timeline-item"><span class="timeline-time">6:00 PM</span><span class="timeline-desc">Cocktail Hour</span></div>
+        <div class="timeline-item"><span class="timeline-time">7:00 PM</span><span class="timeline-desc">Dinner</span></div>
+        <div class="timeline-item"><span class="timeline-time">8:30 PM</span><span class="timeline-desc">Dancing</span></div>
       </div>
 
-      <button class="btn btn-outline" style="margin-top: 3rem;" onclick="navigateTo('menu')">← Back to Chapters</button>
+      <button class="btn btn-outline" style="margin-top: 3rem;" onclick="navigateTo('menu')">← Back to Outline</button>
     </div>
   </main>
 
-  <main class="view" id="view-details">
+  <main class="view content-view" id="view-details">
     <div class="container text-center">
       <h2 style="font-size: 48px; color: var(--accent-black);">The Little Details</h2>
       <p class="script" style="margin-bottom: 4rem;">Everything you need to know.</p>
@@ -518,11 +480,11 @@
         </div>
       </div>
 
-      <button class="btn btn-outline" onclick="navigateTo('menu')">← Back to Chapters</button>
+      <button class="btn btn-outline" onclick="navigateTo('menu')">← Back to Outline</button>
     </div>
   </main>
 
-  <main class="view" id="view-gallery">
+  <main class="view content-view" id="view-gallery">
     <div class="container">
       <div class="gallery-intro">
         <h2 style="font-size: 48px; color: var(--accent-black);">From Our Table</h2>
@@ -533,40 +495,19 @@
     </div>
 
     <div class="pile-container">
-      
-      <div class="pile-item">
-        <img src="photo1.jpg" alt="The Beginning">
-        <div class="pile-caption">The Beginning</div>
-      </div>
-
-      <div class="pile-item">
-        <img src="photo2.jpg" alt="The Coffee Dates">
-        <div class="pile-caption">The Coffee Dates</div>
-      </div>
-
-      <div class="pile-item">
-        <img src="photo3.jpg" alt="The Adventures">
-        <div class="pile-caption">The Adventures</div>
-      </div>
-
-      <div class="pile-item">
-        <img src="photo4.jpg" alt="The Little Things">
-        <div class="pile-caption">The Little Things</div>
-      </div>
-
-      <div class="pile-item">
-        <img src="photo5.jpg" alt="Forever">
-        <div class="pile-caption">Forever</div>
-      </div>
-
+      <div class="pile-item"><img src="photo1.jpg" alt="The Beginning"><div class="pile-caption">The Beginning</div></div>
+      <div class="pile-item"><img src="photo2.jpg" alt="The Coffee Dates"><div class="pile-caption">The Coffee Dates</div></div>
+      <div class="pile-item"><img src="photo3.jpg" alt="The Adventures"><div class="pile-caption">The Adventures</div></div>
+      <div class="pile-item"><img src="photo4.jpg" alt="The Little Things"><div class="pile-caption">The Little Things</div></div>
+      <div class="pile-item"><img src="photo5.jpg" alt="Forever"><div class="pile-caption">Forever</div></div>
     </div>
 
     <div class="text-center" style="margin-top: 2rem;">
-      <button class="btn btn-outline" onclick="navigateTo('menu')">← Back to Chapters</button>
+      <button class="btn btn-outline" onclick="navigateTo('menu')">← Back to Outline</button>
     </div>
   </main>
 
-  <main class="view" id="view-rsvp">
+  <main class="view content-view" id="view-rsvp">
     <div class="container text-center">
       <h2 style="font-size: 48px; color: var(--accent-black);">A Table For You</h2>
       <p class="script" style="margin-bottom: 3rem;">We've saved you a seat.</p>
@@ -618,12 +559,12 @@
       </div>
 
       <div style="margin-top: 4rem;">
-        <button class="btn btn-outline" onclick="navigateTo('menu')">← Back to Chapters</button>
+        <button class="btn btn-outline" onclick="navigateTo('menu')">← Back to Outline</button>
       </div>
     </div>
   </main>
 
-  <main class="view" id="view-countdown">
+  <main class="view content-view" id="view-countdown">
     <div class="container text-center">
       <h2 style="font-size: 48px; color: var(--accent-black);">Until We Say I Do</h2>
       
@@ -640,11 +581,12 @@
         <p class="event-pre-title" style="font-size: 10px;">Elena & Adrian<br>31 January 2028</p>
       </div>
 
-      <button class="btn btn-outline" style="margin-top: 4rem;" onclick="navigateTo('menu')">← Back to Chapters</button>
+      <button class="btn btn-outline" style="margin-top: 4rem;" onclick="navigateTo('menu')">← Back to Outline</button>
     </div>
   </main>
 
   <script>
+    // Handles transitioning between screens
     function navigateTo(viewId) {
       document.querySelectorAll('.view').forEach(view => {
         view.classList.remove('active');
@@ -652,6 +594,7 @@
       document.getElementById('view-' + viewId).classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
+      // Only show the top sticky navigation inside the specific chapters (not Cover or Menu)
       const nav = document.getElementById('topNav');
       if(viewId === 'cover' || viewId === 'menu') {
         nav.classList.remove('visible');
@@ -660,10 +603,12 @@
       }
     }
 
+    // Handles the subtle background color change in the Dress Code section
     function changeBg(colorHex) {
       document.documentElement.style.setProperty('--bg-tint', colorHex);
     }
 
+    // Handles expanding the FAQ questions
     function toggleFaq(btn) {
       const parent = btn.parentElement;
       const isOpen = parent.classList.contains('open');
@@ -673,6 +618,7 @@
       }
     }
 
+    // Handles what happens when the RSVP form is submitted
     function submitRSVP(e) {
       e.preventDefault();
       const guests = document.getElementById('guest-count').value;
@@ -685,6 +631,7 @@
       receipt.style.display = 'block';
     }
 
+    // Live Countdown Timer Math
     const weddingDate = new Date("January 31, 2028 16:00:00").getTime();
 
     setInterval(() => {
