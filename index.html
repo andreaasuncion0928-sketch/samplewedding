@@ -320,6 +320,10 @@
 </head>
 <body>
 
+  <audio id="bg-music" loop>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="screen active" id="screen-cover">
     <div class="cover-image"></div>
     <div class="cover-content">
@@ -328,7 +332,7 @@
       <div class="cover-script">It started with coffee.</div>
       <div class="cover-invite">You are invited.</div>
       
-      <button class="btn cover-btn" onclick="openScreen('story')">OPEN INVITATION &rarr;</button>
+      <button class="btn cover-btn" onclick="startExperience()">OPEN INVITATION &rarr;</button>
     </div>
   </div>
 
@@ -556,6 +560,17 @@
   </div>
 
   <script>
+    /* New function to start the audio and open the story page simultaneously */
+    function startExperience() {
+      var music = document.getElementById('bg-music');
+      if (music.paused) {
+        music.play().catch(function(error) {
+          console.log("Audio playback failed due to browser policies: ", error);
+        });
+      }
+      openScreen('story');
+    }
+
     /* This function does the magic! It hides everything, then only shows 
       the screen you requested. No scrolling, just an instant swap.
     */
