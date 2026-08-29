@@ -7,7 +7,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Poppins:wght@300;400;500&family=Allura&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Poppins:wght@300;400;500&family=Allura&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================================================
@@ -29,7 +29,7 @@
       
       --font-serif: 'Cormorant Garamond', serif;
       --font-sans: 'Poppins', sans-serif;
-      --font-script: 'Brittany', 'Allura', cursive; /* Uses Brittany if available, falls back to elegant Allura */
+      --font-script: 'Brittany', 'Allura', cursive;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -114,7 +114,7 @@
     .cover-btn:hover { background-color: #FFF; color: #000; }
 
     /* ==========================================================================
-       4. MENU SCREEN (ELEGANT LIST, NO TILES)
+       4. MENU SCREEN (ELEGANT LIST)
        ========================================================================== */
     #screen-menu { background-color: var(--white); }
     
@@ -140,18 +140,25 @@
     .elegant-item:hover .ei-arrow { color: var(--black); transform: translateX(5px); }
 
     /* ==========================================================================
-       5. OUR STORY SCREEN
+       5. OUR STORY SCREEN (Refined, Nostalgic, Editorial)
        ========================================================================== */
     .story-content { 
-      max-width: 650px; 
+      max-width: 500px; /* Narrower width creates a beautiful, classic paragraph shape */
       margin: 0 auto; 
       text-align: center; 
-      font-family: var(--font-serif); /* Changed to elegant serif */
-      font-size: 22px; 
-      color: #444; 
-      line-height: 2.2; 
+      font-family: var(--font-serif); 
+      font-size: 19px; 
+      color: #333; 
+      line-height: 2.1; 
+      font-weight: 300;
     }
     .story-content p { margin-bottom: 2.5rem; }
+    
+    .story-highlight-italics {
+      font-style: italic;
+      color: var(--black);
+      font-size: 22px;
+    }
     
     .story-bottom { margin-top: 6rem; border-top: 1px solid var(--border); padding-top: 5rem; }
 
@@ -169,14 +176,13 @@
     .tl-desc { font-family: var(--font-serif); font-size: 22px; }
 
     /* ==========================================================================
-       7. DETAILS SCREEN (Modern & Elegant Design)
+       7. DETAILS SCREEN
        ========================================================================== */
     #screen-details {
       position: relative;
       background-color: var(--white);
     }
     
-    /* Cover image with exactly 70% opacity as the background */
     #screen-details::before {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -184,11 +190,10 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      opacity: 0.7; /* 70% opacity */
+      opacity: 0.7; 
       z-index: 0;
     }
 
-    /* More transparent white overlay to let background peek through elegantly */
     #screen-details::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -204,14 +209,12 @@
       text-align: center; 
       cursor: pointer; 
       transition: all 0.4s ease; 
-      /* Elegant frosted glass effect */
       background: rgba(255, 255, 255, 0.75); 
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
     .detail-card:hover { border-color: var(--black); box-shadow: 0 10px 30px rgba(0,0,0,0.08); background: rgba(255, 255, 255, 0.95); }
     
-    /* Upgraded elegant typography for Details */
     .detail-title { font-family: var(--font-serif); font-size: 32px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; }
     .detail-sub { font-size: 11px; letter-spacing: 3px; color: var(--gray); text-transform: uppercase; font-weight: 300; }
 
@@ -247,7 +250,7 @@
     
     .gal-item img {
       width: 100%; height: 100%; display: block; object-fit: cover;
-      filter: grayscale(100%); /* Ensures photos fit the B&W theme */
+      filter: grayscale(100%); 
     }
 
     /* ==========================================================================
@@ -284,22 +287,27 @@
 
   <div class="screen" id="screen-story">
     <div class="container text-center">
-      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem; text-transform: uppercase;">A Little Story About Us</div>
-      <h2 class="serif" style="font-size: 48px; margin-bottom: 4rem; letter-spacing: 2px; text-transform: uppercase;">Our Story</h2>
+      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1.5rem; text-transform: uppercase;">A Little Story About Us</div>
+      <h2 class="serif" style="font-size: 42px; margin-bottom: 5rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 300;">Our Story</h2>
 
       <div class="story-content">
-        <p>It started with coffee.</p>
-        <p>We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that <span class="script" style="font-size: 3rem; text-transform: lowercase; display: inline-block; transform: translateY(8px); margin: 0 5px;">we had known each other</span> much longer than we actually had.</p>
+        <p class="story-highlight-italics" style="font-size: 26px; margin-bottom: 3.5rem;">It started with coffee.</p>
+        
+        <p>We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.</p>
+        
         <p>Somehow, one coffee became another. Then another. And somewhere between the quiet afternoons, spontaneous plans, and everyday moments...</p>
-        <div class="script" style="font-size: 4rem; margin: 3rem 0;">we became us.</div>
+        
+        <div class="script" style="font-size: 4.5rem; margin: 4rem 0; color: var(--black);">we became us.</div>
+        
         <p>What started as a simple coffee date became our favorite story to tell.</p>
-        <p class="serif" style="font-size: 28px; text-align: center; color: var(--black); margin-top: 4rem; margin-bottom: 3rem; font-style: italic;">And now, we're getting married.</p>
+        
+        <p class="story-highlight-italics" style="margin-top: 4rem; margin-bottom: 4rem;">And now, we're getting married.</p>
         
         <button class="btn" onclick="openScreen('menu')">JOIN US &rarr;</button>
       </div>
 
       <div class="story-bottom text-center">
-        <h3 class="serif" style="font-size: 36px; margin-bottom: 0;">2015</h3>
+        <h3 class="serif" style="font-size: 36px; margin-bottom: 0; font-weight: 300;">2015</h3>
         <div style="font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--black); margin-bottom: 1rem;">Our Year</div>
         <p style="color: var(--gray); font-style: italic; margin-bottom: 2rem; font-family: var(--font-serif); font-size: 18px;">The year everything changed.</p>
         <div class="script" style="font-size: 3.5rem;">Elena & Adrian</div>
