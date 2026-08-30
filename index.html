@@ -401,7 +401,7 @@
     .elegant-item:hover .ei-arrow { color: var(--white); transform: translateX(8px); }
 
     /* ==========================================================================
-       5. OUR STORY SCREEN & TYPEWRITER ANIMATION (HIDDEN JOIN BUTTON)
+       5. OUR STORY SCREEN & TYPEWRITER ANIMATION (SYNCHRONIZED WITH MUSIC INTRO)
        ========================================================================== */
     #screen-story {
       position: relative;
@@ -477,7 +477,6 @@
       animation: cursorBlink 0.8s infinite;
     }
 
-    /* Hidden JOIN US Button Container */
     #story-join-btn-wrap {
       opacity: 0;
       transform: translateY(15px);
@@ -1640,7 +1639,7 @@
   </div>
 
   <script>
-    let odometerHasAnimated = false; // Ensures single execution
+    let odometerHasAnimated = false; // Ensures single animation execution
 
     function startExperience() {
       var music = document.getElementById('bg-music');
@@ -1783,7 +1782,7 @@
         strip.style.transition = 'none';
         strip.style.transform = 'translateY(0%)';
 
-        // Extremely slow, minimal, elegant friction curve (4.5s)
+        // Minimal, elegant friction curve (4.5s)
         setTimeout(() => {
           strip.style.transition = 'transform 4.5s cubic-bezier(0.1, 0.9, 0.2, 1)';
           strip.style.transform = `translateY(${targetPercent}%)`;
@@ -1803,12 +1802,12 @@
       });
     }
 
-    /* TYPEWRITER STORY ANIMATION (JOIN BUTTON FADES IN AT THE END) */
+    /* TYPEWRITER STORY ANIMATION WITH DELAYS SYNCHRONIZED TO MUSIC INTRO */
     const storyBlocks = [
-      { type: 'p', text: 'It started with coffee.', class: 'story-highlight-italics' },
-      { type: 'p', text: 'We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.' },
-      { type: 'div', text: 'we became us.', class: 'story-script-accent' },
-      { type: 'p', text: "And now, we're getting married.", class: 'story-married-text' }
+      { type: 'p', text: 'It started with coffee.', class: 'story-highlight-italics', delayAfter: 2000 },
+      { type: 'p', text: 'We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.', delayAfter: 3500 }, // Pauses here so "we became us" hits right around 8-10 seconds
+      { type: 'div', text: 'we became us.', class: 'story-script-accent', delayAfter: 1800 },
+      { type: 'p', text: "And now, we're getting married.", class: 'story-married-text', delayAfter: 500 }
     ];
 
     let isTyping = false;
@@ -1833,7 +1832,7 @@
         if (blockIndex >= storyBlocks.length) {
           if (currentEl) currentEl.classList.remove('typing-cursor');
           isTyping = false;
-          // Softly reveal "JOIN US" button after last character
+          // Reveal "JOIN US" button softly after last character
           if (btnWrap) btnWrap.classList.add('btn-visible');
           return;
         }
@@ -1852,13 +1851,13 @@
         charIndex++;
 
         if (charIndex < block.text.length) {
-          let speed = Math.random() * 20 + 30; // Typewriter speed
-          if (block.type === 'div') speed = 50;
+          let speed = 40; // Steady typewriter speed
+          if (block.type === 'div') speed = 70; // Slightly slower for script accent
           typeTimeout = setTimeout(typeNextChar, speed);
         } else {
           charIndex = 0;
           blockIndex++;
-          typeTimeout = setTimeout(typeNextChar, 350);
+          typeTimeout = setTimeout(typeNextChar, block.delayAfter);
         }
       }
 
