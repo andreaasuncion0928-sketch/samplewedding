@@ -902,7 +902,7 @@
     }
 
     /* ==========================================================================
-       8. GALLERY SCREEN (STACKED CARD DECK ANIMATION)
+       8. GALLERY SCREEN (SMOOTH STACKED CARD DECK ANIMATION)
        ========================================================================== */
     #screen-gallery {
       background-color: #FAFAFA;
@@ -934,27 +934,32 @@
 
     .stacked-card {
       position: sticky;
-      top: 80px;
-      margin-bottom: 80px;
+      top: 100px;
+      margin-bottom: 35vh;
       background: #F4F1EA;
       padding: 0.8rem 0.8rem 1.2rem;
       border: 1px solid rgba(0, 0, 0, 0.08);
       border-radius: 6px;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-      transition: transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth);
-      will-change: transform;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, top;
     }
 
-    .stacked-card:nth-child(even) {
-      transform: rotate(-1deg);
-    }
-    .stacked-card:nth-child(odd) {
-      transform: rotate(1deg);
-    }
+    /* Alternating visual tilts for the stack effect */
+    .stacked-card:nth-child(1)  { transform: rotate(0deg); }
+    .stacked-card:nth-child(2)  { transform: rotate(-1.5deg); }
+    .stacked-card:nth-child(3)  { transform: rotate(1.2deg); }
+    .stacked-card:nth-child(4)  { transform: rotate(-2deg); }
+    .stacked-card:nth-child(5)  { transform: rotate(1.8deg); }
+    .stacked-card:nth-child(6)  { transform: rotate(-1.2deg); }
+    .stacked-card:nth-child(7)  { transform: rotate(2deg); }
+    .stacked-card:nth-child(8)  { transform: rotate(-1.8deg); }
+    .stacked-card:nth-child(9)  { transform: rotate(1.5deg); }
+    .stacked-card:nth-child(10) { transform: rotate(-0.8deg); }
 
     .stacked-card:hover {
       transform: scale(1.02) rotate(0deg) !important;
-      z-index: 50 !important;
+      z-index: 99 !important;
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.18);
     }
 
@@ -972,7 +977,7 @@
     .gal-img-wrapper img {
       width: 100%;
       height: auto;
-      max-height: 75vh;
+      max-height: 70vh;
       object-fit: contain;
       display: block;
     }
@@ -1027,7 +1032,7 @@
     @media (max-width: 768px) {
       .details-grid { grid-template-columns: 1fr; }
       .arch-cards-grid { grid-template-columns: 1fr; }
-      .stacked-card { top: 60px; margin-bottom: 50px; }
+      .stacked-card { top: 70px; margin-bottom: 25vh; }
     }
   </style>
 </head>
@@ -1381,41 +1386,41 @@
     </div>
   </div>
 
-  <!-- GALLERY SCREEN -->
+  <!-- GALLERY SCREEN (CALIBRATED STACKED CARD DECK) -->
   <div class="screen" id="screen-gallery">
     <div class="gallery-heading-wrap reveal-on-scroll">
       <h2 class="gallery-heading">MOMENTS ALONG THE WAY</h2>
     </div>
 
     <div class="stacked-gallery-container">
-      <div class="stacked-card" style="z-index: 1;">
+      <div class="stacked-card" style="z-index: 10;">
         <div class="gal-img-wrapper"><img src="photo1.jpeg" alt=""></div>
       </div>
-      <div class="stacked-card" style="z-index: 2;">
+      <div class="stacked-card" style="z-index: 9;">
         <div class="gal-img-wrapper"><img src="photo2.jpeg" alt=""></div>
       </div>
-      <div class="stacked-card" style="z-index: 3;">
+      <div class="stacked-card" style="z-index: 8;">
         <div class="gal-img-wrapper"><img src="photo3.jpeg" alt=""></div>
       </div>
-      <div class="stacked-card" style="z-index: 4;">
+      <div class="stacked-card" style="z-index: 7;">
         <div class="gal-img-wrapper"><img src="photo4.jpeg" alt=""></div>
       </div>
-      <div class="stacked-card" style="z-index: 5;">
+      <div class="stacked-card" style="z-index: 6;">
         <div class="gal-img-wrapper"><img src="photo5.jpeg" alt=""></div>
       </div>
-      <div class="stacked-card" style="z-index: 6;">
+      <div class="stacked-card" style="z-index: 5;">
         <div class="gal-img-wrapper"><img src="photo6.jpeg" alt=""></div>
       </div>
-      <div class="stacked-card" style="z-index: 7;">
+      <div class="stacked-card" style="z-index: 4;">
         <div class="gal-img-wrapper"><img src="photo7.jpeg" alt=""></div>
       </div>
-      <div class="stacked-card" style="z-index: 8;">
+      <div class="stacked-card" style="z-index: 3;">
         <div class="gal-img-wrapper"><img src="photo8.jpeg" alt=""></div>
       </div>
-      <div class="stacked-card" style="z-index: 9;">
+      <div class="stacked-card" style="z-index: 2;">
         <div class="gal-img-wrapper"><img src="photo9.jpeg" alt=""></div>
       </div>
-      <div class="stacked-card" style="z-index: 10;">
+      <div class="stacked-card" style="z-index: 1;">
         <div class="gal-img-wrapper"><img src="photo10.jpeg" alt=""></div>
       </div>
     </div>
