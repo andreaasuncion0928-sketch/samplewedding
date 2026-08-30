@@ -654,7 +654,7 @@
     }
 
     /* ==========================================================================
-       8. GALLERY SCREEN (EDITORIAL CINEMATIC SCROLL EXPERIENCE)
+       8. GALLERY SCREEN (10-PHOTO EDITORIAL CINEMATIC SEQUENCE)
        ========================================================================== */
     #screen-gallery {
       background-color: var(--white);
@@ -665,7 +665,7 @@
 
     .gallery-heading-wrap {
       text-align: center;
-      padding: 6rem 1.5rem 2rem;
+      padding: 6rem 1.5rem 3rem;
       opacity: 0;
       transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1);
     }
@@ -697,146 +697,178 @@
       will-change: transform, opacity;
     }
 
-    /* Photo 1: Opening */
-    .gal-section-1 {
-      height: 90vh;
-      width: 100%;
-      margin-bottom: 8rem;
-    }
-
-    .gal-section-1 .gal-img {
-      transform: scale(1.08);
+    /* Common Animation Style 1: Slow Zoom */
+    .gal-zoom .gal-img {
+      transform: scale(1.07);
       transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1);
     }
-
-    .gal-section-1.visible .gal-img {
+    .gal-zoom.visible .gal-img {
       transform: scale(1);
     }
 
-    /* Photo 2: Memory (Right Asymmetric) */
+    /* Common Animation Style 2: Fade + Rise */
+    .gal-fade-rise .gal-frame {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .gal-fade-rise.visible .gal-frame {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* PHOTO 1 — Opening Hero */
+    .gal-section-1 {
+      height: 90vh;
+      width: 100%;
+      margin-bottom: 7rem;
+    }
+
+    /* PHOTO 2 — Editorial Memory (Right) */
     .gal-section-2 {
-      padding: 6rem 1.5rem 8rem;
+      padding: 3rem 1.5rem 7rem;
       display: flex;
       justify-content: flex-end;
       max-width: 1200px;
       margin: 0 auto;
     }
-
     .gal-section-2 .gal-frame {
-      width: clamp(300px, 55vw, 650px);
-      height: clamp(400px, 70vh, 750px);
-      opacity: 0;
-      transform: translateY(40px) rotate(-1.5deg);
-      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+      width: clamp(300px, 52vw, 620px);
+      height: clamp(380px, 68vh, 720px);
+      transform: translateY(40px) rotate(-1deg);
     }
-
     .gal-section-2.visible .gal-frame {
-      opacity: 1;
-      transform: translateY(0) rotate(-1.5deg);
+      transform: translateY(0) rotate(-1deg);
     }
 
-    /* Photo 3: Memory (Left Asymmetric) */
+    /* PHOTO 3 — Editorial Memory (Left) */
     .gal-section-3 {
-      padding: 4rem 1.5rem 10rem;
+      padding: 2rem 1.5rem 8rem;
       display: flex;
       justify-content: flex-start;
       max-width: 1200px;
       margin: 0 auto;
     }
-
     .gal-section-3 .gal-frame {
-      width: clamp(280px, 48vw, 580px);
-      height: clamp(380px, 65vh, 700px);
-      opacity: 0;
-      transform: translateY(40px) rotate(1.5deg);
-      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.15s, transform 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.15s;
+      width: clamp(280px, 45vw, 560px);
+      height: clamp(360px, 62vh, 660px);
+      transform: translateY(40px) rotate(1deg);
+      transition-delay: 0.15s;
     }
-
     .gal-section-3.visible .gal-frame {
-      opacity: 1;
-      transform: translateY(0) rotate(1.5deg);
+      transform: translateY(0) rotate(1deg);
     }
 
-    /* Photo 4: Featured Centerpiece (Curtain Reveal) */
+    /* PHOTO 4 — First Cinematic Feature (Curtain Mask Reveal) */
     .gal-section-4 {
       width: 95vw;
       max-width: 1400px;
-      height: 92vh;
-      margin: 0 auto 10rem;
+      height: 90vh;
+      margin: 0 auto 8rem;
       position: relative;
     }
-
-    .gal-section-4 .gal-frame {
-      height: 100%;
-      position: relative;
-    }
-
+    .gal-section-4 .gal-frame { height: 100%; position: relative; }
     .gal-section-4 .gal-img {
       transform: scale(1.05);
       transition: transform 1.4s cubic-bezier(0.25, 1, 0.5, 1);
     }
-
     .gal-curtain {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; width: 100%; height: 100%;
       background-color: var(--white);
       z-index: 2;
       transform: scaleX(1);
       transform-origin: right;
       transition: transform 1.3s cubic-bezier(0.77, 0, 0.175, 1);
     }
+    .gal-section-4.visible .gal-curtain { transform: scaleX(0); }
+    .gal-section-4.visible .gal-img { transform: scale(1); }
 
-    .gal-section-4.visible .gal-curtain {
-      transform: scaleX(0);
-    }
-
-    .gal-section-4.visible .gal-img {
-      transform: scale(1);
-    }
-
-    /* Photo 5: Closing */
+    /* PHOTO 5 — Editorial Memory (Right) */
     .gal-section-5 {
-      height: 90vh;
-      width: 100%;
-      margin-bottom: 4rem;
+      padding: 3rem 1.5rem 6rem;
+      display: flex;
+      justify-content: flex-end;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-
     .gal-section-5 .gal-frame {
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+      width: clamp(280px, 46vw, 550px);
+      height: clamp(360px, 60vh, 640px);
+      transform: translateY(40px) rotate(1.5deg);
+      transition-delay: 0.15s;
     }
-
-    .gal-section-5 .gal-img {
-      transform: scale(1.06);
-      transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
     .gal-section-5.visible .gal-frame {
-      opacity: 1;
+      transform: translateY(0) rotate(1.5deg);
     }
 
-    .gal-section-5.visible .gal-img {
-      transform: scale(1);
+    /* PHOTO 6 — Editorial Memory (Left) */
+    .gal-section-6 {
+      padding: 2rem 1.5rem 8rem;
+      display: flex;
+      justify-content: flex-start;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .gal-section-6 .gal-frame {
+      width: clamp(300px, 50vw, 600px);
+      height: clamp(380px, 65vh, 680px);
+      transform: translateY(40px) rotate(-1.5deg);
+    }
+    .gal-section-6.visible .gal-frame {
+      transform: translateY(0) rotate(-1.5deg);
+    }
+
+    /* PHOTO 7 — Second Cinematic Feature */
+    .gal-section-7 {
+      width: 95vw;
+      max-width: 1400px;
+      height: 88vh;
+      margin: 0 auto 8rem;
+    }
+
+    /* PHOTO 8 — Editorial Memory (Right) */
+    .gal-section-8 {
+      padding: 3rem 1.5rem 8rem;
+      display: flex;
+      justify-content: flex-end;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .gal-section-8 .gal-frame {
+      width: clamp(290px, 48vw, 580px);
+      height: clamp(370px, 64vh, 670px);
+      transform: translateY(40px) rotate(-1deg);
+    }
+    .gal-section-8.visible .gal-frame {
+      transform: translateY(0) rotate(-1deg);
+    }
+
+    /* PHOTO 9 — Third Cinematic Feature */
+    .gal-section-9 {
+      width: 95vw;
+      max-width: 1400px;
+      height: 90vh;
+      margin: 0 auto 9rem;
+    }
+
+    /* PHOTO 10 — Closing Image */
+    .gal-section-10 {
+      height: 92vh;
+      width: 100%;
+      margin-bottom: 5rem;
     }
 
     .gallery-footer {
-      padding: 3rem 1.5rem 6rem;
+      padding: 4rem 1.5rem 8rem;
       text-align: center;
     }
 
-    /* Accessibility preference */
+    /* Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
-      .gal-section-1 .gal-img,
-      .gal-section-2 .gal-frame,
-      .gal-section-3 .gal-frame,
-      .gal-section-4 .gal-img,
+      .gal-img,
+      .gal-frame,
       .gal-curtain,
-      .gal-section-5 .gal-frame,
-      .gal-section-5 .gal-img,
       .gallery-heading-wrap {
         transition: none !important;
         transform: none !important;
@@ -845,16 +877,7 @@
       .gal-curtain { display: none !important; }
     }
 
-    /* ==========================================================================
-       9. RSVP SCREEN
-       ========================================================================== */
-    .rsvp-form { border: 1px solid var(--border); padding: 4rem 3rem; max-width: 500px; margin: 0 auto; text-align: left; }
-    .form-group { margin-bottom: 2rem; }
-    .form-group label { display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem; color: var(--gray); }
-    .form-group input, .form-group select { width: 100%; padding: 1rem; border: 1px solid var(--border); background: transparent; font-family: var(--font-sans); color: var(--black); }
-    
-    .rsvp-success { display: none; text-align: center; padding: 5rem 0; }
-    
+    /* Responsive Mobile Adjustments */
     @media (max-width: 768px) {
       .details-grid { grid-template-columns: 1fr; }
       .arch-cards-grid { grid-template-columns: 1fr; }
@@ -863,16 +886,28 @@
       .rsvp-form { padding: 2rem 1.5rem; }
       .detail-content { padding: 2.5rem 1.5rem; }
       
-      .gal-section-2, .gal-section-3 {
-        padding: 3rem 1.5rem;
+      .gal-section-2, .gal-section-3, .gal-section-5, .gal-section-6, .gal-section-8 {
+        padding: 2.5rem 1.5rem;
         justify-content: center;
       }
-      .gal-section-2 .gal-frame, .gal-section-3 .gal-frame {
+      .gal-section-2 .gal-frame, 
+      .gal-section-3 .gal-frame,
+      .gal-section-5 .gal-frame,
+      .gal-section-6 .gal-frame,
+      .gal-section-8 .gal-frame {
         width: 100%;
         height: 60vh;
-        transform: none !important;
+        transform: translateY(30px) !important;
       }
-      .gal-section-4 {
+      .gal-section-2.visible .gal-frame,
+      .gal-section-3.visible .gal-frame,
+      .gal-section-5.visible .gal-frame,
+      .gal-section-6.visible .gal-frame,
+      .gal-section-8.visible .gal-frame {
+        transform: translateY(0) !important;
+      }
+
+      .gal-section-4, .gal-section-7, .gal-section-9 {
         width: 100vw;
         height: 70vh;
         margin-bottom: 5rem;
@@ -1132,34 +1167,64 @@
       <h2 class="gallery-heading">MOMENTS ALONG THE WAY</h2>
     </div>
 
-    <div class="gal-section-1 gal-observe">
+    <div class="gal-section-1 gal-zoom gal-observe">
       <div class="gal-frame">
-        <img src="photo1.jpeg" alt="Opening Moment" class="gal-img">
+        <img src="photo1.jpeg" alt="Moments" class="gal-img">
       </div>
     </div>
 
-    <div class="gal-section-2 gal-observe">
+    <div class="gal-section-2 gal-fade-rise gal-observe">
       <div class="gal-frame">
-        <img src="photo2.jpeg" alt="Memory" class="gal-img">
+        <img src="photo2.jpeg" alt="Moments" class="gal-img">
       </div>
     </div>
 
-    <div class="gal-section-3 gal-observe">
+    <div class="gal-section-3 gal-fade-rise gal-observe">
       <div class="gal-frame">
-        <img src="photo3.jpeg" alt="Memory" class="gal-img">
+        <img src="photo3.jpeg" alt="Moments" class="gal-img">
       </div>
     </div>
 
     <div class="gal-section-4 gal-observe">
       <div class="gal-frame">
         <div class="gal-curtain"></div>
-        <img src="photo4.jpeg" alt="Featured Moment" class="gal-img">
+        <img src="photo4.jpeg" alt="Moments" class="gal-img">
       </div>
     </div>
 
-    <div class="gal-section-5 gal-observe">
+    <div class="gal-section-5 gal-fade-rise gal-observe">
       <div class="gal-frame">
-        <img src="photo5.jpeg" alt="Closing Moment" class="gal-img">
+        <img src="photo5.jpeg" alt="Moments" class="gal-img">
+      </div>
+    </div>
+
+    <div class="gal-section-6 gal-fade-rise gal-observe">
+      <div class="gal-frame">
+        <img src="photo6.jpeg" alt="Moments" class="gal-img">
+      </div>
+    </div>
+
+    <div class="gal-section-7 gal-zoom gal-observe">
+      <div class="gal-frame">
+        <img src="photo7.jpeg" alt="Moments" class="gal-img">
+      </div>
+    </div>
+
+    <div class="gal-section-8 gal-fade-rise gal-observe">
+      <div class="gal-frame">
+        <img src="photo8.jpeg" alt="Moments" class="gal-img">
+      </div>
+    </div>
+
+    <div class="gal-section-9 gal-zoom gal-observe">
+      <div class="gal-frame">
+        <img src="photo9.jpeg" alt="Moments" class="gal-img">
+      </div>
+    </div>
+
+    <div class="gal-section-10 gal-zoom gal-observe">
+      <div class="gal-frame">
+        <img src="photo10.jpeg" alt="Moments" class="gal-img">
       </div>
     </div>
 
@@ -1262,7 +1327,7 @@
       document.getElementById('rsvp-success').style.display = 'block';
     }
 
-    /* GALLERY INTERSECTION OBSERVER FOR CINEMATIC SCROLL ANIMATIONS */
+    /* GALLERY INTERSECTION OBSERVER FOR 10-PHOTO CINEMATIC SCROLL EXPERIENCE */
     let galleryObserver;
     function initGalleryObserver() {
       if (galleryObserver) galleryObserver.disconnect();
