@@ -27,7 +27,7 @@
       --card-border: #D8D2C9;
       --text-muted: #7A7570;
       
-      --font-serif: 'Cormorant Garamond', serif;
+      --font-serif: 'Didot', 'Bodoni MT', 'Cormorant Garamond', serif;
       --font-sans: 'Poppins', sans-serif;
       --font-script: 'Brittany', 'Allura', cursive;
     }
@@ -84,7 +84,7 @@
     .back-btn:hover { color: var(--black); border-bottom-color: var(--black); letter-spacing: 4px; }
 
     /* ==========================================================================
-       3. COVER SCREEN
+       3. COVER SCREEN (DIDOT/BODONI ELEGANT LAYOUT)
        ========================================================================== */
     #screen-cover {
       background-color: var(--black);
@@ -96,8 +96,7 @@
       background-image: url('cover.jpeg');
       background-size: cover;
       background-position: center;
-      opacity: 0.35;
-      filter: grayscale(100%);
+      opacity: 0.45;
       z-index: 1;
     }
 
@@ -106,76 +105,50 @@
       justify-content: center; text-align: center; min-height: 100vh; padding: 4rem 2rem; color: #FFF;
     }
 
-    .divider-line {
-      width: 1px;
-      height: 28px;
-      background-color: rgba(255, 255, 255, 0.4);
-      margin: 0 auto;
+    .cover-subtitle {
+      font-size: clamp(9px, 1.5vw, 11px);
+      letter-spacing: 6px;
+      color: rgba(255, 255, 255, 0.85);
+      text-transform: uppercase;
+      font-weight: 300;
+      margin-bottom: 2rem;
     }
 
     .cover-names { 
       font-family: var(--font-serif); 
-      font-size: clamp(52px, 9vw, 96px); 
+      font-size: clamp(48px, 8vw, 92px); 
       line-height: 1.05; 
       color: #FFF; 
-      margin: 1.5rem 0 2rem; 
+      margin-bottom: 2rem; 
       font-weight: 300;
-      letter-spacing: 1px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
     }
 
     .cover-date { 
       font-size: clamp(10px, 1.8vw, 12px); 
-      letter-spacing: 6px; 
+      letter-spacing: 5px; 
       color: rgba(255, 255, 255, 0.85); 
       text-transform: uppercase; 
-      margin-top: 1.5rem;
-      margin-bottom: 2rem; 
-      font-weight: 300; 
-    }
-
-    .cover-script { 
-      font-family: var(--font-script); 
-      font-size: clamp(2.2rem, 5vw, 3.2rem); 
-      color: rgba(255, 255, 255, 0.9); 
-      margin-bottom: 2rem; 
-      font-style: italic;
-    }
-
-    .cover-invite { 
-      font-size: 10px; 
-      letter-spacing: 6px; 
-      color: rgba(255, 255, 255, 0.7); 
-      text-transform: uppercase; 
-      margin-bottom: 1rem; 
+      margin-bottom: 3.5rem; 
       font-weight: 300; 
     }
 
     .cover-btn { 
       background-color: transparent; 
       color: #FFF; 
-      border: 1px solid rgba(255, 255, 255, 0.6); 
-      padding: 1.1rem 3.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.65); 
+      padding: 1rem 3.2rem;
       font-size: 10px;
       letter-spacing: 5px;
       text-transform: uppercase;
-      margin-top: 1rem;
       transition: all 0.4s ease;
+      font-weight: 300;
     }
     .cover-btn:hover { 
       background-color: #FFF; 
       color: #000; 
       border-color: #FFF;
-    }
-
-    .cover-monogram {
-      margin-top: 3.5rem;
-      font-family: var(--font-serif);
-      font-size: 14px;
-      letter-spacing: 6px;
-      color: rgba(255, 255, 255, 0.75);
-      display: flex;
-      align-items: center;
-      gap: 12px;
     }
 
     /* ==========================================================================
@@ -506,7 +479,7 @@
     #screen-day .back-btn:hover { color: #111; border-bottom-color: #111; }
 
     /* ==========================================================================
-       7. DETAILS SCREEN (DIMMED THEDETAILS.JPEG BACKGROUND & TRANSPARENT CARDS)
+       7. DETAILS SCREEN
        ========================================================================== */
     #screen-details {
       position: relative;
@@ -514,7 +487,6 @@
       color: var(--white);
     }
     
-    /* Background Image: thedetails.jpeg */
     #screen-details::before {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -526,7 +498,6 @@
       z-index: 0;
     }
 
-    /* Dim Overlay (65% Dark Opacity) */
     #screen-details::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -536,7 +507,6 @@
 
     .details-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 600px; margin: 0 auto; position: relative; z-index: 2; }
     
-    /* Transparent Detail Cards */
     .detail-card { 
       border: 1px solid rgba(255, 255, 255, 0.25); 
       padding: 3.5rem 2.5rem; 
@@ -571,7 +541,6 @@
       font-weight: 300; 
     }
 
-    /* Transparent Detail Expanded Panels */
     .detail-content { 
       display: none; 
       text-align: left; 
@@ -676,20 +645,11 @@
   <div class="screen active" id="screen-cover">
     <div class="cover-image"></div>
     <div class="cover-content">
-      <h1 class="cover-names">Elena<br>& Adrian</h1>
-      
-      <div class="divider-line"></div>
+      <div class="cover-subtitle">AN INVITATION TO CELEBRATE</div>
+      <h1 class="cover-names">ELENA & ADRIAN</h1>
       <div class="cover-date">31 JANUARY 2028 · MANILA</div>
       
-      <div class="cover-script">It started with coffee.</div>
-      <div class="cover-invite">YOU ARE INVITED.</div>
-      
-      <div class="divider-line" style="margin-bottom: 1.5rem;"></div>
-      <button class="btn cover-btn" onclick="startExperience()">OPEN INVITATION &rarr;</button>
-
-      <div class="cover-monogram">
-        <span>🌿</span> E / A <span>🌿</span>
-      </div>
+      <button class="btn cover-btn" onclick="startExperience()">OPEN OUR STORY &rarr;</button>
     </div>
   </div>
 
