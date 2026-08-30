@@ -401,7 +401,7 @@
     .elegant-item:hover .ei-arrow { color: var(--white); transform: translateX(8px); }
 
     /* ==========================================================================
-       5. OUR STORY SCREEN & TYPEWRITER ANIMATION (SYNCHRONIZED WITH MUSIC INTRO)
+       5. OUR STORY SCREEN & AUDIO-SYNCHRONIZED TYPEWRITER ANIMATION
        ========================================================================== */
     #screen-story {
       position: relative;
@@ -1206,7 +1206,7 @@
       <h2 class="serif reveal-on-scroll" style="font-size: 42px; margin-bottom: 3.5rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 300;">Our Story</h2>
 
       <div class="story-content" id="typewriter-container">
-        <!-- Typed dynamically character by character -->
+        <!-- Typed dynamically character by character, synced to music intro -->
       </div>
 
       <div id="story-join-btn-wrap">
@@ -1639,7 +1639,7 @@
   </div>
 
   <script>
-    let odometerHasAnimated = false; // Ensures single animation execution
+    let odometerHasAnimated = false; // Single execution flag for countdown
 
     function startExperience() {
       var music = document.getElementById('bg-music');
@@ -1663,7 +1663,7 @@
       if(screenId !== 'details') closeDetail();
 
       if (screenId === 'story') {
-        typewriterStory();
+        typewriterStorySynced();
       }
 
       if (screenId === 'menu') {
@@ -1782,7 +1782,6 @@
         strip.style.transition = 'none';
         strip.style.transform = 'translateY(0%)';
 
-        // Minimal, elegant friction curve (4.5s)
         setTimeout(() => {
           strip.style.transition = 'transform 4.5s cubic-bezier(0.1, 0.9, 0.2, 1)';
           strip.style.transform = `translateY(${targetPercent}%)`;
@@ -1802,20 +1801,21 @@
       });
     }
 
-    /* TYPEWRITER STORY ANIMATION WITH DELAYS SYNCHRONIZED TO MUSIC INTRO */
+    /* TYPEWRITER STORY SYNCHRONIZED TO AUDIO VOCALS ("Every time our eyes meet...") */
     const storyBlocks = [
-      { type: 'p', text: 'It started with coffee.', class: 'story-highlight-italics', delayAfter: 2000 },
-      { type: 'p', text: 'We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.', delayAfter: 3500 }, // Pauses here so "we became us" hits right around 8-10 seconds
-      { type: 'div', text: 'we became us.', class: 'story-script-accent', delayAfter: 1800 },
-      { type: 'p', text: "And now, we're getting married.", class: 'story-married-text', delayAfter: 500 }
+      { type: 'p', text: 'It started with coffee.', class: 'story-highlight-italics' },
+      { type: 'p', text: 'We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.' },
+      { type: 'div', text: 'we became us.', class: 'story-script-accent' },
+      { type: 'p', text: "And now, we're getting married.", class: 'story-married-text' }
     ];
 
     let isTyping = false;
     let typeTimeout;
 
-    function typewriterStory() {
+    function typewriterStorySynced() {
       const container = document.getElementById('typewriter-container');
       const btnWrap = document.getElementById('story-join-btn-wrap');
+      const music = document.getElementById('bg-music');
       if (!container || isTyping) return;
 
       container.innerHTML = '';
@@ -1828,11 +1828,11 @@
       let charIndex = 0;
       let currentEl = null;
 
+      // Calculate character speed so Block 0 & Block 1 complete cleanly before Block 2 hits right at the vocals (~6.5 seconds)
       function typeNextChar() {
         if (blockIndex >= storyBlocks.length) {
           if (currentEl) currentEl.classList.remove('typing-cursor');
           isTyping = false;
-          // Reveal "JOIN US" button softly after last character
           if (btnWrap) btnWrap.classList.add('btn-visible');
           return;
         }
@@ -1851,13 +1851,27 @@
         charIndex++;
 
         if (charIndex < block.text.length) {
-          let speed = 40; // Steady typewriter speed
-          if (block.type === 'div') speed = 70; // Slightly slower for script accent
+          // Swift character speed to finish intro narrative comfortably before vocal line
+          let speed = 22; 
+          if (blockIndex === 2) speed = 55; // Deliberate pace for "we became us."
           typeTimeout = setTimeout(typeNextChar, speed);
         } else {
           charIndex = 0;
           blockIndex++;
-          typeTimeout = setTimeout(typeNextChar, block.delayAfter);
+
+          let pause = 250;
+          if (blockIndex === 2) {
+            // Check current audio timestamp to land "we became us." concurrently with the vocal intro (~6.2s to 6.8s)
+            let audioTime = music ? music.currentTime : 0;
+            let targetHitTime = 6.4; 
+            if (audioTime < targetHitTime && !music.paused) {
+              pause = Math.max(100, (targetHitTime - audioTime) * 1000);
+            } else {
+              pause = 400;
+            }
+          }
+
+          typeTimeout = setTimeout(typeNextChar, pause);
         }
       }
 
