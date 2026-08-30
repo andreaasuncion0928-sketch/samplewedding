@@ -654,7 +654,7 @@
     }
 
     /* ==========================================================================
-       8. GALLERY SCREEN (10-PHOTO EDITORIAL CINEMATIC SEQUENCE)
+       8. GALLERY SCREEN (CONTINUOUS CINEMATIC FILM SEQUENCE)
        ========================================================================== */
     #screen-gallery {
       background-color: var(--white);
@@ -665,252 +665,68 @@
 
     .gallery-heading-wrap {
       text-align: center;
-      padding: 6rem 1.5rem 3rem;
+      padding: 5rem 1.5rem 3rem;
       opacity: 0;
-      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+      transform: scale(1.01);
+      transition: opacity 1s ease-out, transform 1s ease-out;
     }
 
     .gallery-heading-wrap.visible {
       opacity: 1;
+      transform: scale(1);
     }
 
     .gallery-heading {
       font-family: var(--font-serif);
-      font-size: clamp(20px, 3vw, 28px);
+      font-size: clamp(20px, 3vw, 26px);
       letter-spacing: 6px;
       text-transform: uppercase;
       font-weight: 300;
       color: var(--black);
     }
 
-    .gal-frame {
+    /* Continuous Flow Container */
+    .film-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2px; /* Subtle separation without white space */
+    }
+
+    .film-frame {
+      width: 100%;
       position: relative;
       overflow: hidden;
-      width: 100%;
+      opacity: 0;
+      transform: scale(1.01);
+      transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
-    .gal-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      will-change: transform, opacity;
-    }
-
-    /* Common Animation Style 1: Slow Zoom */
-    .gal-zoom .gal-img {
-      transform: scale(1.07);
-      transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    .gal-zoom.visible .gal-img {
+    .film-frame.visible {
+      opacity: 1;
       transform: scale(1);
     }
 
-    /* Common Animation Style 2: Fade + Rise */
-    .gal-fade-rise .gal-frame {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    .gal-fade-rise.visible .gal-frame {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* PHOTO 1 — Opening Hero */
-    .gal-section-1 {
-      height: 90vh;
+    .film-img {
       width: 100%;
-      margin-bottom: 7rem;
-    }
-
-    /* PHOTO 2 — Editorial Memory (Right) */
-    .gal-section-2 {
-      padding: 3rem 1.5rem 7rem;
-      display: flex;
-      justify-content: flex-end;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .gal-section-2 .gal-frame {
-      width: clamp(300px, 52vw, 620px);
-      height: clamp(380px, 68vh, 720px);
-      transform: translateY(40px) rotate(-1deg);
-    }
-    .gal-section-2.visible .gal-frame {
-      transform: translateY(0) rotate(-1deg);
-    }
-
-    /* PHOTO 3 — Editorial Memory (Left) */
-    .gal-section-3 {
-      padding: 2rem 1.5rem 8rem;
-      display: flex;
-      justify-content: flex-start;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .gal-section-3 .gal-frame {
-      width: clamp(280px, 45vw, 560px);
-      height: clamp(360px, 62vh, 660px);
-      transform: translateY(40px) rotate(1deg);
-      transition-delay: 0.15s;
-    }
-    .gal-section-3.visible .gal-frame {
-      transform: translateY(0) rotate(1deg);
-    }
-
-    /* PHOTO 4 — First Cinematic Feature (Curtain Mask Reveal) */
-    .gal-section-4 {
-      width: 95vw;
-      max-width: 1400px;
-      height: 90vh;
-      margin: 0 auto 8rem;
-      position: relative;
-    }
-    .gal-section-4 .gal-frame { height: 100%; position: relative; }
-    .gal-section-4 .gal-img {
-      transform: scale(1.05);
-      transition: transform 1.4s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    .gal-curtain {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-color: var(--white);
-      z-index: 2;
-      transform: scaleX(1);
-      transform-origin: right;
-      transition: transform 1.3s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-    .gal-section-4.visible .gal-curtain { transform: scaleX(0); }
-    .gal-section-4.visible .gal-img { transform: scale(1); }
-
-    /* PHOTO 5 — Editorial Memory (Right) */
-    .gal-section-5 {
-      padding: 3rem 1.5rem 6rem;
-      display: flex;
-      justify-content: flex-end;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .gal-section-5 .gal-frame {
-      width: clamp(280px, 46vw, 550px);
-      height: clamp(360px, 60vh, 640px);
-      transform: translateY(40px) rotate(1.5deg);
-      transition-delay: 0.15s;
-    }
-    .gal-section-5.visible .gal-frame {
-      transform: translateY(0) rotate(1.5deg);
-    }
-
-    /* PHOTO 6 — Editorial Memory (Left) */
-    .gal-section-6 {
-      padding: 2rem 1.5rem 8rem;
-      display: flex;
-      justify-content: flex-start;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .gal-section-6 .gal-frame {
-      width: clamp(300px, 50vw, 600px);
-      height: clamp(380px, 65vh, 680px);
-      transform: translateY(40px) rotate(-1.5deg);
-    }
-    .gal-section-6.visible .gal-frame {
-      transform: translateY(0) rotate(-1.5deg);
-    }
-
-    /* PHOTO 7 — Second Cinematic Feature */
-    .gal-section-7 {
-      width: 95vw;
-      max-width: 1400px;
-      height: 88vh;
-      margin: 0 auto 8rem;
-    }
-
-    /* PHOTO 8 — Editorial Memory (Right) */
-    .gal-section-8 {
-      padding: 3rem 1.5rem 8rem;
-      display: flex;
-      justify-content: flex-end;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .gal-section-8 .gal-frame {
-      width: clamp(290px, 48vw, 580px);
-      height: clamp(370px, 64vh, 670px);
-      transform: translateY(40px) rotate(-1deg);
-    }
-    .gal-section-8.visible .gal-frame {
-      transform: translateY(0) rotate(-1deg);
-    }
-
-    /* PHOTO 9 — Third Cinematic Feature */
-    .gal-section-9 {
-      width: 95vw;
-      max-width: 1400px;
-      height: 90vh;
-      margin: 0 auto 9rem;
-    }
-
-    /* PHOTO 10 — Closing Image */
-    .gal-section-10 {
-      height: 92vh;
-      width: 100%;
-      margin-bottom: 5rem;
+      height: auto;
+      display: block;
     }
 
     .gallery-footer {
-      padding: 4rem 1.5rem 8rem;
+      padding: 4rem 1.5rem 6rem;
       text-align: center;
     }
 
-    /* Reduced Motion */
+    /* Accessibility preference */
     @media (prefers-reduced-motion: reduce) {
-      .gal-img,
-      .gal-frame,
-      .gal-curtain,
+      .film-frame,
       .gallery-heading-wrap {
         transition: none !important;
         transform: none !important;
         opacity: 1 !important;
-      }
-      .gal-curtain { display: none !important; }
-    }
-
-    /* Responsive Mobile Adjustments */
-    @media (max-width: 768px) {
-      .details-grid { grid-template-columns: 1fr; }
-      .arch-cards-grid { grid-template-columns: 1fr; }
-      .gallery-grid { grid-template-columns: 1fr; }
-      .gal-item:nth-child(1), .gal-item:nth-child(4) { grid-column: span 1; margin: 0; }
-      .rsvp-form { padding: 2rem 1.5rem; }
-      .detail-content { padding: 2.5rem 1.5rem; }
-      
-      .gal-section-2, .gal-section-3, .gal-section-5, .gal-section-6, .gal-section-8 {
-        padding: 2.5rem 1.5rem;
-        justify-content: center;
-      }
-      .gal-section-2 .gal-frame, 
-      .gal-section-3 .gal-frame,
-      .gal-section-5 .gal-frame,
-      .gal-section-6 .gal-frame,
-      .gal-section-8 .gal-frame {
-        width: 100%;
-        height: 60vh;
-        transform: translateY(30px) !important;
-      }
-      .gal-section-2.visible .gal-frame,
-      .gal-section-3.visible .gal-frame,
-      .gal-section-5.visible .gal-frame,
-      .gal-section-6.visible .gal-frame,
-      .gal-section-8.visible .gal-frame {
-        transform: translateY(0) !important;
-      }
-
-      .gal-section-4, .gal-section-7, .gal-section-9 {
-        width: 100vw;
-        height: 70vh;
-        margin-bottom: 5rem;
       }
     }
   </style>
@@ -1167,64 +983,36 @@
       <h2 class="gallery-heading">MOMENTS ALONG THE WAY</h2>
     </div>
 
-    <div class="gal-section-1 gal-zoom gal-observe">
-      <div class="gal-frame">
-        <img src="photo1.jpeg" alt="Moments" class="gal-img">
+    <div class="film-container">
+      <div class="film-frame gal-observe">
+        <img src="photo1.jpeg" alt="" class="film-img">
       </div>
-    </div>
-
-    <div class="gal-section-2 gal-fade-rise gal-observe">
-      <div class="gal-frame">
-        <img src="photo2.jpeg" alt="Moments" class="gal-img">
+      <div class="film-frame gal-observe">
+        <img src="photo2.jpeg" alt="" class="film-img">
       </div>
-    </div>
-
-    <div class="gal-section-3 gal-fade-rise gal-observe">
-      <div class="gal-frame">
-        <img src="photo3.jpeg" alt="Moments" class="gal-img">
+      <div class="film-frame gal-observe">
+        <img src="photo3.jpeg" alt="" class="film-img">
       </div>
-    </div>
-
-    <div class="gal-section-4 gal-observe">
-      <div class="gal-frame">
-        <div class="gal-curtain"></div>
-        <img src="photo4.jpeg" alt="Moments" class="gal-img">
+      <div class="film-frame gal-observe">
+        <img src="photo4.jpeg" alt="" class="film-img">
       </div>
-    </div>
-
-    <div class="gal-section-5 gal-fade-rise gal-observe">
-      <div class="gal-frame">
-        <img src="photo5.jpeg" alt="Moments" class="gal-img">
+      <div class="film-frame gal-observe">
+        <img src="photo5.jpeg" alt="" class="film-img">
       </div>
-    </div>
-
-    <div class="gal-section-6 gal-fade-rise gal-observe">
-      <div class="gal-frame">
-        <img src="photo6.jpeg" alt="Moments" class="gal-img">
+      <div class="film-frame gal-observe">
+        <img src="photo6.jpeg" alt="" class="film-img">
       </div>
-    </div>
-
-    <div class="gal-section-7 gal-zoom gal-observe">
-      <div class="gal-frame">
-        <img src="photo7.jpeg" alt="Moments" class="gal-img">
+      <div class="film-frame gal-observe">
+        <img src="photo7.jpeg" alt="" class="film-img">
       </div>
-    </div>
-
-    <div class="gal-section-8 gal-fade-rise gal-observe">
-      <div class="gal-frame">
-        <img src="photo8.jpeg" alt="Moments" class="gal-img">
+      <div class="film-frame gal-observe">
+        <img src="photo8.jpeg" alt="" class="film-img">
       </div>
-    </div>
-
-    <div class="gal-section-9 gal-zoom gal-observe">
-      <div class="gal-frame">
-        <img src="photo9.jpeg" alt="Moments" class="gal-img">
+      <div class="film-frame gal-observe">
+        <img src="photo9.jpeg" alt="" class="film-img">
       </div>
-    </div>
-
-    <div class="gal-section-10 gal-zoom gal-observe">
-      <div class="gal-frame">
-        <img src="photo10.jpeg" alt="Moments" class="gal-img">
+      <div class="film-frame gal-observe">
+        <img src="photo10.jpeg" alt="" class="film-img">
       </div>
     </div>
 
@@ -1327,15 +1115,15 @@
       document.getElementById('rsvp-success').style.display = 'block';
     }
 
-    /* GALLERY INTERSECTION OBSERVER FOR 10-PHOTO CINEMATIC SCROLL EXPERIENCE */
+    /* GALLERY OBSERVER FOR SUBTLE FADE + MICRO ZOOM (scale 1.01 -> 1) */
     let galleryObserver;
     function initGalleryObserver() {
       if (galleryObserver) galleryObserver.disconnect();
 
       const observerOptions = {
         root: null,
-        rootMargin: '0px 0px -10% 0px',
-        threshold: 0.15
+        rootMargin: '0px 0px -5% 0px',
+        threshold: 0.1
       };
 
       galleryObserver = new IntersectionObserver((entries) => {
