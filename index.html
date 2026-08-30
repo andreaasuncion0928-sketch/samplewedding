@@ -34,7 +34,7 @@
       --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
       --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
       --ease-smooth: cubic-bezier(0.25, 1, 0.35, 1);
-      --ease-slow-roll: cubic-bezier(0.25, 1, 0.3, 1);
+      --ease-ultra-slow: cubic-bezier(0.1, 0.9, 0.2, 1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -70,6 +70,11 @@
     @keyframes scaleZoomBg {
       0% { transform: scale(1); }
       100% { transform: scale(1.08); }
+    }
+
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
     .reveal-on-scroll {
@@ -278,7 +283,7 @@
     }
 
     /* ==========================================================================
-       4. MENU / WELCOME SCREEN & DELIBERATE SLOW ODOMETER
+       4. MENU / WELCOME SCREEN & ULTRA-SLOW MINIMALIST ODOMETER
        ========================================================================== */
     #screen-menu { 
       position: relative;
@@ -396,7 +401,7 @@
     .elegant-item:hover .ei-arrow { color: var(--white); transform: translateX(8px); }
 
     /* ==========================================================================
-       5. OUR STORY SCREEN & MAGICAL HARRY POTTER WORD REVEAL
+       5. OUR STORY SCREEN & TYPEWRITER ANIMATION (HIDDEN JOIN BUTTON)
        ========================================================================== */
     #screen-story {
       position: relative;
@@ -430,6 +435,7 @@
       line-height: 1.9; 
       font-weight: 400; 
       letter-spacing: 0.5px; 
+      min-height: 360px;
     }
 
     .story-content p { 
@@ -463,22 +469,27 @@
       margin-bottom: 3rem;
     }
 
-    /* Magical Harry Potter Floating Word Animation */
-    .magic-word {
-      display: inline-block;
-      opacity: 0;
-      filter: blur(10px);
-      transform: translateY(12px) scale(0.92);
-      transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1),
-                  filter 1s cubic-bezier(0.2, 0.8, 0.2, 1),
-                  transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-      will-change: opacity, filter, transform;
+    .typing-cursor::after {
+      content: '|';
+      font-weight: 300;
+      color: #111;
+      margin-left: 2px;
+      animation: cursorBlink 0.8s infinite;
     }
 
-    .magic-word.magic-visible {
+    /* Hidden JOIN US Button Container */
+    #story-join-btn-wrap {
+      opacity: 0;
+      transform: translateY(15px);
+      pointer-events: none;
+      transition: opacity 1.2s var(--ease-smooth), transform 1.2s var(--ease-smooth);
+      margin-top: 2rem;
+    }
+
+    #story-join-btn-wrap.btn-visible {
       opacity: 1;
-      filter: blur(0px);
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
+      pointer-events: auto;
     }
     
     .story-bottom { 
@@ -1195,11 +1206,11 @@
       <div class="reveal-on-scroll" style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1.5rem; text-transform: uppercase;">A Little Story About Us</div>
       <h2 class="serif reveal-on-scroll" style="font-size: 42px; margin-bottom: 3.5rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 300;">Our Story</h2>
 
-      <div class="story-content" id="magic-story-container">
-        <!-- Rendered with Harry Potter magical word entrance -->
+      <div class="story-content" id="typewriter-container">
+        <!-- Typed dynamically character by character -->
       </div>
 
-      <div style="margin-top: 2rem;">
+      <div id="story-join-btn-wrap">
         <button class="btn" onclick="openScreen('menu')">JOIN US &rarr;</button>
       </div>
 
@@ -1216,10 +1227,10 @@
   <div class="screen" id="screen-menu">
     <div class="container text-center">
       
-      <!-- Smooth Slow Deliberate Mechanical Odometer -->
+      <!-- Minimalist Ultra-Slow Mechanical Odometer -->
       <div class="countdown-display-wrap reveal-on-scroll">
         <div class="odometer-window" id="odometer-container">
-          <!-- Digit reels -->
+          <!-- Digit Reels -->
         </div>
         <div class="countdown-subtext">D A Y S &nbsp; T O &nbsp; G O</div>
       </div>
@@ -1629,7 +1640,7 @@
   </div>
 
   <script>
-    let odometerHasAnimated = false; // Ensures odometer animates ONLY ONCE
+    let odometerHasAnimated = false; // Ensures single execution
 
     function startExperience() {
       var music = document.getElementById('bg-music');
@@ -1653,15 +1664,15 @@
       if(screenId !== 'details') closeDetail();
 
       if (screenId === 'story') {
-        renderMagicStory();
+        typewriterStory();
       }
 
       if (screenId === 'menu') {
         if (!odometerHasAnimated) {
-          triggerDeliberateSlowOdometer();
-          odometerHasAnimated = true; // Prevents re-animation when coming back
+          triggerUltraSlowOdometer();
+          odometerHasAnimated = true;
         } else {
-          setOdometerFinalState(); // Lock into place when returning from chapters
+          setOdometerFinalState();
         }
       }
 
@@ -1718,7 +1729,7 @@
       document.getElementById('rsvp-success').style.display = 'block';
     }
 
-    /* DELIBERATE SLOW MECHANICAL ODOMETER (NO CONFUSING SPEED) */
+    /* ULTRA-SLOW MINIMALIST ODOMETER COUNTER */
     function getTargetDays() {
       const weddingDate = new Date('January 31, 2028 00:00:00').getTime();
       const now = new Date().getTime();
@@ -1743,9 +1754,7 @@
 
         const strip = document.createElement('div');
         strip.className = 'odometer-digit-strip';
-        strip.setAttribute('data-target-digit', targetDigit);
 
-        // Simple sequence 0 to targetDigit for an even, deliberate roll
         let digitsSequence = [];
         for (let d = 0; d <= targetDigit; d++) {
           digitsSequence.push(d);
@@ -1762,7 +1771,7 @@
       }
     }
 
-    function triggerDeliberateSlowOdometer() {
+    function triggerUltraSlowOdometer() {
       const strips = document.querySelectorAll('.odometer-digit-strip');
       
       strips.forEach((strip) => {
@@ -1774,11 +1783,11 @@
         strip.style.transition = 'none';
         strip.style.transform = 'translateY(0%)';
 
-        // Smooth, deliberate slow mechanical roll
+        // Extremely slow, minimal, elegant friction curve (4.5s)
         setTimeout(() => {
-          strip.style.transition = 'transform 3.0s cubic-bezier(0.25, 1, 0.3, 1)';
+          strip.style.transition = 'transform 4.5s cubic-bezier(0.1, 0.9, 0.2, 1)';
           strip.style.transform = `translateY(${targetPercent}%)`;
-        }, 100);
+        }, 150);
       });
     }
 
@@ -1794,45 +1803,66 @@
       });
     }
 
-    /* MAGICAL HARRY POTTER ENTRANCE FOR "OUR STORY" */
-    const storyData = [
+    /* TYPEWRITER STORY ANIMATION (JOIN BUTTON FADES IN AT THE END) */
+    const storyBlocks = [
       { type: 'p', text: 'It started with coffee.', class: 'story-highlight-italics' },
       { type: 'p', text: 'We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.' },
       { type: 'div', text: 'we became us.', class: 'story-script-accent' },
       { type: 'p', text: "And now, we're getting married.", class: 'story-married-text' }
     ];
 
-    let magicAnimated = false;
+    let isTyping = false;
+    let typeTimeout;
 
-    function renderMagicStory() {
-      const container = document.getElementById('magic-story-container');
-      if (!container || magicAnimated) return;
+    function typewriterStory() {
+      const container = document.getElementById('typewriter-container');
+      const btnWrap = document.getElementById('story-join-btn-wrap');
+      if (!container || isTyping) return;
 
       container.innerHTML = '';
-      magicAnimated = true;
+      if (btnWrap) btnWrap.classList.remove('btn-visible');
 
-      let wordDelay = 0;
+      isTyping = true;
+      clearTimeout(typeTimeout);
 
-      storyData.forEach(block => {
-        const el = document.createElement(block.type);
-        if (block.class) el.className = block.class;
+      let blockIndex = 0;
+      let charIndex = 0;
+      let currentEl = null;
 
-        const words = block.text.split(' ');
-        words.forEach((word) => {
-          const span = document.createElement('span');
-          span.className = 'magic-word';
-          span.textContent = word + ' ';
-          el.appendChild(span);
+      function typeNextChar() {
+        if (blockIndex >= storyBlocks.length) {
+          if (currentEl) currentEl.classList.remove('typing-cursor');
+          isTyping = false;
+          // Softly reveal "JOIN US" button after last character
+          if (btnWrap) btnWrap.classList.add('btn-visible');
+          return;
+        }
 
-          setTimeout(() => {
-            span.classList.add('magic-visible');
-          }, 100 + wordDelay * 75); // Fluid magical staggered reveal
+        const block = storyBlocks[blockIndex];
 
-          wordDelay++;
-        });
+        if (charIndex === 0) {
+          if (currentEl) currentEl.classList.remove('typing-cursor');
+          currentEl = document.createElement(block.type);
+          if (block.class) currentEl.className = block.class;
+          currentEl.classList.add('typing-cursor');
+          container.appendChild(currentEl);
+        }
 
-        container.appendChild(el);
-      });
+        currentEl.textContent = block.text.slice(0, charIndex + 1);
+        charIndex++;
+
+        if (charIndex < block.text.length) {
+          let speed = Math.random() * 20 + 30; // Typewriter speed
+          if (block.type === 'div') speed = 50;
+          typeTimeout = setTimeout(typeNextChar, speed);
+        } else {
+          charIndex = 0;
+          blockIndex++;
+          typeTimeout = setTimeout(typeNextChar, 350);
+        }
+      }
+
+      typeNextChar();
     }
 
     /* GENERAL SCROLL OBSERVER */
