@@ -479,7 +479,7 @@
     #screen-day .back-btn:hover { color: #111; border-bottom-color: #111; }
 
     /* ==========================================================================
-       7. DETAILS SCREEN (UPDATED: ARCH CARDS & DARKER OVERLAY MATCHING THE DAY)
+       7. DETAILS SCREEN
        ========================================================================== */
     #screen-details {
       position: relative;
@@ -549,7 +549,6 @@
       z-index: 2; 
     }
     
-    /* Arch Cards matching The Day styling */
     .detail-card { 
       background: rgba(0, 0, 0, 0.35); 
       backdrop-filter: blur(10px);
@@ -588,7 +587,6 @@
       font-weight: 300; 
     }
 
-    /* Sub-panels for Dress Code, Gifts, FAQ */
     .detail-content { 
       display: none; 
       text-align: left; 
@@ -656,16 +654,195 @@
     }
 
     /* ==========================================================================
-       8. GALLERY SCREEN
+       8. GALLERY SCREEN (EDITORIAL CINEMATIC SCROLL EXPERIENCE)
        ========================================================================== */
-    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3rem; }
-    .gal-item { overflow: hidden; border: 1px solid var(--border); }
-    .gal-item:nth-child(1) { grid-column: span 2; }
-    .gal-item:nth-child(4) { grid-column: span 2; margin: 0 10%; }
-    
-    .gal-item img {
-      width: 100%; height: 100%; display: block; object-fit: cover;
-      filter: grayscale(100%); 
+    #screen-gallery {
+      background-color: var(--white);
+      color: var(--black);
+      padding: 0;
+      position: relative;
+    }
+
+    .gallery-heading-wrap {
+      text-align: center;
+      padding: 6rem 1.5rem 2rem;
+      opacity: 0;
+      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .gallery-heading-wrap.visible {
+      opacity: 1;
+    }
+
+    .gallery-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 3vw, 28px);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      font-weight: 300;
+      color: var(--black);
+    }
+
+    .gal-frame {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .gal-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      will-change: transform, opacity;
+    }
+
+    /* Photo 1: Opening */
+    .gal-section-1 {
+      height: 90vh;
+      width: 100%;
+      margin-bottom: 8rem;
+    }
+
+    .gal-section-1 .gal-img {
+      transform: scale(1.08);
+      transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .gal-section-1.visible .gal-img {
+      transform: scale(1);
+    }
+
+    /* Photo 2: Memory (Right Asymmetric) */
+    .gal-section-2 {
+      padding: 6rem 1.5rem 8rem;
+      display: flex;
+      justify-content: flex-end;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gal-section-2 .gal-frame {
+      width: clamp(300px, 55vw, 650px);
+      height: clamp(400px, 70vh, 750px);
+      opacity: 0;
+      transform: translateY(40px) rotate(-1.5deg);
+      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .gal-section-2.visible .gal-frame {
+      opacity: 1;
+      transform: translateY(0) rotate(-1.5deg);
+    }
+
+    /* Photo 3: Memory (Left Asymmetric) */
+    .gal-section-3 {
+      padding: 4rem 1.5rem 10rem;
+      display: flex;
+      justify-content: flex-start;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gal-section-3 .gal-frame {
+      width: clamp(280px, 48vw, 580px);
+      height: clamp(380px, 65vh, 700px);
+      opacity: 0;
+      transform: translateY(40px) rotate(1.5deg);
+      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.15s, transform 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.15s;
+    }
+
+    .gal-section-3.visible .gal-frame {
+      opacity: 1;
+      transform: translateY(0) rotate(1.5deg);
+    }
+
+    /* Photo 4: Featured Centerpiece (Curtain Reveal) */
+    .gal-section-4 {
+      width: 95vw;
+      max-width: 1400px;
+      height: 92vh;
+      margin: 0 auto 10rem;
+      position: relative;
+    }
+
+    .gal-section-4 .gal-frame {
+      height: 100%;
+      position: relative;
+    }
+
+    .gal-section-4 .gal-img {
+      transform: scale(1.05);
+      transition: transform 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .gal-curtain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--white);
+      z-index: 2;
+      transform: scaleX(1);
+      transform-origin: right;
+      transition: transform 1.3s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    .gal-section-4.visible .gal-curtain {
+      transform: scaleX(0);
+    }
+
+    .gal-section-4.visible .gal-img {
+      transform: scale(1);
+    }
+
+    /* Photo 5: Closing */
+    .gal-section-5 {
+      height: 90vh;
+      width: 100%;
+      margin-bottom: 4rem;
+    }
+
+    .gal-section-5 .gal-frame {
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .gal-section-5 .gal-img {
+      transform: scale(1.06);
+      transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .gal-section-5.visible .gal-frame {
+      opacity: 1;
+    }
+
+    .gal-section-5.visible .gal-img {
+      transform: scale(1);
+    }
+
+    .gallery-footer {
+      padding: 3rem 1.5rem 6rem;
+      text-align: center;
+    }
+
+    /* Accessibility preference */
+    @media (prefers-reduced-motion: reduce) {
+      .gal-section-1 .gal-img,
+      .gal-section-2 .gal-frame,
+      .gal-section-3 .gal-frame,
+      .gal-section-4 .gal-img,
+      .gal-curtain,
+      .gal-section-5 .gal-frame,
+      .gal-section-5 .gal-img,
+      .gallery-heading-wrap {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+      .gal-curtain { display: none !important; }
     }
 
     /* ==========================================================================
@@ -685,6 +862,21 @@
       .gal-item:nth-child(1), .gal-item:nth-child(4) { grid-column: span 1; margin: 0; }
       .rsvp-form { padding: 2rem 1.5rem; }
       .detail-content { padding: 2.5rem 1.5rem; }
+      
+      .gal-section-2, .gal-section-3 {
+        padding: 3rem 1.5rem;
+        justify-content: center;
+      }
+      .gal-section-2 .gal-frame, .gal-section-3 .gal-frame {
+        width: 100%;
+        height: 60vh;
+        transform: none !important;
+      }
+      .gal-section-4 {
+        width: 100vw;
+        height: 70vh;
+        margin-bottom: 5rem;
+      }
     }
   </style>
 </head>
@@ -936,17 +1128,42 @@
   </div>
 
   <div class="screen" id="screen-gallery">
-    <div class="container text-center">
-      <div style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 03</div>
-      <h2 class="serif" style="font-size: 48px; margin-bottom: 4rem; letter-spacing: 2px;">The moments we've kept.</h2>
+    <div class="gallery-heading-wrap gal-observe">
+      <h2 class="gallery-heading">MOMENTS ALONG THE WAY</h2>
+    </div>
 
-      <div class="gallery-grid">
-        <div class="gal-item"><img src="photo1.jpeg" alt="Gallery"></div>
-        <div class="gal-item"><img src="photo2.jpeg" alt="Gallery"></div>
-        <div class="gal-item"><img src="photo3.jpeg" alt="Gallery"></div>
-        <div class="gal-item"><img src="photo4.jpeg" alt="Gallery"></div>
-        <div class="gal-item"><img src="photo5.jpeg" alt="Gallery"></div>
+    <div class="gal-section-1 gal-observe">
+      <div class="gal-frame">
+        <img src="photo1.jpeg" alt="Opening Moment" class="gal-img">
       </div>
+    </div>
+
+    <div class="gal-section-2 gal-observe">
+      <div class="gal-frame">
+        <img src="photo2.jpeg" alt="Memory" class="gal-img">
+      </div>
+    </div>
+
+    <div class="gal-section-3 gal-observe">
+      <div class="gal-frame">
+        <img src="photo3.jpeg" alt="Memory" class="gal-img">
+      </div>
+    </div>
+
+    <div class="gal-section-4 gal-observe">
+      <div class="gal-frame">
+        <div class="gal-curtain"></div>
+        <img src="photo4.jpeg" alt="Featured Moment" class="gal-img">
+      </div>
+    </div>
+
+    <div class="gal-section-5 gal-observe">
+      <div class="gal-frame">
+        <img src="photo5.jpeg" alt="Closing Moment" class="gal-img">
+      </div>
+    </div>
+
+    <div class="gallery-footer">
       <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
     </div>
   </div>
@@ -1009,6 +1226,7 @@
       window.scrollTo(0, 0); 
       
       if(screenId !== 'details') closeDetail();
+      if(screenId === 'gallery') initGalleryObserver();
     }
 
     function toggleArchCard(type, expand) {
@@ -1042,6 +1260,31 @@
       e.preventDefault();
       document.getElementById('rsvp-form').style.display = 'none';
       document.getElementById('rsvp-success').style.display = 'block';
+    }
+
+    /* GALLERY INTERSECTION OBSERVER FOR CINEMATIC SCROLL ANIMATIONS */
+    let galleryObserver;
+    function initGalleryObserver() {
+      if (galleryObserver) galleryObserver.disconnect();
+
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -10% 0px',
+        threshold: 0.15
+      };
+
+      galleryObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.gal-observe').forEach(el => {
+        el.classList.remove('visible');
+        galleryObserver.observe(el);
+      });
     }
   </script>
 </body>
