@@ -301,17 +301,51 @@
       background-color: rgba(0, 0, 0, 0.65); 
       z-index: 0;
     }
+
+    /* Photographic Typography Countdown Styles */
+    .countdown-display-wrap {
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .photo-countdown-number {
+      font-family: var(--font-serif);
+      font-size: clamp(80px, 16vw, 150px);
+      font-weight: 600;
+      line-height: 0.9;
+      letter-spacing: -1px;
+      text-align: center;
+      background-image: url('countdownpic.jpg'), url('countdownpic.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+      margin: 0 auto;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+      animation: floatLight 6s infinite ease-in-out;
+    }
+
+    .countdown-subtext {
+      font-size: clamp(10px, 1.8vw, 12px);
+      letter-spacing: 8px;
+      color: rgba(255, 255, 255, 0.85);
+      text-transform: uppercase;
+      font-weight: 300;
+      margin-top: 0.8rem;
+    }
     
-    .menu-header { margin-bottom: 4rem; text-align: center; color: var(--white); }
-    .menu-header .script { color: var(--white); animation: floatLight 5s infinite ease-in-out; }
-    .menu-header h2 { font-size: 2rem; letter-spacing: 2px; color: var(--white); }
-    .menu-header p { font-size: 12px; letter-spacing: 4px; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; margin-top: 0.5rem;}
+    .menu-header { margin-bottom: 3.5rem; text-align: center; color: var(--white); }
+    .menu-header h2 { font-size: 2rem; letter-spacing: 4px; color: var(--white); text-transform: uppercase; }
+    .menu-header p { font-size: 12px; letter-spacing: 5px; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; margin-top: 0.5rem;}
     
     .elegant-menu { display: flex; flex-direction: column; max-width: 500px; margin: 0 auto; color: var(--white); }
     
     .elegant-item { 
       display: flex; align-items: center; justify-content: space-between; 
-      padding: 2.5rem 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+      padding: 2.2rem 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
       cursor: pointer; transition: all 0.4s var(--ease-smooth); text-align: left;
       position: relative;
     }
@@ -327,23 +361,8 @@
     .elegant-item:first-child { border-top: 1px solid rgba(255, 255, 255, 0.2); }
     .elegant-item:hover { transform: translateX(12px); background: rgba(255,255,255,0.03); }
     .elegant-item:hover::after { width: 100%; }
-
-    /* Static Non-Clickable Variant for Countdown Chapter */
-    .elegant-item.static-item {
-      cursor: default;
-    }
-
-    .elegant-item.static-item:hover {
-      transform: none;
-      background: transparent;
-    }
-
-    .elegant-item.static-item:hover::after {
-      width: 0%;
-    }
     
-    .ei-num { font-family: var(--font-serif); font-size: 1.4rem; font-style: italic; color: rgba(255, 255, 255, 0.5); width: 40px; }
-    .ei-text { flex-grow: 1; padding: 0 1.5rem; }
+    .ei-text { flex-grow: 1; padding: 0 0.5rem; }
     .ei-title { font-family: var(--font-serif); font-size: 26px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.3rem; color: var(--white); }
     .ei-desc { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); font-family: var(--font-sans); }
     .ei-arrow { font-size: 18px; color: rgba(255, 255, 255, 0.5); transition: all 0.3s var(--ease-smooth); }
@@ -1157,26 +1176,23 @@
     </div>
   </div>
 
-  <!-- MENU SCREEN -->
+  <!-- MENU / WELCOME SCREEN -->
   <div class="screen" id="screen-menu">
     <div class="container text-center">
+      
+      <!-- Photographic Countdown Block -->
+      <div class="countdown-display-wrap reveal-on-scroll">
+        <div class="photo-countdown-number" id="days-countdown">00</div>
+        <div class="countdown-subtext">D A Y S &nbsp; T O &nbsp; G O</div>
+      </div>
+
       <div class="menu-header reveal-on-scroll">
-        <div class="script" style="font-size: 4rem; margin-bottom: 1rem;">Welcome.</div>
-        <h2 class="serif" style="font-size: 26px; text-transform: uppercase; letter-spacing: 4px;">Elena & Adrian</h2>
+        <h2 class="serif">Elena & Adrian</h2>
         <p>31 · 01 · 2028</p>
       </div>
       
       <div class="elegant-menu reveal-on-scroll">
-        <div class="elegant-item static-item">
-          <span class="ei-num">01</span>
-          <div class="ei-text">
-            <div class="ei-title" id="countdown-timer">00d : 00h : 00m : 00s</div>
-            <div class="ei-desc">Counting down to our big day</div>
-          </div>
-        </div>
-
         <div class="elegant-item" onclick="openScreen('day')">
-          <span class="ei-num">02</span>
           <div class="ei-text">
             <div class="ei-title">The Day</div>
             <div class="ei-desc">When & where to find us</div>
@@ -1185,7 +1201,6 @@
         </div>
         
         <div class="elegant-item" onclick="openScreen('details')">
-          <span class="ei-num">03</span>
           <div class="ei-text">
             <div class="ei-title">Details</div>
             <div class="ei-desc">Everything you need to know</div>
@@ -1194,7 +1209,6 @@
         </div>
         
         <div class="elegant-item" onclick="openScreen('gallery')">
-          <span class="ei-num">04</span>
           <div class="ei-text">
             <div class="ei-title">Gallery</div>
             <div class="ei-desc">The moments we've kept</div>
@@ -1203,7 +1217,6 @@
         </div>
         
         <div class="elegant-item" onclick="openScreen('rsvp')">
-          <span class="ei-num">05</span>
           <div class="ei-text">
             <div class="ei-title">RSVP</div>
             <div class="ei-desc">Save your seat</div>
@@ -1539,7 +1552,7 @@
   <!-- RSVP SCREEN -->
   <div class="screen" id="screen-rsvp">
     <div class="container text-center">
-      <div class="reveal-on-scroll" style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 05</div>
+      <div class="reveal-on-scroll" style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 04</div>
       <h2 class="serif reveal-on-scroll" style="font-size: 48px; margin-bottom: 1rem; letter-spacing: 2px;">We've saved you a seat.</h2>
       <p class="reveal-on-scroll" style="color: var(--gray); font-size: 14px; margin-bottom: 4rem;">Please let us know if you'll be joining us.</p>
 
@@ -1652,35 +1665,22 @@
       document.getElementById('rsvp-success').style.display = 'block';
     }
 
-    /* COUNTDOWN TIMER FUNCTIONALITY */
-    function initCountdown() {
-      const targetDate = new Date('January 31, 2028 15:00:00').getTime();
+    /* AUTOMATIC DAYS-ONLY COUNTDOWN CALCULATOR */
+    function initDaysCountdown() {
+      const weddingDate = new Date('January 31, 2028 00:00:00').getTime();
+      const now = new Date().getTime();
+      const difference = weddingDate - now;
 
-      function updateTimer() {
-        const now = new Date().getTime();
-        const difference = targetDate - now;
-
-        if (difference <= 0) {
-          document.getElementById('countdown-timer').innerHTML = "IT'S OUR WEDDING DAY!";
-          return;
-        }
-
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        const formattedDays = String(days).padStart(2, '0');
-        const formattedHours = String(hours).padStart(2, '0');
-        const formattedMinutes = String(minutes).padStart(2, '0');
-        const formattedSeconds = String(seconds).padStart(2, '0');
-
-        document.getElementById('countdown-timer').innerHTML = 
-          `${formattedDays}d : ${formattedHours}h : ${formattedMinutes}m : ${formattedSeconds}s`;
+      let daysRemaining = Math.ceil(difference / (1000 * 60 * 60 * 24));
+      
+      if (daysRemaining < 0) {
+        daysRemaining = 0;
       }
 
-      updateTimer();
-      setInterval(updateTimer, 1000);
+      const countdownEl = document.getElementById('days-countdown');
+      if (countdownEl) {
+        countdownEl.textContent = daysRemaining;
+      }
     }
 
     /* GENERAL SCROLL OBSERVER */
@@ -1709,7 +1709,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       initGeneralScrollObserver();
-      initCountdown();
+      initDaysCountdown();
     });
   </script>
 </body>
