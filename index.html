@@ -277,7 +277,7 @@
     }
 
     /* ==========================================================================
-       4. MENU / WELCOME SCREEN
+       4. MENU / WELCOME SCREEN & COUNTDOWN ANIMATIONS
        ========================================================================== */
     #screen-menu { 
       position: relative;
@@ -302,7 +302,34 @@
       z-index: 0;
     }
 
-    /* Pure Vintage Editorial Serif Countdown Styling */
+    /* Ambient Breathing Motion */
+    @keyframes subtlePulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.95;
+      }
+      50% {
+        transform: scale(1.02);
+        opacity: 1;
+      }
+    }
+
+    /* Editorial Flip Down Entrance */
+    @keyframes flipDownIn {
+      0% {
+        opacity: 0;
+        transform: perspective(800px) rotateX(-90deg) translateY(-20px);
+      }
+      60% {
+        opacity: 0.8;
+        transform: perspective(800px) rotateX(15deg) translateY(0);
+      }
+      100% {
+        opacity: 0.95;
+        transform: perspective(800px) rotateX(0deg) translateY(0);
+      }
+    }
+
     .countdown-display-wrap {
       margin-bottom: 2.5rem;
       padding-top: 1rem;
@@ -311,6 +338,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      perspective: 1000px;
     }
 
     .pure-typographic-number {
@@ -325,6 +353,10 @@
       display: block;
       margin: 0 auto;
       width: 100%;
+      transform-origin: center top;
+      will-change: transform, opacity;
+      animation: flipDownIn 1.2s cubic-bezier(0.25, 1, 0.35, 1) forwards,
+                 subtlePulse 7s ease-in-out 1.2s infinite;
     }
 
     .countdown-subtext {
@@ -1181,7 +1213,7 @@
   <div class="screen" id="screen-menu">
     <div class="container text-center">
       
-      <!-- Pure Typographic Serif Countdown Block -->
+      <!-- Pure Typographic Serif Countdown Block with Flip Entrance & Pulse -->
       <div class="countdown-display-wrap reveal-on-scroll">
         <div class="pure-typographic-number" id="days-countdown">00</div>
         <div class="countdown-subtext">D A Y S &nbsp; T O &nbsp; G O</div>
