@@ -417,7 +417,7 @@
     .elegant-item:hover .ei-arrow { color: var(--white); transform: translateX(5px); }
 
     /* ==========================================================================
-       5. OUR STORY SCREEN (FADE-IN FOR FINAL MARRIED TEXT)
+       5. OUR STORY SCREEN (ACCURATE AUDIO-SYNC TO 0:10 VOCALS)
        ========================================================================== */
     #screen-story {
       position: relative;
@@ -477,7 +477,6 @@
       animation: floatLight 6s infinite ease-in-out;
     }
 
-    /* Fade-in for "And now, we're getting married." */
     .story-married-text {
       font-style: italic;
       color: var(--black);
@@ -1256,7 +1255,7 @@
       <h2 class="serif reveal-on-scroll" style="font-size: 42px; margin-bottom: 3.5rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 300;">Our Story</h2>
 
       <div class="story-content" id="typewriter-container">
-        <!-- Typed dynamically character by character, synced to 0:10 audio hit -->
+        <!-- Typed dynamically character by character, strictly synced to 0:10 audio hit -->
       </div>
 
       <div id="story-join-btn-wrap">
@@ -1853,7 +1852,7 @@
       });
     }
 
-    /* TYPEWRITER STORY SYNCHRONIZED WITH FADE-IN FOR "And now, we're getting married." */
+    /* TYPEWRITER STORY SYNCHRONIZED STRICTLY TO AUDIO 0:10 VOCAL HIT ("Every time our eyes meet...") */
     const storyBlocks = [
       { type: 'p', text: 'It started with coffee.', class: 'story-highlight-italics' },
       { type: 'p', text: 'We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.' },
@@ -1880,7 +1879,7 @@
       let charIndex = 0;
       let currentEl = null;
 
-      const VOCAL_HIT_TIME = 10.0;
+      const VOCAL_HIT_TIME = 10.0; // Strictly synced to 0:10 lyrics start
 
       function typeNextChar() {
         if (blockIndex >= storyBlocks.length) {
@@ -1892,7 +1891,6 @@
 
         const block = storyBlocks[blockIndex];
 
-        // Handle "And now, we're getting married." as a fade-in element instead of typewriter
         if (block.isFadeIn) {
           if (currentEl) currentEl.classList.remove('typing-cursor');
           currentEl = document.createElement(block.type);
@@ -1921,21 +1919,22 @@
         charIndex++;
 
         if (charIndex < block.text.length) {
-          let speed = 24; 
+          // Faster character typing speed to finish instrumental setup effortlessly
+          let speed = 30; 
           if (blockIndex === 2) speed = 65; 
           typeTimeout = setTimeout(typeNextChar, speed);
         } else {
           charIndex = 0;
           blockIndex++;
 
-          let delay = 300;
+          let delay = 150; // Minimal delay between paragraphs
 
           if (blockIndex === 2) {
             let currentTime = music ? music.currentTime : 0;
             if (!music.paused && currentTime < VOCAL_HIT_TIME) {
-              delay = Math.max(100, (VOCAL_HIT_TIME - currentTime) * 1000);
+              delay = Math.max(50, (VOCAL_HIT_TIME - currentTime) * 1000);
             } else if (music.paused) {
-              delay = 1500; 
+              delay = 800; 
             }
           }
 
