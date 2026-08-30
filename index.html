@@ -34,7 +34,7 @@
       --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
       --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
       --ease-smooth: cubic-bezier(0.25, 1, 0.35, 1);
-      --ease-mechanical: cubic-bezier(0.12, 0.8, 0.22, 1.12);
+      --ease-mechanical-slow: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -70,6 +70,11 @@
     @keyframes scaleZoomBg {
       0% { transform: scale(1); }
       100% { transform: scale(1.08); }
+    }
+
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
     .reveal-on-scroll {
@@ -278,7 +283,7 @@
     }
 
     /* ==========================================================================
-       4. MENU / WELCOME SCREEN & MECHANICAL ODOMETER COUNTER
+       4. MENU / WELCOME SCREEN & SLOW VINTAGE ODOMETER
        ========================================================================== */
     #screen-menu { 
       position: relative;
@@ -313,7 +318,7 @@
       justify-content: center;
     }
 
-    /* Slot-machine Odometer Window & Digit Strips */
+    /* Slow Mechanical Vintage Odometer Drums */
     .odometer-window {
       display: inline-flex;
       justify-content: center;
@@ -327,7 +332,6 @@
       color: rgba(255, 255, 255, 0.95);
       line-height: 1;
       padding: 0 10px;
-      /* Vignette / shadow gradient overlay to mimic curved mechanical drum */
       mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
       -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
     }
@@ -343,7 +347,7 @@
       display: flex;
       flex-direction: column;
       transform: translateY(0%);
-      transition: transform 2.2s var(--ease-mechanical);
+      transition: transform 3.8s var(--ease-mechanical-slow);
       will-change: transform;
     }
 
@@ -399,7 +403,7 @@
     .elegant-item:hover .ei-arrow { color: var(--white); transform: translateX(8px); }
 
     /* ==========================================================================
-       5. OUR STORY SCREEN
+       5. OUR STORY SCREEN & TYPEWRITER ANIMATION
        ========================================================================== */
     #screen-story {
       position: relative;
@@ -433,6 +437,7 @@
       line-height: 1.9; 
       font-weight: 400; 
       letter-spacing: 0.5px; 
+      min-height: 380px;
     }
 
     .story-content p { 
@@ -464,6 +469,15 @@
       font-weight: 500;
       margin-top: 2.5rem;
       margin-bottom: 3rem;
+    }
+
+    /* Typewriter Cursor */
+    .typing-cursor::after {
+      content: '|';
+      font-weight: 300;
+      color: #111;
+      margin-left: 2px;
+      animation: cursorBlink 0.8s infinite;
     }
     
     .story-bottom { 
@@ -829,6 +843,7 @@
         padding-left: 3rem;
         padding-right: 1rem;
       }
+      .odometer-digit-strip span { width: clamp(45px, 12vw, 80px); }
     }
 
     /* ==========================================================================
@@ -1153,13 +1168,6 @@
       display: none;
       animation: fadeIn 0.8s var(--ease-smooth) forwards;
     }
-
-    @media (max-width: 768px) {
-      .details-grid { grid-template-columns: 1fr; }
-      .arch-cards-grid { grid-template-columns: 1fr; }
-      .stacked-card { top: 70px; margin-bottom: 25vh; }
-      .odometer-digit-strip span { width: clamp(45px, 12vw, 80px); }
-    }
   </style>
 </head>
 <body>
@@ -1186,15 +1194,11 @@
       <div class="reveal-on-scroll" style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1.5rem; text-transform: uppercase;">A Little Story About Us</div>
       <h2 class="serif reveal-on-scroll" style="font-size: 42px; margin-bottom: 3.5rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 300;">Our Story</h2>
 
-      <div class="story-content reveal-on-scroll">
-        <p class="story-highlight-italics">It started with coffee.</p>
-        
-        <p>We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.</p>
-        
-        <div class="story-script-accent">we became us.</div>
-        
-        <p class="story-married-text">And now, we're getting married.</p>
-        
+      <div class="story-content" id="typewriter-container">
+        <!-- Typed dynamically character by character -->
+      </div>
+
+      <div style="margin-top: 2rem;">
         <button class="btn" onclick="openScreen('menu')">JOIN US &rarr;</button>
       </div>
 
@@ -1211,10 +1215,10 @@
   <div class="screen" id="screen-menu">
     <div class="container text-center">
       
-      <!-- Mechanical Odometer / Slot Machine Style Countdown -->
+      <!-- Slow Mechanical Vintage Odometer Counter -->
       <div class="countdown-display-wrap reveal-on-scroll">
         <div class="odometer-window" id="odometer-container">
-          <!-- Dynamically populated by JS into rolling digit reels -->
+          <!-- Dynamically populated into rolling digit reels -->
         </div>
         <div class="countdown-subtext">D A Y S &nbsp; T O &nbsp; G O</div>
       </div>
@@ -1645,8 +1649,12 @@
       
       if(screenId !== 'details') closeDetail();
 
+      if (screenId === 'story') {
+        typewriterStory();
+      }
+
       if (screenId === 'menu') {
-        triggerMechanicalOdometer();
+        triggerSlowOdometer();
       }
 
       initGeneralScrollObserver();
@@ -1702,7 +1710,7 @@
       document.getElementById('rsvp-success').style.display = 'block';
     }
 
-    /* MECHANICAL ODOMETER & SLOT-MACHINE COUNTER ANIMATION */
+    /* SLOW DELIBERATE MECHANICAL VINTAGE ODOMETER COUNTER */
     let calculatedDays = 0;
 
     function getTargetDays() {
@@ -1721,7 +1729,6 @@
 
       container.innerHTML = '';
 
-      // Build vertical digit strips for each digit position
       for (let i = 0; i < digitsStr.length; i++) {
         const targetDigit = parseInt(digitsStr[i]);
         
@@ -1732,7 +1739,6 @@
         strip.className = 'odometer-digit-strip';
         strip.setAttribute('data-target-digit', targetDigit);
 
-        // Sequence digits 0 through 9, then repeat target to simulate multi-turn spin
         let digitsSequence = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, targetDigit];
         
         digitsSequence.forEach(num => {
@@ -1746,21 +1752,76 @@
       }
     }
 
-    function triggerMechanicalOdometer() {
+    function triggerSlowOdometer() {
       const strips = document.querySelectorAll('.odometer-digit-strip');
       
       strips.forEach((strip, index) => {
-        // Reset to initial position
         strip.style.transition = 'none';
         strip.style.transform = 'translateY(0%)';
 
-        // Trigger vertical rolling spin with progressive delay per digit column
+        // Slow, deliberate mechanical roll per column
         setTimeout(() => {
-          strip.style.transition = `transform ${1.8 + index * 0.3}s cubic-bezier(0.12, 0.8, 0.22, 1.15)`;
-          // Roll 10 steps down to target digit index
+          strip.style.transition = `transform ${3.6 + index * 0.4}s cubic-bezier(0.16, 1, 0.3, 1)`;
           strip.style.transform = 'translateY(-90.9%)';
-        }, 80 + index * 120);
+        }, 150 + index * 200);
       });
+    }
+
+    /* NOSTALGIC TYPEWRITER ANIMATION FOR "OUR STORY" */
+    const storyBlocks = [
+      { type: 'p', text: 'It started with coffee.', class: 'story-highlight-italics' },
+      { type: 'p', text: 'We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.' },
+      { type: 'div', text: 'we became us.', class: 'story-script-accent' },
+      { type: 'p', text: "And now, we're getting married.", class: 'story-married-text' }
+    ];
+
+    let isTyping = false;
+    let typeTimeout;
+
+    function typewriterStory() {
+      const container = document.getElementById('typewriter-container');
+      if (!container || isTyping) return;
+
+      container.innerHTML = '';
+      isTyping = true;
+      clearTimeout(typeTimeout);
+
+      let blockIndex = 0;
+      let charIndex = 0;
+      let currentEl = null;
+
+      function typeNextChar() {
+        if (blockIndex >= storyBlocks.length) {
+          if (currentEl) currentEl.classList.remove('typing-cursor');
+          isTyping = false;
+          return;
+        }
+
+        const block = storyBlocks[blockIndex];
+
+        if (charIndex === 0) {
+          if (currentEl) currentEl.classList.remove('typing-cursor');
+          currentEl = document.createElement(block.type);
+          if (block.class) currentEl.className = block.class;
+          currentEl.classList.add('typing-cursor');
+          container.appendChild(currentEl);
+        }
+
+        currentEl.textContent = block.text.slice(0, charIndex + 1);
+        charIndex++;
+
+        if (charIndex < block.text.length) {
+          let speed = Math.random() * 25 + 30; // Vintage typewriter cadence
+          if (block.type === 'div') speed = 55; // Slightly slower for script text
+          typeTimeout = setTimeout(typeNextChar, speed);
+        } else {
+          charIndex = 0;
+          blockIndex++;
+          typeTimeout = setTimeout(typeNextChar, 400); // Pause between paragraphs
+        }
+      }
+
+      typeNextChar();
     }
 
     /* GENERAL SCROLL OBSERVER */
