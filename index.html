@@ -417,7 +417,7 @@
     .elegant-item:hover .ei-arrow { color: var(--white); transform: translateX(5px); }
 
     /* ==========================================================================
-       5. OUR STORY SCREEN (ACCURATE AUDIO-SYNC TO 0:10 VOCALS)
+       5. OUR STORY SCREEN
        ========================================================================== */
     #screen-story {
       position: relative;
@@ -516,10 +516,42 @@
       pointer-events: auto;
     }
     
+    /* Subdued, Minimalist Bottom Section for Our Story */
     .story-bottom { 
-      margin-top: 3.5rem; 
-      border-top: 1px solid rgba(0,0,0,0.15); 
-      padding-top: 3rem; 
+      margin-top: 3rem; 
+      border-top: 1px solid rgba(0,0,0,0.08); 
+      padding-top: 2rem; 
+    }
+
+    .story-bottom .serif-year {
+      font-size: 18px; 
+      margin-bottom: 0.1rem; 
+      font-weight: 300;
+      color: var(--gray);
+      letter-spacing: 2px;
+    }
+
+    .story-bottom .tag-sub {
+      font-size: 9px; 
+      letter-spacing: 3px; 
+      text-transform: uppercase; 
+      color: var(--text-muted); 
+      margin-bottom: 0.5rem;
+    }
+
+    .story-bottom .motto-p {
+      color: var(--gray); 
+      font-style: italic; 
+      margin-bottom: 1.2rem; 
+      font-family: var(--font-serif); 
+      font-size: 13px;
+      font-weight: 300;
+    }
+
+    .story-bottom .script-names {
+      font-size: 1.8rem;
+      color: var(--gray);
+      font-weight: 300;
     }
 
     /* ==========================================================================
@@ -1263,10 +1295,10 @@
       </div>
 
       <div class="story-bottom text-center reveal-on-scroll">
-        <h3 class="serif" style="font-size: 36px; margin-bottom: 0; font-weight: 300;">2015</h3>
-        <div style="font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--black); margin-bottom: 1rem;">Our Year</div>
-        <p style="color: var(--gray); font-style: italic; margin-bottom: 2rem; font-family: var(--font-serif); font-size: 18px;">The year everything changed.</p>
-        <div class="script" style="font-size: 3.5rem;">Elena & Adrian</div>
+        <h3 class="serif serif-year">2015</h3>
+        <div class="tag-sub">Our Year</div>
+        <p class="motto-p">The year everything changed.</p>
+        <div class="script script-names">Elena & Adrian</div>
       </div>
     </div>
   </div>
