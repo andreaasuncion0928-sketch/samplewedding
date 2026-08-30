@@ -159,7 +159,6 @@
       transform: translateY(-2px);
     }
 
-    /* Enhanced & Highly Visible Back Button */
     .back-btn {
       display: inline-flex;
       align-items: center;
@@ -189,7 +188,6 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.18);
     }
 
-    /* Dark Screen Adaptive Back Button */
     #screen-details .back-btn {
       color: var(--white);
       background: rgba(0, 0, 0, 0.6);
@@ -329,6 +327,20 @@
     .elegant-item:first-child { border-top: 1px solid rgba(255, 255, 255, 0.2); }
     .elegant-item:hover { transform: translateX(12px); background: rgba(255,255,255,0.03); }
     .elegant-item:hover::after { width: 100%; }
+
+    /* Static Non-Clickable Variant for Countdown Chapter */
+    .elegant-item.static-item {
+      cursor: default;
+    }
+
+    .elegant-item.static-item:hover {
+      transform: none;
+      background: transparent;
+    }
+
+    .elegant-item.static-item:hover::after {
+      width: 0%;
+    }
     
     .ei-num { font-family: var(--font-serif); font-size: 1.4rem; font-style: italic; color: rgba(255, 255, 255, 0.5); width: 40px; }
     .ei-text { flex-grow: 1; padding: 0 1.5rem; }
@@ -912,7 +924,6 @@
       color: var(--white);
     }
 
-    /* Left / Right Carousel Controls inside Details */
     .detail-nav-bar {
       display: flex;
       align-items: center;
@@ -1156,8 +1167,16 @@
       </div>
       
       <div class="elegant-menu reveal-on-scroll">
-        <div class="elegant-item" onclick="openScreen('day')">
+        <div class="elegant-item static-item">
           <span class="ei-num">01</span>
+          <div class="ei-text">
+            <div class="ei-title" id="countdown-timer">00d : 00h : 00m : 00s</div>
+            <div class="ei-desc">Counting down to our big day</div>
+          </div>
+        </div>
+
+        <div class="elegant-item" onclick="openScreen('day')">
+          <span class="ei-num">02</span>
           <div class="ei-text">
             <div class="ei-title">The Day</div>
             <div class="ei-desc">When & where to find us</div>
@@ -1166,7 +1185,7 @@
         </div>
         
         <div class="elegant-item" onclick="openScreen('details')">
-          <span class="ei-num">02</span>
+          <span class="ei-num">03</span>
           <div class="ei-text">
             <div class="ei-title">Details</div>
             <div class="ei-desc">Everything you need to know</div>
@@ -1175,7 +1194,7 @@
         </div>
         
         <div class="elegant-item" onclick="openScreen('gallery')">
-          <span class="ei-num">03</span>
+          <span class="ei-num">04</span>
           <div class="ei-text">
             <div class="ei-title">Gallery</div>
             <div class="ei-desc">The moments we've kept</div>
@@ -1184,7 +1203,7 @@
         </div>
         
         <div class="elegant-item" onclick="openScreen('rsvp')">
-          <span class="ei-num">04</span>
+          <span class="ei-num">05</span>
           <div class="ei-text">
             <div class="ei-title">RSVP</div>
             <div class="ei-desc">Save your seat</div>
@@ -1520,7 +1539,7 @@
   <!-- RSVP SCREEN -->
   <div class="screen" id="screen-rsvp">
     <div class="container text-center">
-      <div class="reveal-on-scroll" style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 04</div>
+      <div class="reveal-on-scroll" style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 05</div>
       <h2 class="serif reveal-on-scroll" style="font-size: 48px; margin-bottom: 1rem; letter-spacing: 2px;">We've saved you a seat.</h2>
       <p class="reveal-on-scroll" style="color: var(--gray); font-size: 14px; margin-bottom: 4rem;">Please let us know if you'll be joining us.</p>
 
@@ -1633,6 +1652,37 @@
       document.getElementById('rsvp-success').style.display = 'block';
     }
 
+    /* COUNTDOWN TIMER FUNCTIONALITY */
+    function initCountdown() {
+      const targetDate = new Date('January 31, 2028 15:00:00').getTime();
+
+      function updateTimer() {
+        const now = new Date().getTime();
+        const difference = targetDate - now;
+
+        if (difference <= 0) {
+          document.getElementById('countdown-timer').innerHTML = "IT'S OUR WEDDING DAY!";
+          return;
+        }
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        const formattedDays = String(days).padStart(2, '0');
+        const formattedHours = String(hours).padStart(2, '0');
+        const formattedMinutes = String(minutes).padStart(2, '0');
+        const formattedSeconds = String(seconds).padStart(2, '0');
+
+        document.getElementById('countdown-timer').innerHTML = 
+          `${formattedDays}d : ${formattedHours}h : ${formattedMinutes}m : ${formattedSeconds}s`;
+      }
+
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    }
+
     /* GENERAL SCROLL OBSERVER */
     let generalObserver;
     function initGeneralScrollObserver() {
@@ -1659,6 +1709,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       initGeneralScrollObserver();
+      initCountdown();
     });
   </script>
 </body>
