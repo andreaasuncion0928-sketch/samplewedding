@@ -34,6 +34,7 @@
       --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
       --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
       --ease-smooth: cubic-bezier(0.25, 1, 0.35, 1);
+      --ease-mechanical: cubic-bezier(0.12, 0.8, 0.22, 1.12);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -277,7 +278,7 @@
     }
 
     /* ==========================================================================
-       4. MENU / WELCOME SCREEN & COUNTDOWN ANIMATIONS
+       4. MENU / WELCOME SCREEN & MECHANICAL ODOMETER COUNTER
        ========================================================================== */
     #screen-menu { 
       position: relative;
@@ -302,34 +303,6 @@
       z-index: 0;
     }
 
-    /* Ambient Breathing Motion */
-    @keyframes subtlePulse {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 0.95;
-      }
-      50% {
-        transform: scale(1.02);
-        opacity: 1;
-      }
-    }
-
-    /* Editorial Flip Down Entrance */
-    @keyframes flipDownIn {
-      0% {
-        opacity: 0;
-        transform: perspective(800px) rotateX(-90deg) translateY(-20px);
-      }
-      60% {
-        opacity: 0.8;
-        transform: perspective(800px) rotateX(15deg) translateY(0);
-      }
-      100% {
-        opacity: 0.95;
-        transform: perspective(800px) rotateX(0deg) translateY(0);
-      }
-    }
-
     .countdown-display-wrap {
       margin-bottom: 2.5rem;
       padding-top: 1rem;
@@ -338,25 +311,50 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      perspective: 1000px;
     }
 
-    .pure-typographic-number {
+    /* Slot-machine Odometer Window & Digit Strips */
+    .odometer-window {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      height: clamp(100px, 22vw, 190px);
+      overflow: hidden;
       font-family: var(--font-serif);
       font-size: clamp(110px, 24vw, 220px);
       font-weight: 300;
       font-style: italic;
-      line-height: 0.85;
-      letter-spacing: -2px;
       color: rgba(255, 255, 255, 0.95);
+      line-height: 1;
+      padding: 0 10px;
+      /* Vignette / shadow gradient overlay to mimic curved mechanical drum */
+      mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+    }
+
+    .odometer-digit-column {
+      display: inline-block;
+      height: clamp(100px, 22vw, 190px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .odometer-digit-strip {
+      display: flex;
+      flex-direction: column;
+      transform: translateY(0%);
+      transition: transform 2.2s var(--ease-mechanical);
+      will-change: transform;
+    }
+
+    .odometer-digit-strip span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: clamp(100px, 22vw, 190px);
+      width: clamp(65px, 14vw, 130px);
+      line-height: 1;
       text-align: center;
-      display: block;
-      margin: 0 auto;
-      width: 100%;
-      transform-origin: center top;
-      will-change: transform, opacity;
-      animation: flipDownIn 1.2s cubic-bezier(0.25, 1, 0.35, 1) forwards,
-                 subtlePulse 7s ease-in-out 1.2s infinite;
     }
 
     .countdown-subtext {
@@ -1160,7 +1158,7 @@
       .details-grid { grid-template-columns: 1fr; }
       .arch-cards-grid { grid-template-columns: 1fr; }
       .stacked-card { top: 70px; margin-bottom: 25vh; }
-      .pure-typographic-number { letter-spacing: -1px; }
+      .odometer-digit-strip span { width: clamp(45px, 12vw, 80px); }
     }
   </style>
 </head>
@@ -1213,9 +1211,11 @@
   <div class="screen" id="screen-menu">
     <div class="container text-center">
       
-      <!-- Pure Typographic Serif Countdown Block with Flip Entrance & Pulse -->
+      <!-- Mechanical Odometer / Slot Machine Style Countdown -->
       <div class="countdown-display-wrap reveal-on-scroll">
-        <div class="pure-typographic-number" id="days-countdown">00</div>
+        <div class="odometer-window" id="odometer-container">
+          <!-- Dynamically populated by JS into rolling digit reels -->
+        </div>
         <div class="countdown-subtext">D A Y S &nbsp; T O &nbsp; G O</div>
       </div>
 
@@ -1645,6 +1645,10 @@
       
       if(screenId !== 'details') closeDetail();
 
+      if (screenId === 'menu') {
+        triggerMechanicalOdometer();
+      }
+
       initGeneralScrollObserver();
     }
 
@@ -1698,22 +1702,65 @@
       document.getElementById('rsvp-success').style.display = 'block';
     }
 
-    /* AUTOMATIC DAYS-ONLY COUNTDOWN CALCULATOR */
-    function initDaysCountdown() {
+    /* MECHANICAL ODOMETER & SLOT-MACHINE COUNTER ANIMATION */
+    let calculatedDays = 0;
+
+    function getTargetDays() {
       const weddingDate = new Date('January 31, 2028 00:00:00').getTime();
       const now = new Date().getTime();
       const difference = weddingDate - now;
+      let days = Math.ceil(difference / (1000 * 60 * 60 * 24));
+      return days > 0 ? days : 0;
+    }
 
-      let daysRemaining = Math.ceil(difference / (1000 * 60 * 60 * 24));
+    function createOdometerReels() {
+      calculatedDays = getTargetDays();
+      const digitsStr = String(calculatedDays);
+      const container = document.getElementById('odometer-container');
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      // Build vertical digit strips for each digit position
+      for (let i = 0; i < digitsStr.length; i++) {
+        const targetDigit = parseInt(digitsStr[i]);
+        
+        const col = document.createElement('div');
+        col.className = 'odometer-digit-column';
+
+        const strip = document.createElement('div');
+        strip.className = 'odometer-digit-strip';
+        strip.setAttribute('data-target-digit', targetDigit);
+
+        // Sequence digits 0 through 9, then repeat target to simulate multi-turn spin
+        let digitsSequence = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, targetDigit];
+        
+        digitsSequence.forEach(num => {
+          const span = document.createElement('span');
+          span.textContent = num;
+          strip.appendChild(span);
+        });
+
+        col.appendChild(strip);
+        container.appendChild(col);
+      }
+    }
+
+    function triggerMechanicalOdometer() {
+      const strips = document.querySelectorAll('.odometer-digit-strip');
       
-      if (daysRemaining < 0) {
-        daysRemaining = 0;
-      }
+      strips.forEach((strip, index) => {
+        // Reset to initial position
+        strip.style.transition = 'none';
+        strip.style.transform = 'translateY(0%)';
 
-      const countdownEl = document.getElementById('days-countdown');
-      if (countdownEl) {
-        countdownEl.textContent = daysRemaining;
-      }
+        // Trigger vertical rolling spin with progressive delay per digit column
+        setTimeout(() => {
+          strip.style.transition = `transform ${1.8 + index * 0.3}s cubic-bezier(0.12, 0.8, 0.22, 1.15)`;
+          // Roll 10 steps down to target digit index
+          strip.style.transform = 'translateY(-90.9%)';
+        }, 80 + index * 120);
+      });
     }
 
     /* GENERAL SCROLL OBSERVER */
@@ -1741,8 +1788,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      createOdometerReels();
       initGeneralScrollObserver();
-      initDaysCountdown();
     });
   </script>
 </body>
