@@ -925,7 +925,6 @@
       color: var(--black);
     }
 
-    /* Stack Container Dynamic Setup */
     .stacked-gallery-container {
       position: relative;
       max-width: 750px;
@@ -946,7 +945,6 @@
       will-change: transform;
     }
 
-    /* Slight alternating rotations when stacked */
     .stacked-card:nth-child(even) {
       transform: rotate(-1deg);
     }
@@ -1219,21 +1217,21 @@
       </div>
 
       <div class="schedule-toggle-card text-center reveal-on-scroll" onclick="toggleWeddingTimeline()">
-        <span class="schedule-toggle-title" id="schedule-toggle-btn">THE WEDDING SCHEDULE &rarr;</span>
+        <span class="schedule-toggle-title" id="schedule-toggle-btn">PROGRAM FLOW &rarr;</span>
       </div>
 
       <div class="wedding-timeline-wrap" id="wedding-timeline-wrap">
-        <div class="timeline-title-script">Schedule</div>
+        <div class="timeline-title-script">Program Flow</div>
 
         <div class="timeline-center-line"></div>
 
         <div class="timeline-node-item left-node reveal-on-scroll">
           <div class="timeline-node-dot"></div>
           <div class="timeline-node-content">
-            <div class="node-event-title">Ceremony</div>
-            <div class="node-event-time">4:00 PM</div>
+            <div class="node-event-title">Cocktails & Registration</div>
+            <div class="node-event-time">5:00 PM</div>
             <div class="node-event-desc">
-              THE CEREMONY WILL BEGIN AT 4 SHARP, SO WE RECOMMEND ARRIVING A BIT EARLIER AND HAVING A LOOK AROUND WITH SOME BUBBLES IN-HAND!
+              GUESTS ARRIVE FOR REGISTRATION, WELCOME DRINKS, COCKTAILS, AND ACOUSTIC MUSIC BEFORE TAKING THEIR SEATS.
             </div>
           </div>
         </div>
@@ -1241,32 +1239,10 @@
         <div class="timeline-node-item right-node reveal-on-scroll">
           <div class="timeline-node-dot"></div>
           <div class="timeline-node-content">
-            <div class="node-event-title">Cocktail Hour</div>
-            <div class="node-event-time">4:30 PM</div>
-            <div class="node-event-desc">
-              INDULGE IN A COCKTAIL AND ENJOY THE ACOUSTIC ENTERTAINMENT WHILST WE GET OUR PHOTOS TAKEN
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-node-item left-node reveal-on-scroll">
-          <div class="timeline-node-dot"></div>
-          <div class="timeline-node-content">
-            <div class="node-event-title">Reception</div>
+            <div class="node-event-title">Start of Program</div>
             <div class="node-event-time">6:00 PM</div>
             <div class="node-event-desc">
-              JOIN US FOR DINNER, DRINKS, AND A NIGHT OF CELEBRATION, TOASTS, AND DANCING UNDER THE STARS!
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-node-item right-node reveal-on-scroll">
-          <div class="timeline-node-dot"></div>
-          <div class="timeline-node-content">
-            <div class="node-event-title">Socials</div>
-            <div class="node-event-time">8:30 PM</div>
-            <div class="node-event-desc">
-              GRAB A DRINK, HIT THE DANCE FLOOR, AND CELEBRATE THE NIGHT AWAY WITH GREAT MUSIC AND EVEN BETTER COMPANY!
+              OUR HOST FORMALLY OPENS THE EVENING AND WELCOMES OUR BELOVED FAMILY AND FRIENDS TO THE CELEBRATION.
             </div>
           </div>
         </div>
@@ -1274,10 +1250,65 @@
         <div class="timeline-node-item left-node reveal-on-scroll">
           <div class="timeline-node-dot"></div>
           <div class="timeline-node-content">
-            <div class="node-event-title">Call It a Night</div>
-            <div class="node-event-time">10:00 PM</div>
+            <div class="node-event-title">Grand Entrance</div>
+            <div class="node-event-time">6:15 PM</div>
             <div class="node-event-desc">
-              WE SEND OFF THE NEWLYWEDS WITH ONE LAST CHEER AND WISH EVERYONE A SAFE JOURNEY HOME.
+              WELCOMING THE NEWLYWEDS AS THEY MAKE THEIR FIRST OFFICIAL ENTRANCE AS HUSBAND AND WIFE.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-node-item right-node reveal-on-scroll">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-content">
+            <div class="node-event-title">Short Interview & Welcome</div>
+            <div class="node-event-time">6:30 PM</div>
+            <div class="node-event-desc">
+              A QUICK CHAT WITH THE COUPLE TO SHARE THEIR EXCITEMENT AND SET THE JOYFUL TONE FOR THE NIGHT.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-node-item left-node reveal-on-scroll">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-content">
+            <div class="node-event-title">First Dance</div>
+            <div class="node-event-time">6:45 PM</div>
+            <div class="node-event-desc">
+              ELENA AND ADRIAN TAKE THE FLOOR FOR THEIR VERY FIRST DANCE AS A MARRIED COUPLE.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-node-item right-node reveal-on-scroll">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-content">
+            <div class="node-event-title">Cake Cutting & Toast</div>
+            <div class="node-event-time">7:00 PM</div>
+            <div class="node-event-desc">
+              THE TRADITIONAL CUTTING OF THE WEDDING CAKE FOLLOWED BY HEARTFELT TOASTS AND RAISING A GLASS TO LOVE.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-node-item left-node reveal-on-scroll">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-content">
+            <div class="node-event-title">Dinner & Speeches</div>
+            <div class="node-event-time">7:15 PM</div>
+            <div class="node-event-desc">
+              A SUMPTUOUS MEAL SERVED ALONGSIDE MESSAGES, STORIES, AND TOASTS FROM SPECIAL GUESTS.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-node-item right-node reveal-on-scroll">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-content">
+            <div class="node-event-title">Socials & Party</div>
+            <div class="node-event-time">8:30 PM</div>
+            <div class="node-event-desc">
+              THE DANCE FLOOR OPENS! ENJOY DRINKS, MUSIC, AND CELEBRATING UNDER THE STARS WITH US.
             </div>
           </div>
         </div>
@@ -1350,7 +1381,7 @@
     </div>
   </div>
 
-  <!-- GALLERY SCREEN (STACKING PILE) -->
+  <!-- GALLERY SCREEN -->
   <div class="screen" id="screen-gallery">
     <div class="gallery-heading-wrap reveal-on-scroll">
       <h2 class="gallery-heading">MOMENTS ALONG THE WAY</h2>
@@ -1426,7 +1457,7 @@
 
       <div id="rsvp-success" class="rsvp-success">
         <h2 class="serif" style="font-size: 32px; margin-bottom: 1rem;">You're on the list.</h2>
-        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can'wait to celebrate with you.</div>
+        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can't wait to celebrate with you.</div>
       </div>
 
       <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
@@ -1473,10 +1504,10 @@
       
       if (wrap.classList.contains('active')) {
         wrap.classList.remove('active');
-        btn.innerHTML = "THE WEDDING SCHEDULE &rarr;";
+        btn.innerHTML = "PROGRAM FLOW &rarr;";
       } else {
         wrap.classList.add('active');
-        btn.innerHTML = "HIDE THE SCHEDULE &larr;";
+        btn.innerHTML = "HIDE THE PROGRAM &larr;";
         setTimeout(() => {
           initGeneralScrollObserver();
         }, 100);
