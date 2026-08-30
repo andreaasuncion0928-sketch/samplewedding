@@ -302,9 +302,10 @@
       z-index: 0;
     }
 
-    /* Enormous & Ultra-Thin Translucent-Outlined Photo-Clip Countdown */
+    /* Pure Vintage Editorial Serif Countdown Styling */
     .countdown-display-wrap {
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      padding-top: 1rem;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -312,36 +313,28 @@
       justify-content: center;
     }
 
-    .photo-countdown-number {
+    .pure-typographic-number {
       font-family: var(--font-serif);
-      font-size: clamp(140px, 32vw, 290px);
+      font-size: clamp(110px, 24vw, 220px);
       font-weight: 300;
       font-style: italic;
-      line-height: 0.82;
-      letter-spacing: -6px;
+      line-height: 0.85;
+      letter-spacing: -2px;
+      color: rgba(255, 255, 255, 0.95);
       text-align: center;
-      background-image: url('countdownpic.jpg'), url('countdownpic.jpeg'), url('cover.jpeg');
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
       display: block;
       margin: 0 auto;
       width: 100%;
-      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.45);
-      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.7));
     }
 
     .countdown-subtext {
-      font-size: clamp(10px, 2vw, 13px);
-      letter-spacing: 12px;
-      color: rgba(255, 255, 255, 0.85);
+      font-size: clamp(9px, 1.6vw, 11px);
+      letter-spacing: 10px;
+      color: rgba(255, 255, 255, 0.7);
       text-transform: uppercase;
       font-weight: 300;
       margin-top: 1.5rem;
-      text-indent: 12px;
+      text-indent: 10px;
     }
     
     .menu-header { margin-bottom: 3.5rem; text-align: center; color: var(--white); margin-top: 2rem; }
@@ -1135,7 +1128,7 @@
       .details-grid { grid-template-columns: 1fr; }
       .arch-cards-grid { grid-template-columns: 1fr; }
       .stacked-card { top: 70px; margin-bottom: 25vh; }
-      .photo-countdown-number { letter-spacing: -3px; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4); }
+      .pure-typographic-number { letter-spacing: -1px; }
     }
   </style>
 </head>
@@ -1188,9 +1181,9 @@
   <div class="screen" id="screen-menu">
     <div class="container text-center">
       
-      <!-- Enormous & Ultra-Thin Translucent Outlined Photographic Countdown Block -->
+      <!-- Pure Typographic Serif Countdown Block -->
       <div class="countdown-display-wrap reveal-on-scroll">
-        <div class="photo-countdown-number" id="days-countdown">00</div>
+        <div class="pure-typographic-number" id="days-countdown">00</div>
         <div class="countdown-subtext">D A Y S &nbsp; T O &nbsp; G O</div>
       </div>
 
@@ -1589,7 +1582,7 @@
 
       <div id="rsvp-success" class="rsvp-success">
         <h2 class="serif" style="font-size: 32px; margin-bottom: 1rem;">You're on the list.</h2>
-        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can'wait to celebrate with you.</div>
+        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can't wait to celebrate with you.</div>
       </div>
 
       <div class="text-center">
