@@ -654,7 +654,7 @@
     }
 
     /* ==========================================================================
-       8. GALLERY SCREEN (DYNAMIC EDITORIAL SCROLL EXPERIENCE)
+       8. GALLERY SCREEN (PHOTOGRAPHS UNFOLDING CONCEPT)
        ========================================================================== */
     #screen-gallery {
       background-color: var(--white);
@@ -665,9 +665,9 @@
 
     .gallery-heading-wrap {
       text-align: center;
-      padding: 6rem 1.5rem 4rem;
+      padding: 5rem 1.5rem 3rem;
       opacity: 0;
-      transform: scale(1.01);
+      transform: scale(0.98);
       transition: opacity 1.2s ease-out, transform 1.2s ease-out;
     }
 
@@ -685,74 +685,128 @@
       color: var(--black);
     }
 
-    /* Container for dynamic asymmetric layouts */
-    .editorial-flow {
+    /* Unfolding Canvas Stage */
+    .unfolding-stage {
       width: 100%;
       max-width: 1300px;
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
+      position: relative;
     }
 
-    .editorial-item {
+    /* Full Canvas Hero Sections (Base Layer) */
+    .canvas-hero {
+      position: relative;
       width: 100%;
-      margin-bottom: clamp(4rem, 8vh, 10rem);
-      opacity: 0;
-      transform: translateY(40px) scale(1.03);
-      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.35, 1), transform 1.2s cubic-bezier(0.25, 1, 0.35, 1);
-      will-change: opacity, transform;
+      z-index: 1;
     }
 
-    .editorial-item.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    .editorial-img {
+    .canvas-hero img {
       width: 100%;
       height: auto;
       display: block;
-      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.04);
     }
 
-    /* Layout Variations for Dynamic Sizing & Positioning */
-    /* Full Bleed Moments (Photos 1, 4, 7, 9, 10) */
-    .layout-full {
+    /* Overlay Floating Cards that Unfold Over Base Canvas */
+    .unfold-card {
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: scale(0.96);
+      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.35, 1), transform 1.2s cubic-bezier(0.25, 1, 0.35, 1);
+      will-change: opacity, transform;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    .unfold-card.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .unfold-card img {
       width: 100%;
-      max-width: 100%;
+      height: auto;
+      display: block;
     }
 
-    /* Large Centered Cinematic (Photos 4 & 7) */
-    .layout-cinema {
-      width: 92%;
-      max-width: 1150px;
+    /* Unfolding Canvas 1 Layering (Photos 1, 2, 3) */
+    .unfold-layer-group-1 {
+      position: relative;
+      margin-bottom: 2px;
+    }
+
+    .card-photo2 {
+      width: clamp(280px, 48vw, 620px);
+      margin-top: -22vw;
       margin-left: auto;
+      margin-right: clamp(2rem, 6vw, 7rem);
+    }
+
+    .card-photo3 {
+      width: clamp(260px, 44vw, 560px);
+      margin-top: -12vw;
+      margin-left: clamp(2rem, 6vw, 7rem);
       margin-right: auto;
     }
 
-    /* Right Off-Center Focus (Photos 2 & 8) */
-    .layout-right {
-      width: clamp(320px, 58vw, 750px);
+    /* Intermediate Seamless Sequence (Photos 4, 5, 6) */
+    .unfold-sequence-mid {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: -4vw;
+      position: relative;
+      z-index: 3;
+    }
+
+    .card-photo4 {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card-photo5 {
+      width: clamp(280px, 48vw, 600px);
       margin-left: auto;
       margin-right: clamp(2rem, 6vw, 8rem);
+      margin-top: -8vw;
     }
 
-    /* Left Off-Center Focus (Photos 3 & 6) */
-    .layout-left {
-      width: clamp(300px, 52vw, 680px);
+    .card-photo6 {
+      width: clamp(280px, 46vw, 580px);
       margin-left: clamp(2rem, 6vw, 8rem);
       margin-right: auto;
+      margin-top: -6vw;
     }
 
-    /* Compact Medium Focal Point (Photo 5) */
-    .layout-center-medium {
-      width: clamp(340px, 64vw, 820px);
+    /* Unfolding Canvas 2 Layering (Photos 7, 8, 9) */
+    .unfold-layer-group-2 {
+      position: relative;
+      margin-top: -4vw;
+    }
+
+    .card-photo8 {
+      width: clamp(290px, 50vw, 640px);
+      margin-top: -20vw;
       margin-left: auto;
+      margin-right: clamp(2rem, 5vw, 6rem);
+    }
+
+    .card-photo9 {
+      width: clamp(280px, 46vw, 580px);
+      margin-top: -10vw;
+      margin-left: clamp(2rem, 5vw, 6rem);
       margin-right: auto;
+    }
+
+    /* Closing Canvas Hero (Photo 10) */
+    .canvas-hero-closing {
+      margin-top: -4vw;
+      position: relative;
+      z-index: 4;
     }
 
     .gallery-footer {
-      padding: 3rem 1.5rem 6rem;
+      padding: 4rem 1.5rem 6rem;
       text-align: center;
     }
 
@@ -765,20 +819,21 @@
       .rsvp-form { padding: 2rem 1.5rem; }
       .detail-content { padding: 2.5rem 1.5rem; }
 
-      .layout-right, .layout-left, .layout-center-medium, .layout-cinema {
-        width: 100%;
-        margin-left: 0;
-        margin-right: 0;
-        padding: 0 1rem;
+      .card-photo2, .card-photo3, .card-photo5, .card-photo6, .card-photo8, .card-photo9 {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: -10vw;
       }
-      .editorial-item {
-        margin-bottom: 3.5rem;
+      .card-photo4 {
+        width: 100%;
       }
     }
 
     /* Accessibility preference */
     @media (prefers-reduced-motion: reduce) {
-      .editorial-item,
+      .unfold-card,
+      .canvas-hero,
       .gallery-heading-wrap {
         transition: none !important;
         transform: none !important;
@@ -1039,46 +1094,48 @@
       <h2 class="gallery-heading">MOMENTS ALONG THE WAY</h2>
     </div>
 
-    <div class="editorial-flow">
-      <div class="editorial-item layout-full gal-observe">
-        <img src="photo1.jpeg" alt="" class="editorial-img">
+    <div class="unfolding-stage">
+      
+      <div class="unfold-layer-group-1">
+        <div class="canvas-hero gal-observe">
+          <img src="photo1.jpeg" alt="">
+        </div>
+        <div class="unfold-card card-photo2 gal-observe">
+          <img src="photo2.jpeg" alt="">
+        </div>
+        <div class="unfold-card card-photo3 gal-observe">
+          <img src="photo3.jpeg" alt="">
+        </div>
       </div>
 
-      <div class="editorial-item layout-right gal-observe">
-        <img src="photo2.jpeg" alt="" class="editorial-img">
+      <div class="unfold-sequence-mid">
+        <div class="unfold-card card-photo4 gal-observe">
+          <img src="photo4.jpeg" alt="">
+        </div>
+        <div class="unfold-card card-photo5 gal-observe">
+          <img src="photo5.jpeg" alt="">
+        </div>
+        <div class="unfold-card card-photo6 gal-observe">
+          <img src="photo6.jpeg" alt="">
+        </div>
       </div>
 
-      <div class="editorial-item layout-left gal-observe">
-        <img src="photo3.jpeg" alt="" class="editorial-img">
+      <div class="unfold-layer-group-2">
+        <div class="canvas-hero gal-observe">
+          <img src="photo7.jpeg" alt="">
+        </div>
+        <div class="unfold-card card-photo8 gal-observe">
+          <img src="photo8.jpeg" alt="">
+        </div>
+        <div class="unfold-card card-photo9 gal-observe">
+          <img src="photo9.jpeg" alt="">
+        </div>
       </div>
 
-      <div class="editorial-item layout-cinema gal-observe">
-        <img src="photo4.jpeg" alt="" class="editorial-img">
+      <div class="canvas-hero canvas-hero-closing gal-observe">
+        <img src="photo10.jpeg" alt="">
       </div>
 
-      <div class="editorial-item layout-center-medium gal-observe">
-        <img src="photo5.jpeg" alt="" class="editorial-img">
-      </div>
-
-      <div class="editorial-item layout-left gal-observe">
-        <img src="photo6.jpeg" alt="" class="editorial-img">
-      </div>
-
-      <div class="editorial-item layout-cinema gal-observe">
-        <img src="photo7.jpeg" alt="" class="editorial-img">
-      </div>
-
-      <div class="editorial-item layout-right gal-observe">
-        <img src="photo8.jpeg" alt="" class="editorial-img">
-      </div>
-
-      <div class="editorial-item layout-cinema gal-observe">
-        <img src="photo9.jpeg" alt="" class="editorial-img">
-      </div>
-
-      <div class="editorial-item layout-full gal-observe">
-        <img src="photo10.jpeg" alt="" class="editorial-img">
-      </div>
     </div>
 
     <div class="gallery-footer">
@@ -1117,7 +1174,7 @@
 
       <div id="rsvp-success" class="rsvp-success">
         <h2 class="serif" style="font-size: 32px; margin-bottom: 1rem;">You're on the list.</h2>
-        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can't wait to celebrate with you.</div>
+        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can'wait to celebrate with you.</div>
       </div>
 
       <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
@@ -1180,7 +1237,7 @@
       document.getElementById('rsvp-success').style.display = 'block';
     }
 
-    /* SCROLL OBSERVER FOR PROGRESSIVE ELEGANT FADE-AND-RISE ENTRANCE */
+    /* SCROLL OBSERVER FOR PROGRESSIVE ELEGANT UNFOLDING REVEAL */
     let galleryObserver;
     function initGalleryObserver() {
       if (galleryObserver) galleryObserver.disconnect();
