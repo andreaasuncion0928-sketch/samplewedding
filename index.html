@@ -11,7 +11,7 @@
 
   <style>
     /* ==========================================================================
-       1. DESIGN SYSTEM & BASE ANIMATIONS
+       1. DESIGN SYSTEM & BASE ANIMATIONS (Lavender & Black Theme Applied)
        ========================================================================== */
     @font-face {
       font-family: 'Brittany';
@@ -25,7 +25,9 @@
       --gray: #666666;
       --card-bg: #EAE6DF;
       --card-border: #D8D2C9;
-      --text-muted: #7A7570;
+      --text-muted: #8E7A99;
+      --lavender: #9A84A1;
+      --lavender-light: #D4A8F0;
       
       --font-serif: 'Didot', 'Bodoni MT', 'Cormorant Garamond', serif;
       --font-sans: 'Poppins', sans-serif;
@@ -52,8 +54,8 @@
       width: 100%;
     }
 
-    h1, h2, h3, .serif { font-family: var(--font-serif); font-weight: 400; }
-    .script { font-family: var(--font-script); font-size: 2.5rem; color: var(--black); font-weight: normal; }
+    h1, h2, h3, .serif { font-family: var(--font-serif); font-weight: 400; color: var(--black); }
+    .script { font-family: var(--font-script); font-size: 2.5rem; color: var(--lavender); font-weight: normal; }
     
     a { color: inherit; text-decoration: none; cursor: pointer; transition: all 0.3s var(--ease-smooth); }
     button { font-family: var(--font-sans); cursor: pointer; border: none; background: none; outline: none; }
@@ -135,7 +137,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      background-color: var(--white);
+      background-color: var(--lavender-light);
       z-index: -1;
       transform: scaleX(0);
       transform-origin: right;
@@ -144,8 +146,9 @@
 
     .btn:hover {
       color: var(--black);
+      border-color: var(--lavender);
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      box-shadow: 0 8px 20px rgba(154, 132, 161, 0.3);
     }
 
     .btn:hover::before {
@@ -172,7 +175,8 @@
 
     .map-btn:hover {
       background: var(--black);
-      color: var(--white);
+      color: var(--lavender-light);
+      border-color: var(--black);
       transform: translateY(-2px);
     }
 
@@ -207,9 +211,9 @@
     }
 
     #screen-details .back-btn {
-      color: var(--white);
-      background: rgba(0, 0, 0, 0.6);
-      border-color: rgba(255, 255, 255, 0.8);
+      color: var(--lavender-light);
+      background: rgba(17, 17, 17, 0.7);
+      border-color: rgba(212, 168, 240, 0.8);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
     }
@@ -247,7 +251,7 @@
     .cover-subtitle {
       font-size: clamp(9px, 1.5vw, 11px);
       letter-spacing: 6px;
-      color: rgba(255, 255, 255, 0.85);
+      color: var(--lavender-light);
       text-transform: uppercase;
       font-weight: 300;
       margin-bottom: 2rem;
@@ -278,7 +282,7 @@
     .cover-btn { 
       background-color: transparent; 
       color: #FFF; 
-      border: 1px solid rgba(255, 255, 255, 0.65); 
+      border: 1px solid rgba(212, 168, 240, 0.65); 
       padding: 1rem 2.2rem;
       font-size: 10px;
       letter-spacing: 4px;
@@ -290,9 +294,9 @@
 
     .cover-btn:hover { 
       background-color: #FFF; 
-      color: #000; 
+      color: var(--black); 
       border-color: #FFF;
-      box-shadow: 0 10px 25px rgba(255,255,255,0.2);
+      box-shadow: 0 10px 25px rgba(212, 168, 240, 0.3);
     }
 
     /* ==========================================================================
@@ -317,7 +321,7 @@
     #screen-menu::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.65); 
+      background-color: rgba(17, 17, 17, 0.68); 
       z-index: 0;
     }
 
@@ -342,7 +346,7 @@
       font-size: clamp(60px, 14vw, 130px);
       font-weight: 300;
       font-style: italic;
-      color: rgba(255, 255, 255, 0.95);
+      color: var(--lavender-light);
       line-height: 1;
       padding: 0 4px;
       max-width: 100%;
@@ -377,7 +381,7 @@
     .countdown-subtext {
       font-size: clamp(8px, 1.4vw, 10px);
       letter-spacing: clamp(4px, 1.5vw, 8px);
-      color: rgba(255, 255, 255, 0.7);
+      color: var(--text-muted);
       text-transform: uppercase;
       font-weight: 300;
       margin-top: 1rem;
@@ -386,13 +390,13 @@
     
     .menu-header { margin-bottom: 2.2rem; text-align: center; color: var(--white); margin-top: 1.2rem; }
     .menu-header h2 { font-size: clamp(1.4rem, 3.5vw, 2rem); letter-spacing: 4px; color: var(--white); text-transform: uppercase; font-weight: 300; }
-    .menu-header p { font-size: 11px; letter-spacing: 5px; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; margin-top: 0.4rem;}
+    .menu-header p { font-size: 11px; letter-spacing: 5px; color: var(--lavender-light); text-transform: uppercase; margin-top: 0.4rem;}
     
     .elegant-menu { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; color: var(--white); width: 100%; }
     
     .elegant-item { 
       display: flex; align-items: center; justify-content: space-between; 
-      padding: 1.5rem 0.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+      padding: 1.5rem 0.5rem; border-bottom: 1px solid rgba(212, 168, 240, 0.25); 
       cursor: pointer; transition: all 0.4s var(--ease-smooth); text-align: left;
       position: relative;
       width: 100%;
@@ -402,19 +406,19 @@
       content: '';
       position: absolute;
       bottom: -1px; left: 0; width: 0%; height: 1px;
-      background-color: var(--white);
+      background-color: var(--lavender-light);
       transition: width 0.4s var(--ease-smooth);
     }
 
-    .elegant-item:first-child { border-top: 1px solid rgba(255, 255, 255, 0.2); }
-    .elegant-item:hover { transform: translateX(6px); background: rgba(255,255,255,0.03); }
+    .elegant-item:first-child { border-top: 1px solid rgba(212, 168, 240, 0.25); }
+    .elegant-item:hover { transform: translateX(6px); background: rgba(154, 132, 161, 0.08); }
     .elegant-item:hover::after { width: 100%; }
     
     .ei-text { flex-grow: 1; padding: 0 0.5rem; }
     .ei-title { font-family: var(--font-serif); font-size: clamp(18px, 3.5vw, 24px); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.2rem; color: var(--white); }
-    .ei-desc { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); font-family: var(--font-sans); }
-    .ei-arrow { font-size: 16px; color: rgba(255, 255, 255, 0.5); transition: all 0.3s var(--ease-smooth); }
-    .elegant-item:hover .ei-arrow { color: var(--white); transform: translateX(5px); }
+    .ei-desc { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); font-family: var(--font-sans); }
+    .ei-arrow { font-size: 16px; color: var(--lavender); transition: all 0.3s var(--ease-smooth); }
+    .elegant-item:hover .ei-arrow { color: var(--lavender-light); transform: translateX(5px); }
 
     /* ==========================================================================
        5. OUR STORY SCREEN
@@ -437,7 +441,7 @@
     #screen-story::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(255, 255, 255, 0.75); 
+      background-color: rgba(255, 255, 255, 0.8); 
       z-index: 0;
     }
 
@@ -447,7 +451,7 @@
       text-align: center; 
       font-family: var(--font-serif); 
       font-size: clamp(16px, 3.5vw, 19px); 
-      color: #111111; 
+      color: var(--black); 
       line-height: 1.8; 
       font-weight: 400; 
       letter-spacing: 0.5px; 
@@ -457,6 +461,7 @@
 
     .story-content p { 
       margin-bottom: 1.8rem; 
+      color: var(--black);
     }
     
     .story-highlight-italics {
@@ -472,7 +477,7 @@
       font-family: var(--font-script);
       font-size: clamp(2.8rem, 8vw, 4.2rem);
       margin: 2rem 0;
-      color: var(--black);
+      color: var(--lavender);
       line-height: 1.1;
       animation: floatLight 6s infinite ease-in-out;
     }
@@ -497,7 +502,7 @@
     .typing-cursor::after {
       content: '|';
       font-weight: 300;
-      color: #111;
+      color: var(--lavender);
       margin-left: 2px;
       animation: cursorBlink 0.8s infinite;
     }
@@ -519,7 +524,7 @@
     /* Subdued, Minimalist Bottom Section for Our Story */
     .story-bottom { 
       margin-top: 3rem; 
-      border-top: 1px solid rgba(0,0,0,0.08); 
+      border-top: 1px solid rgba(154, 132, 161, 0.25); 
       padding-top: 2rem; 
     }
 
@@ -527,7 +532,7 @@
       font-size: 18px; 
       margin-bottom: 0.1rem; 
       font-weight: 300;
-      color: var(--gray);
+      color: var(--lavender);
       letter-spacing: 2px;
     }
 
@@ -550,7 +555,7 @@
 
     .story-bottom .script-names {
       font-size: 1.8rem;
-      color: var(--gray);
+      color: var(--lavender);
       font-weight: 300;
     }
 
@@ -559,7 +564,7 @@
        ========================================================================== */
     #screen-day {
       position: relative;
-      background-color: #E2DBD4;
+      background-color: var(--off-white);
       color: var(--black);
     }
 
@@ -570,14 +575,14 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      opacity: 0.25;
+      opacity: 0.2;
       z-index: 0;
     }
 
     .day-header-tag {
       font-size: 10px;
       letter-spacing: 5px;
-      color: #555;
+      color: var(--lavender);
       text-transform: uppercase;
       margin-bottom: 0.3rem;
     }
@@ -588,7 +593,7 @@
       letter-spacing: 5px;
       font-weight: 400;
       text-transform: uppercase;
-      color: #222;
+      color: var(--black);
       margin-bottom: 1.2rem;
     }
 
@@ -596,7 +601,7 @@
       font-family: var(--font-serif);
       font-style: italic;
       font-size: 16px;
-      color: #444;
+      color: var(--gray);
       line-height: 1.4;
       margin-bottom: 2.5rem;
     }
@@ -612,10 +617,10 @@
     }
 
     .arch-card {
-      background: rgba(236, 232, 226, 0.88);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(154, 132, 161, 0.3);
       border-radius: 180px 180px 8px 8px;
       padding: 3rem 1.2rem 2.2rem;
       text-align: center;
@@ -627,13 +632,13 @@
 
     .arch-card:hover {
       transform: translateY(-5px) scale(1.01);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+      box-shadow: 0 20px 40px rgba(154, 132, 161, 0.18);
     }
 
     .arch-card.expanded {
       border-radius: 12px;
       padding: 2rem 1.2rem;
-      background: rgba(238, 234, 228, 0.94);
+      background: rgba(255, 255, 255, 0.97);
       transform: none !important;
     }
 
@@ -642,28 +647,29 @@
       height: 42px;
       margin: 0 auto 1rem;
       display: block;
-      opacity: 0.8;
+      opacity: 0.85;
+      stroke: var(--lavender);
     }
 
     .arch-category {
       font-size: 9px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: #777;
+      color: var(--lavender);
       margin-bottom: 0.5rem;
     }
 
     .arch-venue-title {
       font-family: var(--font-serif);
       font-size: clamp(20px, 4vw, 24px);
-      color: #111;
+      color: var(--black);
       margin-bottom: 0.2rem;
       line-height: 1.2;
     }
 
     .arch-location {
       font-size: 12px;
-      color: #666;
+      color: var(--gray);
       margin-bottom: 1.8rem;
       letter-spacing: 1px;
     }
@@ -677,8 +683,8 @@
       font-size: 9px;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #222;
-      border: 1px solid #777;
+      color: var(--black);
+      border: 1px solid var(--lavender);
       background: transparent;
       border-radius: 2px;
       transition: all 0.4s var(--ease-smooth);
@@ -686,9 +692,9 @@
     }
 
     .arch-btn:hover {
-      background: #222;
-      color: #FFF;
-      border-color: #222;
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
     }
 
     .close-card-btn {
@@ -696,7 +702,7 @@
       top: 15px;
       right: 18px;
       font-size: 20px;
-      color: #666;
+      color: var(--gray);
       cursor: pointer;
       line-height: 1;
       display: none;
@@ -727,7 +733,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 0.3rem;
-      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      border-top: 1px solid rgba(154, 132, 161, 0.2);
       padding-top: 1rem;
       margin-bottom: 1.2rem;
     }
@@ -739,14 +745,15 @@
       height: 16px;
       margin: 0 auto 0.3rem;
       display: block;
-      opacity: 0.75;
+      opacity: 0.8;
+      stroke: var(--lavender);
     }
 
     .meta-title {
       font-size: 8px;
       letter-spacing: 1px;
       text-transform: uppercase;
-      color: #333;
+      color: var(--black);
       font-weight: 500;
     }
 
@@ -754,23 +761,23 @@
       font-size: 8px;
       letter-spacing: 0.5px;
       text-transform: uppercase;
-      color: #777;
+      color: var(--gray);
     }
 
     .arch-bottom-motto {
       font-family: var(--font-serif);
       font-style: italic;
       font-size: 14px;
-      color: #444;
+      color: var(--gray);
       margin-bottom: 1rem;
     }
 
     .schedule-toggle-card {
       margin-top: 3rem;
-      background: rgba(236, 232, 226, 0.88);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(154, 132, 161, 0.3);
       border-radius: 8px;
       padding: 1.5rem 1.2rem;
       cursor: pointer;
@@ -783,8 +790,8 @@
     }
 
     .schedule-toggle-card:hover {
-      background: rgba(242, 238, 232, 0.95);
-      border-color: #222;
+      background: rgba(255, 255, 255, 0.98);
+      border-color: var(--black);
       transform: translateY(-3px);
     }
 
@@ -793,7 +800,7 @@
       font-size: 11px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: #222;
+      color: var(--black);
     }
 
     .wedding-timeline-wrap {
@@ -813,7 +820,7 @@
     .timeline-title-script {
       font-family: var(--font-script);
       font-size: clamp(3rem, 7vw, 4.5rem);
-      color: #222;
+      color: var(--black);
       margin-bottom: 2.5rem;
       text-align: center;
       line-height: 1;
@@ -825,7 +832,7 @@
       bottom: 20px;
       left: 50%;
       width: 1px;
-      background-color: #444;
+      background-color: var(--lavender);
       transform: translateX(-50%);
       z-index: 1;
     }
@@ -846,8 +853,8 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #E2DBD4;
-      border: 1px solid #333;
+      background: var(--white);
+      border: 1px solid var(--lavender);
       transform: translateX(-50%);
       z-index: 3;
     }
@@ -876,7 +883,7 @@
     .node-event-title {
       font-family: var(--font-script);
       font-size: clamp(2.2rem, 4.5vw, 3.2rem);
-      color: #111;
+      color: var(--black);
       line-height: 1;
       margin-bottom: 0.4rem;
     }
@@ -886,7 +893,7 @@
       font-size: 10px;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #333;
+      color: var(--lavender);
       font-weight: 500;
       margin-bottom: 0.8rem;
     }
@@ -896,7 +903,7 @@
       font-size: 10px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: #555;
+      color: var(--gray);
       line-height: 1.8;
       max-width: 320px;
       display: inline-block;
@@ -926,14 +933,14 @@
     #screen-details::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.50); 
+      background-color: rgba(17, 17, 17, 0.65); 
       z-index: 0;
     }
 
     .details-header-tag {
       font-size: 10px;
       letter-spacing: 5px;
-      color: rgba(255, 255, 255, 0.7);
+      color: var(--lavender-light);
       text-transform: uppercase;
       margin-bottom: 0.5rem;
       position: relative;
@@ -976,10 +983,10 @@
     }
     
     .detail-card { 
-      background: rgba(0, 0, 0, 0.35); 
+      background: rgba(17, 17, 17, 0.45); 
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.25); 
+      border: 1px solid rgba(212, 168, 240, 0.3); 
       border-radius: 120px 150px 8px 8px;
       padding: 3rem 1rem 2rem; 
       text-align: center; 
@@ -990,8 +997,8 @@
     }
 
     .detail-card:hover { 
-      border-color: rgba(255, 255, 255, 0.7); 
-      background: rgba(0, 0, 0, 0.55); 
+      border-color: var(--lavender-light); 
+      background: rgba(17, 17, 17, 0.7); 
       transform: translateY(-5px) scale(1.02);
     }
     
@@ -1009,7 +1016,7 @@
     .detail-sub { 
       font-size: 10px; 
       letter-spacing: 1.5px; 
-      color: rgba(255, 255, 255, 0.7); 
+      color: var(--text-muted); 
       text-transform: uppercase; 
       font-weight: 300; 
     }
@@ -1020,11 +1027,11 @@
       max-width: 600px; 
       margin: 0 auto; 
       animation: fadeIn 0.4s forwards; 
-      background: rgba(0, 0, 0, 0.45); 
+      background: rgba(17, 17, 17, 0.65); 
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       padding: 2.5rem 1.5rem; 
-      border: 1px solid rgba(255, 255, 255, 0.2); 
+      border: 1px solid rgba(212, 168, 240, 0.3); 
       border-radius: 12px;
       position: relative;
       z-index: 2;
@@ -1042,7 +1049,7 @@
       text-transform: uppercase; 
       margin-bottom: 1.2rem; 
       text-align: center; 
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+      border-bottom: 1px solid rgba(212, 168, 240, 0.25); 
       padding-bottom: 1.2rem;
       color: var(--white);
     }
@@ -1053,7 +1060,7 @@
       justify-content: space-between;
       margin-top: 2.5rem;
       padding-top: 1.2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      border-top: 1px solid rgba(212, 168, 240, 0.2);
       gap: 5px;
     }
 
@@ -1065,7 +1072,7 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       color: rgba(255, 255, 255, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(212, 168, 240, 0.35);
       padding: 0.5rem 1rem;
       border-radius: 20px;
       transition: all 0.3s var(--ease-smooth);
@@ -1086,7 +1093,7 @@
       font-weight: 400; 
       display: flex; 
       justify-content: space-between; 
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+      border-bottom: 1px solid rgba(212, 168, 240, 0.25); 
       letter-spacing: 1px; 
       color: var(--white); 
     }
@@ -1106,7 +1113,7 @@
        8. GALLERY SCREEN
        ========================================================================== */
     #screen-gallery {
-      background-color: #FAFAFA;
+      background-color: var(--off-white);
       color: var(--black);
       padding: 0 0 6rem;
       position: relative;
@@ -1138,9 +1145,9 @@
       position: sticky;
       top: 90px;
       margin-bottom: 30vh;
-      background: #F4F1EA;
+      background: var(--white);
       padding: 0.6rem 0.6rem 1rem;
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(154, 132, 161, 0.2);
       border-radius: 6px;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1161,7 +1168,7 @@
     .stacked-card:hover {
       transform: scale(1.01) rotate(0deg) !important;
       z-index: 99 !important;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 25px 50px rgba(154, 132, 161, 0.25);
     }
 
     .gal-img-wrapper {
@@ -1170,7 +1177,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #EFECE6;
+      background: var(--off-white);
       overflow: hidden;
       border-radius: 4px;
     }
@@ -1223,7 +1230,7 @@
     }
 
     .form-group input:focus, .form-group select:focus {
-      border-color: var(--black);
+      border-color: var(--lavender);
     }
 
     .rsvp-success {
@@ -1283,7 +1290,7 @@
   <!-- OUR STORY SCREEN -->
   <div class="screen" id="screen-story">
     <div class="container text-center">
-      <div class="reveal-on-scroll" style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1.5rem; text-transform: uppercase;">A Little Story About Us</div>
+      <div class="reveal-on-scroll" style="font-size: 11px; letter-spacing: 4px; color: var(--lavender); margin-bottom: 1.5rem; text-transform: uppercase;">A Little Story About Us</div>
       <h2 class="serif reveal-on-scroll" style="font-size: 42px; margin-bottom: 3.5rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 300;">Our Story</h2>
 
       <div class="story-content" id="typewriter-container">
@@ -1578,14 +1585,14 @@
       <!-- Detail Card 1: Dress Code -->
       <div id="dc-dress" class="detail-content">
         <h3 class="dc-header">Black & White</h3>
-        <p class="text-center" style="margin-bottom: 3rem; color: rgba(255,255,255,0.8); font-style: italic; font-size: 16px;">Keep it classic. Keep it timeless.</p>
+        <p class="text-center" style="margin-bottom: 3rem; color: var(--text-muted); font-style: italic; font-size: 16px;">Keep it classic. Keep it timeless.</p>
         <div style="margin-bottom: 2.5rem;">
           <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px; color: var(--white);">LADIES</h4>
-          <p style="color: rgba(255,255,255,0.8); font-size: 14px; font-weight: 300;">Black, white, ivory, or monochrome formalwear.</p>
+          <p style="color: var(--text-muted); font-size: 14px; font-weight: 300;">Black, white, ivory, or monochrome formalwear.</p>
         </div>
         <div style="margin-bottom: 3rem;">
           <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px; color: var(--white);">GENTLEMEN</h4>
-          <p style="color: rgba(255,255,255,0.8); font-size: 14px; font-weight: 300;">Black suit, tuxedo, white shirt, or classic monochrome formalwear.</p>
+          <p style="color: var(--text-muted); font-size: 14px; font-weight: 300;">Black suit, tuxedo, white shirt, or classic monochrome formalwear.</p>
         </div>
         
         <div class="detail-nav-bar">
@@ -1598,7 +1605,7 @@
       <!-- Detail Card 2: Gifts -->
       <div id="dc-gifts" class="detail-content">
         <h3 class="dc-header">Gifts</h3>
-        <p class="text-center" style="margin-top: 2rem; color: rgba(255,255,255,0.85); font-weight: 300; font-size: 15px; line-height: 2;">We are immensely grateful for your love and support. Your presence at our wedding is the greatest gift of all.<br><br>If you wish to bless us with a gift, a monetary contribution to help us start our new chapter together would be deeply appreciated.</p>
+        <p class="text-center" style="margin-top: 2rem; color: var(--text-muted); font-weight: 300; font-size: 15px; line-height: 2;">We are immensely grateful for your love and support. Your presence at our wedding is the greatest gift of all.<br><br>If you wish to bless us with a gift, a monetary contribution to help us start our new chapter together would be deeply appreciated.</p>
         
         <div class="detail-nav-bar">
           <button class="detail-nav-btn" onclick="openDetail('dc-dress')">&larr; Dress Code</button>
@@ -1681,7 +1688,7 @@
   <!-- RSVP SCREEN -->
   <div class="screen" id="screen-rsvp">
     <div class="container text-center">
-      <div class="reveal-on-scroll" style="font-size: 11px; letter-spacing: 4px; color: var(--gray); margin-bottom: 1rem;">CHAPTER 04</div>
+      <div class="reveal-on-scroll" style="font-size: 11px; letter-spacing: 4px; color: var(--lavender); margin-bottom: 1rem;">CHAPTER 04</div>
       <h2 class="serif reveal-on-scroll" style="font-size: 48px; margin-bottom: 1rem; letter-spacing: 2px;">We've saved you a seat.</h2>
       <p class="reveal-on-scroll" style="color: var(--gray); font-size: 14px; margin-bottom: 4rem;">Please let us know if you'll be joining us.</p>
 
