@@ -7,7 +7,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Poppins:wght@300;400;500;600;700&family=Allura&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Poppins:wght@300;400;500;600;700&family=Allura&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================================================
@@ -302,9 +302,9 @@
       z-index: 0;
     }
 
-    /* Ultra-Large Photo Clip Countdown Styling */
+    /* Enormous & Ultra-Thin Translucent-Outlined Photo-Clip Countdown */
     .countdown-display-wrap {
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -314,14 +314,15 @@
 
     .photo-countdown-number {
       font-family: var(--font-serif);
-      font-size: clamp(160px, 35vw, 320px);
-      font-weight: 900;
-      line-height: 0.85;
-      letter-spacing: -4px;
+      font-size: clamp(140px, 32vw, 290px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 0.82;
+      letter-spacing: -6px;
       text-align: center;
       background-image: url('countdownpic.jpg'), url('countdownpic.jpeg'), url('cover.jpeg');
       background-size: cover;
-      background-position: center 30%;
+      background-position: center center;
       background-repeat: no-repeat;
       -webkit-background-clip: text;
       background-clip: text;
@@ -329,16 +330,17 @@
       display: block;
       margin: 0 auto;
       width: 100%;
-      filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.45);
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.7));
     }
 
     .countdown-subtext {
       font-size: clamp(10px, 2vw, 13px);
       letter-spacing: 12px;
-      color: rgba(255, 255, 255, 0.9);
+      color: rgba(255, 255, 255, 0.85);
       text-transform: uppercase;
       font-weight: 300;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       text-indent: 12px;
     }
     
@@ -1133,7 +1135,7 @@
       .details-grid { grid-template-columns: 1fr; }
       .arch-cards-grid { grid-template-columns: 1fr; }
       .stacked-card { top: 70px; margin-bottom: 25vh; }
-      .photo-countdown-number { letter-spacing: -2px; }
+      .photo-countdown-number { letter-spacing: -3px; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4); }
     }
   </style>
 </head>
@@ -1186,7 +1188,7 @@
   <div class="screen" id="screen-menu">
     <div class="container text-center">
       
-      <!-- Ultra Large Photographic Countdown Block -->
+      <!-- Enormous & Ultra-Thin Translucent Outlined Photographic Countdown Block -->
       <div class="countdown-display-wrap reveal-on-scroll">
         <div class="photo-countdown-number" id="days-countdown">00</div>
         <div class="countdown-subtext">D A Y S &nbsp; T O &nbsp; G O</div>
@@ -1587,7 +1589,7 @@
 
       <div id="rsvp-success" class="rsvp-success">
         <h2 class="serif" style="font-size: 32px; margin-bottom: 1rem;">You're on the list.</h2>
-        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can't wait to celebrate with you.</div>
+        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can'wait to celebrate with you.</div>
       </div>
 
       <div class="text-center">
