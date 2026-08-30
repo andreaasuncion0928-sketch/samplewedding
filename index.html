@@ -279,7 +279,7 @@
     }
 
     /* ==========================================================================
-       4. MENU / WELCOME SCREEN WITH COUNTDOWN
+       4. MENU / WELCOME SCREEN
        ========================================================================== */
     #screen-menu { 
       position: relative;
@@ -304,51 +304,11 @@
       z-index: 0;
     }
     
-    .menu-header { margin-bottom: 3rem; text-align: center; color: var(--white); }
+    .menu-header { margin-bottom: 4rem; text-align: center; color: var(--white); }
     .menu-header .script { color: var(--white); animation: floatLight 5s infinite ease-in-out; }
     .menu-header h2 { font-size: 2rem; letter-spacing: 2px; color: var(--white); }
     .menu-header p { font-size: 12px; letter-spacing: 4px; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; margin-top: 0.5rem;}
     
-    /* Countdown Timer Layout */
-    .countdown-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1.5rem;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .countdown-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-width: 60px;
-    }
-
-    .countdown-num {
-      font-family: var(--font-serif);
-      font-size: clamp(24px, 4vw, 36px);
-      color: var(--white);
-      font-weight: 300;
-      line-height: 1;
-    }
-
-    .countdown-label {
-      font-size: 9px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.6);
-      margin-top: 0.4rem;
-    }
-
-    .countdown-divider {
-      font-family: var(--font-serif);
-      font-size: 20px;
-      color: rgba(255, 255, 255, 0.4);
-      margin-top: -12px;
-    }
-
     .elegant-menu { display: flex; flex-direction: column; max-width: 500px; margin: 0 auto; color: var(--white); }
     
     .elegant-item { 
@@ -1138,7 +1098,6 @@
       .details-grid { grid-template-columns: 1fr; }
       .arch-cards-grid { grid-template-columns: 1fr; }
       .stacked-card { top: 70px; margin-bottom: 25vh; }
-      .countdown-wrap { gap: 0.8rem; }
     }
   </style>
 </head>
@@ -1187,36 +1146,13 @@
     </div>
   </div>
 
-  <!-- MENU / CHAPTERS SCREEN WITH LIVE COUNTDOWN -->
+  <!-- MENU SCREEN -->
   <div class="screen" id="screen-menu">
     <div class="container text-center">
       <div class="menu-header reveal-on-scroll">
-        <div class="script" style="font-size: 4rem; margin-bottom: 0.5rem;">Welcome.</div>
+        <div class="script" style="font-size: 4rem; margin-bottom: 1rem;">Welcome.</div>
         <h2 class="serif" style="font-size: 26px; text-transform: uppercase; letter-spacing: 4px;">Elena & Adrian</h2>
         <p>31 · 01 · 2028</p>
-
-        <!-- COUNTDOWN TIMER -->
-        <div class="countdown-wrap">
-          <div class="countdown-item">
-            <span class="countdown-num" id="cd-days">00</span>
-            <span class="countdown-label">Days</span>
-          </div>
-          <span class="countdown-divider">:</span>
-          <div class="countdown-item">
-            <span class="countdown-num" id="cd-hours">00</span>
-            <span class="countdown-label">Hours</span>
-          </div>
-          <span class="countdown-divider">:</span>
-          <div class="countdown-item">
-            <span class="countdown-num" id="cd-mins">00</span>
-            <span class="countdown-label">Mins</span>
-          </div>
-          <span class="countdown-divider">:</span>
-          <div class="countdown-item">
-            <span class="countdown-num" id="cd-secs">00</span>
-            <span class="countdown-label">Secs</span>
-          </div>
-        </div>
       </div>
       
       <div class="elegant-menu reveal-on-scroll">
@@ -1697,61 +1633,33 @@
       document.getElementById('rsvp-success').style.display = 'block';
     }
 
-    /* COUNTDOWN TIMER LOGIC */
-    const weddingDate = new Date("January 31, 2028 15:00:00").getTime();
+    /* GENERAL SCROLL OBSERVER */
+    let generalObserver;
+    function initGeneralScrollObserver() {
+      if (generalObserver) generalObserver.disconnect();
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = weddingDate - now;
+      const options = {
+        root: null,
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.1
+      };
 
-      if (distance < 0) {
-        document.querySelector(".countdown-wrap").innerHTML = "<span style='color: var(--white); font-family: var(--font-serif); font-size: 20px; letter-spacing: 2px;'>TODAY IS THE DAY!</span>";
-        return;
-      }
+      generalObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+          }
+        });
+      }, options);
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000To add a live **Wedding Countdown Timer** to the Chapters (Welcome/Menu) screen, insert the countdown markup into the `#screen-menu` section and add the corresponding CSS styles and JavaScript logic.
+      document.querySelectorAll('.screen.active .reveal-on-scroll').forEach(el => {
+        generalObserver.observe(el);
+      });
+    }
 
-### 1. Add CSS Styles
-Add the following CSS rules inside your `<style>` tag (near the `.menu-header` styles):
-
-```css
-/* Countdown Timer Styles */
-.countdown-container {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin: 2rem auto 3rem;
-  max-width: 500px;
-}
-
-.countdown-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 65px;
-  padding: 0.8rem 0.5rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-
-.countdown-num {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  font-weight: 300;
-  line-height: 1;
-  color: var(--white);
-}
-
-.countdown-label {
-  font-size: 8px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
-  margin-top: 0.4rem;
-}
+    document.addEventListener('DOMContentLoaded', () => {
+      initGeneralScrollObserver();
+    });
+  </script>
+</body>
+</html>
