@@ -108,7 +108,7 @@
     .container { 
       max-width: 850px; 
       margin: 0 auto; 
-      padding: 4rem 1.5rem 4rem; 
+      padding: 3.5rem 1.25rem 4rem; 
       position: relative; 
       z-index: 1;
       width: 100%;
@@ -117,10 +117,10 @@
 
     .btn {
       display: inline-block;
-      padding: 1rem 3rem;
+      padding: 0.9rem 2.8rem;
       background-color: var(--black);
       color: var(--white);
-      font-size: 11px;
+      font-size: 10px;
       letter-spacing: 4px;
       text-transform: uppercase;
       border: 1px solid var(--black);
@@ -241,7 +241,7 @@
 
     .cover-content {
       position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; 
-      justify-content: center; text-align: center; min-height: 100vh; padding: 4rem 1.5rem; color: #FFF;
+      justify-content: center; text-align: center; min-height: 100vh; padding: 4rem 1.25rem; color: #FFF;
     }
 
     .cover-subtitle {
@@ -296,7 +296,7 @@
     }
 
     /* ==========================================================================
-       4. MENU / WELCOME SCREEN & MOBILE-FIT COUNTER
+       4. MENU / WELCOME SCREEN & REFINED MINIMALIST ODOMETER
        ========================================================================== */
     #screen-menu { 
       position: relative;
@@ -322,8 +322,8 @@
     }
 
     .countdown-display-wrap {
-      margin-bottom: 2rem;
-      padding-top: 1rem;
+      margin-bottom: 1.5rem;
+      padding-top: 0.5rem;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -336,23 +336,23 @@
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      height: clamp(80px, 18vw, 190px);
+      height: clamp(65px, 14vw, 130px);
       overflow: hidden;
       font-family: var(--font-serif);
-      font-size: clamp(75px, 18vw, 220px);
+      font-size: clamp(60px, 14vw, 130px);
       font-weight: 300;
       font-style: italic;
       color: rgba(255, 255, 255, 0.95);
       line-height: 1;
-      padding: 0 5px;
+      padding: 0 4px;
       max-width: 100%;
-      mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
     }
 
     .odometer-digit-column {
       display: inline-block;
-      height: clamp(80px, 18vw, 190px);
+      height: clamp(65px, 14vw, 130px);
       overflow: hidden;
       position: relative;
     }
@@ -368,31 +368,31 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: clamp(80px, 18vw, 190px);
-      width: clamp(45px, 12vw, 130px);
+      height: clamp(65px, 14vw, 130px);
+      width: clamp(35px, 9vw, 80px);
       line-height: 1;
       text-align: center;
     }
 
     .countdown-subtext {
-      font-size: clamp(8px, 1.5vw, 11px);
-      letter-spacing: clamp(4px, 1.5vw, 10px);
+      font-size: clamp(8px, 1.4vw, 10px);
+      letter-spacing: clamp(4px, 1.5vw, 8px);
       color: rgba(255, 255, 255, 0.7);
       text-transform: uppercase;
       font-weight: 300;
-      margin-top: 1.2rem;
+      margin-top: 1rem;
       text-indent: 4px;
     }
     
-    .menu-header { margin-bottom: 2.5rem; text-align: center; color: var(--white); margin-top: 1.5rem; }
-    .menu-header h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); letter-spacing: 4px; color: var(--white); text-transform: uppercase; font-weight: 300; }
-    .menu-header p { font-size: 11px; letter-spacing: 5px; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; margin-top: 0.5rem;}
+    .menu-header { margin-bottom: 2.2rem; text-align: center; color: var(--white); margin-top: 1.2rem; }
+    .menu-header h2 { font-size: clamp(1.4rem, 3.5vw, 2rem); letter-spacing: 4px; color: var(--white); text-transform: uppercase; font-weight: 300; }
+    .menu-header p { font-size: 11px; letter-spacing: 5px; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; margin-top: 0.4rem;}
     
-    .elegant-menu { display: flex; flex-direction: column; max-width: 500px; margin: 0 auto; color: var(--white); width: 100%; }
+    .elegant-menu { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; color: var(--white); width: 100%; }
     
     .elegant-item { 
       display: flex; align-items: center; justify-content: space-between; 
-      padding: 1.8rem 0.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+      padding: 1.5rem 0.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
       cursor: pointer; transition: all 0.4s var(--ease-smooth); text-align: left;
       position: relative;
       width: 100%;
@@ -407,17 +407,17 @@
     }
 
     .elegant-item:first-child { border-top: 1px solid rgba(255, 255, 255, 0.2); }
-    .elegant-item:hover { transform: translateX(8px); background: rgba(255,255,255,0.03); }
+    .elegant-item:hover { transform: translateX(6px); background: rgba(255,255,255,0.03); }
     .elegant-item:hover::after { width: 100%; }
     
     .ei-text { flex-grow: 1; padding: 0 0.5rem; }
-    .ei-title { font-family: var(--font-serif); font-size: clamp(20px, 4vw, 26px); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.3rem; color: var(--white); }
+    .ei-title { font-family: var(--font-serif); font-size: clamp(18px, 3.5vw, 24px); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.2rem; color: var(--white); }
     .ei-desc { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); font-family: var(--font-sans); }
-    .ei-arrow { font-size: 18px; color: rgba(255, 255, 255, 0.5); transition: all 0.3s var(--ease-smooth); }
-    .elegant-item:hover .ei-arrow { color: var(--white); transform: translateX(6px); }
+    .ei-arrow { font-size: 16px; color: rgba(255, 255, 255, 0.5); transition: all 0.3s var(--ease-smooth); }
+    .elegant-item:hover .ei-arrow { color: var(--white); transform: translateX(5px); }
 
     /* ==========================================================================
-       5. OUR STORY SCREEN
+       5. OUR STORY SCREEN (FADE-IN FOR FINAL MARRIED TEXT)
        ========================================================================== */
     #screen-story {
       position: relative;
@@ -477,6 +477,7 @@
       animation: floatLight 6s infinite ease-in-out;
     }
 
+    /* Fade-in for "And now, we're getting married." */
     .story-married-text {
       font-style: italic;
       color: var(--black);
@@ -484,6 +485,14 @@
       font-weight: 500;
       margin-top: 2rem;
       margin-bottom: 2.5rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 1.5s var(--ease-smooth), transform 1.5s var(--ease-smooth);
+    }
+
+    .story-married-text.fade-in-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .typing-cursor::after {
@@ -1192,10 +1201,10 @@
     }
 
     /* ==========================================================================
-       9. RESPONSIVE MOBILE BREAKPOINTS & LAYOUT CORRECTIONS
+       9. RESPONSIVE BREAKPOINTS
        ========================================================================== */
     @media (max-width: 768px) {
-      .container { padding: 2.5rem 1rem 3rem; }
+      .container { padding: 2.2rem 1rem 3rem; }
       .details-grid { grid-template-columns: 1fr; gap: 1rem; }
       .arch-cards-grid { grid-template-columns: 1fr; gap: 1.5rem; }
       
@@ -1214,8 +1223,8 @@
       }
 
       .stacked-card { top: 75px; margin-bottom: 22vh; }
-      .odometer-digit-strip span { width: clamp(38px, 11vw, 70px); }
-      .btn { padding: 0.9rem 2rem; font-size: 10px; letter-spacing: 3px; }
+      .odometer-digit-strip span { width: clamp(30px, 8vw, 50px); }
+      .btn { padding: 0.85rem 1.8rem; font-size: 9px; letter-spacing: 3px; }
       
       .detail-nav-bar { flex-wrap: wrap; justify-content: center; gap: 8px; }
       .detail-nav-btn { font-size: 8px; padding: 0.4rem 0.8rem; }
@@ -1247,7 +1256,7 @@
       <h2 class="serif reveal-on-scroll" style="font-size: 42px; margin-bottom: 3.5rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 300;">Our Story</h2>
 
       <div class="story-content" id="typewriter-container">
-        <!-- Typed dynamically character by character, strictly synced to 0:10 lyrics start -->
+        <!-- Typed dynamically character by character, synced to 0:10 audio hit -->
       </div>
 
       <div id="story-join-btn-wrap">
@@ -1267,7 +1276,7 @@
   <div class="screen" id="screen-menu">
     <div class="container text-center">
       
-      <!-- Minimalist Ultra-Slow Mechanical Odometer -->
+      <!-- Minimalist Ultra-Slow 50% Slower Odometer -->
       <div class="countdown-display-wrap reveal-on-scroll">
         <div class="odometer-window" id="odometer-container">
           <!-- Digit Reels -->
@@ -1770,7 +1779,7 @@
       document.getElementById('rsvp-success').style.display = 'block';
     }
 
-    /* ULTRA-SLOW MINIMALIST ODOMETER COUNTER */
+    /* 50% SLOWER MINIMALIST ODOMETER COUNTER (9.0s TRANSITION) */
     function getTargetDays() {
       const weddingDate = new Date('January 31, 2028 00:00:00').getTime();
       const now = new Date().getTime();
@@ -1824,8 +1833,9 @@
         strip.style.transition = 'none';
         strip.style.transform = 'translateY(0%)';
 
+        // 50% slower transition speed (extended to 9.0s)
         setTimeout(() => {
-          strip.style.transition = 'transform 4.5s cubic-bezier(0.1, 0.9, 0.2, 1)';
+          strip.style.transition = 'transform 9.0s cubic-bezier(0.1, 0.9, 0.2, 1)';
           strip.style.transform = `translateY(${targetPercent}%)`;
         }, 150);
       });
@@ -1843,12 +1853,12 @@
       });
     }
 
-    /* TYPEWRITER STORY SYNCHRONIZED STRICTLY TO AUDIO 0:10 VOCAL HIT */
+    /* TYPEWRITER STORY SYNCHRONIZED WITH FADE-IN FOR "And now, we're getting married." */
     const storyBlocks = [
       { type: 'p', text: 'It started with coffee.', class: 'story-highlight-italics' },
       { type: 'p', text: 'We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.' },
       { type: 'div', text: 'we became us.', class: 'story-script-accent' },
-      { type: 'p', text: "And now, we're getting married.", class: 'story-married-text' }
+      { type: 'p', text: "And now, we're getting married.", class: 'story-married-text', isFadeIn: true }
     ];
 
     let isTyping = false;
@@ -1870,7 +1880,7 @@
       let charIndex = 0;
       let currentEl = null;
 
-      const VOCAL_HIT_TIME = 10.0; // Exact 0:10 timestamp for "we became us."
+      const VOCAL_HIT_TIME = 10.0;
 
       function typeNextChar() {
         if (blockIndex >= storyBlocks.length) {
@@ -1881,6 +1891,23 @@
         }
 
         const block = storyBlocks[blockIndex];
+
+        // Handle "And now, we're getting married." as a fade-in element instead of typewriter
+        if (block.isFadeIn) {
+          if (currentEl) currentEl.classList.remove('typing-cursor');
+          currentEl = document.createElement(block.type);
+          if (block.class) currentEl.className = block.class;
+          currentEl.textContent = block.text;
+          container.appendChild(currentEl);
+
+          setTimeout(() => {
+            currentEl.classList.add('fade-in-visible');
+          }, 100);
+
+          blockIndex++;
+          typeTimeout = setTimeout(typeNextChar, 1200);
+          return;
+        }
 
         if (charIndex === 0) {
           if (currentEl) currentEl.classList.remove('typing-cursor');
@@ -1903,7 +1930,6 @@
 
           let delay = 300;
 
-          // Before typing "we became us.", calculate precise remaining time until 0:10 audio hit
           if (blockIndex === 2) {
             let currentTime = music ? music.currentTime : 0;
             if (!music.paused && currentTime < VOCAL_HIT_TIME) {
