@@ -210,7 +210,8 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.18);
     }
 
-    #screen-details .back-btn {
+    #screen-details .back-btn,
+    #screen-entourage .back-btn {
       color: var(--lavender-light);
       background: rgba(17, 17, 17, 0.7);
       border-color: rgba(212, 168, 240, 0.8);
@@ -218,7 +219,8 @@
       -webkit-backdrop-filter: blur(8px);
     }
 
-    #screen-details .back-btn:hover {
+    #screen-details .back-btn:hover,
+    #screen-entourage .back-btn:hover {
       color: var(--black);
       background: var(--white);
       border-color: var(--white);
@@ -910,7 +912,123 @@
     }
 
     /* ==========================================================================
-       7. DETAILS SCREEN
+       7. ENTOURAGE SCREEN
+       ========================================================================== */
+    #screen-entourage {
+      position: relative;
+      background-color: var(--black);
+      color: var(--white);
+    }
+
+    #screen-entourage::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url('entourage.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      opacity: 0.35;
+      z-index: 0;
+      animation: scaleZoomBg 25s infinite alternate var(--ease-smooth);
+    }
+
+    #screen-entourage::after {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(17, 17, 17, 0.65);
+      z-index: 0;
+    }
+
+    .entourage-header-tag {
+      font-size: 10px;
+      letter-spacing: 5px;
+      color: var(--lavender-light);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .entourage-main-title {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 5vw, 48px);
+      letter-spacing: 5px;
+      font-weight: 400;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.15;
+      position: relative;
+      z-index: 2;
+    }
+
+    .entourage-sub-quote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.5;
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .entourage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 820px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    .entourage-card {
+      background: rgba(17, 17, 17, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(212, 168, 240, 0.3);
+      border-radius: 12px;
+      padding: 2.2rem 1.5rem;
+      text-align: center;
+      transition: all 0.4s var(--ease-smooth);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    .entourage-card:hover {
+      border-color: var(--lavender-light);
+      background: rgba(17, 17, 17, 0.75);
+      transform: translateY(-4px);
+    }
+
+    .entourage-card-full {
+      grid-column: span 2;
+    }
+
+    .entourage-role-title {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--lavender-light);
+      margin-bottom: 1rem;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(212, 168, 240, 0.2);
+      padding-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .entourage-person-name {
+      font-family: var(--font-serif);
+      font-size: clamp(16px, 3.2vw, 21px);
+      color: var(--white);
+      margin-bottom: 0.3rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    /* ==========================================================================
+       8. DETAILS SCREEN
        ========================================================================== */
     #screen-details {
       position: relative;
@@ -1110,7 +1228,7 @@
     .faq-item.open .faq-a { max-height: 250px; padding: 1.2rem 0; }
 
     /* ==========================================================================
-       8. GALLERY SCREEN
+       9. GALLERY SCREEN
        ========================================================================== */
     #screen-gallery {
       background-color: var(--off-white);
@@ -1239,12 +1357,14 @@
     }
 
     /* ==========================================================================
-       9. RESPONSIVE BREAKPOINTS
+       10. RESPONSIVE BREAKPOINTS
        ========================================================================== */
     @media (max-width: 768px) {
       .container { padding: 2.2rem 1rem 3rem; }
       .details-grid { grid-template-columns: 1fr; gap: 1rem; }
       .arch-cards-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .entourage-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+      .entourage-card-full { grid-column: span 1; }
       
       .timeline-center-line { left: 15px; }
       .timeline-node-dot { left: 15px; }
@@ -1332,6 +1452,14 @@
           <div class="ei-text">
             <div class="ei-title">The Day</div>
             <div class="ei-desc">When & where to find us</div>
+          </div>
+          <span class="ei-arrow">&rarr;</span>
+        </div>
+
+        <div class="elegant-item" onclick="openScreen('entourage')">
+          <div class="ei-text">
+            <div class="ei-title">The Entourage</div>
+            <div class="ei-desc">Those who walk beside us</div>
           </div>
           <span class="ei-arrow">&rarr;</span>
         </div>
@@ -1560,6 +1688,57 @@
     </div>
   </div>
 
+  <!-- ENTOURAGE SCREEN -->
+  <div class="screen" id="screen-entourage">
+    <div class="container text-center">
+      <div class="entourage-header-tag reveal-on-scroll">WITH OUR BELOVED FAMILIES</div>
+      <h2 class="entourage-main-title reveal-on-scroll">THE ENTOURAGE</h2>
+      <p class="entourage-sub-quote reveal-on-scroll">Those who hold our hands, guide our steps, and stand beside us as we say 'I do.'</p>
+
+      <div class="entourage-grid reveal-on-scroll">
+        <div class="entourage-card">
+          <div class="entourage-role-title">PARENTS OF THE BRIDE</div>
+          <div class="entourage-person-name">Mr. Roberto Santos</div>
+          <div class="entourage-person-name">Mrs. Carmen Santos</div>
+        </div>
+
+        <div class="entourage-card">
+          <div class="entourage-role-title">PARENTS OF THE GROOM</div>
+          <div class="entourage-person-name">Mr. Fernando Reyes</div>
+          <div class="entourage-person-name">Mrs. Alicia Reyes</div>
+        </div>
+
+        <div class="entourage-card">
+          <div class="entourage-role-title">MAID OF HONOR</div>
+          <div class="entourage-person-name">Sophia Santos</div>
+        </div>
+
+        <div class="entourage-card">
+          <div class="entourage-role-title">BEST MAN</div>
+          <div class="entourage-person-name">Marco Reyes</div>
+        </div>
+
+        <div class="entourage-card entourage-card-full">
+          <div class="entourage-role-title">PRINCIPAL SPONSORS</div>
+          <div class="entourage-person-name">Mr. Ricardo Cruz & Mrs. Elena Cruz</div>
+          <div class="entourage-person-name">Mr. Gabriel Gomez & Mrs. Teresa Gomez</div>
+          <div class="entourage-person-name">Mr. Antonio Morales & Mrs. Beatrix Morales</div>
+        </div>
+
+        <div class="entourage-card entourage-card-full">
+          <div class="entourage-role-title">BRIDESMAIDS & GROOMSMEN</div>
+          <div class="entourage-person-name">Isabella Santos &nbsp;·&nbsp; Lucas Torres</div>
+          <div class="entourage-person-name">Clara Mendoza &nbsp;·&nbsp; Mateo Ramos</div>
+          <div class="entourage-person-name">Julianna Navarro &nbsp;·&nbsp; Gabriel Navarro</div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
+      </div>
+    </div>
+  </div>
+
   <!-- DETAILS SCREEN -->
   <div class="screen" id="screen-details">
     <div class="container text-center">
@@ -1717,7 +1896,7 @@
 
       <div id="rsvp-success" class="rsvp-success">
         <h2 class="serif" style="font-size: 32px; margin-bottom: 1rem;">You're on the list.</h2>
-        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can't wait to celebrate with you.</div>
+        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can'wait to celebrate with you.</div>
       </div>
 
       <div class="text-center">
