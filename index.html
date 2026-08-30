@@ -84,7 +84,7 @@
     .back-btn:hover { color: var(--black); border-bottom-color: var(--black); letter-spacing: 4px; }
 
     /* ==========================================================================
-       3. COVER SCREEN (DIDOT/BODONI ELEGANT LAYOUT)
+       3. COVER SCREEN
        ========================================================================== */
     #screen-cover {
       background-color: var(--black);
@@ -479,14 +479,15 @@
     #screen-day .back-btn:hover { color: #111; border-bottom-color: #111; }
 
     /* ==========================================================================
-       7. DETAILS SCREEN
+       7. DETAILS SCREEN (LIGHTER BACKGROUND & TRANSLUCENT WHITE GLASS CARDS)
        ========================================================================== */
     #screen-details {
       position: relative;
-      background-color: var(--black);
-      color: var(--white);
+      background-color: #FAFAFA;
+      color: var(--black);
     }
     
+    /* Background Image: thedetails.jpeg */
     #screen-details::before {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -494,34 +495,36 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      filter: grayscale(100%);
       z-index: 0;
     }
 
+    /* Light/Subtle Overlay (20% Dark Opacity for Brightness) */
     #screen-details::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.65); 
+      background-color: rgba(0, 0, 0, 0.20); 
       z-index: 0;
     }
 
     .details-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 600px; margin: 0 auto; position: relative; z-index: 2; }
     
+    /* Transparent White Cards */
     .detail-card { 
-      border: 1px solid rgba(255, 255, 255, 0.25); 
+      border: 1px solid rgba(255, 255, 255, 0.7); 
       padding: 3.5rem 2.5rem; 
       text-align: center; 
       cursor: pointer; 
       transition: all 0.4s ease; 
-      background: rgba(0, 0, 0, 0.45); 
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.75); 
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     }
     .detail-card:hover { 
-      border-color: var(--white); 
-      background: rgba(0, 0, 0, 0.65); 
+      border-color: var(--black); 
+      background: rgba(255, 255, 255, 0.92); 
       transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
     }
     
     .detail-title { 
@@ -531,31 +534,32 @@
       letter-spacing: 2px; 
       text-transform: uppercase; 
       margin-bottom: 0.5rem; 
-      color: var(--white);
+      color: var(--black);
     }
     .detail-sub { 
       font-size: 11px; 
       letter-spacing: 3px; 
-      color: rgba(255, 255, 255, 0.7); 
+      color: var(--gray); 
       text-transform: uppercase; 
       font-weight: 300; 
     }
 
+    /* Transparent White Detail Sub-Panels */
     .detail-content { 
       display: none; 
       text-align: left; 
       max-width: 600px; 
       margin: 0 auto; 
       animation: fadeIn 0.4s forwards; 
-      background: rgba(0, 0, 0, 0.55); 
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: rgba(255, 255, 255, 0.88); 
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       padding: 4rem 3rem; 
-      border: 1px solid rgba(255, 255, 255, 0.25); 
+      border: 1px solid rgba(255, 255, 255, 0.8); 
       position: relative;
       z-index: 2;
-      color: var(--white);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      color: var(--black);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
     }
     .detail-content.active { display: block; }
     
@@ -567,9 +571,9 @@
       text-transform: uppercase; 
       margin-bottom: 1.5rem; 
       text-align: center; 
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12); 
       padding-bottom: 1.5rem;
-      color: var(--white);
+      color: var(--black);
     }
     
     .faq-q { 
@@ -581,9 +585,9 @@
       font-weight: 400; 
       display: flex; 
       justify-content: space-between; 
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12); 
       letter-spacing: 1px; 
-      color: var(--white); 
+      color: var(--black); 
     }
     .faq-a { 
       max-height: 0; 
@@ -591,17 +595,17 @@
       transition: max-height 0.3s ease; 
       font-size: 14px; 
       font-weight: 300; 
-      color: rgba(255, 255, 255, 0.75); 
+      color: var(--gray); 
       line-height: 1.8; 
     }
     .faq-item.open .faq-a { max-height: 200px; padding: 1.5rem 0; }
 
     #screen-details .back-btn {
-      color: rgba(255, 255, 255, 0.8);
+      color: #333;
     }
     #screen-details .back-btn:hover {
-      color: var(--white);
-      border-bottom-color: var(--white);
+      color: var(--black);
+      border-bottom-color: var(--black);
     }
 
     /* ==========================================================================
@@ -823,8 +827,8 @@
 
   <div class="screen" id="screen-details">
     <div class="container text-center">
-      <div style="font-size: 11px; letter-spacing: 4px; color: rgba(255,255,255,0.8); margin-bottom: 1rem; font-weight: 500;">CHAPTER 02</div>
-      <h2 class="serif" style="font-size: 48px; margin-bottom: 4rem; letter-spacing: 2px; text-transform: uppercase; color: var(--white);">The Details</h2>
+      <div style="font-size: 11px; letter-spacing: 4px; color: #111; margin-bottom: 1rem; font-weight: 500;">CHAPTER 02</div>
+      <h2 class="serif" style="font-size: 48px; margin-bottom: 4rem; letter-spacing: 2px; text-transform: uppercase; color: var(--black);">The Details</h2>
 
       <div id="details-menu" class="details-grid">
         <div class="detail-card" onclick="openDetail('dc-dress')">
@@ -844,21 +848,21 @@
 
       <div id="dc-dress" class="detail-content">
         <h3 class="dc-header">Black & White</h3>
-        <p class="text-center" style="margin-bottom: 3rem; color: rgba(255,255,255,0.8); font-style: italic; font-size: 16px;">Keep it classic. Keep it timeless.</p>
+        <p class="text-center" style="margin-bottom: 3rem; color: var(--gray); font-style: italic; font-size: 16px;">Keep it classic. Keep it timeless.</p>
         <div style="margin-bottom: 2.5rem;">
-          <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px; color: var(--white);">LADIES</h4>
-          <p style="color: rgba(255,255,255,0.75); font-size: 14px; font-weight: 300;">Black, white, ivory, or monochrome formalwear.</p>
+          <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px; color: var(--black);">LADIES</h4>
+          <p style="color: var(--gray); font-size: 14px; font-weight: 300;">Black, white, ivory, or monochrome formalwear.</p>
         </div>
         <div style="margin-bottom: 3rem;">
-          <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px; color: var(--white);">GENTLEMEN</h4>
-          <p style="color: rgba(255,255,255,0.75); font-size: 14px; font-weight: 300;">Black suit, tuxedo, white shirt, or classic monochrome formalwear.</p>
+          <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px; color: var(--black);">GENTLEMEN</h4>
+          <p style="color: var(--gray); font-size: 14px; font-weight: 300;">Black suit, tuxedo, white shirt, or classic monochrome formalwear.</p>
         </div>
         <div class="text-center"><a class="back-btn" onclick="closeDetail()">&larr; Back to Details</a></div>
       </div>
 
       <div id="dc-gifts" class="detail-content">
         <h3 class="dc-header">Gifts</h3>
-        <p class="text-center" style="margin-top: 2rem; color: rgba(255,255,255,0.8); font-weight: 300; font-size: 15px; line-height: 2;">We are immensely grateful for your love and support. Your presence at our wedding is the greatest gift of all.<br><br>If you wish to bless us with a gift, a monetary contribution to help us start our new chapter together would be deeply appreciated.</p>
+        <p class="text-center" style="margin-top: 2rem; color: var(--gray); font-weight: 300; font-size: 15px; line-height: 2;">We are immensely grateful for your love and support. Your presence at our wedding is the greatest gift of all.<br><br>If you wish to bless us with a gift, a monetary contribution to help us start our new chapter together would be deeply appreciated.</p>
         <div class="text-center"><a class="back-btn" onclick="closeDetail()">&larr; Back to Details</a></div>
       </div>
 
