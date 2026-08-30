@@ -96,22 +96,87 @@
       background-image: url('cover.jpeg');
       background-size: cover;
       background-position: center;
-      opacity: 0.5;
+      opacity: 0.35;
+      filter: grayscale(100%);
       z-index: 1;
     }
 
     .cover-content {
       position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; 
-      justify-content: center; text-align: center; height: 100vh; padding: 2rem;
+      justify-content: center; text-align: center; min-height: 100vh; padding: 4rem 2rem; color: #FFF;
     }
 
-    .cover-names { font-family: var(--font-serif); font-size: clamp(52px, 10vw, 100px); line-height: 1; color: #FFF; margin-bottom: 2rem; }
-    .cover-date { font-size: clamp(11px, 2vw, 13px); letter-spacing: 4px; color: #FFF; text-transform: uppercase; margin-bottom: 3rem; font-weight: 300; }
-    .cover-script { font-family: var(--font-script); font-size: clamp(2.5rem, 6vw, 3rem); color: #FFF; margin-bottom: 0.5rem; }
-    .cover-invite { font-size: 12px; letter-spacing: 6px; color: #FFF; text-transform: uppercase; margin-bottom: 4rem; font-weight: 300; }
-    
-    .cover-btn { background-color: transparent; color: #FFF; border: 1px solid #FFF; }
-    .cover-btn:hover { background-color: #FFF; color: #000; }
+    .divider-line {
+      width: 1px;
+      height: 28px;
+      background-color: rgba(255, 255, 255, 0.4);
+      margin: 0 auto;
+    }
+
+    .cover-names { 
+      font-family: var(--font-serif); 
+      font-size: clamp(52px, 9vw, 96px); 
+      line-height: 1.05; 
+      color: #FFF; 
+      margin: 1.5rem 0 2rem; 
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .cover-date { 
+      font-size: clamp(10px, 1.8vw, 12px); 
+      letter-spacing: 6px; 
+      color: rgba(255, 255, 255, 0.85); 
+      text-transform: uppercase; 
+      margin-top: 1.5rem;
+      margin-bottom: 2rem; 
+      font-weight: 300; 
+    }
+
+    .cover-script { 
+      font-family: var(--font-script); 
+      font-size: clamp(2.2rem, 5vw, 3.2rem); 
+      color: rgba(255, 255, 255, 0.9); 
+      margin-bottom: 2rem; 
+      font-style: italic;
+    }
+
+    .cover-invite { 
+      font-size: 10px; 
+      letter-spacing: 6px; 
+      color: rgba(255, 255, 255, 0.7); 
+      text-transform: uppercase; 
+      margin-bottom: 1rem; 
+      font-weight: 300; 
+    }
+
+    .cover-btn { 
+      background-color: transparent; 
+      color: #FFF; 
+      border: 1px solid rgba(255, 255, 255, 0.6); 
+      padding: 1.1rem 3.5rem;
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-top: 1rem;
+      transition: all 0.4s ease;
+    }
+    .cover-btn:hover { 
+      background-color: #FFF; 
+      color: #000; 
+      border-color: #FFF;
+    }
+
+    .cover-monogram {
+      margin-top: 3.5rem;
+      font-family: var(--font-serif);
+      font-size: 14px;
+      letter-spacing: 6px;
+      color: rgba(255, 255, 255, 0.75);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
     /* ==========================================================================
        4. MENU / WELCOME SCREEN
@@ -234,7 +299,7 @@
     }
 
     /* ==========================================================================
-       6. THE DAY SCREEN (MATCHING MOCKUP EXACTLY)
+       6. THE DAY SCREEN
        ========================================================================== */
     #screen-day {
       position: relative;
@@ -280,7 +345,6 @@
       margin-bottom: 3.5rem;
     }
 
-    /* Two Arch Cards Grid */
     .arch-cards-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -290,7 +354,6 @@
       margin: 0 auto;
     }
 
-    /* Arch Card Styling */
     .arch-card {
       background: rgba(236, 232, 226, 0.88);
       backdrop-filter: blur(8px);
@@ -381,7 +444,6 @@
     .arch-card.expanded .arch-icon { display: none; }
     .arch-card.expanded .arch-btn { display: none; }
 
-    /* Expanded Content Layout */
     .arch-expanded-content {
       display: none;
       animation: fadeIn 0.5s ease forwards;
@@ -399,7 +461,6 @@
       margin: 1.2rem 0 1.8rem;
     }
 
-    /* Meta Columns (3 columns: Date, Time, Venue) */
     .arch-meta-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -441,79 +502,138 @@
       color: #444;
     }
 
-    #screen-day .back-btn {
-      color: #666;
-    }
-
-    #screen-day .back-btn:hover {
-      color: #111;
-      border-bottom-color: #111;
-    }
+    #screen-day .back-btn { color: #666; }
+    #screen-day .back-btn:hover { color: #111; border-bottom-color: #111; }
 
     /* ==========================================================================
-       7. DETAILS SCREEN
+       7. DETAILS SCREEN (DIMMED THEDETAILS.JPEG BACKGROUND & TRANSPARENT CARDS)
        ========================================================================== */
     #screen-details {
       position: relative;
-      background-color: var(--white);
+      background-color: var(--black);
+      color: var(--white);
     }
     
+    /* Background Image: thedetails.jpeg */
     #screen-details::before {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-image: url('cover.jpeg');
+      background-image: url('thedetails.jpeg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      opacity: 0.7; 
+      filter: grayscale(100%);
       z-index: 0;
     }
 
+    /* Dim Overlay (65% Dark Opacity) */
     #screen-details::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(255, 255, 255, 0.60); 
+      background-color: rgba(0, 0, 0, 0.65); 
       z-index: 0;
     }
 
     .details-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 600px; margin: 0 auto; position: relative; z-index: 2; }
     
+    /* Transparent Detail Cards */
     .detail-card { 
-      border: 1px solid rgba(0,0,0,0.1); 
+      border: 1px solid rgba(255, 255, 255, 0.25); 
       padding: 3.5rem 2.5rem; 
       text-align: center; 
       cursor: pointer; 
       transition: all 0.4s ease; 
-      background: rgba(255, 255, 255, 0.75); 
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.45); 
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
-    .detail-card:hover { border-color: var(--black); box-shadow: 0 10px 30px rgba(0,0,0,0.08); background: rgba(255, 255, 255, 0.95); }
+    .detail-card:hover { 
+      border-color: var(--white); 
+      background: rgba(0, 0, 0, 0.65); 
+      transform: translateY(-3px);
+    }
     
-    .detail-title { font-family: var(--font-serif); font-size: 32px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; }
-    .detail-sub { font-size: 11px; letter-spacing: 3px; color: var(--gray); text-transform: uppercase; font-weight: 300; }
+    .detail-title { 
+      font-family: var(--font-serif); 
+      font-size: 32px; 
+      font-weight: 300; 
+      letter-spacing: 2px; 
+      text-transform: uppercase; 
+      margin-bottom: 0.5rem; 
+      color: var(--white);
+    }
+    .detail-sub { 
+      font-size: 11px; 
+      letter-spacing: 3px; 
+      color: rgba(255, 255, 255, 0.7); 
+      text-transform: uppercase; 
+      font-weight: 300; 
+    }
 
+    /* Transparent Detail Expanded Panels */
     .detail-content { 
       display: none; 
       text-align: left; 
       max-width: 600px; 
       margin: 0 auto; 
       animation: fadeIn 0.4s forwards; 
-      background: rgba(255, 255, 255, 0.85); 
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
+      background: rgba(0, 0, 0, 0.55); 
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       padding: 4rem 3rem; 
-      border: 1px solid rgba(0,0,0,0.1); 
+      border: 1px solid rgba(255, 255, 255, 0.25); 
       position: relative;
       z-index: 2;
+      color: var(--white);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
     }
     .detail-content.active { display: block; }
     
-    .dc-header { font-family: var(--font-serif); font-size: 38px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 1.5rem;}
+    .dc-header { 
+      font-family: var(--font-serif); 
+      font-size: 38px; 
+      font-weight: 300; 
+      letter-spacing: 2px; 
+      text-transform: uppercase; 
+      margin-bottom: 1.5rem; 
+      text-align: center; 
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+      padding-bottom: 1.5rem;
+      color: var(--white);
+    }
     
-    .faq-q { width: 100%; text-align: left; padding: 1.5rem 0; font-family: var(--font-serif); font-size: 26px; font-weight: 400; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.1); letter-spacing: 1px; color: var(--black); }
-    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-size: 14px; font-weight: 300; color: var(--gray); line-height: 1.8; }
+    .faq-q { 
+      width: 100%; 
+      text-align: left; 
+      padding: 1.5rem 0; 
+      font-family: var(--font-serif); 
+      font-size: 26px; 
+      font-weight: 400; 
+      display: flex; 
+      justify-content: space-between; 
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+      letter-spacing: 1px; 
+      color: var(--white); 
+    }
+    .faq-a { 
+      max-height: 0; 
+      overflow: hidden; 
+      transition: max-height 0.3s ease; 
+      font-size: 14px; 
+      font-weight: 300; 
+      color: rgba(255, 255, 255, 0.75); 
+      line-height: 1.8; 
+    }
     .faq-item.open .faq-a { max-height: 200px; padding: 1.5rem 0; }
+
+    #screen-details .back-btn {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    #screen-details .back-btn:hover {
+      color: var(--white);
+      border-bottom-color: var(--white);
+    }
 
     /* ==========================================================================
        8. GALLERY SCREEN
@@ -556,12 +676,20 @@
   <div class="screen active" id="screen-cover">
     <div class="cover-image"></div>
     <div class="cover-content">
-      <h1 class="cover-names">Elena <br>& Adrian</h1>
-      <div class="cover-date">31 January 2028 · Manila</div>
-      <div class="cover-script">It started with coffee.</div>
-      <div class="cover-invite">You are invited.</div>
+      <h1 class="cover-names">Elena<br>& Adrian</h1>
       
+      <div class="divider-line"></div>
+      <div class="cover-date">31 JANUARY 2028 · MANILA</div>
+      
+      <div class="cover-script">It started with coffee.</div>
+      <div class="cover-invite">YOU ARE INVITED.</div>
+      
+      <div class="divider-line" style="margin-bottom: 1.5rem;"></div>
       <button class="btn cover-btn" onclick="startExperience()">OPEN INVITATION &rarr;</button>
+
+      <div class="cover-monogram">
+        <span>🌿</span> E / A <span>🌿</span>
+      </div>
     </div>
   </div>
 
@@ -735,8 +863,8 @@
 
   <div class="screen" id="screen-details">
     <div class="container text-center">
-      <div style="font-size: 11px; letter-spacing: 4px; color: var(--black); margin-bottom: 1rem; font-weight: 500;">CHAPTER 02</div>
-      <h2 class="serif" style="font-size: 48px; margin-bottom: 4rem; letter-spacing: 2px; text-transform: uppercase;">The Details</h2>
+      <div style="font-size: 11px; letter-spacing: 4px; color: rgba(255,255,255,0.8); margin-bottom: 1rem; font-weight: 500;">CHAPTER 02</div>
+      <h2 class="serif" style="font-size: 48px; margin-bottom: 4rem; letter-spacing: 2px; text-transform: uppercase; color: var(--white);">The Details</h2>
 
       <div id="details-menu" class="details-grid">
         <div class="detail-card" onclick="openDetail('dc-dress')">
@@ -751,26 +879,26 @@
           <h3 class="detail-title">FAQ</h3>
           <p class="detail-sub">A few things you might be wondering.</p>
         </div>
-        <a class="back-btn" style="color: var(--black);" onclick="openScreen('menu')">&larr; Back to Chapters</a>
+        <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
       </div>
 
       <div id="dc-dress" class="detail-content">
         <h3 class="dc-header">Black & White</h3>
-        <p class="text-center" style="margin-bottom: 3rem; color: var(--gray); font-style: italic; font-size: 16px;">Keep it classic. Keep it timeless.</p>
+        <p class="text-center" style="margin-bottom: 3rem; color: rgba(255,255,255,0.8); font-style: italic; font-size: 16px;">Keep it classic. Keep it timeless.</p>
         <div style="margin-bottom: 2.5rem;">
-          <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px;">LADIES</h4>
-          <p style="color: var(--gray); font-size: 14px; font-weight: 300;">Black, white, ivory, or monochrome formalwear.</p>
+          <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px; color: var(--white);">LADIES</h4>
+          <p style="color: rgba(255,255,255,0.75); font-size: 14px; font-weight: 300;">Black, white, ivory, or monochrome formalwear.</p>
         </div>
         <div style="margin-bottom: 3rem;">
-          <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px;">GENTLEMEN</h4>
-          <p style="color: var(--gray); font-size: 14px; font-weight: 300;">Black suit, tuxedo, white shirt, or classic monochrome formalwear.</p>
+          <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px; color: var(--white);">GENTLEMEN</h4>
+          <p style="color: rgba(255,255,255,0.75); font-size: 14px; font-weight: 300;">Black suit, tuxedo, white shirt, or classic monochrome formalwear.</p>
         </div>
         <div class="text-center"><a class="back-btn" onclick="closeDetail()">&larr; Back to Details</a></div>
       </div>
 
       <div id="dc-gifts" class="detail-content">
         <h3 class="dc-header">Gifts</h3>
-        <p class="text-center" style="margin-top: 2rem; color: var(--gray); font-weight: 300; font-size: 15px; line-height: 2;">We are immensely grateful for your love and support. Your presence at our wedding is the greatest gift of all.<br><br>If you wish to bless us with a gift, a monetary contribution to help us start our new chapter together would be deeply appreciated.</p>
+        <p class="text-center" style="margin-top: 2rem; color: rgba(255,255,255,0.8); font-weight: 300; font-size: 15px; line-height: 2;">We are immensely grateful for your love and support. Your presence at our wedding is the greatest gift of all.<br><br>If you wish to bless us with a gift, a monetary contribution to help us start our new chapter together would be deeply appreciated.</p>
         <div class="text-center"><a class="back-btn" onclick="closeDetail()">&larr; Back to Details</a></div>
       </div>
 
@@ -869,7 +997,6 @@
       if(screenId !== 'details') closeDetail();
     }
 
-    /* Arch Card Toggle Logic for The Day Screen */
     function toggleArchCard(type, expand) {
       const card = document.getElementById('card-' + type);
       if (expand) {
