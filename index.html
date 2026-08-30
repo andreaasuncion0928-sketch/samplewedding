@@ -654,10 +654,10 @@
     }
 
     /* ==========================================================================
-       8. GALLERY SCREEN (PHOTOGRAPHS UNFOLDING CONCEPT)
+       8. GALLERY SCREEN (NOSTALGICT & MINIMALIST EDITORIAL CURATION)
        ========================================================================== */
     #screen-gallery {
-      background-color: var(--white);
+      background-color: #FAFAFA;
       color: var(--black);
       padding: 0 0 6rem;
       position: relative;
@@ -665,15 +665,15 @@
 
     .gallery-heading-wrap {
       text-align: center;
-      padding: 5rem 1.5rem 3rem;
+      padding: 5rem 1.5rem 4rem;
       opacity: 0;
-      transform: scale(0.98);
+      transform: translateY(20px);
       transition: opacity 1.2s ease-out, transform 1.2s ease-out;
     }
 
     .gallery-heading-wrap.visible {
       opacity: 1;
-      transform: scale(1);
+      transform: translateY(0);
     }
 
     .gallery-heading {
@@ -685,132 +685,85 @@
       color: var(--black);
     }
 
-    /* Unfolding Canvas Stage */
-    .unfolding-stage {
-      width: 100%;
-      max-width: 1300px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    /* Full Canvas Hero Sections (Base Layer) */
-    .canvas-hero {
-      position: relative;
-      width: 100%;
-      z-index: 1;
-    }
-
-    .canvas-hero img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Overlay Floating Cards that Unfold Over Base Canvas */
-    .unfold-card {
-      position: relative;
-      z-index: 2;
-      opacity: 0;
-      transform: scale(0.96);
-      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.35, 1), transform 1.2s cubic-bezier(0.25, 1, 0.35, 1);
-      will-change: opacity, transform;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
-    }
-
-    .unfold-card.visible {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .unfold-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Unfolding Canvas 1 Layering (Photos 1, 2, 3) */
-    .unfold-layer-group-1 {
-      position: relative;
-      margin-bottom: 2px;
-    }
-
-    .card-photo2 {
-      width: clamp(280px, 48vw, 620px);
-      margin-top: -22vw;
-      margin-left: auto;
-      margin-right: clamp(2rem, 6vw, 7rem);
-    }
-
-    .card-photo3 {
-      width: clamp(260px, 44vw, 560px);
-      margin-top: -12vw;
-      margin-left: clamp(2rem, 6vw, 7rem);
-      margin-right: auto;
-    }
-
-    /* Intermediate Seamless Sequence (Photos 4, 5, 6) */
-    .unfold-sequence-mid {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      margin-top: -4vw;
-      position: relative;
-      z-index: 3;
-    }
-
-    .card-photo4 {
+    /* Gallery Editorial Stage */
+    .nostalgic-gallery-flow {
       width: 100%;
       max-width: 1100px;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
     }
 
-    .card-photo5 {
-      width: clamp(280px, 48vw, 600px);
-      margin-left: auto;
-      margin-right: clamp(2rem, 6vw, 8rem);
-      margin-top: -8vw;
-    }
-
-    .card-photo6 {
-      width: clamp(280px, 46vw, 580px);
-      margin-left: clamp(2rem, 6vw, 8rem);
-      margin-right: auto;
-      margin-top: -6vw;
-    }
-
-    /* Unfolding Canvas 2 Layering (Photos 7, 8, 9) */
-    .unfold-layer-group-2 {
+    /* Framing Cards to ensure no stretch, cropping, or forced dimensions */
+    .gal-nostalgic-card {
       position: relative;
-      margin-top: -4vw;
+      margin-bottom: clamp(4rem, 8vh, 8rem);
+      opacity: 0;
+      transform: translateY(35px) scale(0.98);
+      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.35, 1), transform 1.2s cubic-bezier(0.25, 1, 0.35, 1);
+      will-change: opacity, transform;
+      background: #F4F1EA;
+      padding: 1rem 1rem 1.2rem;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.05);
     }
 
-    .card-photo8 {
-      width: clamp(290px, 50vw, 640px);
-      margin-top: -20vw;
+    .gal-nostalgic-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Crisp Aspect Preservation Container */
+    .gal-img-wrapper {
+      width: 100%;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #EFECE6;
+      overflow: hidden;
+    }
+
+    .gal-img-wrapper img {
+      width: 100%;
+      height: auto;
+      max-height: 80vh; /* Bounded height prevents overwhelming fullscreen zoom */
+      object-fit: contain; /* Guarantees 0% stretching or distortion */
+      display: block;
+    }
+
+    /* Editorial Layout Variations (Balanced Widths & Off-Center Alignment) */
+    .gal-size-hero {
+      width: 92%;
+      max-width: 950px;
       margin-left: auto;
-      margin-right: clamp(2rem, 5vw, 6rem);
-    }
-
-    .card-photo9 {
-      width: clamp(280px, 46vw, 580px);
-      margin-top: -10vw;
-      margin-left: clamp(2rem, 5vw, 6rem);
       margin-right: auto;
     }
 
-    /* Closing Canvas Hero (Photo 10) */
-    .canvas-hero-closing {
-      margin-top: -4vw;
-      position: relative;
-      z-index: 4;
+    .gal-size-medium {
+      width: clamp(290px, 60vw, 680px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .gal-size-right {
+      width: clamp(280px, 52vw, 620px);
+      margin-left: auto;
+      margin-right: clamp(1.5rem, 5vw, 6rem);
+    }
+
+    .gal-size-left {
+      width: clamp(280px, 50vw, 600px);
+      margin-left: clamp(1.5rem, 5vw, 6rem);
+      margin-right: auto;
     }
 
     .gallery-footer {
-      padding: 4rem 1.5rem 6rem;
+      padding: 3rem 1.5rem 6rem;
       text-align: center;
     }
 
-    /* Responsive Mobile Adjustments */
+    /* Responsive Adjustments for Mobile */
     @media (max-width: 768px) {
       .details-grid { grid-template-columns: 1fr; }
       .arch-cards-grid { grid-template-columns: 1fr; }
@@ -819,21 +772,28 @@
       .rsvp-form { padding: 2rem 1.5rem; }
       .detail-content { padding: 2.5rem 1.5rem; }
 
-      .card-photo2, .card-photo3, .card-photo5, .card-photo6, .card-photo8, .card-photo9 {
-        width: 90%;
+      .gal-size-hero,
+      .gal-size-medium,
+      .gal-size-right,
+      .gal-size-left {
+        width: 92%;
         margin-left: auto;
         margin-right: auto;
-        margin-top: -10vw;
       }
-      .card-photo4 {
-        width: 100%;
+
+      .gal-nostalgic-card {
+        margin-bottom: 3.5rem;
+        padding: 0.75rem 0.75rem 0.9rem;
+      }
+
+      .gal-img-wrapper img {
+        max-height: 65vh;
       }
     }
 
     /* Accessibility preference */
     @media (prefers-reduced-motion: reduce) {
-      .unfold-card,
-      .canvas-hero,
+      .gal-nostalgic-card,
       .gallery-heading-wrap {
         transition: none !important;
         transform: none !important;
@@ -1094,48 +1054,66 @@
       <h2 class="gallery-heading">MOMENTS ALONG THE WAY</h2>
     </div>
 
-    <div class="unfolding-stage">
-      
-      <div class="unfold-layer-group-1">
-        <div class="canvas-hero gal-observe">
+    <div class="nostalgic-gallery-flow">
+      <div class="gal-nostalgic-card gal-size-hero gal-observe">
+        <div class="gal-img-wrapper">
           <img src="photo1.jpeg" alt="">
         </div>
-        <div class="unfold-card card-photo2 gal-observe">
+      </div>
+
+      <div class="gal-nostalgic-card gal-size-right gal-observe">
+        <div class="gal-img-wrapper">
           <img src="photo2.jpeg" alt="">
         </div>
-        <div class="unfold-card card-photo3 gal-observe">
+      </div>
+
+      <div class="gal-nostalgic-card gal-size-left gal-observe">
+        <div class="gal-img-wrapper">
           <img src="photo3.jpeg" alt="">
         </div>
       </div>
 
-      <div class="unfold-sequence-mid">
-        <div class="unfold-card card-photo4 gal-observe">
+      <div class="gal-nostalgic-card gal-size-medium gal-observe">
+        <div class="gal-img-wrapper">
           <img src="photo4.jpeg" alt="">
         </div>
-        <div class="unfold-card card-photo5 gal-observe">
+      </div>
+
+      <div class="gal-nostalgic-card gal-size-right gal-observe">
+        <div class="gal-img-wrapper">
           <img src="photo5.jpeg" alt="">
         </div>
-        <div class="unfold-card card-photo6 gal-observe">
+      </div>
+
+      <div class="gal-nostalgic-card gal-size-left gal-observe">
+        <div class="gal-img-wrapper">
           <img src="photo6.jpeg" alt="">
         </div>
       </div>
 
-      <div class="unfold-layer-group-2">
-        <div class="canvas-hero gal-observe">
+      <div class="gal-nostalgic-card gal-size-hero gal-observe">
+        <div class="gal-img-wrapper">
           <img src="photo7.jpeg" alt="">
         </div>
-        <div class="unfold-card card-photo8 gal-observe">
+      </div>
+
+      <div class="gal-nostalgic-card gal-size-right gal-observe">
+        <div class="gal-img-wrapper">
           <img src="photo8.jpeg" alt="">
         </div>
-        <div class="unfold-card card-photo9 gal-observe">
+      </div>
+
+      <div class="gal-nostalgic-card gal-size-medium gal-observe">
+        <div class="gal-img-wrapper">
           <img src="photo9.jpeg" alt="">
         </div>
       </div>
 
-      <div class="canvas-hero canvas-hero-closing gal-observe">
-        <img src="photo10.jpeg" alt="">
+      <div class="gal-nostalgic-card gal-size-hero gal-observe">
+        <div class="gal-img-wrapper">
+          <img src="photo10.jpeg" alt="">
+        </div>
       </div>
-
     </div>
 
     <div class="gallery-footer">
@@ -1174,7 +1152,7 @@
 
       <div id="rsvp-success" class="rsvp-success">
         <h2 class="serif" style="font-size: 32px; margin-bottom: 1rem;">You're on the list.</h2>
-        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can'wait to celebrate with you.</div>
+        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can't wait to celebrate with you.</div>
       </div>
 
       <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
@@ -1237,14 +1215,14 @@
       document.getElementById('rsvp-success').style.display = 'block';
     }
 
-    /* SCROLL OBSERVER FOR PROGRESSIVE ELEGANT UNFOLDING REVEAL */
+    /* SCROLL OBSERVER FOR PROGRESSIVE NOSTALGICT REVEAL */
     let galleryObserver;
     function initGalleryObserver() {
       if (galleryObserver) galleryObserver.disconnect();
 
       const observerOptions = {
         root: null,
-        rootMargin: '0px 0px -10% 0px',
+        rootMargin: '0px 0px -8% 0px',
         threshold: 0.12
       };
 
