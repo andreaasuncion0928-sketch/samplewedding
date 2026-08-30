@@ -401,7 +401,7 @@
     .elegant-item:hover .ei-arrow { color: var(--white); transform: translateX(8px); }
 
     /* ==========================================================================
-       5. OUR STORY SCREEN & AUDIO-SYNCHRONIZED TYPEWRITER ANIMATION
+       5. OUR STORY SCREEN & TYPEWRITER ANIMATION (SYNCHRONIZED TO 0:10)
        ========================================================================== */
     #screen-story {
       position: relative;
@@ -1206,7 +1206,7 @@
       <h2 class="serif reveal-on-scroll" style="font-size: 42px; margin-bottom: 3.5rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 300;">Our Story</h2>
 
       <div class="story-content" id="typewriter-container">
-        <!-- Typed dynamically character by character, synced to music intro -->
+        <!-- Typed dynamically character by character, strictly synced to 0:10 lyrics start -->
       </div>
 
       <div id="story-join-btn-wrap">
@@ -1629,7 +1629,7 @@
 
       <div id="rsvp-success" class="rsvp-success">
         <h2 class="serif" style="font-size: 32px; margin-bottom: 1rem;">You're on the list.</h2>
-        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can't wait to celebrate with you.</div>
+        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can'wait to celebrate with you.</div>
       </div>
 
       <div class="text-center">
@@ -1643,7 +1643,8 @@
 
     function startExperience() {
       var music = document.getElementById('bg-music');
-      if (music.paused) {
+      if (music) {
+        music.currentTime = 0;
         music.play().catch(function(error) {
           console.log("Audio playback deferred or restricted: ", error);
         });
@@ -1663,7 +1664,7 @@
       if(screenId !== 'details') closeDetail();
 
       if (screenId === 'story') {
-        typewriterStorySynced();
+        typewriterStoryAudioSynced();
       }
 
       if (screenId === 'menu') {
@@ -1801,7 +1802,7 @@
       });
     }
 
-    /* TYPEWRITER STORY SYNCHRONIZED TO AUDIO VOCALS ("Every time our eyes meet...") */
+    /* TYPEWRITER STORY SYNCHRONIZED STRICTLY TO AUDIO 0:10 VOCAL START */
     const storyBlocks = [
       { type: 'p', text: 'It started with coffee.', class: 'story-highlight-italics' },
       { type: 'p', text: 'We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.' },
@@ -1812,7 +1813,7 @@
     let isTyping = false;
     let typeTimeout;
 
-    function typewriterStorySynced() {
+    function typewriterStoryAudioSynced() {
       const container = document.getElementById('typewriter-container');
       const btnWrap = document.getElementById('story-join-btn-wrap');
       const music = document.getElementById('bg-music');
@@ -1828,7 +1829,8 @@
       let charIndex = 0;
       let currentEl = null;
 
-      // Calculate character speed so Block 0 & Block 1 complete cleanly before Block 2 hits right at the vocals (~6.5 seconds)
+      const VOCAL_HIT_TIME = 10.0; // 0:10 timestamp for "we became us."
+
       function typeNextChar() {
         if (blockIndex >= storyBlocks.length) {
           if (currentEl) currentEl.classList.remove('typing-cursor');
@@ -1851,27 +1853,26 @@
         charIndex++;
 
         if (charIndex < block.text.length) {
-          // Swift character speed to finish intro narrative comfortably before vocal line
-          let speed = 22; 
-          if (blockIndex === 2) speed = 55; // Deliberate pace for "we became us."
+          let speed = 32;
+          if (blockIndex === 2) speed = 65; // Script accent pace
           typeTimeout = setTimeout(typeNextChar, speed);
         } else {
           charIndex = 0;
           blockIndex++;
 
-          let pause = 250;
+          let delay = 350;
+
+          // Before typing "we became us.", wait for audio clock to hit 0:10
           if (blockIndex === 2) {
-            // Check current audio timestamp to land "we became us." concurrently with the vocal intro (~6.2s to 6.8s)
-            let audioTime = music ? music.currentTime : 0;
-            let targetHitTime = 6.4; 
-            if (audioTime < targetHitTime && !music.paused) {
-              pause = Math.max(100, (targetHitTime - audioTime) * 1000);
-            } else {
-              pause = 400;
+            let currentTime = music ? music.currentTime : 0;
+            if (!music.paused && currentTime < VOCAL_HIT_TIME) {
+              delay = Math.max(100, (VOCAL_HIT_TIME - currentTime) * 1000);
+            } else if (music.paused) {
+              delay = 1800; // Standalone fallback timing if muted
             }
           }
 
-          typeTimeout = setTimeout(typeNextChar, pause);
+          typeTimeout = setTimeout(typeNextChar, delay);
         }
       }
 
