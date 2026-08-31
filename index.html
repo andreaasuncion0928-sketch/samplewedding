@@ -99,6 +99,21 @@
       }
     }
 
+    /* ELEGANT TYPEWRITER CHARACTER FADE ANIMATION */
+    .char-fade {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(4px);
+      animation: charFadeUp 0.35s cubic-bezier(0.25, 1, 0.35, 1) forwards;
+    }
+
+    @keyframes charFadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .reveal-on-scroll {
       opacity: 0;
       transform: translateY(30px);
@@ -479,7 +494,7 @@
       margin-bottom: 1.8rem !important;
     }
 
-    /* UPDATED: BLUR-TO-FOCUS FADE ANIMATION FOR "WE BECAME US" */
+    /* BLUR-TO-FOCUS FADE ANIMATION FOR "WE BECAME US" */
     .story-script-accent {
       font-family: var(--font-script);
       font-size: clamp(2.8rem, 8vw, 4.2rem);
@@ -1466,7 +1481,7 @@
       <h2 class="serif reveal-on-scroll" style="font-size: 42px; margin-bottom: 3.5rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 300;">Our Story</h2>
 
       <div class="story-content" id="typewriter-container">
-        <!-- Decrypted dynamically with music playback, strictly synced to 0:10 audio hit -->
+        <!-- Rendered cleanly with audio synchronization, strictly synced to 0:10 audio hit -->
       </div>
 
       <div id="story-join-btn-wrap">
@@ -2113,7 +2128,7 @@
       });
     }
 
-    /* SCRAMBLE / DECRYPT STORY ANIMATION WITH AUDIO INTRO DELAY (LOCKED TO 0:10 VOCAL HIT) */
+    /* SIMPLE & ELEGANT TYPEWRITER STORY ANIMATION (STRICT 0:10 AUDIO LOCK FOR "WE BECAME US") */
     const storyBlocks = [
       { type: 'p', text: 'It started with coffee.', class: 'story-highlight-italics' },
       { type: 'p', text: 'We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.' },
@@ -2123,44 +2138,32 @@
 
     let isTyping = false;
     let typeTimeout;
-    const scrambleGlyphs = 'ABCDEFGHJKMNPQRSTVWXYZabcdefghijklmnopqrstuvwxyz#$@%&*';
 
-    function scrambleDecryptText(element, finalText, speed, onComplete) {
+    function renderElegantTypewriter(element, text, speed, onComplete) {
       let charIndex = 0;
-      let iterations = 0;
-      const maxScrambleFrames = 3;
+      element.innerHTML = '';
 
-      function update() {
-        if (charIndex > finalText.length) {
-          element.textContent = finalText;
+      function nextChar() {
+        if (charIndex >= text.length) {
           if (onComplete) onComplete();
           return;
         }
 
-        let output = finalText.slice(0, charIndex);
-
-        if (charIndex < finalText.length) {
-          const currentChar = finalText[charIndex];
-          if (/\s/.test(currentChar)) {
-            output += ' ';
-          } else {
-            const randomGlyph = scrambleGlyphs[Math.floor(Math.random() * scrambleGlyphs.length)];
-            output += randomGlyph;
-          }
+        const char = text[charIndex];
+        if (char === ' ') {
+          element.appendChild(document.createTextNode(' '));
+        } else {
+          const span = document.createElement('span');
+          span.className = 'char-fade';
+          span.textContent = char;
+          element.appendChild(span);
         }
 
-        element.textContent = output;
-
-        iterations++;
-        if (iterations >= maxScrambleFrames) {
-          iterations = 0;
-          charIndex++;
-        }
-
-        typeTimeout = setTimeout(update, speed);
+        charIndex++;
+        typeTimeout = setTimeout(nextChar, speed);
       }
 
-      update();
+      nextChar();
     }
 
     function typewriterStoryAudioSynced() {
@@ -2178,10 +2181,10 @@
       let blockIndex = 0;
       let currentEl = null;
 
-      const VOCAL_HIT_TIME = 10.0; // Locked strictly to 0:10 lyrics start
-      const MUSIC_START_DELAY = 1500; // 1.5 second initial music delay
+      const VOCAL_HIT_TIME = 10.0; // Strictly locked to 0:10 lyrics start
+      const MUSIC_START_DELAY = 1500; // 1.5s musical intro breathing time
 
-      function renderNextBlock() {
+      function processStory() {
         if (blockIndex >= storyBlocks.length) {
           if (currentEl) currentEl.classList.remove('typing-cursor');
           isTyping = false;
@@ -2191,6 +2194,7 @@
 
         const block = storyBlocks[blockIndex];
 
+        // Paragraph 4: Fade In
         if (block.isFadeIn) {
           if (currentEl) currentEl.classList.remove('typing-cursor');
           currentEl = document.createElement(block.type);
@@ -2203,56 +2207,58 @@
           }, 100);
 
           blockIndex++;
-          typeTimeout = setTimeout(renderNextBlock, 1200);
+          typeTimeout = setTimeout(processStory, 1200);
           return;
         }
 
+        // Paragraph 3: "we became us." - Lock to 0:10 audio hit
         if (block.isBlurFocus) {
           if (currentEl) currentEl.classList.remove('typing-cursor');
-          currentEl = document.createElement(block.type);
-          if (block.class) currentEl.className = block.class;
-          currentEl.textContent = block.text;
-          container.appendChild(currentEl);
 
-          // Trigger Blur-to-Focus Fade Animation
-          setTimeout(() => {
-            currentEl.classList.add('blur-focus-visible');
-          }, 50);
+          const currentTime = music ? music.currentTime : 0;
+          let delayToTarget = 0;
 
-          blockIndex++;
-          typeTimeout = setTimeout(renderNextBlock, 1800);
+          if (!music.paused && currentTime < VOCAL_HIT_TIME) {
+            delayToTarget = (VOCAL_HIT_TIME - currentTime) * 1000;
+          }
+
+          typeTimeout = setTimeout(() => {
+            currentEl = document.createElement(block.type);
+            if (block.class) currentEl.className = block.class;
+            currentEl.textContent = block.text;
+            container.appendChild(currentEl);
+
+            // Trigger Blur-to-Focus Animation
+            setTimeout(() => {
+              currentEl.classList.add('blur-focus-visible');
+            }, 50);
+
+            blockIndex++;
+            typeTimeout = setTimeout(processStory, 2000);
+          }, delayToTarget);
+
           return;
         }
 
+        // Paragraph 1 & 2: Soft Fade Typewriter
         if (currentEl) currentEl.classList.remove('typing-cursor');
         currentEl = document.createElement(block.type);
         if (block.class) currentEl.className = block.class;
         currentEl.classList.add('typing-cursor');
         container.appendChild(currentEl);
 
-        // Accelerated scramble speed so intro delay doesn't compromise 0:10 lock
-        let speed = 12; 
-        
-        scrambleDecryptText(currentEl, block.text, speed, () => {
+        // Smooth speed tuned so text finishes right before 0:10
+        let speed = 24; 
+        if (blockIndex === 1) speed = 20;
+
+        renderElegantTypewriter(currentEl, block.text, speed, () => {
           blockIndex++;
-
-          let delay = 200;
-
-          if (blockIndex === 2) {
-            let currentTime = music ? music.currentTime : 0;
-            if (!music.paused && currentTime < VOCAL_HIT_TIME) {
-              delay = Math.max(50, (VOCAL_HIT_TIME - currentTime) * 1000);
-            } else if (music.paused) {
-              delay = 800; 
-            }
-          }
-
-          typeTimeout = setTimeout(renderNextBlock, delay);
+          typeTimeout = setTimeout(processStory, 350);
         });
       }
 
-      // Start music immediately, then delay text start by 1.5 seconds
-      typeTimeout = setTimeout(renderNextBlock, MUSIC_START_DELAY);
+      // Start music immediately, delay text start by 1.5s
+      typeTimeout = setTimeout(processStory, MUSIC_START_DELAY);
     }
 
     /* GENERAL SCROLL OBSERVER */
