@@ -107,11 +107,6 @@
       animation: charFadeUp 0.35s cubic-bezier(0.25, 1, 0.35, 1) forwards;
     }
 
-    .word-wrap {
-      display: inline-block;
-      white-space: nowrap;
-    }
-
     @keyframes charFadeUp {
       to {
         opacity: 1;
@@ -471,9 +466,8 @@
       z-index: 0;
     }
 
-    /* PREVENT MID-WORD SPLITTING & WRAP ISSUES */
     .story-content { 
-      max-width: 580px; 
+      max-width: 520px; 
       margin: 0 auto; 
       text-align: center; 
       font-family: var(--font-serif); 
@@ -484,16 +478,11 @@
       letter-spacing: 0.5px; 
       min-height: 320px;
       width: 100%;
-      word-break: normal;
-      overflow-wrap: break-word;
-      hyphens: manual;
     }
 
     .story-content p { 
       margin-bottom: 1.8rem; 
       color: var(--black);
-      word-break: normal;
-      overflow-wrap: break-word;
     }
     
     .story-highlight-italics {
@@ -1473,6 +1462,7 @@
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
+  <!-- COVER SCREEN -->
   <div class="screen active" id="screen-cover">
     <div class="cover-image"></div>
     <div class="cover-content">
@@ -1480,20 +1470,22 @@
       <h1 class="cover-names">ELENA & ADRIAN</h1>
       <div class="cover-date">31 JANUARY 2028 · MANILA</div>
       
-      <button class="btn cover-btn" onclick="startExperience()">OPEN OUR STORY →</button>
+      <button class="btn cover-btn" onclick="startExperience()">OPEN OUR STORY &rarr;</button>
     </div>
   </div>
 
+  <!-- OUR STORY SCREEN -->
   <div class="screen" id="screen-story">
     <div class="container text-center">
       <div class="reveal-on-scroll" style="font-size: 11px; letter-spacing: 4px; color: var(--lavender); margin-bottom: 1.5rem; text-transform: uppercase;">A Little Story About Us</div>
       <h2 class="serif reveal-on-scroll" style="font-size: 42px; margin-bottom: 3.5rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 300;">Our Story</h2>
 
       <div class="story-content" id="typewriter-container">
-        </div>
+        <!-- Rendered cleanly with audio synchronization, strictly synced to 0:10 audio hit -->
+      </div>
 
       <div id="story-join-btn-wrap">
-        <button class="btn" onclick="openScreen('menu')">JOIN US →</button>
+        <button class="btn" onclick="openScreen('menu')">JOIN US &rarr;</button>
       </div>
 
       <div class="story-bottom text-center reveal-on-scroll">
@@ -1505,15 +1497,798 @@
     </div>
   </div>
 
+  <!-- MENU / WELCOME SCREEN -->
   <div class="screen" id="screen-menu">
     <div class="container text-center">
       
+      <!-- Minimalist Ultra-Slow 50% Slower Odometer -->
       <div class="countdown-display-wrap reveal-on-scroll">
         <div class="odometer-window" id="odometer-container">
-          </div>
-        <div class="countdown-subtext">D A Y S   T O   G O</div>
+          <!-- Digit Reels -->
+        </div>
+        <div class="countdown-subtext">D A Y S &nbsp; T O &nbsp; G O</div>
       </div>
 
       <div class="menu-header reveal-on-scroll">
         <h2 class="serif">Elena & Adrian</h2>
-        <p>31 · 0
+        <p>31 · 01 · 2028</p>
+      </div>
+      
+      <div class="elegant-menu reveal-on-scroll">
+        <div class="elegant-item" onclick="openScreen('day')">
+          <div class="ei-text">
+            <div class="ei-title">The Day</div>
+            <div class="ei-desc">When & where to find us</div>
+          </div>
+          <span class="ei-arrow">&rarr;</span>
+        </div>
+
+        <div class="elegant-item" onclick="openScreen('entourage')">
+          <div class="ei-text">
+            <div class="ei-title">The Entourage</div>
+            <div class="ei-desc">Those who walk beside us</div>
+          </div>
+          <span class="ei-arrow">&rarr;</span>
+        </div>
+        
+        <div class="elegant-item" onclick="openScreen('details')">
+          <div class="ei-text">
+            <div class="ei-title">Details</div>
+            <div class="ei-desc">Everything you need to know</div>
+          </div>
+          <span class="ei-arrow">&rarr;</span>
+        </div>
+        
+        <div class="elegant-item" onclick="openScreen('gallery')">
+          <div class="ei-text">
+            <div class="ei-title">Gallery</div>
+            <div class="ei-desc">The moments we've kept</div>
+          </div>
+          <span class="ei-arrow">&rarr;</span>
+        </div>
+        
+        <div class="elegant-item" onclick="openScreen('rsvp')">
+          <div class="ei-text">
+            <div class="ei-title">RSVP</div>
+            <div class="ei-desc">Save your seat</div>
+          </div>
+          <span class="ei-arrow">&rarr;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE DAY SCREEN -->
+  <div class="screen" id="screen-day">
+    <div class="container text-center">
+      <div class="day-header-tag reveal-on-scroll">THE DAY</div>
+      <h2 class="day-main-title reveal-on-scroll">THE DETAILS</h2>
+      <p class="day-sub-quote reveal-on-scroll">Two places. One promise.<br>A day we will always remember.</p>
+
+      <div class="arch-cards-grid">
+        <div class="arch-card reveal-on-scroll" id="card-church">
+          <span class="close-card-btn" onclick="toggleArchCard('church', false)">&times;</span>
+          
+          <svg class="arch-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M32 6v12M28 10h8M16 58V32l16-12 16 12v26M24 58V40h16v18M32 20v8" />
+            <path d="M8 58h48M20 35h4M40 35h4M20 45h4M40 45h4" />
+          </svg>
+
+          <div class="arch-category">THE CEREMONY</div>
+          <h3 class="arch-venue-title">San Sebastian Church</h3>
+          <div class="arch-location">Manila</div>
+
+          <button class="arch-btn" onclick="toggleArchCard('church', true)">
+            SEE THE CHURCH &rarr;
+          </button>
+
+          <div class="arch-expanded-content">
+            <img src="church.jpeg" alt="San Sebastian Church" class="arch-preview-img">
+            
+            <div class="arch-meta-grid">
+              <div class="meta-col">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <div class="meta-title">TUESDAY</div>
+                <div class="meta-sub">JANUARY 31, 2028</div>
+              </div>
+              <div class="meta-col">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 16 14"/></svg>
+                <div class="meta-title">3:00 PM</div>
+                <div class="meta-sub">CEREMONY</div>
+              </div>
+              <div class="meta-col">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <div class="meta-title">SAN SEBASTIAN</div>
+                <div class="meta-sub">CHURCH, MANILA</div>
+              </div>
+            </div>
+
+            <div class="arch-bottom-motto">Where our forever begins.</div>
+            <a href="https://maps.google.com/?q=San+Sebastian+Church+Manila" target="_blank" class="map-btn">Get Directions &rarr;</a>
+          </div>
+        </div>
+
+        <div class="arch-card reveal-on-scroll" id="card-reception">
+          <span class="close-card-btn" onclick="toggleArchCard('reception', false)">&times;</span>
+
+          <svg class="arch-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 58V20l20-10 20 10v38M8 58h48M20 58V32h24v28" />
+            <path d="M24 22h4v6h-4zM36 22h4v6h-4zM24 38h4v6h-4zM36 38h4v6h-4z" />
+          </svg>
+
+          <div class="arch-category">THE RECEPTION</div>
+          <h3 class="arch-venue-title">Manila Hotel</h3>
+          <div class="arch-location">Manila</div>
+
+          <button class="arch-btn" onclick="toggleArchCard('reception', true)">
+            SEE THE RECEPTION &rarr;
+          </button>
+
+          <div class="arch-expanded-content">
+            <img src="hotel.jpg" alt="Manila Hotel" class="arch-preview-img">
+            
+            <div class="arch-meta-grid">
+              <div class="meta-col">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <div class="meta-title">TUESDAY</div>
+                <div class="meta-sub">JANUARY 31, 2028</div>
+              </div>
+              <div class="meta-col">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 16 14"/></svg>
+                <div class="meta-title">6:00 PM</div>
+                <div class="meta-sub">RECEPTION</div>
+              </div>
+              <div class="meta-col">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <div class="meta-title">MANILA HOTEL</div>
+                <div class="meta-sub">MANILA</div>
+              </div>
+            </div>
+
+            <div class="arch-bottom-motto">A celebration to remember.</div>
+            <a href="https://maps.google.com/?q=The+Manila+Hotel+Manila" target="_blank" class="map-btn">Get Directions &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="schedule-toggle-card text-center reveal-on-scroll" onclick="toggleWeddingTimeline()">
+        <span class="schedule-toggle-title" id="schedule-toggle-btn">PROGRAM FLOW &rarr;</span>
+      </div>
+
+      <div class="wedding-timeline-wrap" id="wedding-timeline-wrap">
+        <div class="timeline-title-script">Program Flow</div>
+
+        <div class="timeline-center-line"></div>
+
+        <div class="timeline-node-item left-node reveal-on-scroll">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-content">
+            <div class="node-event-title">Cocktails & Registration</div>
+            <div class="node-event-time">5:00 PM</div>
+            <div class="node-event-desc">
+              GUESTS ARRIVE FOR REGISTRATION, WELCOME DRINKS, COCKTAILS, AND ACOUSTIC MUSIC BEFORE TAKING THEIR SEATS.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-node-item right-node reveal-on-scroll">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-content">
+            <div class="node-event-title">Start of Program</div>
+            <div class="node-event-time">6:00 PM</div>
+            <div class="node-event-desc">
+              OUR HOST FORMALLY OPENS THE EVENING AND WELCOMES OUR BELOVED FAMILY AND FRIENDS TO THE CELEBRATION.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-node-item left-node reveal-on-scroll">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-content">
+            <div class="node-event-title">Grand Entrance</div>
+            <div class="node-event-time">6:15 PM</div>
+            <div class="node-event-desc">
+              WELCOMING THE NEWLYWEDS AS THEY MAKE THEIR FIRST OFFICIAL ENTRANCE AS HUSBAND AND WIFE.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-node-item right-node reveal-on-scroll">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-content">
+            <div class="node-event-title">Short Interview & Welcome</div>
+            <div class="node-event-time">6:30 PM</div>
+            <div class="node-event-desc">
+              A QUICK CHAT WITH THE COUPLE TO SHARE THEIR EXCITEMENT AND SET THE JOYFUL TONE FOR THE NIGHT.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-node-item left-node reveal-on-scroll">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-content">
+            <div class="node-event-title">First Dance</div>
+            <div class="node-event-time">6:45 PM</div>
+            <div class="node-event-desc">
+              ELENA AND ADRIAN TAKE THE FLOOR FOR THEIR VERY FIRST DANCE AS A MARRIED COUPLE.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-node-item right-node reveal-on-scroll">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-content">
+            <div class="node-event-title">Cake Cutting & Toast</div>
+            <div class="node-event-time">7:00 PM</div>
+            <div class="node-event-desc">
+              THE TRADITIONAL CUTTING OF THE WEDDING CAKE FOLLOWED BY HEARTFELT TOASTS AND RAISING A GLASS TO LOVE.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-node-item left-node reveal-on-scroll">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-content">
+            <div class="node-event-title">Dinner & Speeches</div>
+            <div class="node-event-time">7:15 PM</div>
+            <div class="node-event-desc">
+              A SUMPTUOUS MEAL SERVED ALONGSIDE MESSAGES, STORIES, AND TOASTS FROM SPECIAL GUESTS.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-node-item right-node reveal-on-scroll">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-content">
+            <div class="node-event-title">Socials & Party</div>
+            <div class="node-event-time">8:30 PM</div>
+            <div class="node-event-desc">
+              THE DANCE FLOOR OPENS! ENJOY DRINKS, MUSIC, AND CELEBRATING UNDER THE STARS WITH US.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENTOURAGE SCREEN -->
+  <div class="screen" id="screen-entourage">
+    <div class="container text-center">
+      <div class="entourage-header-tag reveal-on-scroll">WITH OUR BELOVED FAMILIES</div>
+      <h2 class="entourage-main-title reveal-on-scroll">THE ENTOURAGE</h2>
+      <p class="entourage-sub-quote reveal-on-scroll">Those who hold our hands, guide our steps, and stand beside us as we say 'I do.'</p>
+
+      <div class="entourage-grid reveal-on-scroll">
+        <div class="entourage-card">
+          <div class="entourage-role-title">PARENTS OF THE BRIDE</div>
+          <div class="entourage-person-name">Mr. Roberto Santos</div>
+          <div class="entourage-person-name">Mrs. Carmen Santos</div>
+        </div>
+
+        <div class="entourage-card">
+          <div class="entourage-role-title">PARENTS OF THE GROOM</div>
+          <div class="entourage-person-name">Mr. Fernando Reyes</div>
+          <div class="entourage-person-name">Mrs. Alicia Reyes</div>
+        </div>
+
+        <div class="entourage-card">
+          <div class="entourage-role-title">MAID OF HONOR</div>
+          <div class="entourage-person-name">Sophia Santos</div>
+        </div>
+
+        <div class="entourage-card">
+          <div class="entourage-role-title">BEST MAN</div>
+          <div class="entourage-person-name">Marco Reyes</div>
+        </div>
+
+        <div class="entourage-card entourage-card-full">
+          <div class="entourage-role-title">PRINCIPAL SPONSORS</div>
+          <div class="entourage-person-name">Mr. Ricardo Cruz & Mrs. Elena Cruz</div>
+          <div class="entourage-person-name">Mr. Gabriel Gomez & Mrs. Teresa Gomez</div>
+          <div class="entourage-person-name">Mr. Antonio Morales & Mrs. Beatrix Morales</div>
+        </div>
+
+        <div class="entourage-card entourage-card-full">
+          <div class="entourage-role-title">BRIDESMAIDS & GROOMSMEN</div>
+          <div class="entourage-person-name">Isabella Santos &nbsp;·&nbsp; Lucas Torres</div>
+          <div class="entourage-person-name">Clara Mendoza &nbsp;·&nbsp; Mateo Ramos</div>
+          <div class="entourage-person-name">Julianna Navarro &nbsp;·&nbsp; Gabriel Navarro</div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAILS SCREEN -->
+  <div class="screen" id="screen-details">
+    <div class="container text-center">
+      <div class="details-header-tag reveal-on-scroll">THE DETAILS</div>
+      <h2 class="details-main-title reveal-on-scroll">EVERYTHING YOU NEED TO KNOW</h2>
+      <p class="details-sub-quote reveal-on-scroll">A few thoughtful details to guide your day with us.</p>
+
+      <div id="details-menu" class="details-grid reveal-on-scroll">
+        <div class="detail-card" onclick="openDetail('dc-dress')">
+          <div class="detail-title">Dress Code</div>
+          <p class="detail-sub">Black & White Formal</p>
+        </div>
+        <div class="detail-card" onclick="openDetail('dc-gifts')">
+          <div class="detail-title">Gifts</div>
+          <p class="detail-sub">Registry & Wedding Fund</p>
+        </div>
+        <div class="detail-card" onclick="openDetail('dc-faq')">
+          <div class="detail-title">FAQ</div>
+          <p class="detail-sub">Questions answered</p>
+        </div>
+      </div>
+
+      <!-- Detail Card 1: Dress Code -->
+      <div id="dc-dress" class="detail-content">
+        <h3 class="dc-header">Black & White</h3>
+        <p class="text-center" style="margin-bottom: 3rem; color: var(--gray); font-style: italic; font-size: 16px;">Keep it classic. Keep it timeless.</p>
+        <div style="margin-bottom: 2.5rem;">
+          <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px; color: var(--black);">LADIES</h4>
+          <p style="color: var(--gray); font-size: 14px; font-weight: 300;">Black, white, ivory, or monochrome formalwear.</p>
+        </div>
+        <div style="margin-bottom: 3rem;">
+          <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px; color: var(--black);">GENTLEMEN</h4>
+          <p style="color: var(--gray); font-size: 14px; font-weight: 300;">Black suit, tuxedo, white shirt, or classic monochrome formalwear.</p>
+        </div>
+        
+        <div class="detail-nav-bar">
+          <button class="detail-nav-btn" onclick="openDetail('dc-faq')">&larr; FAQ</button>
+          <button class="detail-nav-btn" onclick="closeDetail()">Menu</button>
+          <button class="detail-nav-btn" onclick="openDetail('dc-gifts')">Gifts &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Detail Card 2: Gifts & Registry -->
+      <div id="dc-gifts" class="detail-content">
+        <h3 class="dc-header">Registry & Gifts</h3>
+        <p class="text-center" style="margin-top: 1.5rem; color: var(--gray); font-weight: 300; font-size: 14px; line-height: 1.9;">We are immensely grateful for your love and support. Your presence at our wedding is the greatest gift of all.<br><br>If you wish to bless us with a gift, a contribution towards our future together or our gift registry would be deeply appreciated.</p>
+        
+        <div class="registry-actions">
+          <a href="#" class="registry-btn" onclick="alert('Wedding Fund GCash/Maya details: 0917-XXX-XXXX')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            Send Monetary Gift (GCash / Maya)
+          </a>
+          <a href="https://www.crateandbarrel.com" target="_blank" class="registry-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+            View Online Gift Registry &rarr;
+          </a>
+        </div>
+
+        <div class="detail-nav-bar">
+          <button class="detail-nav-btn" onclick="openDetail('dc-dress')">&larr; Dress Code</button>
+          <button class="detail-nav-btn" onclick="closeDetail()">Menu</button>
+          <button class="detail-nav-btn" onclick="openDetail('dc-faq')">FAQ &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Detail Card 3: FAQ -->
+      <div id="dc-faq" class="detail-content">
+        <h3 class="dc-header">FAQ</h3>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Is there available parking at the venues? <span>+</span></button>
+          <div class="faq-a">Yes! Dedicated street and courtyard parking is available at San Sebastian Church. For the reception, Manila Hotel offers full valet parking service as well as a multi-level guest parking garage.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Can I request special dietary accommodations? <span>+</span></button>
+          <div class="faq-a">Absolutely. If you have severe food allergies, vegetarian/vegan preferences, or religious dietary requirements, please indicate them when submitting your RSVP response.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Can I bring a plus-one? <span>+</span></button>
+          <div class="faq-a">Please follow the number of seats indicated on your formal invitation envelope.</div>
+        </div>
+        
+        <div class="detail-nav-bar">
+          <button class="detail-nav-btn" onclick="openDetail('dc-gifts')">&larr; Gifts</button>
+          <button class="detail-nav-btn" onclick="closeDetail()">Menu</button>
+          <button class="detail-nav-btn" onclick="openDetail('dc-dress')">Dress Code &rarr;</button>
+        </div>
+      </div>
+
+      <div class="text-center"><a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a></div>
+    </div>
+  </div>
+
+  <!-- GALLERY SCREEN (10 Photos Stacked Gallery) -->
+  <div class="screen" id="screen-gallery">
+    <div class="gallery-heading-wrap reveal-on-scroll">
+      <h2 class="gallery-heading">MOMENTS ALONG THE WAY</h2>
+    </div>
+
+    <div class="stacked-gallery-container">
+      <div class="stacked-card" style="z-index: 1;"><div class="gal-img-wrapper"><img src="photo1.jpeg" alt=""></div></div>
+      <div class="stacked-card" style="z-index: 2;"><div class="gal-img-wrapper"><img src="photo2.jpeg" alt=""></div></div>
+      <div class="stacked-card" style="z-index: 3;"><div class="gal-img-wrapper"><img src="photo3.jpeg" alt=""></div></div>
+      <div class="stacked-card" style="z-index: 4;"><div class="gal-img-wrapper"><img src="photo4.jpeg" alt=""></div></div>
+      <div class="stacked-card" style="z-index: 5;"><div class="gal-img-wrapper"><img src="photo5.jpeg" alt=""></div></div>
+      <div class="stacked-card" style="z-index: 6;"><div class="gal-img-wrapper"><img src="photo6.jpeg" alt=""></div></div>
+      <div class="stacked-card" style="z-index: 7;"><div class="gal-img-wrapper"><img src="photo7.jpeg" alt=""></div></div>
+      <div class="stacked-card" style="z-index: 8;"><div class="gal-img-wrapper"><img src="photo8.jpeg" alt=""></div></div>
+      <div class="stacked-card" style="z-index: 9;"><div class="gal-img-wrapper"><img src="photo9.jpeg" alt=""></div></div>
+      <div class="stacked-card" style="z-index: 10;"><div class="gal-img-wrapper"><img src="photo10.jpeg" alt=""></div></div>
+    </div>
+
+    <div class="gallery-footer text-center">
+      <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
+    </div>
+  </div>
+
+  <!-- RSVP SCREEN -->
+  <div class="screen" id="screen-rsvp">
+    <div class="container text-center">
+      <div class="reveal-on-scroll" style="font-size: 11px; letter-spacing: 4px; color: var(--lavender); margin-bottom: 1rem;">CHAPTER 04</div>
+      <h2 class="serif reveal-on-scroll" style="font-size: 48px; margin-bottom: 1rem; letter-spacing: 2px;">We've saved you a seat.</h2>
+      <p class="reveal-on-scroll" style="color: var(--gray); font-size: 14px; margin-bottom: 4rem;">Please let us know if you'll be joining us.</p>
+
+      <form id="rsvp-form" class="rsvp-form reveal-on-scroll" onsubmit="submitRSVP(event)">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" required placeholder="Elena & Adrian">
+        </div>
+        <div class="form-group">
+          <label>Will you join us?</label>
+          <select required>
+            <option value="yes">Happily, yes</option>
+            <option value="no">Regretfully, no</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Number of Guests</label>
+          <select required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <button type="submit" class="btn" style="width: 100%;">Confirm RSVP &rarr;</button>
+      </form>
+
+      <div id="rsvp-success" class="rsvp-success">
+        <h2 class="serif" style="font-size: 32px; margin-bottom: 1rem;">You're on the list.</h2>
+        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can't wait to celebrate with you.</div>
+      </div>
+
+      <div class="text-center">
+        <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let odometerHasAnimated = false;
+
+    function startExperience() {
+      var music = document.getElementById('bg-music');
+      if (music) {
+        music.currentTime = 0;
+        music.play().catch(function(error) {
+          console.log("Audio playback deferred or restricted: ", error);
+        });
+      }
+      openScreen('story');
+    }
+
+    function openScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+      });
+      
+      const targetScreen = document.getElementById('screen-' + screenId);
+      targetScreen.classList.add('active');
+      window.scrollTo(0, 0); 
+      
+      if(screenId !== 'details') closeDetail();
+
+      if (screenId === 'story') {
+        typewriterStoryAudioSynced();
+      }
+
+      if (screenId === 'menu') {
+        if (!odometerHasAnimated) {
+          triggerUltraSlowOdometer();
+          odometerHasAnimated = true;
+        } else {
+          setOdometerFinalState();
+        }
+      }
+
+      initGeneralScrollObserver();
+    }
+
+    function toggleArchCard(type, expand) {
+      const card = document.getElementById('card-' + type);
+      if (expand) {
+        card.classList.add('expanded');
+      } else {
+        card.classList.remove('expanded');
+      }
+    }
+
+    function toggleWeddingTimeline() {
+      const wrap = document.getElementById('wedding-timeline-wrap');
+      const btn = document.getElementById('schedule-toggle-btn');
+      
+      if (wrap.classList.contains('active')) {
+        wrap.classList.remove('active');
+        btn.innerHTML = "PROGRAM FLOW &rarr;";
+      } else {
+        wrap.classList.add('active');
+        btn.innerHTML = "HIDE THE PROGRAM &larr;";
+        setTimeout(() => {
+          initGeneralScrollObserver();
+        }, 100);
+      }
+    }
+
+    function openDetail(id) {
+      document.getElementById('details-menu').style.display = 'none';
+      document.querySelectorAll('.detail-content').forEach(el => el.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+    
+    function closeDetail() {
+      document.querySelectorAll('.detail-content').forEach(el => el.classList.remove('active'));
+      document.getElementById('details-menu').style.display = 'grid';
+    }
+
+    function toggleFaq(btn) {
+      const parent = btn.parentElement;
+      const isOpen = parent.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) parent.classList.add('open');
+    }
+
+    function submitRSVP(e) {
+      e.preventDefault();
+      document.getElementById('rsvp-form').style.display = 'none';
+      document.getElementById('rsvp-success').style.display = 'block';
+    }
+
+    /* 50% SLOWER MINIMALIST ODOMETER COUNTER (9.0s TRANSITION) */
+    function getTargetDays() {
+      const weddingDate = new Date('January 31, 2028 00:00:00').getTime();
+      const now = new Date().getTime();
+      const difference = weddingDate - now;
+      let days = Math.ceil(difference / (1000 * 60 * 60 * 24));
+      return days > 0 ? days : 0;
+    }
+
+    function createOdometerReels() {
+      const calculatedDays = getTargetDays();
+      const digitsStr = String(calculatedDays);
+      const container = document.getElementById('odometer-container');
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      for (let i = 0; i < digitsStr.length; i++) {
+        const targetDigit = parseInt(digitsStr[i]);
+        
+        const col = document.createElement('div');
+        col.className = 'odometer-digit-column';
+
+        const strip = document.createElement('div');
+        strip.className = 'odometer-digit-strip';
+
+        let digitsSequence = [];
+        for (let d = 0; d <= targetDigit; d++) {
+          digitsSequence.push(d);
+        }
+        
+        digitsSequence.forEach(num => {
+          const span = document.createElement('span');
+          span.textContent = num;
+          strip.appendChild(span);
+        });
+
+        col.appendChild(strip);
+        container.appendChild(col);
+      }
+    }
+
+    function triggerUltraSlowOdometer() {
+      const strips = document.querySelectorAll('.odometer-digit-strip');
+      
+      strips.forEach((strip) => {
+        const totalItems = strip.querySelectorAll('span').length;
+        if (totalItems <= 1) return;
+
+        const targetPercent = -((totalItems - 1) * (100 / totalItems));
+
+        strip.style.transition = 'none';
+        strip.style.transform = 'translateY(0%)';
+
+        // 50% slower transition speed (extended to 9.0s)
+        setTimeout(() => {
+          strip.style.transition = 'transform 9.0s cubic-bezier(0.1, 0.9, 0.2, 1)';
+          strip.style.transform = `translateY(${targetPercent}%)`;
+        }, 150);
+      });
+    }
+
+    function setOdometerFinalState() {
+      const strips = document.querySelectorAll('.odometer-digit-strip');
+      strips.forEach((strip) => {
+        const totalItems = strip.querySelectorAll('span').length;
+        if (totalItems <= 1) return;
+
+        const targetPercent = -((totalItems - 1) * (100 / totalItems));
+        strip.style.transition = 'none';
+        strip.style.transform = `translateY(${targetPercent}%)`;
+      });
+    }
+
+    /* SIMPLE & ELEGANT TYPEWRITER STORY ANIMATION (STRICT 0:10 AUDIO LOCK FOR "WE BECAME US") */
+    const storyBlocks = [
+      { type: 'p', text: 'It started with coffee.', class: 'story-highlight-italics' },
+      { type: 'p', text: 'We met over iced coffee on an ordinary afternoon in Manila. What was supposed to be a quick coffee date turned into hours of conversation, laughter, and the feeling that we had known each other much longer than we actually had.' },
+      { type: 'div', text: 'we became us.', class: 'story-script-accent', isBlurFocus: true },
+      { type: 'p', text: "And now, we're getting married.", class: 'story-married-text', isFadeIn: true }
+    ];
+
+    let isTyping = false;
+    let typeTimeout;
+
+    function renderElegantTypewriter(element, text, speed, onComplete) {
+      let charIndex = 0;
+      element.innerHTML = '';
+
+      function nextChar() {
+        if (charIndex >= text.length) {
+          if (onComplete) onComplete();
+          return;
+        }
+
+        const char = text[charIndex];
+        if (char === ' ') {
+          element.appendChild(document.createTextNode(' '));
+        } else {
+          const span = document.createElement('span');
+          span.className = 'char-fade';
+          span.textContent = char;
+          element.appendChild(span);
+        }
+
+        charIndex++;
+        typeTimeout = setTimeout(nextChar, speed);
+      }
+
+      nextChar();
+    }
+
+    function typewriterStoryAudioSynced() {
+      const container = document.getElementById('typewriter-container');
+      const btnWrap = document.getElementById('story-join-btn-wrap');
+      const music = document.getElementById('bg-music');
+      if (!container || isTyping) return;
+
+      container.innerHTML = '';
+      if (btnWrap) btnWrap.classList.remove('btn-visible');
+
+      isTyping = true;
+      clearTimeout(typeTimeout);
+
+      let blockIndex = 0;
+      let currentEl = null;
+
+      const VOCAL_HIT_TIME = 10.0; // Strictly locked to 0:10 lyrics start
+      const MUSIC_START_DELAY = 1500; // 1.5s musical intro breathing time
+
+      function processStory() {
+        if (blockIndex >= storyBlocks.length) {
+          if (currentEl) currentEl.classList.remove('typing-cursor');
+          isTyping = false;
+          if (btnWrap) btnWrap.classList.add('btn-visible');
+          return;
+        }
+
+        const block = storyBlocks[blockIndex];
+
+        // Paragraph 4: Fade In
+        if (block.isFadeIn) {
+          if (currentEl) currentEl.classList.remove('typing-cursor');
+          currentEl = document.createElement(block.type);
+          if (block.class) currentEl.className = block.class;
+          currentEl.textContent = block.text;
+          container.appendChild(currentEl);
+
+          setTimeout(() => {
+            currentEl.classList.add('fade-in-visible');
+          }, 100);
+
+          blockIndex++;
+          typeTimeout = setTimeout(processStory, 1200);
+          return;
+        }
+
+        // Paragraph 3: "we became us." - Lock to 0:10 audio hit
+        if (block.isBlurFocus) {
+          if (currentEl) currentEl.classList.remove('typing-cursor');
+
+          const currentTime = music ? music.currentTime : 0;
+          let delayToTarget = 0;
+
+          if (!music.paused && currentTime < VOCAL_HIT_TIME) {
+            delayToTarget = (VOCAL_HIT_TIME - currentTime) * 1000;
+          }
+
+          typeTimeout = setTimeout(() => {
+            currentEl = document.createElement(block.type);
+            if (block.class) currentEl.className = block.class;
+            currentEl.textContent = block.text;
+            container.appendChild(currentEl);
+
+            // Trigger Blur-to-Focus Animation
+            setTimeout(() => {
+              currentEl.classList.add('blur-focus-visible');
+            }, 50);
+
+            blockIndex++;
+            typeTimeout = setTimeout(processStory, 2000);
+          }, delayToTarget);
+
+          return;
+        }
+
+        // Paragraph 1 & 2: Soft Fade Typewriter
+        if (currentEl) currentEl.classList.remove('typing-cursor');
+        currentEl = document.createElement(block.type);
+        if (block.class) currentEl.className = block.class;
+        currentEl.classList.add('typing-cursor');
+        container.appendChild(currentEl);
+
+        // Smooth speed tuned so text finishes right before 0:10
+        let speed = 24; 
+        if (blockIndex === 1) speed = 20;
+
+        renderElegantTypewriter(currentEl, block.text, speed, () => {
+          blockIndex++;
+          typeTimeout = setTimeout(processStory, 350);
+        });
+      }
+
+      // Start music immediately, delay text start by 1.5s
+      typeTimeout = setTimeout(processStory, MUSIC_START_DELAY);
+    }
+
+    /* GENERAL SCROLL OBSERVER */
+    let generalObserver;
+    function initGeneralScrollObserver() {
+      if (generalObserver) generalObserver.disconnect();
+
+      const options = {
+        root: null,
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.1
+      };
+
+      generalObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+          }
+        });
+      }, options);
+
+      document.querySelectorAll('.screen.active .reveal-on-scroll').forEach(el => {
+        generalObserver.observe(el);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      createOdometerReels();
+      initGeneralScrollObserver();
+    });
+  </script>
+</body>
+</html>
