@@ -197,7 +197,7 @@
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--black);
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.92);
       border: 1.5px solid var(--black);
       border-radius: 30px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.08);
@@ -908,7 +908,7 @@
     }
 
     /* ==========================================================================
-       7. ENTOURAGE SCREEN (White Aesthetic aligned with "Our Story" & "The Day")
+       7. ENTOURAGE SCREEN (Enhanced Background Visibility with Reduced White Overlay)
        ========================================================================== */
     #screen-entourage {
       position: relative;
@@ -923,7 +923,7 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      opacity: 0.45;
+      opacity: 0.75; /* Boosted image contrast */
       z-index: 0;
       animation: scaleZoomBg 25s infinite alternate var(--ease-smooth);
     }
@@ -931,7 +931,7 @@
     #screen-entourage::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(255, 255, 255, 0.85);
+      background-color: rgba(255, 255, 255, 0.45); /* Reduced white opacity to reveal photo */
       z-index: 0;
     }
 
@@ -962,7 +962,7 @@
       font-family: var(--font-serif);
       font-style: italic;
       font-size: 16px;
-      color: var(--gray);
+      color: #333333;
       line-height: 1.5;
       margin-bottom: 3rem;
       position: relative;
@@ -981,22 +981,22 @@
     }
 
     .entourage-card {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(154, 132, 161, 0.3);
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(154, 132, 161, 0.35);
       border-radius: 12px;
       padding: 2.2rem 1.5rem;
       text-align: center;
       transition: all 0.4s var(--ease-smooth);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
     }
 
     .entourage-card:hover {
       border-color: var(--lavender);
-      background: rgba(255, 255, 255, 0.98);
+      background: rgba(255, 255, 255, 0.96);
       transform: translateY(-4px);
-      box-shadow: 0 12px 35px rgba(154, 132, 161, 0.18);
+      box-shadow: 0 12px 35px rgba(154, 132, 161, 0.22);
     }
 
     .entourage-card-full {
@@ -1009,8 +1009,8 @@
       text-transform: uppercase;
       color: var(--lavender);
       margin-bottom: 1rem;
-      font-weight: 500;
-      border-bottom: 1px solid rgba(154, 132, 161, 0.2);
+      font-weight: 600;
+      border-bottom: 1px solid rgba(154, 132, 161, 0.25);
       padding-bottom: 0.5rem;
       display: inline-block;
     }
@@ -1020,12 +1020,12 @@
       font-size: clamp(16px, 3.2vw, 21px);
       color: var(--black);
       margin-bottom: 0.3rem;
-      font-weight: 300;
+      font-weight: 400;
       letter-spacing: 1px;
     }
 
     /* ==========================================================================
-       8. DETAILS SCREEN (White Aesthetic aligned with "Our Story" & "The Day")
+       8. DETAILS SCREEN (Enhanced Background Visibility with Reduced White Overlay)
        ========================================================================== */
     #screen-details {
       position: relative;
@@ -1040,7 +1040,7 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      opacity: 0.45;
+      opacity: 0.75; /* Boosted image contrast */
       z-index: 0;
       animation: scaleZoomBg 25s infinite alternate var(--ease-smooth);
     }
@@ -1048,7 +1048,7 @@
     #screen-details::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(255, 255, 255, 0.85); 
+      background-color: rgba(255, 255, 255, 0.45); /* Reduced white opacity to reveal photo */
       z-index: 0;
     }
 
@@ -1079,7 +1079,7 @@
       font-family: var(--font-serif);
       font-style: italic;
       font-size: 16px;
-      color: var(--gray);
+      color: #333333;
       line-height: 1.5;
       margin-bottom: 2.5rem;
       position: relative;
@@ -1098,30 +1098,30 @@
     }
     
     .detail-card { 
-      background: rgba(255, 255, 255, 0.92); 
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(154, 132, 161, 0.3); 
+      background: rgba(255, 255, 255, 0.88); 
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(154, 132, 161, 0.35); 
       border-radius: 120px 150px 8px 8px;
       padding: 3rem 1rem 2rem; 
       text-align: center; 
       cursor: pointer; 
       transition: all 0.4s var(--ease-smooth); 
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
       width: 100%;
     }
 
     .detail-card:hover { 
       border-color: var(--lavender); 
-      background: rgba(255, 255, 255, 0.98); 
+      background: rgba(255, 255, 255, 0.96); 
       transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 12px 35px rgba(154, 132, 161, 0.18);
+      box-shadow: 0 12px 35px rgba(154, 132, 161, 0.22);
     }
     
     .detail-title { 
       font-family: var(--font-serif); 
       font-size: clamp(18px, 3.5vw, 24px); 
-      font-weight: 300; 
+      font-weight: 400; 
       letter-spacing: 2px; 
       text-transform: uppercase; 
       margin-bottom: 0.5rem; 
@@ -1134,7 +1134,7 @@
       letter-spacing: 1.5px; 
       color: var(--text-muted); 
       text-transform: uppercase; 
-      font-weight: 300; 
+      font-weight: 400; 
     }
 
     .detail-content { 
@@ -1143,16 +1143,16 @@
       max-width: 600px; 
       margin: 0 auto; 
       animation: fadeIn 0.4s forwards; 
-      background: rgba(255, 255, 255, 0.95); 
+      background: rgba(255, 255, 255, 0.92); 
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       padding: 2.5rem 1.5rem; 
-      border: 1px solid rgba(154, 132, 161, 0.3); 
+      border: 1px solid rgba(154, 132, 161, 0.35); 
       border-radius: 12px;
       position: relative;
       z-index: 2;
       color: var(--black);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
       width: 100%;
     }
     .detail-content.active { display: block; }
@@ -1242,7 +1242,7 @@
       width: 100%;
       max-width: 380px;
       padding: 0.9rem 1.5rem;
-      background: rgba(154, 132, 161, 0.08);
+      background: rgba(154, 132, 161, 0.1);
       border: 1px solid rgba(154, 132, 161, 0.4);
       color: var(--black);
       font-size: 10px;
@@ -1919,7 +1919,7 @@
 
       <div id="rsvp-success" class="rsvp-success">
         <h2 class="serif" style="font-size: 32px; margin-bottom: 1rem;">You're on the list.</h2>
-        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can'wait to celebrate with you.</div>
+        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can't wait to celebrate with you.</div>
       </div>
 
       <div class="text-center">
