@@ -215,22 +215,6 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.18);
     }
 
-    #screen-details .back-btn,
-    #screen-entourage .back-btn {
-      color: var(--lavender-light);
-      background: rgba(17, 17, 17, 0.7);
-      border-color: rgba(212, 168, 240, 0.8);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    #screen-details .back-btn:hover,
-    #screen-entourage .back-btn:hover {
-      color: var(--black);
-      background: var(--white);
-      border-color: var(--white);
-    }
-
     /* ==========================================================================
        3. COVER SCREEN
        ========================================================================== */
@@ -924,12 +908,12 @@
     }
 
     /* ==========================================================================
-       7. ENTOURAGE SCREEN
+       7. ENTOURAGE SCREEN (White Aesthetic aligned with "Our Story" & "The Day")
        ========================================================================== */
     #screen-entourage {
       position: relative;
-      background-color: var(--black);
-      color: var(--white);
+      background-color: var(--white);
+      color: var(--black);
     }
 
     #screen-entourage::before {
@@ -939,7 +923,7 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      opacity: 0.35;
+      opacity: 0.45;
       z-index: 0;
       animation: scaleZoomBg 25s infinite alternate var(--ease-smooth);
     }
@@ -947,14 +931,14 @@
     #screen-entourage::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(17, 17, 17, 0.65);
+      background-color: rgba(255, 255, 255, 0.85);
       z-index: 0;
     }
 
     .entourage-header-tag {
       font-size: 10px;
       letter-spacing: 5px;
-      color: var(--lavender-light);
+      color: var(--lavender);
       text-transform: uppercase;
       margin-bottom: 0.5rem;
       position: relative;
@@ -967,7 +951,7 @@
       letter-spacing: 5px;
       font-weight: 400;
       text-transform: uppercase;
-      color: var(--white);
+      color: var(--black);
       margin-bottom: 1rem;
       line-height: 1.15;
       position: relative;
@@ -978,7 +962,7 @@
       font-family: var(--font-serif);
       font-style: italic;
       font-size: 16px;
-      color: rgba(255, 255, 255, 0.85);
+      color: var(--gray);
       line-height: 1.5;
       margin-bottom: 3rem;
       position: relative;
@@ -997,21 +981,22 @@
     }
 
     .entourage-card {
-      background: rgba(17, 17, 17, 0.5);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(212, 168, 240, 0.3);
+      border: 1px solid rgba(154, 132, 161, 0.3);
       border-radius: 12px;
       padding: 2.2rem 1.5rem;
       text-align: center;
       transition: all 0.4s var(--ease-smooth);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
     }
 
     .entourage-card:hover {
-      border-color: var(--lavender-light);
-      background: rgba(17, 17, 17, 0.75);
+      border-color: var(--lavender);
+      background: rgba(255, 255, 255, 0.98);
       transform: translateY(-4px);
+      box-shadow: 0 12px 35px rgba(154, 132, 161, 0.18);
     }
 
     .entourage-card-full {
@@ -1022,10 +1007,10 @@
       font-size: 10px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--lavender-light);
+      color: var(--lavender);
       margin-bottom: 1rem;
       font-weight: 500;
-      border-bottom: 1px solid rgba(212, 168, 240, 0.2);
+      border-bottom: 1px solid rgba(154, 132, 161, 0.2);
       padding-bottom: 0.5rem;
       display: inline-block;
     }
@@ -1033,19 +1018,19 @@
     .entourage-person-name {
       font-family: var(--font-serif);
       font-size: clamp(16px, 3.2vw, 21px);
-      color: var(--white);
+      color: var(--black);
       margin-bottom: 0.3rem;
       font-weight: 300;
       letter-spacing: 1px;
     }
 
     /* ==========================================================================
-       8. DETAILS SCREEN
+       8. DETAILS SCREEN (White Aesthetic aligned with "Our Story" & "The Day")
        ========================================================================== */
     #screen-details {
       position: relative;
-      background-color: var(--black);
-      color: var(--white);
+      background-color: var(--white);
+      color: var(--black);
     }
     
     #screen-details::before {
@@ -1055,7 +1040,7 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      opacity: 0.4;
+      opacity: 0.45;
       z-index: 0;
       animation: scaleZoomBg 25s infinite alternate var(--ease-smooth);
     }
@@ -1063,14 +1048,14 @@
     #screen-details::after {
       content: '';
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(17, 17, 17, 0.65); 
+      background-color: rgba(255, 255, 255, 0.85); 
       z-index: 0;
     }
 
     .details-header-tag {
       font-size: 10px;
       letter-spacing: 5px;
-      color: var(--lavender-light);
+      color: var(--lavender);
       text-transform: uppercase;
       margin-bottom: 0.5rem;
       position: relative;
@@ -1083,7 +1068,7 @@
       letter-spacing: 5px;
       font-weight: 400;
       text-transform: uppercase;
-      color: var(--white);
+      color: var(--black);
       margin-bottom: 1rem;
       line-height: 1.15;
       position: relative;
@@ -1094,7 +1079,7 @@
       font-family: var(--font-serif);
       font-style: italic;
       font-size: 16px;
-      color: rgba(255, 255, 255, 0.85);
+      color: var(--gray);
       line-height: 1.5;
       margin-bottom: 2.5rem;
       position: relative;
@@ -1113,23 +1098,24 @@
     }
     
     .detail-card { 
-      background: rgba(17, 17, 17, 0.45); 
+      background: rgba(255, 255, 255, 0.92); 
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(212, 168, 240, 0.3); 
+      border: 1px solid rgba(154, 132, 161, 0.3); 
       border-radius: 120px 150px 8px 8px;
       padding: 3rem 1rem 2rem; 
       text-align: center; 
       cursor: pointer; 
       transition: all 0.4s var(--ease-smooth); 
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
       width: 100%;
     }
 
     .detail-card:hover { 
-      border-color: var(--lavender-light); 
-      background: rgba(17, 17, 17, 0.7); 
+      border-color: var(--lavender); 
+      background: rgba(255, 255, 255, 0.98); 
       transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 12px 35px rgba(154, 132, 161, 0.18);
     }
     
     .detail-title { 
@@ -1139,7 +1125,7 @@
       letter-spacing: 2px; 
       text-transform: uppercase; 
       margin-bottom: 0.5rem; 
-      color: var(--white);
+      color: var(--black);
       line-height: 1.2;
     }
 
@@ -1157,16 +1143,16 @@
       max-width: 600px; 
       margin: 0 auto; 
       animation: fadeIn 0.4s forwards; 
-      background: rgba(17, 17, 17, 0.65); 
+      background: rgba(255, 255, 255, 0.95); 
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       padding: 2.5rem 1.5rem; 
-      border: 1px solid rgba(212, 168, 240, 0.3); 
+      border: 1px solid rgba(154, 132, 161, 0.3); 
       border-radius: 12px;
       position: relative;
       z-index: 2;
-      color: var(--white);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+      color: var(--black);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
       width: 100%;
     }
     .detail-content.active { display: block; }
@@ -1179,9 +1165,9 @@
       text-transform: uppercase; 
       margin-bottom: 1.2rem; 
       text-align: center; 
-      border-bottom: 1px solid rgba(212, 168, 240, 0.25); 
+      border-bottom: 1px solid rgba(154, 132, 161, 0.25); 
       padding-bottom: 1.2rem;
-      color: var(--white);
+      color: var(--black);
     }
 
     .detail-nav-bar {
@@ -1190,7 +1176,7 @@
       justify-content: space-between;
       margin-top: 2.5rem;
       padding-top: 1.2rem;
-      border-top: 1px solid rgba(212, 168, 240, 0.2);
+      border-top: 1px solid rgba(154, 132, 161, 0.2);
       gap: 5px;
     }
 
@@ -1201,17 +1187,17 @@
       font-size: 9px;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.85);
-      border: 1px solid rgba(212, 168, 240, 0.35);
+      color: var(--black);
+      border: 1px solid rgba(154, 132, 161, 0.4);
       padding: 0.5rem 1rem;
       border-radius: 20px;
       transition: all 0.3s var(--ease-smooth);
     }
 
     .detail-nav-btn:hover {
-      color: var(--black);
-      background: var(--white);
-      border-color: var(--white);
+      color: var(--white);
+      background: var(--black);
+      border-color: var(--black);
     }
 
     .faq-q { 
@@ -1223,9 +1209,9 @@
       font-weight: 400; 
       display: flex; 
       justify-content: space-between; 
-      border-bottom: 1px solid rgba(212, 168, 240, 0.25); 
+      border-bottom: 1px solid rgba(154, 132, 161, 0.25); 
       letter-spacing: 1px; 
-      color: var(--white); 
+      color: var(--black); 
     }
 
     .faq-a { 
@@ -1234,7 +1220,7 @@
       transition: max-height 0.4s var(--ease-smooth), padding 0.4s var(--ease-smooth); 
       font-size: 13px; 
       font-weight: 300; 
-      color: rgba(255, 255, 255, 0.8); 
+      color: var(--gray); 
       line-height: 1.7; 
     }
     .faq-item.open .faq-a { max-height: 250px; padding: 1.2rem 0; }
@@ -1256,9 +1242,9 @@
       width: 100%;
       max-width: 380px;
       padding: 0.9rem 1.5rem;
-      background: rgba(212, 168, 240, 0.12);
-      border: 1px solid rgba(212, 168, 240, 0.4);
-      color: var(--white);
+      background: rgba(154, 132, 161, 0.08);
+      border: 1px solid rgba(154, 132, 161, 0.4);
+      color: var(--black);
       font-size: 10px;
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -1267,9 +1253,9 @@
     }
 
     .registry-btn:hover {
-      background: var(--white);
-      color: var(--black);
-      border-color: var(--white);
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
       transform: translateY(-2px);
     }
 
@@ -1810,14 +1796,14 @@
       <!-- Detail Card 1: Dress Code -->
       <div id="dc-dress" class="detail-content">
         <h3 class="dc-header">Black & White</h3>
-        <p class="text-center" style="margin-bottom: 3rem; color: var(--text-muted); font-style: italic; font-size: 16px;">Keep it classic. Keep it timeless.</p>
+        <p class="text-center" style="margin-bottom: 3rem; color: var(--gray); font-style: italic; font-size: 16px;">Keep it classic. Keep it timeless.</p>
         <div style="margin-bottom: 2.5rem;">
-          <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px; color: var(--white);">LADIES</h4>
-          <p style="color: var(--text-muted); font-size: 14px; font-weight: 300;">Black, white, ivory, or monochrome formalwear.</p>
+          <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px; color: var(--black);">LADIES</h4>
+          <p style="color: var(--gray); font-size: 14px; font-weight: 300;">Black, white, ivory, or monochrome formalwear.</p>
         </div>
         <div style="margin-bottom: 3rem;">
-          <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px; color: var(--white);">GENTLEMEN</h4>
-          <p style="color: var(--text-muted); font-size: 14px; font-weight: 300;">Black suit, tuxedo, white shirt, or classic monochrome formalwear.</p>
+          <h4 style="letter-spacing: 3px; font-weight: 400; margin-bottom: 0.8rem; font-size: 13px; color: var(--black);">GENTLEMEN</h4>
+          <p style="color: var(--gray); font-size: 14px; font-weight: 300;">Black suit, tuxedo, white shirt, or classic monochrome formalwear.</p>
         </div>
         
         <div class="detail-nav-bar">
@@ -1830,7 +1816,7 @@
       <!-- Detail Card 2: Gifts & Registry -->
       <div id="dc-gifts" class="detail-content">
         <h3 class="dc-header">Registry & Gifts</h3>
-        <p class="text-center" style="margin-top: 1.5rem; color: var(--text-muted); font-weight: 300; font-size: 14px; line-height: 1.9;">We are immensely grateful for your love and support. Your presence at our wedding is the greatest gift of all.<br><br>If you wish to bless us with a gift, a contribution towards our future together or our gift registry would be deeply appreciated.</p>
+        <p class="text-center" style="margin-top: 1.5rem; color: var(--gray); font-weight: 300; font-size: 14px; line-height: 1.9;">We are immensely grateful for your love and support. Your presence at our wedding is the greatest gift of all.<br><br>If you wish to bless us with a gift, a contribution towards our future together or our gift registry would be deeply appreciated.</p>
         
         <div class="registry-actions">
           <a href="#" class="registry-btn" onclick="alert('Wedding Fund GCash/Maya details: 0917-XXX-XXXX')">
@@ -1933,7 +1919,7 @@
 
       <div id="rsvp-success" class="rsvp-success">
         <h2 class="serif" style="font-size: 32px; margin-bottom: 1rem;">You're on the list.</h2>
-        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can't wait to celebrate with you.</div>
+        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can'wait to celebrate with you.</div>
       </div>
 
       <div class="text-center">
