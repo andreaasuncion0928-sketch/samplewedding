@@ -85,7 +85,6 @@
       50% { opacity: 0; }
     }
 
-    /* KEYFRAME FOR BLUR-TO-FOCUS FADE ANIMATION */
     @keyframes blurFocusEntry {
       0% {
         opacity: 0;
@@ -99,13 +98,11 @@
       }
     }
 
-    /* WORD WRAP CONTAINER FOR INTACT WORDS */
     .word-wrap {
       display: inline-block;
       white-space: nowrap;
     }
 
-    /* ELEGANT TYPEWRITER CHARACTER FADE ANIMATION */
     .char-fade {
       display: inline-block;
       opacity: 0;
@@ -502,7 +499,6 @@
       margin-bottom: 1.8rem !important;
     }
 
-    /* BLUR-TO-FOCUS FADE ANIMATION FOR "WE BECAME US" */
     .story-script-accent {
       font-family: var(--font-script);
       font-size: clamp(2.8rem, 8vw, 4.2rem);
@@ -594,7 +590,7 @@
     }
 
     /* ==========================================================================
-       6. THE DAY SCREEN
+       6. THE DAY SCREEN (Strict Uniform Card Sizing Fixed)
        ========================================================================== */
     #screen-day {
       position: relative;
@@ -651,13 +647,19 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1.8rem;
-      align-items: start;
+      align-items: stretch;
       max-width: 820px;
       margin: 0 auto;
       width: 100%;
     }
 
+    /* Flex-layout added to lock uniform heights for both Church & Reception */
     .arch-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
@@ -677,6 +679,7 @@
     }
 
     .arch-card.expanded {
+      display: block;
       border-radius: 12px;
       padding: 2rem 1.2rem;
       background: rgba(255, 255, 255, 0.97);
@@ -702,7 +705,7 @@
 
     .arch-venue-title {
       font-family: var(--font-serif);
-      font-size: clamp(20px, 4vw, 24px);
+      font-size: clamp(18px, 4vw, 24px);
       color: var(--black);
       margin-bottom: 0.2rem;
       line-height: 1.2;
@@ -730,6 +733,7 @@
       border-radius: 2px;
       transition: all 0.4s var(--ease-smooth);
       max-width: 100%;
+      margin-top: auto;
     }
 
     .arch-btn:hover {
@@ -951,7 +955,7 @@
     }
 
     /* ==========================================================================
-       7. ENTOURAGE SCREEN (Aligned with "The Details" aesthetic)
+       7. ENTOURAGE SCREEN (Equal Opacity & Depth to "The Details")
        ========================================================================== */
     #screen-entourage {
       position: relative;
@@ -1432,48 +1436,43 @@
     }
 
     /* ==========================================================================
-       10. RESPONSIVE BREAKPOINTS (Maintains Desktop Layout Structure on Mobile)
+       10. RESPONSIVE BREAKPOINTS (Enhanced Smooth Mobile Formatting)
        ========================================================================== */
     @media (max-width: 768px) {
-      .container { padding: 2rem 0.8rem 2.8rem; }
+      .container { padding: 2.2rem 1rem 3rem; }
 
-      /* Keep 3-column details grid layout on mobile */
+      /* Details grid optimization for small screens */
       .details-grid { 
         grid-template-columns: repeat(3, 1fr); 
         gap: 0.6rem; 
       }
       .detail-card { 
-        padding: 2rem 0.4rem 1.4rem; 
-        border-radius: 60px 80px 6px 6px; 
+        padding: 1.8rem 0.4rem 1.2rem; 
+        border-radius: 50px 60px 6px 6px; 
       }
       .detail-title { 
-        font-size: 14px; 
+        font-size: 13px; 
         letter-spacing: 1px; 
       }
       .detail-sub { 
         font-size: 8px; 
-        letter-spacing: 1px; 
+        letter-spacing: 0.5px; 
       }
 
-      /* Keep 2-column cards layout for Ceremony/Reception */
+      /* Stack Ceremony and Reception vertically on mobile while keeping uniform height styling */
       .arch-cards-grid { 
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 0.8rem; 
+        grid-template-columns: 1fr; 
+        gap: 1.5rem; 
       }
       .arch-card { 
-        padding: 2rem 0.6rem 1.6rem; 
-        border-radius: 90px 90px 6px 6px; 
+        padding: 2.2rem 1rem 1.8rem; 
+        border-radius: 120px 120px 8px 8px; 
       }
       .arch-venue-title { 
-        font-size: 16px; 
-      }
-      .arch-btn { 
-        padding: 0.6rem 0.8rem; 
-        font-size: 8px; 
-        letter-spacing: 1px; 
+        font-size: 20px; 
       }
 
-      /* Keep 2-column layout for Entourage on mobile */
+      /* Entourage grid alignment on mobile */
       .entourage-grid { 
         grid-template-columns: repeat(2, 1fr); 
         gap: 0.8rem; 
@@ -1482,13 +1481,13 @@
         grid-column: span 2; 
       }
       .entourage-card { 
-        padding: 1.5rem 0.8rem; 
+        padding: 1.6rem 0.8rem; 
       }
       .entourage-person-name { 
         font-size: 14px; 
       }
 
-      /* Retain timeline structure */
+      /* Stacked gallery top positioning for mobile */
       .stacked-card { top: 75px; margin-bottom: 22vh; }
       .odometer-digit-strip span { width: clamp(30px, 8vw, 50px); }
       .btn { padding: 0.85rem 1.8rem; font-size: 9px; letter-spacing: 3px; }
@@ -1504,7 +1503,6 @@
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- COVER SCREEN -->
   <div class="screen active" id="screen-cover">
     <div class="cover-image"></div>
     <div class="cover-content">
@@ -1512,22 +1510,20 @@
       <h1 class="cover-names">ELENA & ADRIAN</h1>
       <div class="cover-date">31 JANUARY 2028 · MANILA</div>
       
-      <button class="btn cover-btn" onclick="startExperience()">OPEN OUR STORY &rarr;</button>
+      <button class="btn cover-btn" onclick="startExperience()">OPEN OUR STORY →</button>
     </div>
   </div>
 
-  <!-- OUR STORY SCREEN -->
   <div class="screen" id="screen-story">
     <div class="container text-center">
       <div class="reveal-on-scroll" style="font-size: 11px; letter-spacing: 4px; color: var(--lavender); margin-bottom: 1.5rem; text-transform: uppercase;">A Little Story About Us</div>
       <h2 class="serif reveal-on-scroll" style="font-size: 42px; margin-bottom: 3.5rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 300;">Our Story</h2>
 
       <div class="story-content" id="typewriter-container">
-        <!-- Rendered cleanly with audio synchronization, strictly synced to 0:10 audio hit -->
-      </div>
+        </div>
 
       <div id="story-join-btn-wrap">
-        <button class="btn" onclick="openScreen('menu')">JOIN US &rarr;</button>
+        <button class="btn" onclick="openScreen('menu')">JOIN US →</button>
       </div>
 
       <div class="story-bottom text-center reveal-on-scroll">
@@ -1539,16 +1535,13 @@
     </div>
   </div>
 
-  <!-- MENU / WELCOME SCREEN -->
   <div class="screen" id="screen-menu">
     <div class="container text-center">
       
-      <!-- Minimalist Ultra-Slow 50% Slower Odometer -->
       <div class="countdown-display-wrap reveal-on-scroll">
         <div class="odometer-window" id="odometer-container">
-          <!-- Digit Reels -->
-        </div>
-        <div class="countdown-subtext">D A Y S &nbsp; T O &nbsp; G O</div>
+          </div>
+        <div class="countdown-subtext">D A Y S   T O   G O</div>
       </div>
 
       <div class="menu-header reveal-on-scroll">
@@ -1562,7 +1555,7 @@
             <div class="ei-title">The Day</div>
             <div class="ei-desc">When & where to find us</div>
           </div>
-          <span class="ei-arrow">&rarr;</span>
+          <span class="ei-arrow">→</span>
         </div>
 
         <div class="elegant-item" onclick="openScreen('entourage')">
@@ -1570,7 +1563,7 @@
             <div class="ei-title">The Entourage</div>
             <div class="ei-desc">Those who walk beside us</div>
           </div>
-          <span class="ei-arrow">&rarr;</span>
+          <span class="ei-arrow">→</span>
         </div>
         
         <div class="elegant-item" onclick="openScreen('details')">
@@ -1578,7 +1571,7 @@
             <div class="ei-title">Details</div>
             <div class="ei-desc">Everything you need to know</div>
           </div>
-          <span class="ei-arrow">&rarr;</span>
+          <span class="ei-arrow">→</span>
         </div>
         
         <div class="elegant-item" onclick="openScreen('gallery')">
@@ -1586,7 +1579,7 @@
             <div class="ei-title">Gallery</div>
             <div class="ei-desc">The moments we've kept</div>
           </div>
-          <span class="ei-arrow">&rarr;</span>
+          <span class="ei-arrow">→</span>
         </div>
         
         <div class="elegant-item" onclick="openScreen('rsvp')">
@@ -1594,13 +1587,12 @@
             <div class="ei-title">RSVP</div>
             <div class="ei-desc">Save your seat</div>
           </div>
-          <span class="ei-arrow">&rarr;</span>
+          <span class="ei-arrow">→</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- THE DAY SCREEN -->
   <div class="screen" id="screen-day">
     <div class="container text-center">
       <div class="day-header-tag reveal-on-scroll">THE DAY</div>
@@ -1609,7 +1601,7 @@
 
       <div class="arch-cards-grid">
         <div class="arch-card reveal-on-scroll" id="card-church">
-          <span class="close-card-btn" onclick="toggleArchCard('church', false)">&times;</span>
+          <span class="close-card-btn" onclick="toggleArchCard('church', false)">×</span>
           
           <svg class="arch-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M32 6v12M28 10h8M16 58V32l16-12 16 12v26M24 58V40h16v18M32 20v8" />
@@ -1621,7 +1613,7 @@
           <div class="arch-location">Manila</div>
 
           <button class="arch-btn" onclick="toggleArchCard('church', true)">
-            SEE THE CHURCH &rarr;
+            SEE THE CHURCH →
           </button>
 
           <div class="arch-expanded-content">
@@ -1646,12 +1638,12 @@
             </div>
 
             <div class="arch-bottom-motto">Where our forever begins.</div>
-            <a href="https://maps.google.com/?q=San+Sebastian+Church+Manila" target="_blank" class="map-btn">Get Directions &rarr;</a>
+            <a href="https://maps.google.com/?q=San+Sebastian+Church+Manila" target="_blank" class="map-btn">Get Directions →</a>
           </div>
         </div>
 
         <div class="arch-card reveal-on-scroll" id="card-reception">
-          <span class="close-card-btn" onclick="toggleArchCard('reception', false)">&times;</span>
+          <span class="close-card-btn" onclick="toggleArchCard('reception', false)">×</span>
 
           <svg class="arch-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M12 58V20l20-10 20 10v38M8 58h48M20 58V32h24v28" />
@@ -1663,7 +1655,7 @@
           <div class="arch-location">Manila</div>
 
           <button class="arch-btn" onclick="toggleArchCard('reception', true)">
-            SEE THE RECEPTION &rarr;
+            SEE THE RECEPTION →
           </button>
 
           <div class="arch-expanded-content">
@@ -1688,13 +1680,13 @@
             </div>
 
             <div class="arch-bottom-motto">A celebration to remember.</div>
-            <a href="https://maps.google.com/?q=The+Manila+Hotel+Manila" target="_blank" class="map-btn">Get Directions &rarr;</a>
+            <a href="https://maps.google.com/?q=The+Manila+Hotel+Manila" target="_blank" class="map-btn">Get Directions →</a>
           </div>
         </div>
       </div>
 
       <div class="schedule-toggle-card text-center reveal-on-scroll" onclick="toggleWeddingTimeline()">
-        <span class="schedule-toggle-title" id="schedule-toggle-btn">PROGRAM FLOW &rarr;</span>
+        <span class="schedule-toggle-title" id="schedule-toggle-btn">PROGRAM FLOW →</span>
       </div>
 
       <div class="wedding-timeline-wrap" id="wedding-timeline-wrap">
@@ -1792,12 +1784,11 @@
       </div>
 
       <div class="text-center">
-        <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
+        <a class="back-btn" onclick="openScreen('menu')">← Back to Chapters</a>
       </div>
     </div>
   </div>
 
-  <!-- ENTOURAGE SCREEN -->
   <div class="screen" id="screen-entourage">
     <div class="container text-center">
       <div class="entourage-header-tag reveal-on-scroll">WITH OUR BELOVED FAMILIES</div>
@@ -1836,19 +1827,18 @@
 
         <div class="entourage-card entourage-card-full">
           <div class="entourage-role-title">BRIDESMAIDS & GROOMSMEN</div>
-          <div class="entourage-person-name">Isabella Santos &nbsp;·&nbsp; Lucas Torres</div>
-          <div class="entourage-person-name">Clara Mendoza &nbsp;·&nbsp; Mateo Ramos</div>
-          <div class="entourage-person-name">Julianna Navarro &nbsp;·&nbsp; Gabriel Navarro</div>
+          <div class="entourage-person-name">Isabella Santos  ·  Lucas Torres</div>
+          <div class="entourage-person-name">Clara Mendoza  ·  Mateo Ramos</div>
+          <div class="entourage-person-name">Julianna Navarro  ·  Gabriel Navarro</div>
         </div>
       </div>
 
       <div class="text-center">
-        <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
+        <a class="back-btn" onclick="openScreen('menu')">← Back to Chapters</a>
       </div>
     </div>
   </div>
 
-  <!-- DETAILS SCREEN -->
   <div class="screen" id="screen-details">
     <div class="container text-center">
       <div class="details-header-tag reveal-on-scroll">THE DETAILS</div>
@@ -1870,7 +1860,6 @@
         </div>
       </div>
 
-      <!-- Detail Card 1: Dress Code -->
       <div id="dc-dress" class="detail-content">
         <h3 class="dc-header">Black & White</h3>
         <p class="text-center" style="margin-bottom: 3rem; color: var(--gray); font-style: italic; font-size: 16px;">Keep it classic. Keep it timeless.</p>
@@ -1884,13 +1873,12 @@
         </div>
         
         <div class="detail-nav-bar">
-          <button class="detail-nav-btn" onclick="openDetail('dc-faq')">&larr; FAQ</button>
+          <button class="detail-nav-btn" onclick="openDetail('dc-faq')">← FAQ</button>
           <button class="detail-nav-btn" onclick="closeDetail()">Menu</button>
-          <button class="detail-nav-btn" onclick="openDetail('dc-gifts')">Gifts &rarr;</button>
+          <button class="detail-nav-btn" onclick="openDetail('dc-gifts')">Gifts →</button>
         </div>
       </div>
 
-      <!-- Detail Card 2: Gifts & Registry -->
       <div id="dc-gifts" class="detail-content">
         <h3 class="dc-header">Registry & Gifts</h3>
         <p class="text-center" style="margin-top: 1.5rem; color: var(--gray); font-weight: 300; font-size: 14px; line-height: 1.9;">We are immensely grateful for your love and support. Your presence at our wedding is the greatest gift of all.<br><br>If you wish to bless us with a gift, a contribution towards our future together or our gift registry would be deeply appreciated.</p>
@@ -1902,18 +1890,17 @@
           </a>
           <a href="https://www.crateandbarrel.com" target="_blank" class="registry-btn">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-            View Online Gift Registry &rarr;
+            View Online Gift Registry →
           </a>
         </div>
 
         <div class="detail-nav-bar">
-          <button class="detail-nav-btn" onclick="openDetail('dc-dress')">&larr; Dress Code</button>
+          <button class="detail-nav-btn" onclick="openDetail('dc-dress')">← Dress Code</button>
           <button class="detail-nav-btn" onclick="closeDetail()">Menu</button>
-          <button class="detail-nav-btn" onclick="openDetail('dc-faq')">FAQ &rarr;</button>
+          <button class="detail-nav-btn" onclick="openDetail('dc-faq')">FAQ →</button>
         </div>
       </div>
 
-      <!-- Detail Card 3: FAQ -->
       <div id="dc-faq" class="detail-content">
         <h3 class="dc-header">FAQ</h3>
         <div class="faq-item">
@@ -1930,17 +1917,16 @@
         </div>
         
         <div class="detail-nav-bar">
-          <button class="detail-nav-btn" onclick="openDetail('dc-gifts')">&larr; Gifts</button>
+          <button class="detail-nav-btn" onclick="openDetail('dc-gifts')">← Gifts</button>
           <button class="detail-nav-btn" onclick="closeDetail()">Menu</button>
-          <button class="detail-nav-btn" onclick="openDetail('dc-dress')">&rarr; Dress Code</button>
+          <button class="detail-nav-btn" onclick="openDetail('dc-dress')">→ Dress Code</button>
         </div>
       </div>
 
-      <div class="text-center"><a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a></div>
+      <div class="text-center"><a class="back-btn" onclick="openScreen('menu')">← Back to Chapters</a></div>
     </div>
   </div>
 
-  <!-- GALLERY SCREEN (10 Photos Stacked Gallery) -->
   <div class="screen" id="screen-gallery">
     <div class="gallery-heading-wrap reveal-on-scroll">
       <h2 class="gallery-heading">MOMENTS ALONG THE WAY</h2>
@@ -1960,11 +1946,10 @@
     </div>
 
     <div class="gallery-footer text-center">
-      <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
+      <a class="back-btn" onclick="openScreen('menu')">← Back to Chapters</a>
     </div>
   </div>
 
-  <!-- RSVP SCREEN -->
   <div class="screen" id="screen-rsvp">
     <div class="container text-center">
       <div class="reveal-on-scroll" style="font-size: 11px; letter-spacing: 4px; color: var(--lavender); margin-bottom: 1rem;">CHAPTER 04</div>
@@ -1991,16 +1976,16 @@
             <option value="3">3</option>
           </select>
         </div>
-        <button type="submit" class="btn" style="width: 100%;">Confirm RSVP &rarr;</button>
+        <button type="submit" class="btn" style="width: 100%;">Confirm RSVP →</button>
       </form>
 
       <div id="rsvp-success" class="rsvp-success">
         <h2 class="serif" style="font-size: 32px; margin-bottom: 1rem;">You're on the list.</h2>
-        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can't wait to celebrate with you.</div>
+        <div class="script" style="font-size: 2rem; margin-bottom: 3rem;">We can'wait to celebrate with you.</div>
       </div>
 
       <div class="text-center">
-        <a class="back-btn" onclick="openScreen('menu')">&larr; Back to Chapters</a>
+        <a class="back-btn" onclick="openScreen('menu')">← Back to Chapters</a>
       </div>
     </div>
   </div>
@@ -2061,10 +2046,10 @@
       
       if (wrap.classList.contains('active')) {
         wrap.classList.remove('active');
-        btn.innerHTML = "PROGRAM FLOW &rarr;";
+        btn.innerHTML = "PROGRAM FLOW →";
       } else {
         wrap.classList.add('active');
-        btn.innerHTML = "HIDE THE PROGRAM &larr;";
+        btn.innerHTML = "HIDE THE PROGRAM ←";
         setTimeout(() => {
           initGeneralScrollObserver();
         }, 100);
